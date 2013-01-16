@@ -18,6 +18,18 @@ vingrinajums 1:
     .. 5.vieta? => C (jo vismazak uzvaru)
     .. 2 punkti?=> A, D un E
 
+    futbola turnīrs:
+        A-> B, C, D
+        B-> D
+        C-> B
+        D->
+        E-> C
+
+    kurai komdai..
+    .. visvairak uzvaru? => A
+    .. vismazak uzvaru?  => D
+    .. nav neizskirtu?   => nav (katrai ir neizskirta)
+
 
 Kas ir grafs?
 Grafu izomorfisms
