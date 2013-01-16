@@ -5,6 +5,13 @@ atslēgvārdi:
     cilpa
     orientēts/ neorientēts
 
+piemēri
+    daudzskaldnu grafi
+    celu kartes
+    ielu plani
+    turniru grafi
+    variantu koki
+
 vingrinajums 1:
     volejbola turnīrs:
         A-> E, D
@@ -30,6 +37,28 @@ vingrinajums 1:
     .. vismazak uzvaru?  => D
     .. nav neizskirtu?   => nav (katrai ir neizskirta)
 
+vingrinajums 2:
+    uzzimet koku spelu kaulina + monetas metienam:
+    X --
+        |-- kaulina 1 --
+                        |-- monetas cipars
+                        |-- monetas gerbonis
+        |-- kaulina 2 --
+                        |-- monetas cipars
+                        |-- monetas gerbonis
+        |-- kaulina 3 --
+                        |-- monetas cipars
+                        |-- monetas gerbonis
+        |-- kaulina 4 --
+                        |-- monetas cipars
+                        |-- monetas gerbonis
+        |-- kaulina 5 --
+                        |-- monetas cipars
+                        |-- monetas gerbonis
+        |-- kaulina 6 --
+                        |-- monetas cipars
+                        |-- monetas gerbonis
+        Atbilde: iespejami: katram no 6 kaulina variantiem, 2 monetas varianti = 6*2 = 12
 
 Kas ir grafs?
 Grafu izomorfisms
