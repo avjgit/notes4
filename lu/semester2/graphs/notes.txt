@@ -12,6 +12,7 @@ piemēri
     turniru grafi
     variantu koki
     kartes
+    unikursivi = Eilera grafi (tadi, kurus var apiet, neejot pa kadu skautni 2 reizes)
 
 vingrinajums 1:
     volejbola turnīrs:
@@ -74,6 +75,30 @@ vingrinajums 4:
             katrai no valstim:
                 pieskir valstij mazako pieejamo (kas nav kaiminu aiznemta) krasu
     => 3 krasas
+
+    cik krasu vajadzes, ja +1 "jurai"?
+    => 4
+
+vingrinajums 5:
+    uzzimet karti, kuras izkrasosanai vajag >= 4 krasas
+    => no zim.1.5, novilkt liniju starp 1 un 4 rindu,
+
+vingrinajums 6:
+    ok, nevar
+
+vingrinajums 7:
+    vai Eilera grafi?
+    a) A, B, C, D - taisnsturis, E - diagonalu krustpunkts
+        ne
+    b) A, B, C, D - taisnsturis, E - virs, starp B un C
+        ja => A-B-E-C-A-D-B-C-D
+
+vingrinajums 8:
+    uzzimet unikursivu grafu ar 6 virsotnem un 3 skautnem pie katras virsotnes
+        apvienot 1.7 a un b (E - diagonalu krustpunkts, F - "jumts"):
+
+    to pasu, bet noslegtu
+
 Kas ir grafs?
 Grafu izomorfisms
 Dažādi grafu veidi
