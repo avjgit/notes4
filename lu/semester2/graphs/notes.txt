@@ -11,6 +11,7 @@ piemēri
     ielu plani
     turniru grafi
     variantu koki
+    kartes
 
 vingrinajums 1:
     volejbola turnīrs:
@@ -60,6 +61,19 @@ vingrinajums 2:
                         |-- monetas gerbonis
         Atbilde: iespejami: katram no 6 kaulina variantiem, 2 monetas varianti = 6*2 = 12
 
+vingrinajums 3:
+    uzzimet grafu, kas nav pareiza karte: A --- B
+
+vingrinajums 4:
+    mazakais krasu skaits, ar kuru var pareizi izkrasot zim.1.5 valstu karti:
+        algoritms 1:
+            katrai no valstim:
+                pieskirt valstij mazako pieejamo krasu j
+                atzimet kaiminvalstiis, ka krasa j nav iespejama
+        algoritms 2:
+            katrai no valstim:
+                pieskir valstij mazako pieejamo (kas nav kaiminu aiznemta) krasu
+    => 3 krasas
 Kas ir grafs?
 Grafu izomorfisms
 Dažādi grafu veidi
