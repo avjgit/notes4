@@ -14,9 +14,9 @@ vingrinajums 1:
         E-> B, C
 
     kurai komandai..
-    .. 1.vieta?
-    .. 5.vieta?
-    .. 2 punkti?
+    .. 1.vieta? => B (jo visvairak uzvaru)
+    .. 5.vieta? => C (jo vismazak uzvaru)
+    .. 2 punkti?=> A, D un E
 
 
 Kas ir grafs?
