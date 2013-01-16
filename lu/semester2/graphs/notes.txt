@@ -1,0 +1,30 @@
+================== 1.1 Kā rodas grafi?
+atslēgvārdi:
+    virsotnes
+    šķautnes
+    cilpa
+    orientēts/ neorientēts
+
+vingrinajums 1:
+    volejbola turnīrs:
+        A-> E, D
+        B-> A, C, D
+        C-> A
+        D-> C, E
+        E-> B, C
+
+    kurai komandai..
+    .. 1.vieta?
+    .. 5.vieta?
+    .. 2 punkti?
+
+
+Kas ir grafs?
+Grafu izomorfisms
+Dažādi grafu veidi
+Grafu aprakstīšana
+Apakšgrafi un darbības ar grafiem
+Maršruti grafos
+Maršrutu matricas
+Eilera cikli un ķēdes
+Plakani un planāri grafi
