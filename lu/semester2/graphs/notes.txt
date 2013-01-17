@@ -98,8 +98,20 @@ vingrinajums 8:
 
     to pasu, bet noslegtu
 
-Kas ir grafs?
-Grafu izomorfisms
+================== 1.2 Kas ir grafs?
+uzdot grafu:
+    noradit virsotnu kopu;
+    katram divas virsotnem noradit skautnes, kas ved no 1. uz 2.
+
+grafs: (X, E)
+
+skautne u ved no x uz y
+
+grafa incidence - x, u, y
+
+
+
+================== 1.3 Grafu izomorfisms
 Dažādi grafu veidi
 Grafu aprakstīšana
 Apakšgrafi un darbības ar grafiem

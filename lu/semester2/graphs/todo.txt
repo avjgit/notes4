@@ -1,3 +1,10 @@
 vingrinajums 8
     uzzimet unikursivu grafu ar 6 virsotnem, ar vismaz 3 skautnem no katras
     to pasu, bet noslegtu (apgaita atrgiezas sakumpunkta)
+
+1.2.1
+    "k¯ap¯ec nepiecieˇsams, lai neviens loks nekrustotu pats sevi un
+nesatur¯etu ne savus galapunktus, ne ar¯ı citas grafa virsotnes"
+
+?
+"katram p¯arim (x,y) ∈ X^2" - kas ir "X^2"?
