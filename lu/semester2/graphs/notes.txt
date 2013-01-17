@@ -95,7 +95,6 @@ vingrinajums 7:
 
 vingrinajums 8:
     uzzimet unikursivu grafu ar 6 virsotnem un 3 skautnem pie katras virsotnes
-        apvienot 1.7 a un b (E - diagonalu krustpunkts, F - "jumts"):
 
     to pasu, bet noslegtu
 

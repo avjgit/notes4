@@ -1,0 +1,3 @@
+vingrinajums 8
+    uzzimet unikursivu grafu ar 6 virsotnem, ar vismaz 3 skautnem no katras
+    to pasu, bet noslegtu (apgaita atrgiezas sakumpunkta)
