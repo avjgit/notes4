@@ -11,10 +11,14 @@ def automata1(word)
     last1_zero = true
     last2_zero = true
 
+#     return
+#         first_zero &&
+#         last1_zero &&
+#         last2_zero
     return
-        first_zero &&
-        last1_zero &&
-        last2_zero
+        word[0]               == '0' &&
+        word[word.length - 1] == '0' &&
+        word[word.length - 2] == '0'
 end
 
 def assert(actual, expected)
@@ -25,8 +29,10 @@ def assert(actual, expected)
     end
 end
 
-assert(automata1('0'), false)
-assert(automata1('00'), true)
+# assert(automata1('0'), false)
+# assert(automata1('00'), true)
+assert(automata1('012345000'), true)
+
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
