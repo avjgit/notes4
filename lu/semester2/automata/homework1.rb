@@ -17,7 +17,7 @@ def automata1(word)
         last2_zero
 end
 
-def assert(actual, expected, description)
+def assert(actual, expected)
     if actual = expected
         puts ': succeeded'
     else
@@ -25,8 +25,8 @@ def assert(actual, expected, description)
     end
 end
 
-assert(automata1('0'), false, 'mock1 test')
-assert(automata1('00'), true, 'mock2 test')
+assert(automata1('0'), false)
+assert(automata1('00'), true)
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
