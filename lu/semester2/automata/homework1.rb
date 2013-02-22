@@ -15,16 +15,17 @@ def automata1(word)
         last2_zero
 end
 
-def test(succeeded, description)
+def assert(actual, expected, description)
     print description
-    if succeeded
-        print ' succeeded'
+    if actual = expected
+        puts ' succeeded'
     else
-        print ' failed'
+        puts ' failed'
     end
 end
 
-test(true, 'mock test')
+assert(true, true, 'mock test')
+assert(true, false, 'mock test')
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
