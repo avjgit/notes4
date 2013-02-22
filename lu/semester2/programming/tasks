@@ -1,0 +1,16 @@
+Izveidot programmu valodā C++, kas apstrādā teksta failu secīgā režīmā. Dati no faila jānolasa pa vienam simbolam (nedrīkst nolasīt uzreiz visu failu vai veselu rindiņu). Nedrīkst dublēt visa faila saturu operatīvajā atmiņā. Sīkākas prasības sk. Laboratorijas darbu noteikumos.
+F10. Doti divi faili f1 un f2. Failā f1 ir patvaļīgs teksts, failā f2 ir ne vairāk kā 40 vārdu pārīšu, kas atdalīti ar komatiem. Izdrukāt failā tekstu no ieejas faila f1, kurā visi vārdi, kas ir sastopami failā f2 kā pirmā komponente no pārīša, tiek aizstāti ar tam atbilstošo failā f2 norādīto vārdu. Drīkst uzskatīt, ka vārda garums failā nepārsniedz 40 simbolus. Par vārdu uzskatīt patvaļīgu simbolu virkni, kas atdalīta ar tukšumiem vai pieturas zīmēm (punkts, komats, apaļās iekavas, izsaukuma zīme, jautājuma zīme).
+========================================================
+
+Izveidot programmu valodā C++, kas ļauj izveidot vienvirziena saistīto sarakstu (izmantojot dinamiskās datu struktūras), kurā glabājas noteikta tipa vērtības. Jābūt  paredzētai iespējai sarakstu papildināt ar jaunu elementu (pielikt elementu saraksta galā), izdrukāt sarakstu, iznīcināt sarakstu. Bez tam jāuzraksta funkcija, kura aprakstīta zemāk. Iznīcinot saraksta elementus, korekti jāatbrīvo izdalītā atmiņa. Galvenajā programmā:
+  a) jābūt iespējai ievadīt saraksta elementus (izveidot patvaļīgu sarakstu),
+  b) jāpielieto uzrakstītā funkcija sarakstam,
+  c) jāizdrukā saraksts pēc funkcijas darbības.
+  d) beigās jāiznīcina saraksts (lietojot delete).
+Sīkākas prasības sk. Laboratorijas darbu noteikumos.
+G9. Uzrakstīt funkciju, kas pārvieto saraksta n-to elementu uz saraksta beigām. Darbība jāveic, pārkabinot saites, nevis pārrakstot elementu vērtības.
+=========================================================
+
+Izveidot programmu valodā C++.  Ja programma darbojas ar failu, nedrīkst dublēt visa faila saturu operatīvajā atmiņā. Ar faila komponenti tiek saprasts fiksēta garuma ieraksts. Sīkākās prasības sk. Laboratorijas darbu noteikumos.
+H6. Uzrakstīt programmu, kas ļauj izveidot un labot bināru failu, kura ieraksta struktūra ir sekojoša: vārds – atslēga (30 simboli), vārds – vērtība (30 simboli), ieraksta statuss (0 vai 1). Programmai katrs jauns ieraksts jāieliek faila beigās. Jāparedz iespēja (1) izmest faila komponenti (loģiski atzīmējot kā izmestu), (2) izdrukāt faila esošās komponentes uz ekrāna, (3) izmest loģiski izmestas komponentes fiziski.
+==============================================================
