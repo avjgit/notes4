@@ -5,6 +5,8 @@
 # –Jāiesniedz tikai pirmkods
 
 def automata1(word)
+    print 'running for: ' + word
+
     first_zero = true
     last1_zero = true
     last2_zero = true
@@ -16,16 +18,15 @@ def automata1(word)
 end
 
 def assert(actual, expected, description)
-    print description
     if actual = expected
-        puts ' succeeded'
+        puts ': succeeded'
     else
-        puts ' failed'
+        puts ': failed'
     end
 end
 
-assert(true, true, 'mock test')
-assert(true, false, 'mock test')
+assert(automata1('0'), false, 'mock1 test')
+assert(automata1('00'), true, 'mock2 test')
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
