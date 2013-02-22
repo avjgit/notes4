@@ -15,5 +15,16 @@ def automata1(word)
         last2_zero
 end
 
+def test(succeeded, description)
+    print description
+    if succeeded
+        print ' succeeded'
+    else
+        print ' failed'
+    end
+end
+
+test(true, 'mock test')
+
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
