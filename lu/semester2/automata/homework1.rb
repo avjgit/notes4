@@ -4,7 +4,16 @@
 # –Programmā jābūt funkcijai, kas saņem ievadā simbolu virkni (string) un atgriež jā vai nē (boolean)
 # –Jāiesniedz tikai pirmkods
 
+def automata1(word)
+    first_zero = true
+    last1_zero = true
+    last2_zero = true
 
+    return
+        first_zero &&
+        last1_zero &&
+        last2_zero
+end
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
