@@ -4,6 +4,14 @@
 # –Programmā jābūt funkcijai, kas saņem ievadā simbolu virkni (string) un atgriež jā vai nē (boolean)
 # –Jāiesniedz tikai pirmkods
 
+
+# Kā izmantot programmu:
+# Instalēt Ruby (http://www.editrocket.com/articles/ruby_windows.html)
+# un no Windows comandrindas (CMD) tajā direktorijā, kur atrodas šis fails, palaist komandu "ruby homework1.rb".
+# Tiks izpildīti testi (piem., assert(automata1(''), false)), kas atrodas failā.
+# Var pievienot jebkurus papildus testus (piem., assert(automata1('0 vai sis vards tiks akceptets? 00'), true)).
+# Piezīme: programmējot automātu, tika interpretēts, ka vārds '00' ir akceptējams (jo iepriekšpēdējāa vienlaikus ir pirmā)
+
 def automata1(word)
     print 'running for: ' + word
 
@@ -29,56 +37,25 @@ def automata1(word)
         i += 1
     end
 
-    # if zero_first
-    #     p 'zero_first is ok'
-    # end
-    # if zero_penult
-    #     p 'zero_penult is ok'
-    # end
-    # if zero_last
-    #     p 'zero_last is ok'
-    # end
-
     return zero_first  &&
            zero_penult &&
            zero_last
-    # return zero_last && zero_penult && zero_last
 end
 
 def assert(actual, expected)
-    if actual
-        puts ' actual true'
-    else
-        puts ' actual false'
-    end
-    if expected
-        puts ' expected true'
-    else
-        puts ' expected false'
-    end
-
-    if actual === expected
+    if actual == expected
         puts ': succeeded'
     else
         puts ': failed'
     end
 end
 
-# assert(automata1(''), false)
-# assert(automata1('0'), false)
-# assert(automata1('00'), true)
-# assert(automata1('010'), false)
-# assert(automata1('0100'), true)
-# automata1('')
-# automata1('1')
-# automata1('0')
-
-# main code check
-if automata1('00')
-    p 'accepted'
-else
-    p 'not accepted'
-end
+assert(automata1(''), false)
+assert(automata1('0'), false)
+assert(automata1('00'), true)
+assert(automata1('010'), false)
+assert(automata1('0100'), true)
+assert(automata1('10001'), false)
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
