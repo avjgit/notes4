@@ -40,11 +40,6 @@ def automata1(word)
 end
 
 def assert(actual, expected)
-    # if actual == expected
-    #     puts ': succeeded'
-    # else
-    #     puts ': failed'
-    # end
     puts actual == expected ? ': succeeded' : ': failed'
 end
 
