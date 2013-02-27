@@ -54,6 +54,17 @@ def automata1(word)
 end
 
 def assert(actual, expected)
+    if actual
+        puts ' actual true'
+    else
+        puts ' actual false'
+    end
+    if expected
+        puts ' expected true'
+    else
+        puts ' expected false'
+    end
+
     if actual == expected
         puts ': succeeded'
     else
@@ -61,7 +72,7 @@ def assert(actual, expected)
     end
 end
 
-# assert(automata1(''), false)
+assert(automata1(''), false)
 # assert(automata1('0'), false)
 # assert(automata1('00'), true)
 # assert(automata1('010'), false)
@@ -69,10 +80,5 @@ end
 # automata1('')
 # automata1('1')
 # automata1('0')
-if automata1('')
-    p 'accepted'
-else
-    p 'not'
-end
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
