@@ -10,6 +10,7 @@
 # Tiks izpildīti testi (piem., assert(automata1(''), false)), kas atrodas failā.
 # Var pievienot jebkurus papildus testus (piem., assert(automata1('0 vai sis vards tiks akceptets? 00'), true)).
 # Piezīme: programmējot automātu, tika interpretēts, ka vārds '00' ir akceptējams (jo iepriekšpēdējāa vienlaikus ir pirmā)
+# Darba versiju vēsture atrodama https://github.com/avjgit/notes4/blob/master/lu/semester2/automata/homework1.rb.
 
 def automata1(word)
     print 'running for: ' + word
