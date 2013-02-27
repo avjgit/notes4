@@ -29,21 +29,20 @@ def automata1(word)
         i += 1
     end
 
-    if zero_first
-        p 'zero_first is ok'
-    end
-    if zero_penult
-        p 'zero_penult is ok'
-    end
-    if zero_last
-        p 'zero_last is ok'
-    end
+    # if zero_first
+    #     p 'zero_first is ok'
+    # end
+    # if zero_penult
+    #     p 'zero_penult is ok'
+    # end
+    # if zero_last
+    #     p 'zero_last is ok'
+    # end
 
-    # return
-    #     zero_first  &&
-    #     zero_penult &&
-    #     zero_last
-    return zero_last && zero_penult && zero_last
+    return zero_first  &&
+           zero_penult &&
+           zero_last
+    # return zero_last && zero_penult && zero_last
 end
 
 def assert(actual, expected)
