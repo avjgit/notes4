@@ -7,18 +7,10 @@
 def automata1(word)
     print 'running for: ' + word
 
-    first_zero = true
-    last1_zero = true
-    last2_zero = true
+    first_zero = false
+    last1_zero = false
+    last2_zero = false
 
-end
-
-def automata1_rubyway(word)
-    print 'running for: ' + word
-    return
-        word[0]               == '0' &&
-        word[word.length - 1] == '0' &&
-        word[word.length - 2] == '0'
 end
 
 def assert(actual, expected)
@@ -29,11 +21,12 @@ def assert(actual, expected)
     end
 end
 
-# assert(automata1('0'), false)
-# assert(automata1('00'), true)
-# assert(automata1('012345000'), true)
+assert(automata1(''), false)
+assert(automata1('0'), false)
+assert(automata1('00'), true)
+assert(automata1('010'), false)
+assert(automata1('0100'), true)
 
-automata1('012345')
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
