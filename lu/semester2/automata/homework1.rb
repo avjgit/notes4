@@ -65,7 +65,7 @@ def assert(actual, expected)
         puts ' expected false'
     end
 
-    if actual == expected
+    if actual === expected
         puts ': succeeded'
     else
         puts ': failed'
@@ -80,5 +80,10 @@ assert(automata1(''), false)
 # automata1('')
 # automata1('1')
 # automata1('0')
+if true == true
+    p 'bool comparison works'
+else
+    p 'no it does not'
+end
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
