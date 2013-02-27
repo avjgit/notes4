@@ -22,12 +22,6 @@ def automata1(word)
         i += 1
     end
 
-    if zero_first
-        p 'hey, first is 0'
-    else
-        p 'no, it is not'
-    end
-
     # all next, till end of word, are processed in loop
     while !word[i].nil?
         zero_penult = zero_last
@@ -35,22 +29,21 @@ def automata1(word)
         i += 1
     end
 
-    if zero_last
-        p 'hey, last is 0 too'
-    else
-        p 'no, it is not'
+    if zero_first
+        p 'zero_first is ok'
     end
-
     if zero_penult
-        p 'hey, and penult??'
-    else
-        p 'no, it is not'
+        p 'zero_penult is ok'
+    end
+    if zero_last
+        p 'zero_last is ok'
     end
 
-    return
-        zero_first  &&
-        zero_penult &&
-        zero_last
+    # return
+    #     zero_first  &&
+    #     zero_penult &&
+    #     zero_last
+    return zero_last && zero_penult && zero_last
 end
 
 def assert(actual, expected)
@@ -72,7 +65,7 @@ def assert(actual, expected)
     end
 end
 
-assert(automata1(''), false)
+# assert(automata1(''), false)
 # assert(automata1('0'), false)
 # assert(automata1('00'), true)
 # assert(automata1('010'), false)
@@ -80,10 +73,13 @@ assert(automata1(''), false)
 # automata1('')
 # automata1('1')
 # automata1('0')
-if true == true
-    p 'bool comparison works'
+
+# main code check
+if automata1('00')
+    p 'accepted'
 else
-    p 'no it does not'
+    p 'not accepted'
 end
+
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
