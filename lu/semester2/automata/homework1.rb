@@ -4,7 +4,6 @@
 # –Programmā jābūt funkcijai, kas saņem ievadā simbolu virkni (string) un atgriež jā vai nē (boolean)
 # –Jāiesniedz tikai pirmkods
 
-
 # Kā izmantot programmu:
 # Instalēt Ruby (http://www.editrocket.com/articles/ruby_windows.html)
 # un no Windows comandrindas (CMD) tajā direktorijā, kur atrodas šis fails, palaist komandu "ruby homework1.rb".
@@ -25,8 +24,8 @@ def automata1(word)
 
         zero_first = true
         zero_last  = true
-        i = 1
 
+        i = 1
         while !word[i].nil?
             zero_penult = zero_last
             zero_last = (word[i] == accepted)
@@ -52,3 +51,11 @@ assert(automata1('10001'), false)
 
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
+
+# Jānoskaidro akceptors. Proti,
+# - kādi ir visi iespējamie stāvokļi
+# - kurš no tiem ir sākuma stāvoklis
+# - kuri no tiem ir "laimīgu beigu" (akceptējošie) stāvokļi
+# - kā var starp stāvokļiem pārvietoties (alfabēts un pārejas funkcija)
+# Alfabēts tiek izmantots pārejas funkcijā - sastādot akcetora tabulu
+# (proti, katram iespējamajam simbolam norādot automata nākamo stāvokli).
