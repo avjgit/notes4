@@ -24,11 +24,11 @@ def automata1(word)
     i = 0
 
     # taking the first char separately
-    if !word[i].nil?
+    # if !word[i].nil?
         zero_first = (word[i] == accepted)
         zero_last = zero_first
         i += 1
-    end
+    # end
 
     # all next, till end of word, are processed in loop
     while !word[i].nil?
