@@ -11,14 +11,23 @@ def automata1(word)
     zero_penult = false
     zero_last   = false
 
-    # pseudocode
-    # take char (first)
-    # if it is zero, proceed
-        # save it as first, and also pre-last
-    # take next
-        # save it as last
-        #
-    print word[1]
+    accepted = '0'
+
+    i = 0
+
+    # taking the first char separately
+    if !word[i].nil?
+        i++
+        zero_first = (word[i] == accepted)
+        zero_last = zero_first
+    end
+
+    # all next, till end of word, are processed in loop
+    while !word[i].nil?
+        i++
+        zero_penult = zero_last
+        zero_last = (word[i] == accepted)
+    end
 
     return
         zero_first  &&
@@ -40,17 +49,5 @@ assert(automata1('00'), true)
 assert(automata1('010'), false)
 assert(automata1('0100'), true)
 
-if 'as'[1].nil?
-    puts 'nothing here'
-else
-    puts 'ok, it was ' + 'as'[1]
-end
-
-
-if 'as'[2].nil?
-    puts 'nothing here'
-else
-    puts 'ok, it was ' + 'as'[1]
-end
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
