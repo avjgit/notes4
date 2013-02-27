@@ -21,17 +21,12 @@ def automata1(word)
 
     accepted = '0'
 
-    i = 0
+    if word[0] == accepted
 
-    # taking the first char separately
-    # if !word[i].nil?
-        zero_first = (word[i] == accepted)
-        zero_last = zero_first
-        i += 1
-    # end
+        zero_first = true
+        zero_last  = true
+        i = 1
 
-    # all next, till end of word, are processed in loop
-    if zero_first
         while !word[i].nil?
             zero_penult = zero_last
             zero_last = (word[i] == accepted)
@@ -45,11 +40,12 @@ def automata1(word)
 end
 
 def assert(actual, expected)
-    if actual == expected
-        puts ': succeeded'
-    else
-        puts ': failed'
-    end
+    # if actual == expected
+    #     puts ': succeeded'
+    # else
+    #     puts ': failed'
+    # end
+    puts actual == expected ? ': succeeded' : ': failed'
 end
 
 assert(automata1(''), false)
