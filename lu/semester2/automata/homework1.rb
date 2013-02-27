@@ -31,10 +31,12 @@ def automata1(word)
     # end
 
     # all next, till end of word, are processed in loop
-    while !word[i].nil?
-        zero_penult = zero_last
-        zero_last = (word[i] == accepted)
-        i += 1
+    if zero_first
+        while !word[i].nil?
+            zero_penult = zero_last
+            zero_last = (word[i] == accepted)
+            i += 1
+        end
     end
 
     return zero_first  &&
