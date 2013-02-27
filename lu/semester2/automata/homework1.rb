@@ -12,6 +12,13 @@ def automata1(word)
     zero_last   = false
 
     # pseudocode
+    # take char (first)
+    # if it is zero, proceed
+        # save it as first, and also pre-last
+    # take next
+        # save it as last
+        #
+    print word[1]
 
     return
         zero_first  &&
@@ -33,6 +40,17 @@ assert(automata1('00'), true)
 assert(automata1('010'), false)
 assert(automata1('0100'), true)
 
+if 'as'[1].nil?
+    puts 'nothing here'
+else
+    puts 'ok, it was ' + 'as'[1]
+end
 
+
+if 'as'[2].nil?
+    puts 'nothing here'
+else
+    puts 'ok, it was ' + 'as'[1]
+end
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
