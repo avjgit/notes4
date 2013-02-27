@@ -17,7 +17,6 @@ def automata1(word)
 
     # taking the first char separately
     if !word[i].nil?
-        p word[i]
         zero_first = (word[i] == accepted)
         zero_last = zero_first
         i += 1
@@ -36,14 +35,26 @@ def automata1(word)
         i += 1
     end
 
-    # return
-    #     zero_first  &&
-    #     zero_penult &&
-    #     zero_last
+    if zero_last
+        p 'hey, last is 0 too'
+    else
+        p 'no, it is not'
+    end
+
+    if zero_penult
+        p 'hey, and penult??'
+    else
+        p 'no, it is not'
+    end
+
+    return
+        zero_first  &&
+        zero_penult &&
+        zero_last
 end
 
 def assert(actual, expected)
-    if actual = expected
+    if actual == expected
         puts ': succeeded'
     else
         puts ': failed'
@@ -57,6 +68,11 @@ end
 # assert(automata1('0100'), true)
 # automata1('')
 # automata1('1')
-automata1('0')
+# automata1('0')
+if automata1('')
+    p 'accepted'
+else
+    p 'not'
+end
 ##################################################################################
 # 2) Neformāli aprakstīt vispārīgus principus, kā noprogrammēt patvaļīgu automātu.
