@@ -7,9 +7,9 @@
 def automata1(word)
     print 'running for: ' + word
 
-    first_zero = false
-    last1_zero = false
-    last2_zero = false
+    first_zero  = false
+    last_zero   = false
+    penult_zero = false
 
 end
 
