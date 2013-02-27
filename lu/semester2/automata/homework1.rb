@@ -7,10 +7,16 @@
 def automata1(word)
     print 'running for: ' + word
 
-    first_zero  = false
-    last_zero   = false
-    penult_zero = false
+    zero_first  = false
+    zero_penult = false
+    zero_last   = false
 
+    # pseudocode
+
+    return
+        zero_first  &&
+        zero_penult &&
+        zero_last
 end
 
 def assert(actual, expected)
