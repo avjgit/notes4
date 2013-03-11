@@ -32,20 +32,27 @@ int main()
     char c;
     char word[40];
     ifstream inFile;
+    ofstream outFile;
     inFile.open("f1");
     if(!inFile) return 1;
+    outFile.open("f2");
 
-    // while (!inFile.eof())
+    inFile >> c;
+
+    while (!inFile.eof())
+    {
+        // cout << c;
+        // inFile >> c;
+        outFile << c;
+        c = inFile.get();
+    }
+    // for (int i=0; i<150;i++)
     // {
     //     inFile >> c;
     //     cout << c;
     // }
-    for (int i=0; i<150;i++)
-    {
-        inFile >> c;
-        cout << c;
-    }
 
     inFile.close();
+    outFile.close();
     return 0;
 }
