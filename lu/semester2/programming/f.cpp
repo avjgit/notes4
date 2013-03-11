@@ -24,32 +24,28 @@ bool is_end_of_word(char c)
 int main()
 {
     // tests of is_end_of_word
-    if (is_end_of_word('a')) {cout << "nok";} else {cout << "ok";}
-    if (is_end_of_word(' ')) {cout << "ok";} else {cout << "nok";}
-    if (is_end_of_word('?')) {cout << "ok";} else {cout << "nok";}
-
-
-
+    // if (is_end_of_word('a')) {cout << "nok";} else {cout << "ok";}
+    // if (is_end_of_word(' ')) {cout << "ok";}  else {cout << "nok";}
+    // if (is_end_of_word('?')) {cout << "ok";}  else {cout << "nok";}
     // end of tests of is_end_of_word
 
-    // char character;
-    // char word[40];
-    // ifstream inFile;
-    // inFile.open("f1");
-    // if(!inFile) return 1;
+    char c;
+    char word[40];
+    ifstream inFile;
+    inFile.open("f1");
+    if(!inFile) return 1;
 
-    // while(inFile)
+    // while (!inFile.eof())
     // {
     //     inFile >> c;
     //     cout << c;
     // }
-    // // while (!inFile.eof())
-    // // {
-    // //     inFile >> c;
-    // //     cout << c;
-    // // }
-    // printf("asf");
-    // inFile.close();
+    for (int i=0; i<150;i++)
+    {
+        inFile >> c;
+        cout << c;
+    }
 
+    inFile.close();
     return 0;
 }
