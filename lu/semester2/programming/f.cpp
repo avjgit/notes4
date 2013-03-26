@@ -13,3 +13,13 @@
 // Par vārdu uzskatīt patvaļīgu simbolu virkni,
 // kas atdalīta ar tukšumiem vai pieturas zīmēm
 // (punkts, komats, apaļās iekavas, izsaukuma zīme, jautājuma zīme).
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout << "Program";
+    return 0;
+}
+
