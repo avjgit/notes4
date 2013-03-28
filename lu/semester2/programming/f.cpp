@@ -24,16 +24,16 @@ int main()
     fstream f1 ("f1");
     fstream f2 ("f2");
 
-    f1 >> c;
-
-    while (!f1.eof())
-    {
+    c = f1.get();
+    while (!f1.eof()) {
         cout << c;
-        f1 >> c;
+        c = f1.get();
     }
+
+
+
 
     f1.close();
     f2.close();
     return 0;
 }
-
