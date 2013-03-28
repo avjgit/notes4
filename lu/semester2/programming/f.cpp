@@ -15,11 +15,25 @@
 // (punkts, komats, apaļās iekavas, izsaukuma zīme, jautājuma zīme).
 
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 int main()
 {
-    cout << "Program";
+    char c;
+    fstream f1 ("f1");
+    fstream f2 ("f2");
+
+    f1 >> c;
+
+    while (!f1.eof())
+    {
+        cout << c;
+        f1 >> c;
+    }
+
+    f1.close();
+    f2.close();
     return 0;
 }
 
