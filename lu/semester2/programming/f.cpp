@@ -18,29 +18,41 @@ bool is_end_of_word(char c)
 
 int main()
 {
-    // tests of is_end_of_word
-    // if (is_end_of_word('a')) {cout << "nok";} else {cout << "ok";}
-    // if (is_end_of_word(' ')) {cout << "ok";} else {cout << "nok";}
-    // if (is_end_of_word('?')) {cout << "ok";} else {cout << "nok";}
+    const int MAX_WORD_SIZE = 40;
+    char  c;                     // character to read in
+    char  word[MAX_WORD_SIZE];   // array to save a word read in
+    int   word_length;
 
-    char c;             // character to read in
-    char word[40];      // array to save a word read in
-    ifstream f1 ("f1");
-    ifstream f2 ("f2");
-    ofstream f3 ("f3");
-
-
-    // read the word from f1
-    // check if it exists in f2
-    // if does, then replace it with pair from f2
-    // output to f3
+    ifstream f1 ("f1");          // file to read text from
+    ifstream f2 ("f2");          // file to check replacements
+    ofstream f3 ("f3");          // file to output result
 
     c = f1.get();
+
     while (!f1.eof()) {
-        cout << c;
-        f3 << c;
+
+        word_length = 0;
+
+        // char by char, read the word from f1
+        while (!is_end_of_word(c))
+        {
+            word[word_length] = c;
+            c = f1.get();
+        }
+
+        // check if it exists in f2
+
+        // if does, then replace it with pair from f2
+
+        // output to f3
+        for (int i = 0; i<= word_length; i++)
+        {
+            f3 << word[i];
+        }
+
         c = f1.get();
     }
+
 
     f1.close();
     f2.close();
