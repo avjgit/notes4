@@ -37,6 +37,7 @@ int main()
         while (!is_end_of_word(c))
         {
             word[word_length] = c;
+            word_length++;
             c = f1.get();
         }
 
@@ -45,10 +46,14 @@ int main()
         // if does, then replace it with pair from f2
 
         // output to f3
-        for (int i = 0; i<= word_length; i++)
+        cout << "got this word: ";
+        for (int i = 0; i < word_length; i++)
         {
-            f3 << word[i];
+            // f3 << word[i];
+            cout << word[i];
+
         }
+        cout << endl;
 
         c = f1.get();
     }
