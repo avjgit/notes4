@@ -28,10 +28,11 @@ int main()
     int   word_length;
     int   pair1_length;
     int   pair2_length;
+    bool  is_word_in_pair;
 
 
     ifstream f1 ("f1");          // file to read text from
-    ifstream f2 ("f2");          // file to check replacements
+    ifstream f2;                 // file to check replacements
     ofstream f3 ("f3");          // file to output result
 
     c = f1.get();
@@ -41,21 +42,22 @@ int main()
 
         // char by char, read the word from f1
         word_length = 0;
-        while (!is_end_of_word(c))
+        while (!f1.eof() && !is_end_of_word(c))
         {
             word[word_length] = c;
             word_length++;
             c = f1.get();
         }
 
-
         // check if it exists in f2
+        f2.open("f2");
         c2 = f2.get();
         while(!f2.eof())
         {
             // read first word from pair
             pair1_length = 0;
-            while (c2 != WORD_SEPARATOR)
+
+            while (!f2.eof() && c2 != WORD_SEPARATOR)
             {
                 pair1[pair1_length] = c2;
                 pair1_length++;
@@ -63,15 +65,28 @@ int main()
             }
 
             // if this is word from input file (f1)
-            if (pair1[0] == word[0])
+            is_word_in_pair = false;
+            if (word_length == pair1_length)
             {
-                // if does, then replace it with pair from f2
+                is_word_in_pair = true;
+                for(int i = 0; i < word_length; i++)
+                {
+                    if (word[i] != pair1[i])
+                    {
+                        is_word_in_pair = false;
+                        break;
+                    }
+                }
+            }
+
+            if (is_word_in_pair)
+            {
                 word[0] = 'X';
-                break;
             }
 
             c2 = f2.get();
         }
+        f2.close();
 
         // output to f3
         for (int i = 0; i < word_length; i++)
@@ -80,12 +95,14 @@ int main()
         }
 
         // copy punctuation to the file as well
-        f3 << c;
+        if (!f1.eof())
+        {
+            f3 << c;
+        }
         c = f1.get();
     }
 
     f1.close();
-    f2.close();
     f3.close();
     return 0;
 }
