@@ -46,15 +46,13 @@ int main()
         // if does, then replace it with pair from f2
 
         // output to f3
-        cout << "got this word: ";
         for (int i = 0; i < word_length; i++)
         {
-            // f3 << word[i];
-            cout << word[i];
-
+            f3 << word[i];
         }
-        cout << endl;
 
+        // copy punctuation to the file as well
+        f3 << c;
         c = f1.get();
     }
 
