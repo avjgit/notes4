@@ -81,7 +81,15 @@ int main()
 
             if (is_word_in_pair)
             {
-                word[0] = 'X';
+                // get next word from pair
+                word_length = 0;
+                c2 = f2.get();
+                while (!f2.eof() && c2 != PAIR_SEPARATOR)
+                {
+                    word[word_length] = c2;
+                    word_length++;
+                    c2 = f2.get();
+                }
             }
 
             c2 = f2.get();
