@@ -23,10 +23,17 @@ int main()
     // if (is_end_of_word(' ')) {cout << "ok";} else {cout << "nok";}
     // if (is_end_of_word('?')) {cout << "ok";} else {cout << "nok";}
 
-    char c;        // character to read in
-    char word[40]; // array to save a word read in
-    fstream f1 ("f1");
+    char c;             // character to read in
+    char word[40];      // array to save a word read in
+    ifstream f1 ("f1");
+    ifstream f2 ("f2");
     ofstream f3 ("f3");
+
+
+    // read the word from f1
+    // check if it exists in f2
+    // if does, then replace it with pair from f2
+    // output to f3
 
     c = f1.get();
     while (!f1.eof()) {
@@ -36,6 +43,7 @@ int main()
     }
 
     f1.close();
+    f2.close();
     f3.close();
     return 0;
 }
