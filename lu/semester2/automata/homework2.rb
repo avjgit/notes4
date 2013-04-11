@@ -94,3 +94,11 @@ def assert(actual, expected)
 end
 
 assert(automata2('gulbisnadal'), true)
+assert(automata2('_gulbis_nadal_'), true)
+
+assert(automata2('nadalgulbis'), true)
+assert(automata2('_nadal_gulbis_'), true)
+
+assert(automata2('gulbis'), false)
+assert(automata2('nadal'), false)
+
