@@ -89,6 +89,25 @@ def automata2(word)
     return has_gulbis && has_nadal
 end
 
+def gulbis_positions(word)
+    print 'running for: ' + word
+    positions = []
+    i = 0
+    while !word[i].nil?
+        if(word[i]   == 'g' &&
+           word[i+1] == 'u' &&
+           word[i+2] == 'l' &&
+           word[i+3] == 'b' &&
+           word[i+4] == 'i' &&
+           word[i+5] == 's'
+        )
+            positions << i+6
+        end
+        i += 1
+    end
+
+    return positions
+end
 def assert(actual, expected)
     puts actual == expected ? ': succeeded' : ': failed'
 end
@@ -102,3 +121,5 @@ assert(automata2('_nadal_gulbis_'), true)
 assert(automata2('gulbis'), false)
 assert(automata2('nadal'), false)
 
+assert(gulbis_positions('gulbis'), [6])
+assert(gulbis_positions('_gulbis_gulbis_gulbis_'), [7, 14, 21])
