@@ -49,3 +49,18 @@
 # 26  21  21  21  21  21  27  21  21  21  21  26
 # 27  21  21  21  21  21  21  28  21  21  21  27
 # 28  28  28  28  28  28  28  28  28  28  28  28
+# -----------------------------------------------------
+# 3)Noprogrammēt uzbūvēto automātu:
+# –Drīkst izmantot jebkādu programmēšanas valodu
+# –Nedrīkst izmantot jebkāda veida bibliotēkas, kas meklē tekstā, piemēram, regulārās izteiksmes.
+# –Programmā jābūt funkcijai, kas saņem ievadā simbolu virkni (string) un atgriež sarakstu ar visām fragmenta gulbis beigu simbola atrašanās pozīcijām simbolu virknē.
+def automata2(word)
+    print 'running for: ' + word
+    return true
+end
+
+def assert(actual, expected)
+    puts actual == expected ? ': succeeded' : ': failed'
+end
+
+assert(automata2('gulbisnadal'), true)
