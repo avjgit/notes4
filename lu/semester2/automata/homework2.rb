@@ -116,3 +116,4 @@ assert(automata2('nadals'), false)
 
 assert(gulbis_positions('gulbis'), [6])
 assert(gulbis_positions('_gulbis_gulbis_gulbis_'), [7, 14, 21])
+assert(gulbis_positions('nav gulbja'), [])
