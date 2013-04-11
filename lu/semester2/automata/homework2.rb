@@ -20,29 +20,29 @@
 # -----------------------------------------------------
 # 2)Determinizēt uzbūvēto avotu.
     Σ   G   U   L   B   I   S   N   A   D   ɛ
-00  X   X   X   X   X   X   X   X   X   X   X
-01  X   X   X   X   X   X   X   X   X   X   X
-02  X   X   X   X   X   X   X   X   X   X   X
-03  X   X   X   X   X   X   X   X   X   X   X
-04  X   X   X   X   X   X   X   X   X   X   X
-05  X   X   X   X   X   X   X   X   X   X   X
-06  X   X   X   X   X   X   X   X   X   X   X
-07  X   X   X   X   X   X   X   X   X   X   X
-08  X   X   X   X   X   X   X   X   X   X   X
-09  X   X   X   X   X   X   X   X   X   X   X
-10  X   X   X   X   X   X   X   X   X   X   X
-11  X   X   X   X   X   X   X   X   X   X   X
-12  X   X   X   X   X   X   X   X   X   X   X
-13  X   X   X   X   X   X   X   X   X   X   X
-14  X   X   X   X   X   X   X   X   X   X   X
-15  X   X   X   X   X   X   X   X   X   X   X
-16  X   X   X   X   X   X   X   X   X   X   X
-17  X   X   X   X   X   X   X   X   X   X   X
-18  X   X   X   X   X   X   X   X   X   X   X
-19  X   X   X   X   X   X   X   X   X   X   X
-20  X   X   X   X   X   X   X   X   X   X   X
-21  X   X   X   X   X   X   X   X   X   X   X
-22  X   X   X   X   X   X   X   X   X   X   X
-23  X   X   X   X   X   X   X   X   X   X   X
-24  X   X   X   X   X   X   X   X   X   X   X
-25  X   X   X   X   X   X   X   X   X   X   X
+00  X   X   X   X   X   X   X   X   X   X   (01,15)
+01  X   X   X   X   X   X   X   X   X   X   01
+02  X   X   X   X   X   X   X   X   X   X   02
+03  X   X   X   X   X   X   X   X   X   X   03
+04  X   X   X   X   X   X   X   X   X   X   04
+05  X   X   X   X   X   X   X   X   X   X   05
+06  X   X   X   X   X   X   X   X   X   X   06
+07  X   X   X   X   X   X   X   X   X   X   08  # NB!
+08  X   X   X   X   X   X   X   X   X   X   08
+09  X   X   X   X   X   X   X   X   X   X   09
+10  X   X   X   X   X   X   X   X   X   X   10
+11  X   X   X   X   X   X   X   X   X   X   11
+12  X   X   X   X   X   X   X   X   X   X   12
+13  X   X   X   X   X   X   X   X   X   X   13
+14  X   X   X   X   X   X   X   X   X   X   14
+15  X   X   X   X   X   X   X   X   X   X   15
+16  X   X   X   X   X   X   X   X   X   X   16
+17  X   X   X   X   X   X   X   X   X   X   17
+18  X   X   X   X   X   X   X   X   X   X   18
+19  X   X   X   X   X   X   X   X   X   X   19
+20  X   X   X   X   X   X   X   X   X   X   20
+21  X   X   X   X   X   X   X   X   X   X   22  # NB!
+22  X   X   X   X   X   X   X   X   X   X   22
+23  X   X   X   X   X   X   X   X   X   X   23
+24  X   X   X   X   X   X   X   X   X   X   24
+25  X   X   X   X   X   X   X   X   X   X   25
