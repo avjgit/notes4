@@ -1,0 +1,16 @@
+key terms:
+    alphabet - S (sigma)
+
+    word (also empty word - e (epsilon)) - made of alphabet's symbols
+
+    language - made of words
+
+    problem - question if given word belongs to given language
+
+    finite determined automata:
+        Q - finite set
+        S - alphabet
+        d - delta - transition function
+        q0 - entry
+        F - akccepted states
+        A =
