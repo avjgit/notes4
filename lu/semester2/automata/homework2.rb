@@ -12,4 +12,5 @@
 # kas pieder valodai L={w┤|  w satur abus fragmentus gulbis un nadals} alfabētā Σ=ASCII.
 
 ==> (a)
+        #virziens nr1: apaļa bultiņa, uz to pašu saakuma staavokli a
         -Σ->(a)
