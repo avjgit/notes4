@@ -56,7 +56,37 @@
 # –Programmā jābūt funkcijai, kas saņem ievadā simbolu virkni (string) un atgriež sarakstu ar visām fragmenta gulbis beigu simbola atrašanās pozīcijām simbolu virknē.
 def automata2(word)
     print 'running for: ' + word
-    return true
+
+    has_gulbis = false
+    i = 0
+    while !word[i].nil?
+        if(word[i]   == 'g' &&
+           word[i+1] == 'u' &&
+           word[i+2] == 'l' &&
+           word[i+3] == 'b' &&
+           word[i+4] == 'i' &&
+           word[i+5] == 's'
+        )
+            has_gulbis = true
+        end
+        i += 1
+    end
+
+    has_nadal  = false
+    i = 0
+    while !word[i].nil?
+        if(word[i]   == 'n' &&
+           word[i+1] == 'a' &&
+           word[i+2] == 'd' &&
+           word[i+3] == 'a' &&
+           word[i+4] == 'l'
+        )
+            has_nadal = true
+        end
+        i += 1
+    end
+
+    return has_gulbis && has_nadal
 end
 
 def assert(actual, expected)
