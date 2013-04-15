@@ -47,8 +47,8 @@ void mark_inactive()
     fstream fin ("iofile.bin", ios::in | ios::out | ios::binary);
 
     fin.read (key, KEY_SIZE);
-    // fin.seekg(VALUE_SIZE, ios::cur);
-    fin.read (value, KEY_SIZE);
+    fin.seekg(VALUE_SIZE, ios::cur);
+    // fin.read (value, KEY_SIZE);
 
     while (fin)
     {
@@ -82,14 +82,15 @@ void mark_inactive()
         {
             cout << "skipping" << endl;
 
-            fin.read ((char*)&flag, sizeof(int));
-            // fin.seekg(FLAG_SIZE, ios::cur);
+            // fin.read ((char*)&flag, sizeof(int));
+            fin.seekg(sizeof(int), ios::cur);
+            cout << fin.tellg() << endl;
         }
 
         cout << "reading next" << endl;
         fin.read (key, KEY_SIZE);
-        fin.read (value, KEY_SIZE);
-        // fin.seekg(VALUE_SIZE, ios::cur);
+        // fin.read (value, KEY_SIZE);
+        fin.seekg(VALUE_SIZE, ios::cur);
     }
     cout << records_deactivated << " out of " << records_total << " deactivagted." << endl;
     fin.close ();
