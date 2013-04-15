@@ -8,6 +8,8 @@
     // };
     // fin.close ();
 
+    const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + FLAG_SIZE;
+
 #include <iostream>
 #include <fstream>
 using namespace std;

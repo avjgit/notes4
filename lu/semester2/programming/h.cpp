@@ -37,56 +37,66 @@ void add()
 
 int main()
 {
-    const char menu_mark_inactive   = 'm';
-    const char menu_print           = 'p';
-    const char menu_remove_inactive = 'r';
     const char menu_add             = 'a';
-    const char menu_exit            = 'x';
+    const char menu_print           = 'p';
+    const char menu_mark_inactive   = 'm';
+    const char menu_remove_inactive = 'r';
+    const char menu_quit            = 'q';
 
-    const int KEY_SIZE      = 3; //30
-    const int VALUE_SIZE    = 3; //30
-    const int FLAG_SIZE     = 1;
+    char menu_chosen = ' ';
 
-    const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + FLAG_SIZE;
-    const int FLAG_ACTIVE   = 1;
-    const int FLAG_INACTIVE = 0;
-
-    char key    [KEY_SIZE];
-    char value  [VALUE_SIZE];
-
-    fstream iofile;
-
-    iofile.open("iofile.bin", ios::out | ios::binary);
-
-    cout << "enter key: ";
-    cin >> key;
-    iofile.write (key, KEY_SIZE);
-
-    cout << "enter value: ";
-    cin >> value;
-    iofile.write (value, VALUE_SIZE);
-
-    iofile.write ((char*)&FLAG_ACTIVE, sizeof(int));
-    iofile.close ();
-
-    fstream fin ("iofile.bin", ios::in);
-    fin.read (key, KEY_SIZE);
-    fin.read (value, VALUE_SIZE);
-    fin.read ((char*)&FLAG_ACTIVE, sizeof(int));
+    while (menu_chosen != menu_quit)
+    {
+        cout << "Choose your action:" << endl;
+        cout << "-------------------" << endl;
+        cout << "Enter '" << menu_add << "' to (a)dd new entry" << endl;
+        cout << "Enter '" << menu_print << "' to (p)rint all entries" << endl;
+        cout << "Enter '" << menu_mark_inactive << "' to (m)ark value inactive" << endl;
+        cout << "Enter '" << menu_remove_inactive << "' to (r)emove all inactive values" << endl;
+        cout << "Enter '" << menu_quit << "' to (q)uit" << endl;
+        cin >> menu_chosen;
+    }
 
 
-    cout << key << endl;
-    cout << value << endl;
-    cout << FLAG_ACTIVE << endl;
 
-    // while (fin)
-    // {
-    //     cout << i << endl;
-    //     fin.read ((char*)&i, sizeof(int));
-    // };
 
-    fin.close ();
+    // const int KEY_SIZE      = 3; //30
+    // const int VALUE_SIZE    = 3; //30
+    // const int FLAG_SIZE     = 1;
 
-    cin >> key;
+    // const int FLAG_ACTIVE   = 1;
+    // const int FLAG_INACTIVE = 0;
+
+    // char key    [KEY_SIZE];
+    // char value  [VALUE_SIZE];
+
+    // fstream iofile;
+
+    // iofile.open("iofile.bin", ios::out | ios::app | ios::binary);
+
+    // cout << "enter key: ";
+    // cin >> key;
+    // iofile.write (key, KEY_SIZE);
+
+    // cout << "enter value: ";
+    // cin >> value;
+    // iofile.write (value, VALUE_SIZE);
+
+    // iofile.write ((char*)&FLAG_ACTIVE, sizeof(int));
+    // iofile.close ();
+
+    // fstream fin ("iofile.bin", ios::in);
+    // fin.read (key, KEY_SIZE);
+    // fin.read (value, VALUE_SIZE);
+    // fin.read ((char*)&FLAG_ACTIVE, sizeof(int));
+
+    // cout << key << endl;
+    // cout << value << endl;
+    // cout << FLAG_ACTIVE << endl;
+
+    // fin.close ();
+
+    // cin >> key;
+
     return 0;
 }
