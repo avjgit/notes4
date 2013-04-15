@@ -12,6 +12,13 @@
 #include <fstream>
 using namespace std;
 
+const int KEY_SIZE      = 3; //30
+const int VALUE_SIZE    = 3; //30
+const int FLAG_SIZE     = 1;
+const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + FLAG_SIZE;
+const int FLAG_ACTIVE   = 1;
+const int FLAG_INACTIVE = 0;
+
 // (1) izmet faila komponenti (loģiski atzīmējot kā izmestu)
 void mark_inactive()
 {
@@ -32,7 +39,25 @@ void remove_inactive()
 
 void add()
 {
+    char key    [KEY_SIZE];
+    char value  [VALUE_SIZE];
+    int flag;
+    fstream iofile;
+    iofile.open("iofile.bin", ios::out | ios::app | ios::binary);
 
+    cout << "Enter the key: ";
+    cin >> key;
+    iofile.write (key, KEY_SIZE);
+
+    cout << "Enter the value: ";
+    cin >> value;
+    iofile.write (value, VALUE_SIZE);
+
+    cout << "Enter the activity flag (1 or 0): ";
+    cin >> flag;
+    iofile.write ((char*)&flag, sizeof(int));
+
+    iofile.close ();
 }
 
 int main()
@@ -78,30 +103,6 @@ int main()
     }
 
 
-    // const int KEY_SIZE      = 3; //30
-    // const int VALUE_SIZE    = 3; //30
-    // const int FLAG_SIZE     = 1;
-
-    // const int FLAG_ACTIVE   = 1;
-    // const int FLAG_INACTIVE = 0;
-
-    // char key    [KEY_SIZE];
-    // char value  [VALUE_SIZE];
-
-    // fstream iofile;
-
-    // iofile.open("iofile.bin", ios::out | ios::app | ios::binary);
-
-    // cout << "enter key: ";
-    // cin >> key;
-    // iofile.write (key, KEY_SIZE);
-
-    // cout << "enter value: ";
-    // cin >> value;
-    // iofile.write (value, VALUE_SIZE);
-
-    // iofile.write ((char*)&FLAG_ACTIVE, sizeof(int));
-    // iofile.close ();
 
     // fstream fin ("iofile.bin", ios::in);
     // fin.read (key, KEY_SIZE);
