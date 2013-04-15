@@ -12,8 +12,8 @@
 #include <fstream>
 using namespace std;
 
-const int KEY_SIZE      = 3;
-const int VALUE_SIZE    = 3;
+const int KEY_SIZE      = 30;
+const int VALUE_SIZE    = 30;
 const int FLAG_SIZE     = 1;
 const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + FLAG_SIZE;
 const int FLAG_ACTIVE   = 1;
@@ -26,6 +26,16 @@ void mark_inactive()
     char key [KEY_SIZE];
     bool are_keys_equal;
     char value [KEY_SIZE];
+
+    for (int i = 0; i < KEY_SIZE; i++)
+    {
+        key[i] = ' ';
+    }
+
+    for (int i = 0; i < KEY_SIZE; i++)
+    {
+        key_deactivate[i] = ' ';
+    }
 
     int flag;
     int records_total = 0;
@@ -45,7 +55,6 @@ void mark_inactive()
         records_total++;
         cout << "Checking entry  " << records_total << endl;
 
-
         // check if key is the one to deactivate
         are_keys_equal = true;
         for (int i = 0; i < KEY_SIZE; i++)
@@ -60,18 +69,24 @@ void mark_inactive()
             }
         }
 
+        cout << "out of loop" << endl;
+
         // if it is the key - then deactivate, else skip to next
         if (are_keys_equal)
         {
-            fin.put((char)FLAG_INACTIVE);
+            cout << "writing" << endl;
+            fin.write ((char*)&FLAG_INACTIVE, sizeof(int));
             records_deactivated++;
         }
         else
         {
-            fin.read ((char*)flag, FLAG_SIZE);
+            cout << "skipping" << endl;
+
+            fin.read ((char*)&flag, sizeof(int));
             // fin.seekg(FLAG_SIZE, ios::cur);
         }
 
+        cout << "reading next" << endl;
         fin.read (key, KEY_SIZE);
         fin.read (value, KEY_SIZE);
         // fin.seekg(VALUE_SIZE, ios::cur);
@@ -118,6 +133,16 @@ void add()
     fstream iofile;
     iofile.open("iofile.bin", ios::out | ios::app | ios::binary);
 
+    for (int i = 0; i < KEY_SIZE; i++)
+    {
+        key[i] = ' ';
+    }
+
+    for (int i = 0; i < VALUE_SIZE; i++)
+    {
+        value[i] = ' ';
+    }
+
     cout << "Enter the key: ";
     cin >> key;
     iofile.write (key, KEY_SIZE);
@@ -145,6 +170,7 @@ int main()
 
     while (menu_chosen != menu_quit)
     {
+        cout << endl;
         cout << "-------------------" << endl;
         cout << "Choose your action:" << endl;
         cout << "-------------------" << endl;
