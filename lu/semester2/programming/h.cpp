@@ -48,20 +48,15 @@ void mark_inactive()
 
     fin.read (key, KEY_SIZE);
     fin.seekg(VALUE_SIZE, ios::cur);
-    // fin.read (value, KEY_SIZE);
 
     while (fin)
     {
         records_total++;
-        cout << "Checking entry  " << records_total << endl;
 
         // check if key is the one to deactivate
         are_keys_equal = true;
         for (int i = 0; i < KEY_SIZE; i++)
         {
-            cout << "key " << i << " is " << key[i] << endl;
-            cout << "key_deactivate " << i << " is " << key_deactivate[i] << endl;
-
             if (key[i] != key_deactivate[i])
             {
                 are_keys_equal = false;
@@ -69,30 +64,21 @@ void mark_inactive()
             }
         }
 
-        cout << "out of loop" << endl;
-
         // if it is the key - then deactivate, else skip to next
         if (are_keys_equal)
         {
-            cout << "writing" << endl;
             fin.write ((char*)&FLAG_INACTIVE, sizeof(int));
             records_deactivated++;
         }
         else
         {
-            cout << "skipping" << endl;
-
-            // fin.read ((char*)&flag, sizeof(int));
             fin.seekg(sizeof(int), ios::cur);
-            cout << fin.tellg() << endl;
         }
 
-        cout << "reading next" << endl;
         fin.read (key, KEY_SIZE);
-        // fin.read (value, KEY_SIZE);
         fin.seekg(VALUE_SIZE, ios::cur);
     }
-    cout << records_deactivated << " out of " << records_total << " deactivagted." << endl;
+    cout << records_deactivated << " out of " << records_total << " deactivated." << endl;
     fin.close ();
 }
 
