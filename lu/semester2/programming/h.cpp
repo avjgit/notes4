@@ -12,8 +12,8 @@
 #include <fstream>
 using namespace std;
 
-const int KEY_SIZE      = 3; //30
-const int VALUE_SIZE    = 3; //30
+const int KEY_SIZE      = 30;
+const int VALUE_SIZE    = 30;
 const int FLAG_SIZE     = 1;
 const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + FLAG_SIZE;
 const int FLAG_ACTIVE   = 1;
@@ -28,7 +28,23 @@ void mark_inactive()
 // (2) izdrukā faila esošās komponentes uz ekrāna
 void print()
 {
+    char key [KEY_SIZE];
+    char value [VALUE_SIZE];
+    int flag;
+    fstream fin ("iofile.bin", ios::in | ios::binary);
 
+    fin.read (key, KEY_SIZE);
+    fin.read (value, VALUE_SIZE);
+    fin.read ((char*)&flag, sizeof(int));
+    while (fin)
+    {
+        cout << key <<": " << value << " " << flag << endl;
+
+        fin.read (key, KEY_SIZE);
+        fin.read (value, VALUE_SIZE);
+        fin.read ((char*)&flag, sizeof(int));
+    }
+    fin.close ();
 }
 
 // (3) izmet loģiski izmestas komponentes fiziski
@@ -101,21 +117,5 @@ int main()
                 cout << "You have entered unrecognisable value." << endl;
           }
     }
-
-
-
-    // fstream fin ("iofile.bin", ios::in);
-    // fin.read (key, KEY_SIZE);
-    // fin.read (value, VALUE_SIZE);
-    // fin.read ((char*)&FLAG_ACTIVE, sizeof(int));
-
-    // cout << key << endl;
-    // cout << value << endl;
-    // cout << FLAG_ACTIVE << endl;
-
-    // fin.close ();
-
-    // cin >> key;
-
     return 0;
 }
