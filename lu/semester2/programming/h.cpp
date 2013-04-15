@@ -12,8 +12,8 @@
 #include <fstream>
 using namespace std;
 
-const int KEY_SIZE      = 30;
-const int VALUE_SIZE    = 30;
+const int KEY_SIZE      = 3;
+const int VALUE_SIZE    = 3;
 const int FLAG_SIZE     = 1;
 const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + FLAG_SIZE;
 const int FLAG_ACTIVE   = 1;
@@ -22,7 +22,62 @@ const int FLAG_INACTIVE = 0;
 // (1) izmet faila komponenti (loģiski atzīmējot kā izmestu)
 void mark_inactive()
 {
+    char key_deactivate[KEY_SIZE];
+    char key [KEY_SIZE];
+    bool are_keys_equal;
+    char value [KEY_SIZE];
 
+    int flag;
+    int records_total = 0;
+    int records_deactivated = 0;
+
+    cout << "Enter key of records to deactivate: ";
+    cin >> key_deactivate;
+
+    fstream fin ("iofile.bin", ios::in | ios::out | ios::binary);
+
+    fin.read (key, KEY_SIZE);
+    // fin.seekg(VALUE_SIZE, ios::cur);
+    fin.read (value, KEY_SIZE);
+
+    while (fin)
+    {
+        records_total++;
+        cout << "Checking entry  " << records_total << endl;
+
+
+        // check if key is the one to deactivate
+        are_keys_equal = true;
+        for (int i = 0; i < KEY_SIZE; i++)
+        {
+            cout << "key " << i << " is " << key[i] << endl;
+            cout << "key_deactivate " << i << " is " << key_deactivate[i] << endl;
+
+            if (key[i] != key_deactivate[i])
+            {
+                are_keys_equal = false;
+                break;
+            }
+        }
+
+        // if it is the key - then deactivate, else skip to next
+        if (are_keys_equal)
+        {
+            fin.put((char)FLAG_INACTIVE);
+            records_deactivated++;
+        }
+        else
+        {
+            fin.read ((char*)flag, FLAG_SIZE);
+            // fin.seekg(FLAG_SIZE, ios::cur);
+        }
+
+        fin.read (key, KEY_SIZE);
+        fin.read (value, KEY_SIZE);
+        // fin.seekg(VALUE_SIZE, ios::cur);
+    }
+    cout << records_deactivated << " out of " << records_total << " deactivagted." << endl;
+    fin.close ();
 }
 
 // (2) izdrukā faila esošās komponentes uz ekrāna
@@ -32,7 +87,9 @@ void print()
     char value [VALUE_SIZE];
     int flag;
     fstream fin ("iofile.bin", ios::in | ios::binary);
-
+    cout << "-------------------" << endl;
+    cout << "File content:" << endl;
+    cout << "-------------------" << endl;
     fin.read (key, KEY_SIZE);
     fin.read (value, VALUE_SIZE);
     fin.read ((char*)&flag, sizeof(int));
@@ -88,6 +145,7 @@ int main()
 
     while (menu_chosen != menu_quit)
     {
+        cout << "-------------------" << endl;
         cout << "Choose your action:" << endl;
         cout << "-------------------" << endl;
         cout << "Enter '" << menu_add               << "' to (a)dd new entry"               << endl;
@@ -95,7 +153,7 @@ int main()
         cout << "Enter '" << menu_mark_inactive     << "' to (m)ark value inactive"         << endl;
         cout << "Enter '" << menu_remove_inactive   << "' to (r)emove all inactive values"  << endl;
         cout << "Enter '" << menu_quit              << "' to (q)uit"                        << endl;
-
+        cout << "Your choice: ";
         cin >> menu_chosen;
 
         switch (menu_chosen) {
