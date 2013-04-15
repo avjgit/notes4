@@ -49,15 +49,33 @@ int main()
     {
         cout << "Choose your action:" << endl;
         cout << "-------------------" << endl;
-        cout << "Enter '" << menu_add << "' to (a)dd new entry" << endl;
-        cout << "Enter '" << menu_print << "' to (p)rint all entries" << endl;
-        cout << "Enter '" << menu_mark_inactive << "' to (m)ark value inactive" << endl;
-        cout << "Enter '" << menu_remove_inactive << "' to (r)emove all inactive values" << endl;
-        cout << "Enter '" << menu_quit << "' to (q)uit" << endl;
+        cout << "Enter '" << menu_add               << "' to (a)dd new entry"               << endl;
+        cout << "Enter '" << menu_print             << "' to (p)rint all entries"           << endl;
+        cout << "Enter '" << menu_mark_inactive     << "' to (m)ark value inactive"         << endl;
+        cout << "Enter '" << menu_remove_inactive   << "' to (r)emove all inactive values"  << endl;
+        cout << "Enter '" << menu_quit              << "' to (q)uit"                        << endl;
+
         cin >> menu_chosen;
+
+        switch (menu_chosen) {
+            case menu_add:
+                add();
+                break;
+            case menu_print:
+                print();
+                break;
+            case menu_mark_inactive:
+                mark_inactive();
+                break;
+            case menu_remove_inactive:
+                remove_inactive();
+                break;
+            case menu_quit:
+                break;
+            default:
+                cout << "You have entered unrecognisable value." << endl;
+          }
     }
-
-
 
 
     // const int KEY_SIZE      = 3; //30
