@@ -10,12 +10,13 @@
 
 #include <iostream>
 #include <fstream>
+#include <stdio.h>
+
 using namespace std;
 
 const int KEY_SIZE      = 30;
 const int VALUE_SIZE    = 30;
-const int FLAG_SIZE     = 1;
-const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + FLAG_SIZE;
+const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + sizeof(int);
 const int FLAG_ACTIVE   = 1;
 const int FLAG_INACTIVE = 0;
 
@@ -25,7 +26,6 @@ void mark_inactive()
     char key_deactivate[KEY_SIZE];
     char key [KEY_SIZE];
     bool are_keys_equal;
-    char value [KEY_SIZE];
 
     for (int i = 0; i < KEY_SIZE; i++)
     {
@@ -37,7 +37,6 @@ void mark_inactive()
         key_deactivate[i] = ' ';
     }
 
-    int flag;
     int records_total = 0;
     int records_deactivated = 0;
 
@@ -109,7 +108,43 @@ void print()
 // (3) izmet loģiski izmestas komponentes fiziski
 void remove_inactive()
 {
+    char key [KEY_SIZE];
+    char value [VALUE_SIZE];
+    int flag;
 
+    int records_total = 0;
+    int records_copied = 0;
+    char record[RECORD_SIZE];
+
+    fstream fin ("iofile.bin", ios::in | ios::binary);
+    fstream fout ("iofile_tmp.bin", ios::out | ios::binary);
+
+    fin.read (key, KEY_SIZE);
+    fin.read (value, VALUE_SIZE);
+    fin.read ((char*)&flag, sizeof(int));
+
+    while (fin)
+    {
+        records_total++;
+
+        // copy active only
+        if (flag == FLAG_ACTIVE)
+        {
+            fout.write (key, KEY_SIZE);
+            fout.write (value, VALUE_SIZE);
+            fout.write ((char*)&flag, sizeof(int));
+            records_copied++;
+        }
+        fin.read (key, KEY_SIZE);
+        fin.read (value, VALUE_SIZE);
+        fin.read ((char*)&flag, sizeof(int));
+
+    }
+    cout << records_total-records_copied << " out of " << records_total << " removed." << endl;
+    fin.close ();
+    fout.close ();
+    remove("iofile.bin");
+    rename("iofile_tmp.bin", "iofile.bin");
 }
 
 void add()
