@@ -16,7 +16,6 @@ using namespace std;
 
 const int KEY_SIZE      = 30;
 const int VALUE_SIZE    = 30;
-const int RECORD_SIZE   = KEY_SIZE + VALUE_SIZE + sizeof(int);
 const int FLAG_ACTIVE   = 1;
 const int FLAG_INACTIVE = 0;
 
