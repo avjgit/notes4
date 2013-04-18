@@ -44,25 +44,19 @@ CREATE TABLE [dbo].[trips](
 )
 GO
 
---
-ALTER TABLE [dbo].[cars_drivers]  WITH CHECK ADD  CONSTRAINT [FK_cars_drivers_driver] FOREIGN KEY([person_id])
+ALTER TABLE [dbo].[cars_drivers]
+ADD  CONSTRAINT [FK_cars_drivers_driver] FOREIGN KEY([person_id])
 REFERENCES [dbo].[drivers] ([person_id])
 GO
-ALTER TABLE [dbo].[cars_drivers] CHECK CONSTRAINT [FK_cars_drivers_driver]
-GO
 
---
-ALTER TABLE [dbo].[cars_drivers]  WITH CHECK ADD  CONSTRAINT [FK_cars_drivers_car] FOREIGN KEY([licence_plate])
+ALTER TABLE [dbo].[cars_drivers]
+ADD  CONSTRAINT [FK_cars_drivers_car] FOREIGN KEY([licence_plate])
 REFERENCES [dbo].[cars] ([licence_plate])
 GO
-ALTER TABLE [dbo].[cars_drivers] CHECK CONSTRAINT [FK_cars_drivers_car]
-GO
 
---
-ALTER TABLE [dbo].[trips]  WITH CHECK ADD  CONSTRAINT [FK_trips_cars_driver] FOREIGN KEY([cars_driver_id])
+ALTER TABLE [dbo].[trips]
+ADD  CONSTRAINT [FK_trips_cars_driver] FOREIGN KEY([cars_driver_id])
 REFERENCES [dbo].[cars_drivers] ([cars_driver_id])
-GO
-ALTER TABLE [dbo].[trips] CHECK CONSTRAINT [FK_trips_cars_driver]
 GO
 
 -- Atlasīt informāciju par visiem reisiem, kas notikuši 2012. gadā – reisa datums, No kurienes, uz kurieni, cik km nobraukti šī reisa laikā.
