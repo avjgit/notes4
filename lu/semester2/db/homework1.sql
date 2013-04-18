@@ -6,17 +6,17 @@
 -- Uzrakstīt tabulu izveides skriptu atbilstoši izveidotajam ER modelim:
 
 -- Jāglabā informācija par transporta līdzekļiem – Valsts reģistrācijas Nr. (unikāls), ražotājs, modelis, izlaiduma gads, krāsa.
-CREATE TABLE [dbo].[cars] (
+CREATE TABLE [cars] (
     [licence_plate] [varchar] (6) NOT NULL PRIMARY KEY,
     [manufacturer] [varchar] (50),
     [model] [varchar] (50),
-    [year] [int] NOT NULL ,
+    [year] [int],
     [color] [varchar] (50)
 ) ON [PRIMARY]
 GO
 
 -- Jāglabā informācija par šoferiem – Personas kods (unikāls), vārds, uzvārds, vadītāja apliecības nr.
-CREATE TABLE [dbo].[drivers] (
+CREATE TABLE [drivers] (
     [person_id] [int] NOT NULL PRIMARY KEY,
     [firstname] [varchar] (50) NOT NULL ,
     [lastname] [varchar] (50)  NOT NULL ,
@@ -26,7 +26,7 @@ GO
 
 -- Jāsaglabā ziņas, kuru transporta līdzekli kuriem šoferiem ir atļauts vadīt.
 -- Katru transporta līdzekli atļauts vadīt vairākiem šoferiem, katram šoferiem atļauts vadīt vairākus transporta līdzekļus.
-CREATE TABLE [dbo].[cars_drivers](
+CREATE TABLE [cars_drivers](
     [cars_driver_id] [int] IDENTITY (1, 1) NOT NULL PRIMARY KEY,
     [person_id] [int] NOT NULL,
     [licence_plate] [varchar] (6) NOT NULL
@@ -34,7 +34,7 @@ CREATE TABLE [dbo].[cars_drivers](
 GO
 
 -- Jāglabā ziņas par reisiem – kurā datumā no kurienes uz kurieni kurš šoferis ar kuru transporta līdzekli ir braucis, cik km nobraucis šī reisa laikā.
-CREATE TABLE [dbo].[trips](
+CREATE TABLE [trips](
     [trip_id] [int] IDENTITY (1, 1) NOT NULL PRIMARY KEY,
     [cars_driver_id] [int] NOT NULL,
     [trip_date] [datetime] NOT NULL,
@@ -44,19 +44,19 @@ CREATE TABLE [dbo].[trips](
 )
 GO
 
-ALTER TABLE [dbo].[cars_drivers]
+ALTER TABLE [cars_drivers]
 ADD  CONSTRAINT [FK_cars_drivers_driver] FOREIGN KEY([person_id])
-REFERENCES [dbo].[drivers] ([person_id])
+REFERENCES [drivers] ([person_id])
 GO
 
-ALTER TABLE [dbo].[cars_drivers]
+ALTER TABLE [cars_drivers]
 ADD  CONSTRAINT [FK_cars_drivers_car] FOREIGN KEY([licence_plate])
-REFERENCES [dbo].[cars] ([licence_plate])
+REFERENCES [cars] ([licence_plate])
 GO
 
-ALTER TABLE [dbo].[trips]
+ALTER TABLE [trips]
 ADD  CONSTRAINT [FK_trips_cars_driver] FOREIGN KEY([cars_driver_id])
-REFERENCES [dbo].[cars_drivers] ([cars_driver_id])
+REFERENCES [cars_drivers] ([cars_driver_id])
 GO
 
 -- Atlasīt informāciju par visiem reisiem, kas notikuši 2012. gadā – reisa datums, No kurienes, uz kurieni, cik km nobraukti šī reisa laikā.
