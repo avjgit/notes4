@@ -9,20 +9,73 @@
 #include <iostream>
 using namespace std;
 
-int main()
+struct element
 {
-    struct element
-    {
-        string content;
-        element* next;
-    };
+    string content;
+    element* next;
+};
 
-    element* first      = NULL;
-    element* last       = NULL;
+element* first      = NULL;
+element* last       = NULL;
+element* current    = NULL;
 
+
+void move(element* first, element* last, int nth)
+{
     element* before     = NULL;
     element* current    = NULL;
     element* after      = NULL;
+
+    int movable = nth;
+    bool end_of_list = false;
+
+    before = first;
+    current = first;
+    after = current->next;
+
+    for(int i = 1; i < movable; i++)
+    {
+        before = current;
+        current = after;
+
+        if (current == NULL)
+        {
+            cout << "Element number is out of list; move is not possible." << endl;
+            end_of_list = true;
+            break;
+        }
+
+        after = current->next;
+
+    }
+
+    if (!end_of_list)
+    {
+        // change link before straight to after (skip "current")
+        if (after != NULL)
+        {
+            before->next = after;
+        }
+
+        // if 1st?
+        // if (movable == 1)
+        // {
+        //     first = current->next;
+        //     cout << "first is now " << first->content;
+        // }
+
+        last->next = current;
+        last = last->next;
+
+        current->next = NULL;
+    }
+}
+
+int main()
+{
+    // element* first      = NULL;
+    // element* last       = NULL;
+    // element* current    = NULL;
 
     string buffer;
 
@@ -68,6 +121,11 @@ int main()
                 break;
             case menu_print:
                 cout << "List content: " << endl;
+
+                // cout << "first is now " << first->content;
+                // cout << "last is " << last->content;
+
+
                 for(current = first; current != NULL; current = current->next)
                 {
                     cout << "- " << current->content << endl;
@@ -76,35 +134,10 @@ int main()
             case menu_move:
                 cout << "Which list item to move: ";
                 cin >> movable;
+                move(first, last, movable);
 
-                before = first;
-                current = first;
-                after = current->next;
-
-                for(int i = 1; i < movable; i++)
-                {
-                    before = current;
-                    current = after;
-                    after = current->next;
-                }
-
-                // change link before straight to after (skip "current")
-                if (after != NULL)
-                {
-                    before->next = after;
-                }
-
-                // if 1st?
-                if (movable == 1)
-                {
-                    first = after;
-                }
-
-                last->next = current;
-                last = last->next;
-
-                current->next = NULL;
-
+                // cout << "first is now " << first->content;
+                // cout << "last is " << last->content;
                 break;
             case menu_quit:
                 break;
@@ -124,3 +157,19 @@ int main()
 
     return 0;
 }
+
+// testa plans:
+
+// tests 1
+// 1) izveidot sarakstu ar elementiem "Adisabeba", "Berlin", "Cairo"
+// 2) izdrukat sarakstu uz ekrana, parliecinoties, ka tas ir izveidots
+// 3) izsaukt MOVE funkciju, parvietojot 2.elementu uz beigam
+// 4) izdrukat sarakstu uz ekrana, parliecinoties, ka tas tagad ir "Adisabeba", "Cairo", "Berlin"
+
+
+// tests 2
+// 1) izveidot sarakstu ar elementiem "Adisabeba", "Berlin", "Cairo"
+// 2) izdrukat sarakstu uz ekrana, parliecinoties, ka tas ir izveidots
+// 3) izsaukt MOVE funkciju, meginot parvietot 15.elementu uz beigam
+// 4) parliecinaties, ka tiek pazinota programmas kluda
+// 5) parliecinaties, ka saraksts tika saglabats

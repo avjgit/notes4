@@ -113,7 +113,6 @@ void remove_inactive()
 
     int records_total = 0;
     int records_copied = 0;
-    char record[RECORD_SIZE];
 
     fstream fin ("iofile.bin", ios::in | ios::binary);
     fstream fout ("iofile_tmp.bin", ios::out | ios::binary);
@@ -149,10 +148,10 @@ void remove_inactive()
 void add()
 {
     char key    [KEY_SIZE];
+    char key_existing[KEY_SIZE];
     char value  [VALUE_SIZE];
     int flag;
     fstream iofile;
-    iofile.open("iofile.bin", ios::out | ios::app | ios::binary);
 
     for (int i = 0; i < KEY_SIZE; i++)
     {
@@ -166,6 +165,9 @@ void add()
 
     cout << "Enter the key: ";
     cin >> key;
+
+    iofile.open("iofile.bin", ios::out | ios::app | ios::binary);
+
     iofile.write (key, KEY_SIZE);
 
     cout << "Enter the value: ";
