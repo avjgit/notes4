@@ -14,7 +14,7 @@ body {
     width: 1000px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 20px 0px 20px 0px black;
+    box-shadow: 0px 0px 20px 5px black;
 }
 
 #logo {
@@ -23,8 +23,10 @@ body {
 
 #banner {
     height: 210px;
-    border-bottom: 20px;
-    border-bottom-color: 20% grey;
+    /*border-bottom: 20px;*/
+    /*border-bottom-color: #333333;*/
+    border-top: 20px;
+    border-top-color: #333333;
     background-image: url("http://i.cdn.turner.com/v5cache/TNT/Images/i84/fb_hdr_btsstrangebrew2_1000x250.jpg");
     padding-top: 40px;
     padding-left: 40px;
@@ -42,6 +44,18 @@ body {
     font-size: 18px
 }
 
+/*for navigation menu*/
+/*because "#topmenu > a {" does not work*/
+/*#topmenu > a {
+    text-decoration: none;
+    color: white;
+}*/
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
 #banner > a {
     color: #005BD0;
     font-weight: bold;
@@ -53,7 +67,7 @@ body {
 }
 
 #topmenu {
-    background-color: grey;
+    background-color: #333333;
     overflow: auto;
 }
 
@@ -66,6 +80,8 @@ body {
     float: left;
     height: 30px;
     margin-left: 20px;
+    list-style-type: none;
+    font-weight: bold;
 }
 
 article {
@@ -81,6 +97,7 @@ aside {
 aside > h3 {
     color: #005BD0;
     font-size: 14px;
+
 }
 
 aside > h2 {
