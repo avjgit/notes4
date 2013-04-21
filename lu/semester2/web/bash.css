@@ -42,6 +42,16 @@ body {
     font-size: 18px
 }
 
+#banner > a {
+    color: #005BD0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#banner > a:visited {
+    color: #999999;
+}
+
 footer {
     width: 1000px;
     background-color: #999999;
