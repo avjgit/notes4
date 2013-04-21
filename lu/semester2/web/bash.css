@@ -73,6 +73,37 @@ article {
     background-color: white;
 }
 
+aside {
+    width: 300px;
+    float: right;
+}
+
+aside > h3 {
+    /*color: #005BD0;*/
+    font-size: 14px;
+}
+
+aside > h2 {
+    /*color: #8F866A;*/
+}
+
+#legal-advice, #man-cave {
+    height: 100px;
+    background-position: center;
+}
+
+#legal-advice {
+    background-image: url("http://i.cdn.turner.com/v5cache/TNT/Images/i82/fb_explore_notsolegal_300x169.jpg");
+}
+
+#man-cave {
+    background-image: url("http://i.cdn.turner.com/v5cache/TNT/Images/i82/fb_explore_mancave_300x169.jpg");
+}
+
+div.chapter {
+    margin-right: 310px;
+}
+
 footer {
     width: 1000px;
     background-color: #999999;
