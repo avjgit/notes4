@@ -3,7 +3,7 @@ body {
     background-image: url("http://i.cdn.turner.com/v5cache/TNT/images/series/franklinandbash/franklinandbash_background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center center;
+    background-position: center top;
     padding: 0px;
     margin: 0px;
     font-family: Arial, sans-serif;
@@ -79,12 +79,12 @@ aside {
 }
 
 aside > h3 {
-    /*color: #005BD0;*/
+    color: #005BD0;
     font-size: 14px;
 }
 
 aside > h2 {
-    /*color: #8F866A;*/
+    color: #8F866A;
 }
 
 #legal-advice, #man-cave {
