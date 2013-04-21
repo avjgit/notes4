@@ -52,6 +52,27 @@ body {
     color: #999999;
 }
 
+#topmenu {
+    background-color: grey;
+    overflow: auto;
+}
+
+#topmenu > ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+#topmenu > li {
+    float: left;
+    height: 30px;
+    margin-left: 20px;
+}
+
+article {
+    padding: 15px;
+    background-color: white;
+}
+
 footer {
     width: 1000px;
     background-color: #999999;
