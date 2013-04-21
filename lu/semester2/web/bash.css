@@ -11,10 +11,31 @@ body {
     font-size: 16px;
 }
 
-#main{
+#main {
     color: red;
     width: 1000px;
     margin-left: auto;
     margin-right: auto;
     text-shadow: 20px 0px 20px 0px black;
+}
+
+footer {
+    /*color: green;*/
+    width: 1000px;
+    background-color: #999999;
+    text-align: center;
+    font-size: 12px;
+    font-family: Arial;
+    margin-right: auto;
+    margin-left: auto;
+    border-top: double;
+    border-top-color: #555;
+    border-top-width: 3px;
+}
+
+footer > p {
+    /*color: green;*/
+    margin: 0px;
+    padding: 0px;
+
 }
