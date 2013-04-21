@@ -19,6 +19,14 @@ body {
     text-shadow: 20px 0px 20px 0px black;
 }
 
+#logo {
+    margin-left: 30px;
+}
+
+#banner {
+    height: 210px;
+}
+
 footer {
     /*color: green;*/
     width: 1000px;
