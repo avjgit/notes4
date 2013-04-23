@@ -19,55 +19,65 @@ element* first      = NULL;
 element* last       = NULL;
 element* current    = NULL;
 
-
 void move(element* first, element* last, int nth)
 {
-    element* before     = NULL;
-    element* current    = NULL;
-    element* after      = NULL;
-
-    int movable = nth;
-    bool end_of_list = false;
-
-    before = first;
-    current = first;
-    after = current->next;
-
-    for(int i = 1; i < movable; i++)
+    if (nth == 1)
     {
-        before = current;
-        current = after;
-
-        if (current == NULL)
-        {
-            cout << "Element number is out of list; move is not possible." << endl;
-            end_of_list = true;
-            break;
-        }
-
-        after = current->next;
-
+        last-> next = first;
+        last        = first;
+        first       = first->next;
+        cout << "hey, first is now " << first->content << endl;
+        last->next = NULL;
     }
-
-    if (!end_of_list)
+    else
     {
-        // change link before straight to after (skip "current")
-        if (after != NULL)
+        element* before     = NULL;
+        element* current    = NULL;
+        element* after      = NULL;
+
+        int movable = nth;
+        bool end_of_list = false;
+
+        before  = first;
+        current = first;
+        after   = first->next;
+
+        for(int i = 1; i < movable; i++)
         {
-            before->next = after;
+            before = current;
+            current = after;
+
+            if (current == NULL)
+            {
+                cout << "Element number is out of list; move is not possible." << endl;
+                end_of_list = true;
+                break;
+            }
+
+            after = current->next;
+
         }
 
-        // if 1st?
-        // if (movable == 1)
-        // {
-        //     first = current->next;
-        //     cout << "first is now " << first->content;
-        // }
+        if (!end_of_list)
+        {
+            // change link before straight to after (skip "current")
+            if (after != NULL)
+            {
+                before->next = after;
+            }
 
-        last->next = current;
-        last = last->next;
+            // if 1st?
+            if (movable == 1)
+            {
+                first = current->next;
+                cout << "first is now " << first->content;
+            }
 
-        current->next = NULL;
+            last->next = current;
+            last = last->next;
+
+            current->next = NULL;
+        }
     }
 }
 
@@ -135,9 +145,9 @@ int main()
                 cout << "Which list item to move: ";
                 cin >> movable;
                 move(first, last, movable);
-
-                // cout << "first is now " << first->content;
-                // cout << "last is " << last->content;
+                cout << "after move, " << endl;
+                cout << "first is now " << first->content;
+                cout << "last is " << last->content;
                 break;
             case menu_quit:
                 break;
