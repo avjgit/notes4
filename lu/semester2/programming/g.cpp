@@ -15,11 +15,11 @@ struct element
     element* next;
 };
 
-element* first      = NULL;
-element* last       = NULL;
-element* current    = NULL;
+// element* first      = NULL;
+// element* last       = NULL;
+// element* current    = NULL;
 
-void move(element* first, element* last, int nth)
+void move(element* &first, element* &last, int nth)
 {
     if (nth == 1)
     {
@@ -83,9 +83,9 @@ void move(element* first, element* last, int nth)
 
 int main()
 {
-    // element* first      = NULL;
-    // element* last       = NULL;
-    // element* current    = NULL;
+    element* first      = NULL;
+    element* last       = NULL;
+    element* current    = NULL;
 
     string buffer;
 

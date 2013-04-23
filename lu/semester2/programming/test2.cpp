@@ -1,9 +1,16 @@
 #include <iostream>
 using namespace std;
 
-void change(int* p1, int* p2)
+void change(int* &p1, int* p2)
 {
+    cout << "p1 is " << *p1;
+    cout << "p2 is " << *p2;
+
     p1 = p2;
+
+    cout << "p1 is " << *p1;
+    cout << "p2 is " << *p2;
+
 }
 
 int main()
