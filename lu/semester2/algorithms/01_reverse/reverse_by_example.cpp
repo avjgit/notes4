@@ -25,13 +25,17 @@ int main()
 
     for(i = 0; i < amount; i++)
     {
+        fprintf(stdout, "inside, step %d\n", i);
+
         if (!feof(infile))
         {
             fscanf(infile, "%d", &number);
             numbers[i] = number;
+            fprintf(stdout, "wrote %d\n", number);
         }
         else
         {
+            fprintf(stdout, "end of file\n");
             break;
         }
     }
@@ -39,6 +43,7 @@ int main()
     if (i == 0)
     {
         fprintf(oufile, "%s", "Nav skaitlu");
+        fprintf(stdout, "printed Nav skaitlu\n");
     }
     else
     {
@@ -46,6 +51,7 @@ int main()
         {
             i--;
             fprintf(oufile, "%d%s", numbers[i], " ");
+            fprintf(stdout, "put %d number - %d\n", i, numbers[i]);
         }
     }
 
