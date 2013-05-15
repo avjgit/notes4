@@ -59,7 +59,6 @@ VALUES('FU23',    'BMW', '530', 2011, NULL)
 INSERT INTO Automasina (RegNr, Marka, Modelis, IzlaidumaGads, Ipasnieks)
 VALUES('HK9559',  'Citroen', 'C5'  2011,    'Jānis Zaļenieks')
 
-
 -- Sods
 -- Izmers  Parkapums   Datums  AutoRegNr
 -- 5.00    Stāvēšana neatļautā vietā   11.02.2013  GT9354
@@ -80,19 +79,31 @@ INSERT INTO Sods (Izmers,  Parkapums,   Datums,  AutoRegNr)
 VALUES (10.00,   'Neatļauta pagrieziena veikšana',  14.03.2012,  'GT9354'
 
 -- Izmainīt datus tabulā Automasina – Automašīnai  FU23 nomainīt īpašnieku  uz „Anna Pētersone”.
--- Izmainīt datus tabulā Automasina – Automašīnai  FU23 nomainīt īpašnieku  uz „Anna Pētersone”.
+UPDATE Automasina
+SET Ipasnieks = 'Anna Pētersone'
+WHERE RegNr = 'FU23'
 
 -- Izmainīt datus tabulā Sods – sodiem, kuriem izmers ir lielāks par 10Ls, uzstādīt lauku Datums vienādu ar 14.03.2013.
--- Izmainīt datus tabulā Sods – sodiem, kuriem izmers ir lielāks par 10Ls, uzstādīt lauku Datums vienādu ar 14.03.2013.
+UPDATE Sods
+SET Datums = '2012-01-01'
+WHERE Izmers > 10
 
 -- Atlasīt no tabulas Automasina  laukus RegNr, Marka, Modelis tām automašīnām, kurām izlaiduma gads ir lielāks pa 2010 vai vienāds ar  2010. Sakārtot pēc automašīnas markas dilstošā kārtībā un pēc modeļa augošā kārtībā.
--- Atlasīt no tabulas Automasina  laukus RegNr, Marka, Modelis tām automašīnām, kurām izlaiduma gads ir lielāks pa 2010 vai vienāds ar  2010. Sakārtot pēc automašīnas markas dilstošā kārtībā un pēc modeļa augošā kārtībā.
+SELECT RegNr, Marka, Modelis
+FROM  Automasina
+WHERE IzlaidumaGads >= 2010
+ORDER BY Marka DESCENDING, Modelis ASCENDING
 
 -- Atlasīt no tabulas Sods laukus AutoRegNr, Summa, Datums tiem pārkāpumiem, kuru izmers ir lielāks par 100Ls vai arī AutoRegNr satur ciparu 3.
--- Atlasīt no tabulas Sods laukus AutoRegNr, Summa, Datums tiem pārkāpumiem, kuru izmers ir lielāks par 100Ls vai arī AutoRegNr satur ciparu 3.
+SELECT AutoRegNr, Summa, Datums
+FROM  Sods
+WHERE Izmers > 100
+OR AutoRegNr '%3%'
 
 -- Izdzēst no tabulas Sods sodus, kuru izmers  ir lielāks par 20Ls.
--- Izdzēst no tabulas Sods sodus, kuru izmers  ir lielāks par 20Ls.
+DELETE FROM Sods WHERE Izmers > 20
 
 -- Izdzēst visus datus no tabulas Automasina un tabulas Sods.
--- Izdzēst visus datus no tabulas Automasina un tabulas Sods.
+DELETE FROM Automasina
+
+DELETE FROM Sods
