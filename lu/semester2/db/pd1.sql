@@ -9,13 +9,14 @@
 -- IzlaidumaGads   Vesels skaitlis     Nav Null
 -- Ipasnieks   Simbolu virkne ar mainīgu garumu    50  Var būt Null
 
--- Tabula Automasina
--- Nosaukums   Datu tips   Izmērs  Piezīmes
--- RegNr   Simbolu virkne ar fiksētu garumu    10  Primarā atslēga
--- Marka   Simbolu virkne ar mainīgu garumu    30  Nav Null
--- Modelis Simbolu virkne ar mainīgu garumu    25  Nav Null
--- IzlaidumaGads   Vesels skaitlis     Nav Null
--- Ipasnieks   Simbolu virkne ar mainīgu garumu    50  Var būt Null
+CREATE TABLE [automasina] (
+     RegNr          [char]    (10) NOT NULL PRIMARY KEY
+    ,Marka          [varchar] (30) NOT NULL
+    ,Modelis        [varchar] (25) NOT NULL
+    ,IzlaidumaGads  [int]          NOT Null
+    ,Ipasnieks      [varchar] (50) NULL
+)
+GO
 
 -- Tabula Sods
 -- Nosaukums   Datu tips   Izmērs  Piezīmes
@@ -25,13 +26,19 @@
 -- Datums  Datums      Nav Null
 -- AutoRegNr   Simbolu virkne ar fiksētu garumu    10  Ārējā atslēga. Norāde uz tabulu Automasina lauku RegNr
 
--- Tabula Sods
--- Nosaukums   Datu tips   Izmērs  Piezīmes
--- ID  Vesels skaitlis     Automātiski numurējas, primārā atslēga
--- Izmers  Decimāldaļkaitlis, 2 cipari aiz komata  4,2 Nav Null
--- Parkapums   Simbolu virkne ar mainīgu garumu    100 Var būt  Null
--- Datums  Datums      Nav Null
--- AutoRegNr   Simbolu virkne ar fiksētu garumu    10  Ārējā atslēga. Norāde uz tabulu Automasina lauku RegNr
+CREATE TABLE [sods] (
+     ID         [int] IDENTITY(1,1) NOT NULL PRIMARY KEY
+    ,Izmers     [numeric] (4,2) NOT NULL
+    ,Parkapums  [varchar] (100) NULL
+    ,Datums     [datetime] NOT NULL
+    ,AutoRegNr  [char]    (10)
+)
+GO
+
+ALTER TABLE [sods]
+ADD  CONSTRAINT [fk_sods_automasina_regnr] FOREIGN KEY([AutoRegNr])
+REFERENCES [automasina] ([RegNr])
+GO
 
 -- Automasina
 -- RegNr   Marka   Modelis IzlaidumaGads   Ipasnieks
