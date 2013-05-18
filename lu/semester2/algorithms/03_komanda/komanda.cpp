@@ -3,20 +3,15 @@
 
 int main()
 {
-    FILE* infile;
-    FILE* oufile;
-
-    infile = fopen("komanda.in", "r");
-    oufile = fopen("komanda.out", "w+");
+    FILE* infile = fopen("komanda.in", "r");
+    FILE* oufile = fopen("komanda.out", "w+");
 
     long long parent, left, right;
 
-    parent = 3999999997;
-
     while (!feof(infile))
     {
-        fscanf(infile, "%lld %lld %lld", &parent, &left, &right);
-        fprintf(oufile, "%lld %lld %lld", parent, left, right);
+        fscanf  (infile, "%lld %lld %lld", &parent, &left, &right);
+        fprintf (oufile, "%lld %lld %lld",  parent,  left,  right);
     }
 
     fclose(infile);
