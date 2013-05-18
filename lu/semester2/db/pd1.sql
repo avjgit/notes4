@@ -1,5 +1,5 @@
--- To: girts.karnitis@lu.lv Subj: DBI MD1 aj05044
--- DBI KD1 aj05044 Andrejs Jurčenoks
+-- To: girts.karnitis@lu.lv Subj: DBI PD KD1 aj05044
+-- DBI PD KD1 aj05044 Andrejs Jurčenoks
 
 -- Tabula Automasina
 -- Nosaukums   Datu tips   Izmērs  Piezīmes
@@ -57,26 +57,26 @@ INSERT INTO Automasina (RegNr, Marka, Modelis, IzlaidumaGads, Ipasnieks)
 VALUES('FU23',    'BMW', '530', 2011, NULL)
 
 INSERT INTO Automasina (RegNr, Marka, Modelis, IzlaidumaGads, Ipasnieks)
-VALUES('HK9559',  'Citroen', 'C5'  2011,    'Jānis Zaļenieks')
+VALUES('HK9559',  'Citroen', 'C5',  2011,    'Jānis Zaļenieks')
 
 -- Sods
 -- Izmers  Parkapums   Datums  AutoRegNr
 -- 5.00    Stāvēšana neatļautā vietā   11.02.2013  GT9354
 -- 40.00   Ātruma pārkāpšana   05.06.2012  HK9559
--- 200.00      09.04.2013  BU9838
+-- 99.99      09.04.2013  BU9838
 -- 10.00   Neatļauta pagrieziena veikšana  14.03.2012  GT9354
 
 INSERT INTO Sods (Izmers,  Parkapums,   Datums,  AutoRegNr)
-VALUES (5.00,    'Stāvēšana neatļautā vietā',   11.02.2013,  'GT9354')
+VALUES (5.00,    'Stāvēšana neatļautā vietā',   '2013-02-11',  'GT9354')
 
 INSERT INTO Sods (Izmers,  Parkapums,   Datums,  AutoRegNr)
-VALUES (40.00,   'Ātruma pārkāpšana',   05.06.2012, 'HK9559'
+VALUES (40.00,   'Ātruma pārkāpšana',   '2012-06-05', 'HK9559')
 
 INSERT INTO Sods (Izmers,  Parkapums,   Datums,  AutoRegNr)
-VALUES (200.00,  NULL,    09.04.2013,  'BU9838'
+VALUES (99.99,  NULL,    '2013-04-09',  'BU9838')
 
 INSERT INTO Sods (Izmers,  Parkapums,   Datums,  AutoRegNr)
-VALUES (10.00,   'Neatļauta pagrieziena veikšana',  14.03.2012,  'GT9354'
+VALUES (10.00,   'Neatļauta pagrieziena veikšana',  '2012-03-14',  'GT9354')
 
 -- Izmainīt datus tabulā Automasina – Automašīnai  FU23 nomainīt īpašnieku  uz „Anna Pētersone”.
 UPDATE Automasina
@@ -95,15 +95,17 @@ WHERE IzlaidumaGads >= 2010
 ORDER BY Marka DESCENDING, Modelis ASCENDING
 
 -- Atlasīt no tabulas Sods laukus AutoRegNr, Summa, Datums tiem pārkāpumiem, kuru izmers ir lielāks par 100Ls vai arī AutoRegNr satur ciparu 3.
-SELECT AutoRegNr, Summa, Datums
+SELECT AutoRegNr, Izmers, Datums
 FROM  Sods
 WHERE Izmers > 100
-OR AutoRegNr '%3%'
+OR AutoRegNr LIKE '%3%'
 
 -- Izdzēst no tabulas Sods sodus, kuru izmers  ir lielāks par 20Ls.
 DELETE FROM Sods WHERE Izmers > 20
 
 -- Izdzēst visus datus no tabulas Automasina un tabulas Sods.
-DELETE FROM Automasina
 
+-- saakumaa sods, jo ir FK uz Automasinu
 DELETE FROM Sods
+
+DELETE FROM Automasina
