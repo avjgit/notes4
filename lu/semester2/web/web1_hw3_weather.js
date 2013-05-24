@@ -13,5 +13,13 @@
 // TODO - wind speed should not be negative, but can be zero
 // TODO - cloudiness value should be picked
 
+window.onload = mainFunction;
+
+function mainFunction(){
+    document.getElementById("drawbutton").onclick = function(){
+        alert("this works");
+    }
+}
+
 //Bonus task: calculate the "weather feels like" value.
 // Some good ideas can be found here: http://donsnotes.com/reference/temperature-index.html
