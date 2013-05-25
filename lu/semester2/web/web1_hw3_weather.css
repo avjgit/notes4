@@ -1,0 +1,18 @@
+#controls, #buttons {
+    min-width:560px;
+}
+#buttons {
+    text-align:center;
+    padding:20px;
+}
+input[type=text], select {
+    width:80px;
+}
+label {
+    width:100px;
+    float:left;
+    display:block;
+}
+canvas {
+    border:1px solid black;
+}
