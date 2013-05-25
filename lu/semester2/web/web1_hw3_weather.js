@@ -15,9 +15,24 @@ function mainFunction(){
         var i;
         for(i = 0; i < temperatures.length; i++){
             alert(temperatures[i].value);
+
+            if (temperatures[i].value == 'undefined' ||
+               temperatures[i].value == '') {
+                alert("t should be provided!");
+            }
+
+            if (isNaN(temperatures[i].value)) {
+                alert("t should be a number!");
+            }
+
+            if (temperatures[i].value < -50 ||
+               temperatures[i].value > 50) {
+                alert("t should be from -50 to 50 degC!");
+            }
+
         }
 
-        alert(temperatures[0].value);
+        //alert(temperatures[0].value);
         //alert(windspeeds[0].value);
         //alert(sunclouds[0].selectedIndex);
 
