@@ -17,7 +17,9 @@ window.onload = mainFunction;
 
 function mainFunction(){
     document.getElementById("drawbutton").onclick = function(){
-        alert("this works");
+        // alert("this works");
+        var temperatures = document.getElementById("temperatures").getElementsByTagName("input");
+        alert(temperatures.length);
     }
 }
 
