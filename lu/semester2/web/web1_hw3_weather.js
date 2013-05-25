@@ -12,9 +12,14 @@ function mainFunction(){
         var windspeeds   = getInputs("windspeed");
         var sunclouds    = getInputs("sunclouds", "select");
 
+        var i;
+        for(i = 0; i < temperatures.length; i++){
+            alert(temperatures[i].value);
+        }
+
         alert(temperatures[0].value);
-        alert(windspeeds[0].value);
-        alert(sunclouds[0].selectedIndex);
+        //alert(windspeeds[0].value);
+        //alert(sunclouds[0].selectedIndex);
 
     }
 }
