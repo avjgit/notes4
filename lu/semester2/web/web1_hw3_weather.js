@@ -19,6 +19,8 @@ function mainFunction(){
     document.getElementById("drawbutton").onclick = function(){
         // alert("this works");
         var temperatures = document.getElementById("temperatures").getElementsByTagName("input");
+        var windspeeds = document.getElementById("windspeed").getElementsByTagName("input");
+        var sunclouds = document.getElementById("sunclouds").getElementsByTagName("input");
         alert(temperatures.length);
     }
 }
