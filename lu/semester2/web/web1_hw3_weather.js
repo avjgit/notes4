@@ -17,24 +17,37 @@ function mainFunction(){
             alert(temperatures[i].value);
 
             if (temperatures[i].value == 'undefined' ||
-               temperatures[i].value == '') {
+               temperatures[i].value === '') {
                 alert("t should be provided!");
             }
-
             if (isNaN(temperatures[i].value)) {
                 alert("t should be a number!");
             }
-
             if (temperatures[i].value < -50 ||
                temperatures[i].value > 50) {
                 alert("t should be from -50 to 50 degC!");
             }
-
         }
 
-        //alert(temperatures[0].value);
-        //alert(windspeeds[0].value);
-        //alert(sunclouds[0].selectedIndex);
+        for(i = 0; i < windspeeds.length; i++){
 
-    }
+            if (windspeeds[i].value == 'undefined' ||
+               windspeeds[i].value === '') {
+                // lets set default for wind
+               windspeeds[i] = 0;
+            }
+            if (isNaN(windspeeds[i].value)) {
+                alert("ws should be a number!");
+            }
+            if (windspeeds[i].value < 0) {
+                alert("ws should be non-negative!");
+            }
+        }
+
+         for(i = 0; i < sunclouds.length; i++){
+            if (sunclouds[i].selectedIndex === 0) {
+                alert("cl should be specified!");
+            }
+        }
+    };
 }
