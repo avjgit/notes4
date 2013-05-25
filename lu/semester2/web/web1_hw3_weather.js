@@ -5,19 +5,20 @@ function getInputs(id, tag){
     return document.getElementById(id).getElementsByTagName(tag);
 }
 
-function validate_temperatures(temperatures){
+function are_valid_temperatures(temperatures){
     var i;
     var min_temperature = -50;
     var max_tempearture = +50;
     for(i = 0; i < temperatures.length; i++){
-        alert(temperatures[i].value);
 
         if (temperatures[i].value === 'undefined' ||
            temperatures[i].value === '') {
             alert("temperatures should be provided!");
+            return false;
         }
         if (isNaN(temperatures[i].value)) {
             alert("temperatures should be a number!");
+            return false;
         }
         if (temperatures[i].value < min_temperature ||
            temperatures[i].value > max_tempearture) {
@@ -25,11 +26,13 @@ function validate_temperatures(temperatures){
                 + min_temperature + " to "
                 + max_tempearture + " degC!"
             );
+            return false;
         }
     }
+    return true;
 }
 
-function validate_windspeeds(windspeeds){
+function are_valid_windspeeds(windspeeds){
     var i;
     for(i = 0; i < windspeeds.length; i++){
 
@@ -40,20 +43,25 @@ function validate_windspeeds(windspeeds){
         }
         if (isNaN(windspeeds[i].value)) {
             alert("windspeed should be a number!");
+            return false;
         }
         if (windspeeds[i].value < 0) {
             alert("windspeed should be non-negative!");
+            return false;
         }
     }
+    return true;
 }
 
-function validate_clouds(sunclouds){
+function are_valid_clouds(sunclouds){
     var i;
     for(i = 0; i < sunclouds.length; i++){
         if (sunclouds[i].selectedIndex === 0) {
             alert("clouds should be specified!");
+            return false;
         }
     }
+    return true;
 }
 
 function mainFunction(){
@@ -63,9 +71,12 @@ function mainFunction(){
         var windspeeds   = getInputs("windspeed");
         var sunclouds    = getInputs("sunclouds", "select");
 
-        validate_temperatures(temperatures);
-        validate_windspeeds(windspeeds);
-        validate_clouds(sunclouds);
-
+        if (
+            are_valid_temperatures(temperatures) &&
+            are_valid_windspeeds(windspeeds) &&
+            are_valid_clouds(sunclouds)
+        ){
+            draw_graph();
+        }
     };
 }
