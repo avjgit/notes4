@@ -92,12 +92,19 @@
         };
     }
 
-    function normalize_values(values, max)
+    function normalize_values(values, max_allowed)
     {
-
+        var nv = []; //normalized temperatures
+        var max = values[0];
+        for(var i = 1; i<5; i++){
+            max = Math.max(max,values[i]);
+        }
+        for(var i = 0; i<5; i++)
+            nv[i] = (max_allowed/max)*values[i];
+        return nv;
     }
 
-    function drawGraph(label,temperatures){
+    function drawGraph(label,temperatures, windspeeds, sunclouds){
         var canvas = document.getElementById("graph");
         var cwidth = canvas.width;
         var cheight = canvas.height;
@@ -136,23 +143,29 @@
 
             var bar_width = Math.floor(draw_area/ temperatures.length);
 
-            var nv = []; //normalized temperatures
-            var max = temperatures[0];
-            for(var i = 1; i<5; i++){
-                max = Math.max(max,temperatures[i]);
-            }
-            for(var i = 0; i<5; i++)
-                nv[i] = (highest/max)*temperatures[i];
+            // var nv = []; //normalized temperatures
+            // var max = temperatures[0];
+            // for(var i = 1; i<5; i++){
+            //     max = Math.max(max,temperatures[i]);
+            // }
+            // for(var i = 0; i<5; i++)
+            //     nv[i] = (highest/max)*temperatures[i];
+
+            var t_normalized = normalize_values(temperatures, highest);
 
             for(var i = 0; i < 5; i++){
                 ctx.fillStyle = "grey";
                 ctx.fillText(label[i], draw_margin + bar_width * (i), labels_start);
             }
 
-
             for(var i = 0; i<5; i++){
                 ctx.fillStyle = "lightgrey";
-                ctx.fillRect(draw_margin + bar_width * (i), line.start_y -nv[i], bar_width, nv[i]);
+                ctx.fillRect(
+                    draw_margin + bar_width * (i),
+                    line.start_y -t_normalized[i],
+                    bar_width,
+                    t_normalized[i]
+                );
             }
             ctx.fillStyle = line.color;
             ctx.fillRect(
