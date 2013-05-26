@@ -1,4 +1,9 @@
+// jsfiddle = http://jsfiddle.net/avjjsfiddle/HuqEV/
+
+
 window.onload = mainFunction;
+
+
 //
 // first 720 lines of source below - from https://raw.github.com/darkskyapp/skycons/master/skycons.js
 // to render animated icons
