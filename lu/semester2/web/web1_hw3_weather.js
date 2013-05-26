@@ -1,4 +1,5 @@
 // http://jsfiddle.net/avjjsfiddle/HuqEV/
+// https://github.com/avjgit/notes4/blob/master/lu/semester2/web/web1_hw3_weather.js
 window.onload = mainFunction;
 
 function getInputs(id, tag){
