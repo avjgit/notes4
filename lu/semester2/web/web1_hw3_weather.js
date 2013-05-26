@@ -83,7 +83,11 @@
                 are_valid_windspeeds(windspeeds) &&
                 are_valid_clouds(sunclouds)
             ){
-                drawGraph(labels, temperatures, windspeeds, sunclouds);
+                drawGraph(
+                    labels,
+                    temperatures,
+                    windspeeds,
+                    sunclouds);
             }
         };
     }
@@ -93,7 +97,7 @@
 
     }
 
-    function drawGraph(label,value){
+    function drawGraph(label,temperatures){
         var canvas = document.getElementById("graph");
         var cwidth = canvas.width;
         var cheight = canvas.height;
@@ -107,15 +111,15 @@
 
             var labels_height       = Math.floor(cheight * .05);
             var chart_height        = Math.floor(cheight * .35);
-            var chart_halfheight    = Math.floor(chart_height/2);
+            var chart_half          = Math.floor(chart_height/2);
 
-            var temp_color_height   = Math.floor(cheight * .2);
+            var color_height        = Math.floor(cheight * .2);
             var wind_height         = Math.floor(cheight * .2);
             var cloud_height        = Math.floor(cheight * .2);
 
             var labels_start        = labels_height;
             var chart_start         = labels_start + chart_height;
-            var color_start         = chart_start + temp_color_height;
+            var color_start         = chart_start + color_height;
             var wind_start          = color_start + wind_height;
             var cloud_start         = wind_start + cloud_height;
 
@@ -125,32 +129,30 @@
                 width: draw_area,
                 height: 2,
                 start_x: draw_margin,
-                start_y: labels_height + chart_halfheight // lable shiehgt + graph height / 2
+                start_y: labels_height + chart_half
             };
 
-            var temp_bar_height = (chart_height - line.height)/2;
-            var highest = Math.floor(temp_bar_height * .9);
+            var highest = Math.floor(chart_half * .9);
 
-            var bar_step = Math.floor(draw_area/ value.length);
-            var bar_width = Math.floor(bar_step * 1)
+            var bar_width = Math.floor(draw_area/ temperatures.length);
+
+            var nv = []; //normalized temperatures
+            var max = temperatures[0];
+            for(var i = 1; i<5; i++){
+                max = Math.max(max,temperatures[i]);
+            }
+            for(var i = 0; i<5; i++)
+                nv[i] = (highest/max)*temperatures[i];
 
             for(var i = 0; i < 5; i++){
                 ctx.fillStyle = "grey";
-                ctx.fillText(label[i], draw_margin + bar_step * (i), labels_start);
+                ctx.fillText(label[i], draw_margin + bar_width * (i), labels_start);
             }
-
-            var nv = []; //normalized value
-            var max = value[0];
-            for(var i = 1; i<5; i++){
-                max = Math.max(max,value[i]);
-            }
-            for(var i = 0; i<5; i++)
-                nv[i] = (highest/max)*value[i];
 
 
             for(var i = 0; i<5; i++){
                 ctx.fillStyle = "lightgrey";
-                ctx.fillRect(draw_margin + bar_step * (i), line.start_y -nv[i], bar_width, nv[i]);
+                ctx.fillRect(draw_margin + bar_width * (i), line.start_y -nv[i], bar_width, nv[i]);
             }
             ctx.fillStyle = line.color;
             ctx.fillRect(
