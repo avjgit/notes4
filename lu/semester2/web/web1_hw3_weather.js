@@ -6,7 +6,7 @@ function getInputs(id, tag){
     var i;
     var values = [];
     for (i = 0; i < inputs.length; i++){
-        values[i] = inputs[i].value || inputs[i].selectedIndex;
+        values[i] = inputs[i].value;
     }
     return values;
 }
@@ -17,17 +17,17 @@ function are_valid_temperatures(temperatures){
     var max_tempearture = +50;
     for(i = 0; i < temperatures.length; i++){
 
-        if (temperatures[i].value === 'undefined' ||
-           temperatures[i].value === '') {
+        if (temperatures[i] === 'undefined' ||
+           temperatures[i] === '') {
             alert("temperatures should be provided!");
             return false;
         }
-        if (isNaN(temperatures[i].value)) {
+        if (isNaN(temperatures[i])) {
             alert("temperatures should be a number!");
             return false;
         }
-        if (temperatures[i].value < min_temperature ||
-           temperatures[i].value > max_tempearture) {
+        if (temperatures[i] < min_temperature ||
+           temperatures[i] > max_tempearture) {
             alert("temperatures should be from "
                 + min_temperature + " to "
                 + max_tempearture + " degC!"
@@ -42,16 +42,16 @@ function are_valid_windspeeds(windspeeds){
     var i;
     for(i = 0; i < windspeeds.length; i++){
 
-        if (windspeeds[i].value === 'undefined' ||
-           windspeeds[i].value === '') {
+        if (windspeeds[i] === 'undefined' ||
+           windspeeds[i] === '') {
             // lets set default for wind
            windspeeds[i] = 0;
         }
-        if (isNaN(windspeeds[i].value)) {
+        if (isNaN(windspeeds[i])) {
             alert("windspeed should be a number!");
             return false;
         }
-        if (windspeeds[i].value < 0) {
+        if (windspeeds[i] < 0) {
             alert("windspeed should be non-negative!");
             return false;
         }
@@ -62,7 +62,7 @@ function are_valid_windspeeds(windspeeds){
 function are_valid_clouds(sunclouds){
     var i;
     for(i = 0; i < sunclouds.length; i++){
-        if (sunclouds[i].selectedIndex === 0) {
+        if (sunclouds[i] === "") {
             alert("clouds should be specified!");
             return false;
         }
@@ -82,19 +82,21 @@ function mainFunction(){
             are_valid_windspeeds(windspeeds) &&
             are_valid_clouds(sunclouds)
         ){
-            draw_graph();
+            alert("inside here");
+            drawGraph(sunclouds, temperatures);
         }
     };
 }
 
 function drawGraph(label,value){
+    alert("inside");
     var nv=[]; //normalized value
-    var max=value[1];
-    for(var i=2; i<6; i++){
+    var max=value[0];
+    for(var i=1; i<5; i++){
             max=Math.max(max,value[i]);
     }
     var highest=280;
-    for(var i=1; i<6; i++)
+    for(var i=0; i<5; i++)
         nv[i]=(highest/max)*value[i];
 
     var canvas = document.getElementById("graph");
@@ -102,10 +104,10 @@ function drawGraph(label,value){
       var ctx = canvas.getContext('2d');
       ctx.clearRect(0,0,canvas.width,canvas.height);
       ctx.fillStyle="#FCA";
-      ctx.fillRect(20,300,550,2);
-      for(var i=1; i<6; i++){
+      ctx.fillRect(20,300,560,2);
+      for(var i=0; i<5; i++){
           ctx.fillStyle="lightgrey";
-          ctx.fillRect(50+100*(i-1),300-nv[i],80, nv[i]);
+          ctx.fillRect(60+100*(i-1),300-nv[i],80, nv[i]);
           ctx.fillStyle="grey";
           ctx.fillText(label[i],60+100*(i-1),350);
       }
