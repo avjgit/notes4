@@ -94,12 +94,12 @@
 
     function normalize_values(values, max_allowed)
     {
-        var nv = []; //normalized temperatures
+        var nv = []; //normalized values
         var max = values[0];
-        for(var i = 1; i<5; i++){
+        for(var i = 1; i < values.length; i++){
             max = Math.max(max,values[i]);
         }
-        for(var i = 0; i<5; i++)
+        for(var i = 0; i < values.length; i++)
             nv[i] = (max_allowed/max)*values[i];
         return nv;
     }
@@ -130,7 +130,13 @@
             var wind_start          = color_start + wind_height;
             var cloud_start         = wind_start + cloud_height;
 
-            // create chart X axis
+            var bar_width = Math.floor(draw_area/ temperatures.length);
+
+            var highest_bar = Math.floor(chart_half * .9);
+
+            var t_normalized = normalize_values(temperatures, highest_bar);
+
+            // chart X axis
             var line = {
                 color: "blue",
                 width: draw_area,
@@ -139,34 +145,24 @@
                 start_y: labels_height + chart_half
             };
 
-            var highest = Math.floor(chart_half * .9);
-
-            var bar_width = Math.floor(draw_area/ temperatures.length);
-
-            // var nv = []; //normalized temperatures
-            // var max = temperatures[0];
-            // for(var i = 1; i<5; i++){
-            //     max = Math.max(max,temperatures[i]);
-            // }
-            // for(var i = 0; i<5; i++)
-            //     nv[i] = (highest/max)*temperatures[i];
-
-            var t_normalized = normalize_values(temperatures, highest);
-
-            for(var i = 0; i < 5; i++){
+            // draw chart labels
+            for(var i = 0; i < t_normalized.length; i++){
                 ctx.fillStyle = "grey";
                 ctx.fillText(label[i], draw_margin + bar_width * (i), labels_start);
             }
 
-            for(var i = 0; i<5; i++){
+            // draw chart temperature bars
+            for(var i = 0; i < t_normalized.length; i++){
                 ctx.fillStyle = "lightgrey";
                 ctx.fillRect(
                     draw_margin + bar_width * (i),
-                    line.start_y -t_normalized[i],
+                    line.start_y - t_normalized[i],
                     bar_width,
                     t_normalized[i]
                 );
             }
+
+            // draw chart X axis
             ctx.fillStyle = line.color;
             ctx.fillRect(
                 line.start_x,
@@ -176,6 +172,40 @@
             );
 
             // temperature colored rectangle
+            // Create gradient
+            var grd=ctx.createLinearGradient(draw_margin,0,draw_area,0);
+            var grd_step = 1/ t_normalized.length;
+
+            var t_colors = [];
+            var color_intensity_max = 255;
+            var t_max = 50;
+            var color_intensity;
+            for (var i = 0; i < temperatures.length; i++)
+            {
+                color_intensity = Math.floor((temperatures[i] / t_max) * color_intensity_max);
+                if (color_intensity > 0)
+                {
+                    t_colors[i] = "rgb(" + color_intensity + ",0,0)";
+                }
+                else
+                {
+                    t_colors[i] = "rgb(0,0," + (-1 * color_intensity) + ")";
+                }
+            };
+
+            for (var i = 0; i < t_colors.length; i++)
+            {
+                grd.addColorStop(grd_step*(i+1), t_colors[i]);
+            }
+
+            // Fill with gradient
+            ctx.fillStyle=grd;
+            ctx.fillRect(
+                draw_margin,
+                color_start,
+                draw_area,
+                color_height
+            );
 
 
 
