@@ -94,12 +94,7 @@ function mainFunction(){
             are_valid_windspeeds(windspeeds) &&
             are_valid_clouds(sunclouds)
         ){
-            drawGraph(
-                labels,
-                temperatures,
-                windspeeds,
-                sunclouds
-            );
+            drawGraph(labels, temperatures, windspeeds, sunclouds);
         }
     };
 }
@@ -113,39 +108,51 @@ function drawGraph(label,value){
         var ctx = canvas.getContext('2d');
         ctx.clearRect(0,0,cwidth,cheight);
 
-        var labels_width        = Math.floor(cwidth * .1);
-        var temp_bars_width     = Math.floor(cwidth * .3);
-        var temp_color_width    = Math.floor(cwidth * .2);
-        var wind_width          = Math.floor(cwidth * .2);
-        var cloud_width         = Math.floor(cwidth * .2);
+        var draw_start           = Math.floor(cwidth * .1);
 
-        // create line
+        var labels_height        = Math.floor(cheight * .05);
+        var temp_bars_height     = Math.floor(cheight * .35);
+        var temp_color_height    = Math.floor(cheight * .2);
+        var wind_height          = Math.floor(cheight * .2);
+        var cloud_height         = Math.floor(cheight * .2);
+
+
+        // create chart X axe
         var line = {
             color: "blue",
             width: Math.floor(cwidth * 0.9),
-            height: 2
+            height: 2,
+            start_x: draw_start,
+            start_y: 300 // lable shiehgt + graph height / 2
         };
 
         ctx.fillStyle = line.color;
-        ctx.fillRect(20,300,line.width,line.height);
+        ctx.fillRect(
+            line.start_x,
+            line.start_y,
+            line.width,
+            line.height
+        );
 
         for(var i=0; i<5; i++){
-            ctx.fillStyle="grey";
-            ctx.fillText(label[i],60+100*(i),30);
+        ctx.fillStyle="grey";
+        ctx.fillText(label[i],60+100*(i),30);
         }
 
         var nv=[]; //normalized value
         var max=value[0];
         for(var i=1; i<5; i++){
-            max=Math.max(max,value[i]);
+        max=Math.max(max,value[i]);
         }
         var highest=280;
         for(var i=0; i<5; i++)
-            nv[i]=(highest/max)*value[i];
+        nv[i]=(highest/max)*value[i];
 
         for(var i=0; i<5; i++){
-            ctx.fillStyle="lightgrey";
-            ctx.fillRect(60+100*(i),300-nv[i],80, nv[i]);
+        ctx.fillStyle="lightgrey";
+        ctx.fillRect(60+100*(i),300-nv[i],80, nv[i]);
+        //ctx.fillStyle="grey";
+        //ctx.fillText(label[i],60+100*(i),350);
         }
     }
 };
