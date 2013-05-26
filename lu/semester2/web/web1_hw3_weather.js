@@ -1,6 +1,17 @@
 window.onload = mainFunction;
 
 function getInputs(id, tag){
+    tag = typeof tag === 'undefined' ? "input" : tag; // default tag - input
+    var inputs = document.getElementById(id).getElementsByTagName(tag);
+    var i;
+    var values = [];
+    for (i = 0; i < inputs.length; i++){
+        values[i] = inputs[i].value;
+    }
+    return values;
+}
+
+function getLabelsInputs(id, tag){
     tag = typeof tag !== 'undefined' ? tag : "input"; // default tag - input
     var inputs = document.getElementById(id).getElementsByTagName(tag);
     var i;
@@ -73,9 +84,13 @@ function are_valid_clouds(sunclouds){
 function mainFunction(){
     document.getElementById("drawbutton").onclick = function(){
 
+        var labels       = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"];
         var temperatures = getInputs("temperatures");
         var windspeeds   = getInputs("windspeed");
         var sunclouds    = getInputs("sunclouds", "select");
+
+        alert(labels[0]);
+        alert(temperatures[0]);
 
         if (
             are_valid_temperatures(temperatures) &&
