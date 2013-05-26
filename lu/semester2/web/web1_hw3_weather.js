@@ -89,20 +89,35 @@ function mainFunction(){
         var windspeeds   = getInputs("windspeed");
         var sunclouds    = getInputs("sunclouds", "select");
 
-        alert(labels[0]);
-        alert(temperatures[0]);
-
         if (
             are_valid_temperatures(temperatures) &&
             are_valid_windspeeds(windspeeds) &&
             are_valid_clouds(sunclouds)
         ){
-            drawGraph(sunclouds, temperatures);
+            drawGraph(
+                labels,
+                temperatures,
+                windspeeds,
+                sunclouds
+            );
         }
     };
 }
 
 function drawGraph(label,value){
+
+    var canvas = document.getElementById("graph");
+    if (canvas.getContext){
+
+    var ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="#FCA";
+      ctx.fillRect(20,300,550,2);
+
+        for(var i=0; i<5; i++){
+            ctx.fillStyle="grey";
+            ctx.fillText(label[i],60+100*(i),30);
+        }
 
     var nv=[]; //normalized value
     var max=value[0];
@@ -113,17 +128,9 @@ function drawGraph(label,value){
     for(var i=0; i<5; i++)
         nv[i]=(highest/max)*value[i];
 
-    var canvas = document.getElementById("graph");
-    if (canvas.getContext){
-      var ctx = canvas.getContext('2d');
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle="#FCA";
-      ctx.fillRect(20,300,550,2);
       for(var i=0; i<5; i++){
           ctx.fillStyle="lightgrey";
           ctx.fillRect(60+100*(i),300-nv[i],80, nv[i]);
-          ctx.fillStyle="grey";
-          ctx.fillText(label[i],60+100*(i),350);
       }
     }
 };
