@@ -118,18 +118,16 @@ function drawGraph(label,temperatures, windspeeds, sunclouds){
         var draw_area = cwidth - 2*draw_margin;
 
         var labels_height       = Math.floor(cheight * .05);
-        var chart_height        = Math.floor(cheight * .35);
+        var chart_height        = Math.floor(cheight * .6);
         var chart_half          = Math.floor(chart_height/2);
 
-        var color_height        = Math.floor(cheight * .2);
-        var wind_height         = Math.floor(cheight * .2);
-        var cloud_height        = Math.floor(cheight * .2);
+        var color_height        = Math.floor(cheight * .1);
+        var wind_height         = Math.floor(cheight * .05);
 
         var labels_start        = labels_height;
         var chart_start         = labels_start + chart_height;
         var color_start         = chart_start + color_height;
-        var wind_start          = color_start + wind_height;
-        var cloud_start         = wind_start + cloud_height;
+        var wind_start          = color_start + 2*wind_height;
 
         var bar_width = Math.floor(draw_area/ temperatures.length);
 

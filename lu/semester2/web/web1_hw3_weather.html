@@ -1,18 +1,18 @@
 <div id="controls"> <span class="inputs" id="temperatures">
     <label>Temperature</label>
-    <input type="text" placeholder="Day 1"/>
-    <input type="text" placeholder="Day 2" />
-    <input type="text" placeholder="Day 3" />
-    <input type="text" placeholder="Day 4" />
-    <input type="text" placeholder="Day 5"/>
+    <input type="text" placeholder="Day 1" value="20"/>
+    <input type="text" placeholder="Day 2" value="30"/>
+    <input type="text" placeholder="Day 3" value="-15"/>
+    <input type="text" placeholder="Day 4" value="0"/>
+    <input type="text" placeholder="Day 5" value="15"/>
     </span>
 
 </div>
 <div> <span class="inputs" id="windspeed">
         <label>Wind speed</label>
         <input type="text" />
-    <input type="text" />
-    <input type="text" />
+    <input type="text" value="60"/>
+    <input type="text" value="30"/>
     <input type="text" />
     <input type="text" />
     </span>
@@ -21,32 +21,32 @@
 <div> <span class="inputs" id="sunclouds">
         <label>Clouds</label>
         <select>
-            <option value="">..pick a value</option>
             <option value="sun">Sun</option>
+            <option value="">..pick a value</option>
             <option value="partial">Partial clouds</option>
             <option value="cloudy">Cloudy</option>
         </select>
        <select>
+            <option value="partial">Partial clouds</option>
             <option value="">..pick a value</option>
             <option value="sun">Sun</option>
-            <option value="partial">Partial clouds</option>
             <option value="cloudy">Cloudy</option>
         </select>
        <select>
+            <option value="cloudy">Cloudy</option>
             <option value="">..pick a value</option>
             <option value="sun">Sun</option>
             <option value="partial">Partial clouds</option>
-            <option value="cloudy">Cloudy</option>
         </select>
        <select>
+            <option value="cloudy">Cloudy</option>
             <option value="">..pick a value</option>
             <option value="sun">Sun</option>
             <option value="partial">Partial clouds</option>
-            <option value="cloudy">Cloudy</option>
         </select>
        <select>
-            <option value="">..pick a value</option>
             <option value="sun">Sun</option>
+            <option value="">..pick a value</option>
             <option value="partial">Partial clouds</option>
             <option value="cloudy">Cloudy</option>
         </select>
@@ -56,4 +56,14 @@
 <div id='buttons'>
     <button id="drawbutton">Generate graphics!</button>
 </div>
-<canvas id="graph" width="600" height="400" />
+
+<figure class="icons">
+    <canvas id="margin" width="10" height="64"></canvas>
+    <canvas id="icon0" width="96" height="64"></canvas>
+    <canvas id="icon1" width="96" height="64"></canvas>
+    <canvas id="icon2" width="96" height="64"></canvas>
+    <canvas id="icon3" width="96" height="64"></canvas>
+    <canvas id="icon4" width="96" height="64"></canvas>
+</figure>
+
+<canvas id="graph" width="600" height="400"/>
