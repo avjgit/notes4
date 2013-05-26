@@ -80,3 +80,28 @@ function mainFunction(){
         }
     };
 }
+
+function drawGraph(label,value){
+    var nv=[]; //normalized value
+    var max=value[1];
+    for(var i=2; i<6; i++){
+            max=Math.max(max,value[i]);
+    }
+    var highest=280;
+    for(var i=1; i<6; i++)
+        nv[i]=(highest/max)*value[i];
+
+    var canvas = document.getElementById("graph");
+    if (canvas.getContext){
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle="#FCA";
+      ctx.fillRect(20,300,560,2);
+      for(var i=1; i<6; i++){
+          ctx.fillStyle="lightgrey";
+          ctx.fillRect(60+100*(i-1),300-nv[i],80, nv[i]);
+          ctx.fillStyle="grey";
+          ctx.fillText(label[i],60+100*(i-1),350);
+      }
+    }
+};
