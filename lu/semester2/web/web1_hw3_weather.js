@@ -2,7 +2,13 @@ window.onload = mainFunction;
 
 function getInputs(id, tag){
     tag = typeof tag !== 'undefined' ? tag : "input"; // default tag - input
-    return document.getElementById(id).getElementsByTagName(tag);
+    var inputs = document.getElementById(id).getElementsByTagName(tag);
+    var i;
+    var values = [];
+    for (i = 0; i < inputs.length; i++){
+        values[i] = inputs[i].value || inputs[i].selectedIndex;
+    }
+    return values;
 }
 
 function are_valid_temperatures(temperatures){
@@ -96,10 +102,10 @@ function drawGraph(label,value){
       var ctx = canvas.getContext('2d');
       ctx.clearRect(0,0,canvas.width,canvas.height);
       ctx.fillStyle="#FCA";
-      ctx.fillRect(20,300,560,2);
+      ctx.fillRect(20,300,550,2);
       for(var i=1; i<6; i++){
           ctx.fillStyle="lightgrey";
-          ctx.fillRect(60+100*(i-1),300-nv[i],80, nv[i]);
+          ctx.fillRect(50+100*(i-1),300-nv[i],80, nv[i]);
           ctx.fillStyle="grey";
           ctx.fillText(label[i],60+100*(i-1),350);
       }
