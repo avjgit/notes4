@@ -105,32 +105,47 @@ function mainFunction(){
 }
 
 function drawGraph(label,value){
-
     var canvas = document.getElementById("graph");
-    if (canvas.getContext){
+    var cwidth = canvas.width;
+    var cheight = canvas.height;
 
-    var ctx = canvas.getContext('2d');
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.fillStyle="#FCA";
-      ctx.fillRect(20,300,550,2);
+    if (canvas.getContext){
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,cwidth,cheight);
+
+        var labels_width        = Math.floor(cwidth * .1);
+        var temp_bars_width     = Math.floor(cwidth * .3);
+        var temp_color_width    = Math.floor(cwidth * .2);
+        var wind_width          = Math.floor(cwidth * .2);
+        var cloud_width         = Math.floor(cwidth * .2);
+
+        // create line
+        var line = {
+            color: "blue",
+            width: Math.floor(cwidth * 0.9),
+            height: 2
+        };
+
+        ctx.fillStyle = line.color;
+        ctx.fillRect(20,300,line.width,line.height);
 
         for(var i=0; i<5; i++){
             ctx.fillStyle="grey";
             ctx.fillText(label[i],60+100*(i),30);
         }
 
-    var nv=[]; //normalized value
-    var max=value[0];
-    for(var i=1; i<5; i++){
+        var nv=[]; //normalized value
+        var max=value[0];
+        for(var i=1; i<5; i++){
             max=Math.max(max,value[i]);
-    }
-    var highest=280;
-    for(var i=0; i<5; i++)
-        nv[i]=(highest/max)*value[i];
+        }
+        var highest=280;
+        for(var i=0; i<5; i++)
+            nv[i]=(highest/max)*value[i];
 
-      for(var i=0; i<5; i++){
-          ctx.fillStyle="lightgrey";
-          ctx.fillRect(60+100*(i),300-nv[i],80, nv[i]);
-      }
+        for(var i=0; i<5; i++){
+            ctx.fillStyle="lightgrey";
+            ctx.fillRect(60+100*(i),300-nv[i],80, nv[i]);
+        }
     }
 };
