@@ -1,11 +1,242 @@
-// jsfiddle = http://jsfiddle.net/avjjsfiddle/HuqEV/
-
-
+// http://jsfiddle.net/avjjsfiddle/HuqEV/
 window.onload = mainFunction;
 
+function getInputs(id, tag){
+    tag = typeof tag === 'undefined' ? "input" : tag; // default tag - input
+    var inputs = document.getElementById(id).getElementsByTagName(tag);
+    var i;
+    var values = [];
+    for (i = 0; i < inputs.length; i++){
+        values[i] = inputs[i].value;
+    }
+    return values;
+}
 
-//
-// first 720 lines of source below - from https://raw.github.com/darkskyapp/skycons/master/skycons.js
+function are_valid_temperatures(temperatures){
+    var i;
+    var min_temperature = -50;
+    var max_tempearture = +50;
+    for(i = 0; i < temperatures.length; i++){
+
+        if (temperatures[i] === 'undefined' ||
+           temperatures[i] === '') {
+            alert("temperatures should be provided!");
+            return false;
+        }
+        if (isNaN(temperatures[i])) {
+            alert("temperatures should be a number!");
+            return false;
+        }
+        if (temperatures[i] < min_temperature ||
+           temperatures[i] > max_tempearture) {
+            alert("temperatures should be from "
+                + min_temperature + " to "
+                + max_tempearture + " degC!"
+            );
+            return false;
+        }
+    }
+    return true;
+}
+
+function are_valid_windspeeds(windspeeds){
+    var i;
+    for(i = 0; i < windspeeds.length; i++){
+
+        if (windspeeds[i] === 'undefined' ||
+           windspeeds[i] === '') {
+            // lets set default for wind
+           windspeeds[i] = 0;
+        }
+        if (isNaN(windspeeds[i])) {
+            alert("windspeed should be a number!");
+            return false;
+        }
+        if (windspeeds[i] < 0) {
+            alert("windspeed should be non-negative!");
+            return false;
+        }
+    }
+    return true;
+}
+
+function are_valid_clouds(sunclouds){
+    var i;
+    for(i = 0; i < sunclouds.length; i++){
+        if (sunclouds[i] === "") {
+            alert("clouds should be specified!");
+            return false;
+        }
+    }
+    return true;
+}
+
+function mainFunction(){
+    document.getElementById("drawbutton").onclick = function(){
+
+        var labels       = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"];
+        var temperatures = getInputs("temperatures");
+        var windspeeds   = getInputs("windspeed");
+        var sunclouds    = getInputs("sunclouds", "select");
+
+        if (
+            are_valid_temperatures(temperatures) &&
+            are_valid_windspeeds(windspeeds) &&
+            are_valid_clouds(sunclouds)
+        ){
+            drawGraph(
+                labels,
+                temperatures,
+                windspeeds,
+                sunclouds);
+        }
+    };
+}
+
+function normalize_values(values, max_allowed)
+{
+    var nv = []; //normalized values
+    var max = values[0];
+    for(var i = 1; i < values.length; i++){
+        max = Math.max(max,values[i]);
+    }
+    for(var i = 0; i < values.length; i++)
+        nv[i] = (max_allowed/max)*values[i];
+    return nv;
+}
+
+function drawGraph(label,temperatures, windspeeds, sunclouds){
+    var canvas = document.getElementById("graph");
+    var cwidth = canvas.width;
+    var cheight = canvas.height;
+
+    if (canvas.getContext){
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,cwidth,cheight);
+
+        var draw_margin = Math.floor(cwidth * .1);
+        var draw_area = cwidth - 2*draw_margin;
+
+        var labels_height       = Math.floor(cheight * .05);
+        var chart_height        = Math.floor(cheight * .35);
+        var chart_half          = Math.floor(chart_height/2);
+
+        var color_height        = Math.floor(cheight * .2);
+        var wind_height         = Math.floor(cheight * .2);
+        var cloud_height        = Math.floor(cheight * .2);
+
+        var labels_start        = labels_height;
+        var chart_start         = labels_start + chart_height;
+        var color_start         = chart_start + color_height;
+        var wind_start          = color_start + wind_height;
+        var cloud_start         = wind_start + cloud_height;
+
+        var bar_width = Math.floor(draw_area/ temperatures.length);
+
+        var highest_bar = Math.floor(chart_half * .9);
+
+        var t_normalized = normalize_values(temperatures, highest_bar);
+
+        // chart X axis
+        var line = {
+            color: "blue",
+            width: draw_area,
+            height: 2,
+            start_x: draw_margin,
+            start_y: labels_height + chart_half
+        };
+
+        // draw chart labels
+        for(var i = 0; i < t_normalized.length; i++){
+            ctx.fillStyle = "grey";
+            ctx.fillText(label[i], draw_margin + bar_width * (i), labels_start);
+        }
+
+        // draw chart temperature bars
+        for(var i = 0; i < t_normalized.length; i++){
+            ctx.fillStyle = "lightgrey";
+            ctx.fillRect(
+                draw_margin + bar_width * (i),
+                line.start_y - t_normalized[i],
+                bar_width,
+                t_normalized[i]
+            );
+        }
+
+        // draw chart X axis
+        ctx.fillStyle = line.color;
+        ctx.fillRect(
+            line.start_x,
+            line.start_y,
+            line.width,
+            line.height
+        );
+
+        // temperature colored rectangle
+        var grd=ctx.createLinearGradient(draw_margin,0,draw_area,0);
+        var grd_step = 1/ t_normalized.length;
+
+        var t_colors = [];
+        var color_intensity_max = 255;
+        var t_max = 50;
+        var color_intensity;
+        for (var i = 0; i < temperatures.length; i++)
+        {
+            color_intensity = Math.floor((temperatures[i] / t_max) * color_intensity_max);
+            if (color_intensity > 0)
+            {
+                t_colors[i] = "rgb(" + color_intensity + ",0,0)";
+            }
+            else
+            {
+                t_colors[i] = "rgb(0,0," + (-1 * color_intensity) + ")";
+            }
+        };
+
+        for (var i = 0; i < t_colors.length; i++)
+        {
+            grd.addColorStop(grd_step*(i+1), t_colors[i]);
+        }
+
+        ctx.fillStyle=grd;
+        ctx.fillRect(
+            draw_margin,
+            color_start,
+            draw_area,
+            color_height
+        );
+
+        // fill winds
+        var winds = [];
+        var windspeed;
+        for (var i = 0; i < windspeeds.length; i++)
+        {
+            windspeed = parseInt(windspeeds[i], 10);
+
+            if (windspeed < 1)
+                winds[i] = "calm";
+            else if (windspeed < 5)
+                winds[i] = "light air";
+            else if (windspeed < 20)
+                winds[i] = "breeze";
+            else if (windspeed < 50)
+                winds[i] = "gale";
+            else if (windspeed < 100)
+                winds[i] = "storm";
+            else
+                winds[i] = "hurricane!";
+        };
+
+        for(var i = 0; i < winds.length; i++){
+            ctx.fillStyle = "blue";
+            ctx.fillText(
+                winds[i],
+                draw_margin + bar_width * (i),
+                wind_start + wind_height);
+        };
+
+// next ~700 lines of source below - from
+// https://raw.github.com/darkskyapp/skycons/master/skycons.js
 // to render animated icons
 // actual code = Ctrl+F START_OF_LOGIC
 
@@ -53,100 +284,6 @@ var Skycons;
       cancelInterval = clearInterval;
     }
   }());
-
-  /* Catmull-rom spline stuffs. */
-  /*
-  function upsample(n, spline) {
-    var polyline = [],
-        len = spline.length,
-        bx  = spline[0],
-        by  = spline[1],
-        cx  = spline[2],
-        cy  = spline[3],
-        dx  = spline[4],
-        dy  = spline[5],
-        i, j, ax, ay, px, qx, rx, sx, py, qy, ry, sy, t;
-
-    for(i = 6; i !== spline.length; i += 2) {
-      ax = bx;
-      bx = cx;
-      cx = dx;
-      dx = spline[i    ];
-      px = -0.5 * ax + 1.5 * bx - 1.5 * cx + 0.5 * dx;
-      qx =        ax - 2.5 * bx + 2.0 * cx - 0.5 * dx;
-      rx = -0.5 * ax            + 0.5 * cx           ;
-      sx =                   bx                      ;
-
-      ay = by;
-      by = cy;
-      cy = dy;
-      dy = spline[i + 1];
-      py = -0.5 * ay + 1.5 * by - 1.5 * cy + 0.5 * dy;
-      qy =        ay - 2.5 * by + 2.0 * cy - 0.5 * dy;
-      ry = -0.5 * ay            + 0.5 * cy           ;
-      sy =                   by                      ;
-
-      for(j = 0; j !== n; ++j) {
-        t = j / n;
-
-        polyline.push(
-          ((px * t + qx) * t + rx) * t + sx,
-          ((py * t + qy) * t + ry) * t + sy
-        );
-      }
-    }
-
-    polyline.push(
-      px + qx + rx + sx,
-      py + qy + ry + sy
-    );
-
-    return polyline;
-  }
-
-  function downsample(n, polyline) {
-    var len = 0,
-        i, dx, dy;
-
-    for(i = 2; i !== polyline.length; i += 2) {
-      dx = polyline[i    ] - polyline[i - 2];
-      dy = polyline[i + 1] - polyline[i - 1];
-      len += Math.sqrt(dx * dx + dy * dy);
-    }
-
-    len /= n;
-
-    var small = [],
-        target = len,
-        min = 0,
-        max, t;
-
-    small.push(polyline[0], polyline[1]);
-
-    for(i = 2; i !== polyline.length; i += 2) {
-      dx = polyline[i    ] - polyline[i - 2];
-      dy = polyline[i + 1] - polyline[i - 1];
-      max = min + Math.sqrt(dx * dx + dy * dy);
-
-      if(max > target) {
-        t = (target - min) / (max - min);
-
-        small.push(
-          polyline[i - 2] + dx * t,
-          polyline[i - 1] + dy * t
-        );
-
-        target += len;
-      }
-
-      min = max;
-    }
-
-    small.push(polyline[polyline.length - 2], polyline[polyline.length - 1]);
-
-    return small;
-  }
-  */
 
   /* Define skycon things. */
   /* FIXME: I'm *really really* sorry that this code is so gross. Really, I am.
@@ -342,38 +479,6 @@ var Skycons;
     puffs(ctx, t, cx, cy, a, b, c - s, d - s);
     ctx.globalCompositeOperation = 'source-over';
   }
-
-  /*
-  var WIND_PATHS = [
-        downsample(63, upsample(8, [
-          -1.00, -0.28,
-          -0.75, -0.18,
-          -0.50,  0.12,
-          -0.20,  0.12,
-          -0.04, -0.04,
-          -0.07, -0.18,
-          -0.19, -0.18,
-          -0.23, -0.05,
-          -0.12,  0.11,
-           0.02,  0.16,
-           0.20,  0.15,
-           0.50,  0.07,
-           0.75,  0.18,
-           1.00,  0.28
-        ])),
-        downsample(31, upsample(16, [
-          -1.00, -0.10,
-          -0.75,  0.00,
-          -0.50,  0.10,
-          -0.25,  0.14,
-           0.00,  0.10,
-           0.25,  0.00,
-           0.50, -0.10,
-           0.75, -0.14,
-           1.00, -0.10
-        ]))
-      ];
-  */
 
   var WIND_PATHS = [
         [
@@ -724,260 +829,24 @@ var Skycons;
   };
 }(this));
 
-// START_OF_LOGIC
+        var icons = new Skycons();
 
-function getInputs(id, tag){
-    tag = typeof tag === 'undefined' ? "input" : tag; // default tag - input
-    var inputs = document.getElementById(id).getElementsByTagName(tag);
-    var i;
-    var values = [];
-    for (i = 0; i < inputs.length; i++){
-        values[i] = inputs[i].value;
-    }
-    return values;
-}
-
-function are_valid_temperatures(temperatures){
-    var i;
-    var min_temperature = -50;
-    var max_tempearture = +50;
-    for(i = 0; i < temperatures.length; i++){
-
-        if (temperatures[i] === 'undefined' ||
-           temperatures[i] === '') {
-            alert("temperatures should be provided!");
-            return false;
-        }
-        if (isNaN(temperatures[i])) {
-            alert("temperatures should be a number!");
-            return false;
-        }
-        if (temperatures[i] < min_temperature ||
-           temperatures[i] > max_tempearture) {
-            alert("temperatures should be from "
-                + min_temperature + " to "
-                + max_tempearture + " degC!"
-            );
-            return false;
-        }
-    }
-    return true;
-}
-
-function are_valid_windspeeds(windspeeds){
-    var i;
-    for(i = 0; i < windspeeds.length; i++){
-
-        if (windspeeds[i] === 'undefined' ||
-           windspeeds[i] === '') {
-            // lets set default for wind
-           windspeeds[i] = 0;
-        }
-        if (isNaN(windspeeds[i])) {
-            alert("windspeed should be a number!");
-            return false;
-        }
-        if (windspeeds[i] < 0) {
-            alert("windspeed should be non-negative!");
-            return false;
-        }
-    }
-    return true;
-}
-
-function are_valid_clouds(sunclouds){
-    var i;
-    for(i = 0; i < sunclouds.length; i++){
-        if (sunclouds[i] === "") {
-            alert("clouds should be specified!");
-            return false;
-        }
-    }
-    return true;
-}
-
-function mainFunction(){
-    document.getElementById("drawbutton").onclick = function(){
-
-        var labels       = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"];
-        var temperatures = getInputs("temperatures");
-        var windspeeds   = getInputs("windspeed");
-        var sunclouds    = getInputs("sunclouds", "select");
-
-        if (
-            are_valid_temperatures(temperatures) &&
-            are_valid_windspeeds(windspeeds) &&
-            are_valid_clouds(sunclouds)
-        ){
-            drawGraph(
-                labels,
-                temperatures,
-                windspeeds,
-                sunclouds);
-        }
-    };
-}
-
-function normalize_values(values, max_allowed)
-{
-    var nv = []; //normalized values
-    var max = values[0];
-    for(var i = 1; i < values.length; i++){
-        max = Math.max(max,values[i]);
-    }
-    for(var i = 0; i < values.length; i++)
-        nv[i] = (max_allowed/max)*values[i];
-    return nv;
-}
-
-function drawGraph(label,temperatures, windspeeds, sunclouds){
-    var canvas = document.getElementById("graph");
-    var cwidth = canvas.width;
-    var cheight = canvas.height;
-
-    if (canvas.getContext){
-        var ctx = canvas.getContext('2d');
-        ctx.clearRect(0,0,cwidth,cheight);
-
-        var draw_margin = Math.floor(cwidth * .1);
-        var draw_area = cwidth - 2*draw_margin;
-
-        var labels_height       = Math.floor(cheight * .05);
-        var chart_height        = Math.floor(cheight * .35);
-        var chart_half          = Math.floor(chart_height/2);
-
-        var color_height        = Math.floor(cheight * .2);
-        var wind_height         = Math.floor(cheight * .2);
-        var cloud_height        = Math.floor(cheight * .2);
-
-        var labels_start        = labels_height;
-        var chart_start         = labels_start + chart_height;
-        var color_start         = chart_start + color_height;
-        var wind_start          = color_start + wind_height;
-        var cloud_start         = wind_start + cloud_height;
-
-        var bar_width = Math.floor(draw_area/ temperatures.length);
-
-        var highest_bar = Math.floor(chart_half * .9);
-
-        var t_normalized = normalize_values(temperatures, highest_bar);
-
-        // chart X axis
-        var line = {
-            color: "blue",
-            width: draw_area,
-            height: 2,
-            start_x: draw_margin,
-            start_y: labels_height + chart_half
-        };
-
-        // draw chart labels
-        for(var i = 0; i < t_normalized.length; i++){
-            ctx.fillStyle = "grey";
-            ctx.fillText(label[i], draw_margin + bar_width * (i), labels_start);
-        }
-
-        // draw chart temperature bars
-        for(var i = 0; i < t_normalized.length; i++){
-            ctx.fillStyle = "lightgrey";
-            ctx.fillRect(
-                draw_margin + bar_width * (i),
-                line.start_y - t_normalized[i],
-                bar_width,
-                t_normalized[i]
-            );
-        }
-
-        // draw chart X axis
-        ctx.fillStyle = line.color;
-        ctx.fillRect(
-            line.start_x,
-            line.start_y,
-            line.width,
-            line.height
-        );
-
-        // temperature colored rectangle
-        var grd=ctx.createLinearGradient(draw_margin,0,draw_area,0);
-        var grd_step = 1/ t_normalized.length;
-
-        var t_colors = [];
-        var color_intensity_max = 255;
-        var t_max = 50;
-        var color_intensity;
-        for (var i = 0; i < temperatures.length; i++)
-        {
-            color_intensity = Math.floor((temperatures[i] / t_max) * color_intensity_max);
-            if (color_intensity > 0)
-            {
-                t_colors[i] = "rgb(" + color_intensity + ",0,0)";
-            }
-            else
-            {
-                t_colors[i] = "rgb(0,0," + (-1 * color_intensity) + ")";
-            }
-        };
-
-        for (var i = 0; i < t_colors.length; i++)
-        {
-            grd.addColorStop(grd_step*(i+1), t_colors[i]);
-        }
-
-        ctx.fillStyle=grd;
-        ctx.fillRect(
-            draw_margin,
-            color_start,
-            draw_area,
-            color_height
-        );
-
-        // fill winds
-        var winds = [];
-        var windspeed;
-        for (var i = 0; i < windspeeds.length; i++)
-        {
-            windspeed = parseInt(windspeeds[i], 10);
-
-            if (windspeed < 1)
-                winds[i] = "calm";
-            else if (windspeed < 5)
-                winds[i] = "light air";
-            else if (windspeed < 20)
-                winds[i] = "breeze";
-            else if (windspeed < 50)
-                winds[i] = "gale";
-            else if (windspeed < 100)
-                winds[i] = "storm";
-            else
-                winds[i] = "hurricane!";
-        };
-
-        for(var i = 0; i < winds.length; i++){
-            ctx.fillStyle = "blue";
-            ctx.fillText(
-                winds[i],
-                draw_margin + bar_width * (i),
-                wind_start + wind_height);
-        };
-
-        var clouds = [];
         for (var i = 0; i < sunclouds.length; i++)
         {
             switch (sunclouds[i]){
-                case "sun": clouds[i] = "Skycons.CLEAR_DAY"; break;
-                case "partial": clouds[i] = "Skycons.PARTLY_CLOUDY_DAY"; break;
-                case "cloudy": clouds[i] = "Skycons.CLOUDY"; break;
+                case "sun":
+                    icons.set("icon" + i, Skycons.CLEAR_DAY);
+                    break;
+                case "partial":
+                    icons.set("icon" + i, Skycons.PARTLY_CLOUDY_DAY);
+                    break;
+                case "cloudy":
+                    icons.set("icon" + i, Skycons.CLOUDY);
+                    break;
             };
         };
 
-        var skycons = new Skycons();
-        for (var i = 0; i < clouds.length; i++)
-        {
-            skycons.add(document.getElementById("icon" + i, clouds[i]);
-        }
-        skycons.play();
-
+        icons.play();
     }
 };
-
 
