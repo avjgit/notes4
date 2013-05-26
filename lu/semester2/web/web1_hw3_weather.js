@@ -82,14 +82,13 @@ function mainFunction(){
             are_valid_windspeeds(windspeeds) &&
             are_valid_clouds(sunclouds)
         ){
-            alert("inside here");
             drawGraph(sunclouds, temperatures);
         }
     };
 }
 
 function drawGraph(label,value){
-    alert("inside");
+
     var nv=[]; //normalized value
     var max=value[0];
     for(var i=1; i<5; i++){
@@ -104,12 +103,12 @@ function drawGraph(label,value){
       var ctx = canvas.getContext('2d');
       ctx.clearRect(0,0,canvas.width,canvas.height);
       ctx.fillStyle="#FCA";
-      ctx.fillRect(20,300,560,2);
+      ctx.fillRect(20,300,550,2);
       for(var i=0; i<5; i++){
           ctx.fillStyle="lightgrey";
-          ctx.fillRect(60+100*(i-1),300-nv[i],80, nv[i]);
+          ctx.fillRect(60+100*(i),300-nv[i],80, nv[i]);
           ctx.fillStyle="grey";
-          ctx.fillText(label[i],60+100*(i-1),350);
+          ctx.fillText(label[i],60+100*(i),350);
       }
     }
 };
