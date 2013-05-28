@@ -8,8 +8,44 @@
 
 struct node
 {
-    long long self, left_nr, right_nr;
+    long long self, left_nr, right_nr, level;
     node *next, *previous, *left, *right;
+    node *tree_stack_next, *level_stack_next;
+};
+
+class t_stack
+{
+private:
+    node *last, *outstack, *empty;
+public:
+    t_stack()
+    {
+        empty = new node;
+        empty->self = 0;
+        empty->tree_stack_next = NULL;
+        empty->level_stack_next = NULL;
+
+        last = empty;
+        outstack = empty;
+    }
+    void put(node* node_in)
+    {
+        node_in->tree_stack_next = last;
+        last = node_in;
+        // last->tree_stack_next = empty;
+    }
+    node* pop()
+    {
+        outstack = last;
+        last = last->tree_stack_next;
+        return outstack;
+    }
+    bool is_empty()
+    {
+        // return (last->self == 0);
+        return last->tree_stack_next == NULL;
+    }
+
 };
 
 class queue
@@ -118,6 +154,9 @@ int main()
         current->previous       = NULL;
         current->left           = NULL;
         current->right          = NULL;
+        current->level          = -1;
+        current->tree_stack_next = NULL;
+        current->level_stack_next = NULL;
 
         if (first == NULL)
         {
@@ -200,7 +239,11 @@ int main()
 
     ///////////////////////////////////////////////// traversal
     queue q;
+    t_stack tree_stack;
+
+    root->level = 0;
     q.in(root);
+
     node *lefttest, *righttest;
     int test_i = 0;
 
@@ -210,16 +253,19 @@ int main()
 
         current = q.out();
 
-        fprintf(stdout, "took: %lld\n", current->self);
+        // fprintf(stdout, "took: %lld\n", current->self);
+        tree_stack.put(current);
 
         if (current->left != NULL){
-            lefttest = current->left;
             // fprintf(stdout, "enqueueing left, : %lld\n", lefttest->self);
+            lefttest = current->left;
+            lefttest->level = current->level + 1;
             q.in(current->left);
         }
         if (current->right != NULL){
-            righttest = current->right;
             // fprintf(stdout, "enqueueing right, : %lld\n", righttest->self);
+            righttest = current->right;
+            righttest->level = current->level + 1;
             q.in(current->right);
         }
 
@@ -232,22 +278,35 @@ int main()
     node *right_node = NULL;
     long long left_node_self, right_node_self;
 
-    for(current = first; current != NULL; current = current->next)
+    // testoutput
+    // for(current = first; current != NULL; current = current->next)
+    // {
+    //     // fprintf(stdout, "current: %lld\n", current->self);
+
+    //     left_node = current->left;
+    //     left_node_self = left_node->self;
+
+    //     right_node = current->right;
+    //     right_node_self = right_node->self;
+
+    //     fprintf(
+    //         out,
+    //         "%lld: %lld %lld\n",
+    //         current->self,
+    //         left_node_self,
+    //         right_node_self
+    //     );
+    // }
+
+    while (!tree_stack.is_empty())
     {
-        // fprintf(stdout, "current: %lld\n", current->self);
-
-        left_node = current->left;
-        left_node_self = left_node->self;
-
-        right_node = current->right;
-        right_node_self = right_node->self;
+        current = tree_stack.pop();
 
         fprintf(
             out,
-            "%lld: %lld %lld\n",
-            current->self,
-            left_node_self,
-            right_node_self
+            "%lld: %lld\n",
+            current->level,
+            current->self
         );
     }
 
