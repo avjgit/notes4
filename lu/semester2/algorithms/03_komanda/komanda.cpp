@@ -4,7 +4,91 @@
 struct node
 {
     long long self, left_nr, right_nr;
-    node *next, *left, *right;
+    node *next, *previous, *left, *right;
+};
+
+class queue
+{
+private:
+    node *first, *last, *dequeue, *empty;
+public:
+    queue()
+    {
+        empty = new node;
+        empty->self = 0;
+        empty->previous = NULL;
+
+        first = empty;
+        last = empty;
+
+    }
+    void in (node* node_in)
+    {
+        fprintf(stdout, "---------- in with %lld\n", node_in->self);
+        // fprintf(stdout, "empty is %lld\n", empty->self);
+
+
+        if (first->self == 0)
+        {
+            first = node_in;
+            last = node_in;
+
+            fprintf(stdout, "initializing first with %lld\n", first->self);
+            fprintf(stdout, "initializing last with %lld\n", last->self);
+        }
+        else
+        {
+            fprintf(stdout, "last was %lld\n", last->self);
+            fprintf(stdout, "first is %lld\n", first->self);
+
+            last->previous = node_in;
+            last = last->previous;
+
+            fprintf(stdout, "now last is %lld\n", last->self);
+            fprintf(stdout, "first is still %lld\n", first->self);
+        }
+    }
+    node* out()
+    {
+        dequeue = first;
+
+        fprintf(stdout, "dequeueing, first is %lld\n", first->self);
+        fprintf(stdout, "dequeueing, last is %lld\n", last->self);
+        fprintf(stdout, "dequeueing, %lld is to dequeue\n", dequeue->self);
+        // fprintf(stdout, "dequeueing, empty is %lld\n", empty->self);
+
+        // if (first->previous == NULL)
+        if (first == last)
+        {
+            fprintf(stdout, "taking very last element\n");
+            first = empty;
+            last = empty;
+        }
+        else
+        {
+            fprintf(stdout, "taking %lld out of queue\n", first->self);
+            first = first->previous;
+        }
+
+        fprintf(stdout, "after dequeueing, first is %lld\n", first->self);
+        fprintf(stdout, "after dequeueing, last is %lld\n", last->self);
+        fprintf(stdout, "dequeueing, %lld is to dequeue\n", dequeue->self);
+
+        return dequeue;
+    }
+    bool is_empty()
+    {
+        if (first->self == 0)
+        {
+            fprintf(stdout, "queue is empty!\n");
+            return true;
+        }
+        else
+        {
+            fprintf(stdout, "queue has: %lld\n", first->self);
+            return false;
+        }
+    }
 };
 
 int main()
@@ -28,6 +112,7 @@ int main()
         current->left_nr        = left;
         current->right_nr       = right;
         current->next           = NULL;
+        current->previous      = NULL;
         current->left           = NULL;
         current->right          = NULL;
 
@@ -110,6 +195,36 @@ int main()
     }
     // fprintf(stdout, "root is %lld\n", root->self);
 
+    ///////////////////////////////////////////////// traversal
+    queue q;
+    q.in(root);
+    node *lefttest, *righttest;
+    int test_i = 0;
+
+    while (!q.is_empty() && test_i < 9)
+    {
+        fprintf(stdout, "######## loop starts\n");
+
+        current = q.out();
+        // if (test_i == 2) return 0;
+
+
+        fprintf(stdout, "took: %lld\n", current->self);
+
+        if (current->left != NULL){
+            lefttest = current->left;
+            fprintf(stdout, "enqueueing left, : %lld\n", lefttest->self);
+            q.in(current->left);
+        }
+        if (current->right != NULL){
+            righttest = current->right;
+            fprintf(stdout, "enqueueing right, : %lld\n", righttest->self);
+            q.in(current->right);
+        }
+
+        test_i++;
+    }
+    // return 0;
 
     ///////////////////////////////////////////////// output
     node *left_node = NULL;
@@ -134,6 +249,18 @@ int main()
             right_node_self
         );
     }
+
+    // fprintf(
+    //     out,
+    //     "one more\n"
+    // );
+
+    // current = q.out();
+    // fprintf(
+    //     out,
+    //     "%lld\n",
+    //     current->self
+    // );
 
     ///////////////////////////////////////////////// closing
     fclose(in);
