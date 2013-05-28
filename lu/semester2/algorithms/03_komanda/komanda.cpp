@@ -42,8 +42,41 @@ public:
     }
     bool is_empty()
     {
-        // return (last->self == 0);
         return last->tree_stack_next == NULL;
+    }
+
+};
+
+
+class l_stack
+{
+private:
+    node *last, *outstack, *empty;
+public:
+    l_stack()
+    {
+        empty = new node;
+        empty->self = 0;
+        empty->tree_stack_next = NULL;
+        empty->level_stack_next = NULL;
+
+        last = empty;
+        outstack = empty;
+    }
+    void put(node* node_in)
+    {
+        node_in->level_stack_next = last;
+        last = node_in;
+    }
+    node* pop()
+    {
+        outstack = last;
+        last = last->level_stack_next;
+        return outstack;
+    }
+    bool is_empty()
+    {
+        return last->level_stack_next == NULL;
     }
 
 };
@@ -278,7 +311,8 @@ int main()
     node *right_node = NULL;
     long long left_node_self, right_node_self;
 
-    // testoutput
+
+    // testoutput1 - just list
     // for(current = first; current != NULL; current = current->next)
     // {
     //     // fprintf(stdout, "current: %lld\n", current->self);
@@ -298,28 +332,64 @@ int main()
     //     );
     // }
 
+    //testoutput2 - levels
+    // while (!tree_stack.is_empty())
+    // {
+    //     current = tree_stack.pop();
+    //     fprintf(out, "%lld: %lld\n", current->level, current->self);
+    // }
+
+
+    // real output
+
+    node *levelnode;
+    l_stack level_stack;
+    current = tree_stack.pop();
+    long long cur_level = current->level;
+    fprintf(stdout, "poped level %lld: %lld\n", current->level, current->self);
+    level_stack.put(current);
+
     while (!tree_stack.is_empty())
     {
         current = tree_stack.pop();
+        fprintf(stdout, "poped level %lld: %lld\n", current->level, current->self);
 
-        fprintf(
-            out,
-            "%lld: %lld\n",
-            current->level,
-            current->self
-        );
+        // loading stack until next level pops up
+        if (current->level == cur_level)
+        {
+            level_stack.put(current);
+            fprintf(stdout, "same level, put to stack\n");
+        }
+        // when new level pops up, then load the level stack to file
+        else
+        {
+            fprintf(stdout, "we have new level!\n");
+
+            fprintf(out, "%lld:", cur_level);
+            cur_level = current->level;
+
+            while (!level_stack.is_empty())
+            {
+                levelnode = level_stack.pop();
+                fprintf(out, " %lld", levelnode->self);
+            }
+            fprintf(out, "\n");
+
+            level_stack.put(current);
+        }
     }
 
-    fprintf(stdout,"done\n");
+    fprintf(out, "%lld:", cur_level);
 
-    // current = q.out();
-    // fprintf(
-    //     out,
-    //     "%lld\n",
-    //     current->self
-    // );
+    while (!level_stack.is_empty())
+    {
+        levelnode = level_stack.pop();
+        fprintf(out, " %lld", levelnode->self);
+    }
+    fprintf(out, "\n");
 
     ///////////////////////////////////////////////// closing
+    fprintf(stdout,"done\n");
     fclose(in);
     fclose(out);
     return 0;
