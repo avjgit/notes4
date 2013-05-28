@@ -321,9 +321,9 @@ int main()
     // return 0;
 
     ///////////////////////////////////////////////// output
-    node *left_node = NULL;
-    node *right_node = NULL;
-    long long left_node_self, right_node_self;
+    // node *left_node = NULL;
+    // node *right_node = NULL;
+    // long long left_node_self, right_node_self;
 
 
     // testoutput1 - just list
