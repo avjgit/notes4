@@ -179,6 +179,11 @@ int main()
     {
         fscanf  (in, "%lld %lld %lld", &self, &left, &right);
 
+        if (self == 0)
+        {
+            break;
+        }
+
         current = new node;
         current->self           = self;
         current->left_nr        = left;
@@ -207,43 +212,54 @@ int main()
     for(node *parent = first; parent != NULL; parent = parent->next)
     {
         // fprintf(stdout,"-------- in with parent %lld\n", parent->self);
-        for(node *child = first; child != NULL; child = child->next)
+        // fprintf(stdout,"left is %lld\n", parent->left_nr);
+        // fprintf(stdout,"right is %lld\n", parent->right_nr);
+
+        if (parent->left_nr != 0)
         {
-            // fprintf(stdout,"checking child %lld\n", child->self);
-            if (child->self == parent->left_nr)
+            for(node *child = first; child != NULL; child = child->next)
             {
-                parent->left = child;
-                break;
+                // fprintf(stdout,"checking child for left: %lld\n", child->self);
+                if (child->self == parent->left_nr)
+                {
+                    // fprintf(stdout,"found!\n");
+                    parent->left = child;
+                    break;
+                }
             }
         }
 
-        if (parent->left == NULL)
-        {
-            current = new node;
-            current->self           = parent->left_nr;
-            current->left           = NULL;
-            current->right          = NULL;
-            parent->left = current;
-        }
+        // if (parent->left == NULL)
+        // {
+        //     current = new node;
+        //     current->self           = parent->left_nr;
+        //     current->left           = NULL;
+        //     current->right          = NULL;
+        //     parent->left = current;
+        // }
 
-        for(node *child = first; child != NULL; child = child->next)
+        if (parent->right_nr != 0)
         {
-            // fprintf(stdout,"checking child %lld\n", child->self);
-            if (child->self == parent->right_nr)
+            for(node *child = first; child != NULL; child = child->next)
             {
-                parent->right = child;
-                break;
+                // fprintf(stdout,"checking child for right: %lld\n", child->self);
+                if (child->self == parent->right_nr)
+                {
+                    // fprintf(stdout,"found!\n");
+                    parent->right = child;
+                    break;
+                }
             }
         }
 
-        if (parent->right == NULL)
-        {
-            current = new node;
-            current->self           = parent->right_nr;
-            current->left           = NULL;
-            current->right          = NULL;
-            parent->right = current;
-        }
+        // if (parent->right == NULL)
+        // {
+        //     current = new node;
+        //     current->self           = parent->right_nr;
+        //     current->left           = NULL;
+        //     current->right          = NULL;
+        //     parent->right = current;
+        // }
     }
 
     node *maybe_parent = NULL;
@@ -278,9 +294,8 @@ int main()
     q.in(root);
 
     node *lefttest, *righttest;
-    int test_i = 0;
 
-    while (!q.is_empty() && test_i < 9)
+    while (!q.is_empty())
     {
         // fprintf(stdout, "######## loop starts\n");
 
@@ -302,7 +317,6 @@ int main()
             q.in(current->right);
         }
 
-        test_i++;
     }
     // return 0;
 
@@ -346,25 +360,24 @@ int main()
     l_stack level_stack;
     current = tree_stack.pop();
     long long cur_level = current->level;
-    fprintf(stdout, "poped level %lld: %lld\n", current->level, current->self);
+    // fprintf(stdout, "poped level %lld: %lld\n", current->level, current->self);
     level_stack.put(current);
 
     while (!tree_stack.is_empty())
     {
         current = tree_stack.pop();
-        fprintf(stdout, "poped level %lld: %lld\n", current->level, current->self);
+        // fprintf(stdout, "poped level %lld: %lld\n", current->level, current->self);
 
         // loading stack until next level pops up
         if (current->level == cur_level)
         {
             level_stack.put(current);
-            fprintf(stdout, "same level, put to stack\n");
+            // fprintf(stdout, "same level, put to stack\n");
         }
         // when new level pops up, then load the level stack to file
         else
         {
-            fprintf(stdout, "we have new level!\n");
-
+            // fprintf(stdout, "we have new level!\n");
             fprintf(out, "%lld:", cur_level);
             cur_level = current->level;
 
@@ -389,7 +402,7 @@ int main()
     fprintf(out, "\n");
 
     ///////////////////////////////////////////////// closing
-    fprintf(stdout,"done\n");
+    // fprintf(stdout,"done\n");
     fclose(in);
     fclose(out);
     return 0;
