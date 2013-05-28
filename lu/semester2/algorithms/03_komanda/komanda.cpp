@@ -1,3 +1,8 @@
+// Andrejs Jurcenoks
+// aj05044
+// Datu strukturas un pamatalgoritmi I
+// PD2
+// https://github.com/avjgit/notes4/tree/master/lu/semester2/algorithms/03_komanda
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -24,55 +29,53 @@ public:
     }
     void in (node* node_in)
     {
-        fprintf(stdout, "---------- in with %lld\n", node_in->self);
+        // fprintf(stdout, "---------- in with %lld\n", node_in->self);
         // fprintf(stdout, "empty is %lld\n", empty->self);
-
-
         if (first->self == 0)
         {
             first = node_in;
             last = node_in;
 
-            fprintf(stdout, "initializing first with %lld\n", first->self);
-            fprintf(stdout, "initializing last with %lld\n", last->self);
+            // fprintf(stdout, "initializing first with %lld\n", first->self);
+            // fprintf(stdout, "initializing last with %lld\n", last->self);
         }
         else
         {
-            fprintf(stdout, "last was %lld\n", last->self);
-            fprintf(stdout, "first is %lld\n", first->self);
+            // fprintf(stdout, "last was %lld\n", last->self);
+            // fprintf(stdout, "first is %lld\n", first->self);
 
             last->previous = node_in;
             last = last->previous;
 
-            fprintf(stdout, "now last is %lld\n", last->self);
-            fprintf(stdout, "first is still %lld\n", first->self);
+            // fprintf(stdout, "now last is %lld\n", last->self);
+            // fprintf(stdout, "first is still %lld\n", first->self);
         }
     }
     node* out()
     {
         dequeue = first;
 
-        fprintf(stdout, "dequeueing, first is %lld\n", first->self);
-        fprintf(stdout, "dequeueing, last is %lld\n", last->self);
-        fprintf(stdout, "dequeueing, %lld is to dequeue\n", dequeue->self);
+        // fprintf(stdout, "dequeueing, first is %lld\n", first->self);
+        // fprintf(stdout, "dequeueing, last is %lld\n", last->self);
+        // fprintf(stdout, "dequeueing, %lld is to dequeue\n", dequeue->self);
         // fprintf(stdout, "dequeueing, empty is %lld\n", empty->self);
 
         // if (first->previous == NULL)
         if (first == last)
         {
-            fprintf(stdout, "taking very last element\n");
+            // fprintf(stdout, "taking very last element\n");
             first = empty;
             last = empty;
         }
         else
         {
-            fprintf(stdout, "taking %lld out of queue\n", first->self);
+            // fprintf(stdout, "taking %lld out of queue\n", first->self);
             first = first->previous;
         }
 
-        fprintf(stdout, "after dequeueing, first is %lld\n", first->self);
-        fprintf(stdout, "after dequeueing, last is %lld\n", last->self);
-        fprintf(stdout, "dequeueing, %lld is to dequeue\n", dequeue->self);
+        // fprintf(stdout, "after dequeueing, first is %lld\n", first->self);
+        // fprintf(stdout, "after dequeueing, last is %lld\n", last->self);
+        // fprintf(stdout, "dequeueing, %lld is to dequeue\n", dequeue->self);
 
         return dequeue;
     }
@@ -80,12 +83,12 @@ public:
     {
         if (first->self == 0)
         {
-            fprintf(stdout, "queue is empty!\n");
+            // fprintf(stdout, "queue is empty!\n");
             return true;
         }
         else
         {
-            fprintf(stdout, "queue has: %lld\n", first->self);
+            // fprintf(stdout, "queue has: %lld\n", first->self);
             return false;
         }
     }
@@ -112,7 +115,7 @@ int main()
         current->left_nr        = left;
         current->right_nr       = right;
         current->next           = NULL;
-        current->previous      = NULL;
+        current->previous       = NULL;
         current->left           = NULL;
         current->right          = NULL;
 
@@ -203,22 +206,20 @@ int main()
 
     while (!q.is_empty() && test_i < 9)
     {
-        fprintf(stdout, "######## loop starts\n");
+        // fprintf(stdout, "######## loop starts\n");
 
         current = q.out();
-        // if (test_i == 2) return 0;
-
 
         fprintf(stdout, "took: %lld\n", current->self);
 
         if (current->left != NULL){
             lefttest = current->left;
-            fprintf(stdout, "enqueueing left, : %lld\n", lefttest->self);
+            // fprintf(stdout, "enqueueing left, : %lld\n", lefttest->self);
             q.in(current->left);
         }
         if (current->right != NULL){
             righttest = current->right;
-            fprintf(stdout, "enqueueing right, : %lld\n", righttest->self);
+            // fprintf(stdout, "enqueueing right, : %lld\n", righttest->self);
             q.in(current->right);
         }
 
@@ -250,10 +251,7 @@ int main()
         );
     }
 
-    // fprintf(
-    //     out,
-    //     "one more\n"
-    // );
+    fprintf(stdout,"done\n");
 
     // current = q.out();
     // fprintf(
