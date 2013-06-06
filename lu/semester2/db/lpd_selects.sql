@@ -15,3 +15,4 @@
  par lektoriem, par noteiktas sekcijas referātiem.
 
 - kura telpa ir brīva datumaa saakot no plkst 14 lidz (neieskaitot) 16?
+- CIK IESNIEDZA PEDEJA BRIDI?
