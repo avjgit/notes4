@@ -16,3 +16,11 @@
 
 - kura telpa ir brīva datumaa saakot no plkst 14 lidz (neieskaitot) 16?
 - CIK IESNIEDZA PEDEJA BRIDI?
+
+- lekcija referencejas uz lecturere, nevis refereat,
+jo modelis ir veidots domu, ka referatu var prezentet vairaki cilveki (teoretiski, pat vienlaicigi)
+ja butu tikai uz referatu, tad nav skaidrs - kurs to lasīs
+
+- atbrauks jauna delegaacija;
+jums jasazinas ar viesnīcaam un jaaatjauno pieejamo istabu skaits;
+atrodiet kontaktus (epastus un tel) viesnīcaam
