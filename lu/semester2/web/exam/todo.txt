@@ -2,8 +2,8 @@
 OK,DONE • The page has to be developed according to HTML 5 or XHTML 1.0 Strict standard. DOCTYPE has to be declared and the document must conform to it.
 later   • The document must validate using the W3C validator (http://validator. w3.org).
 OK,DONE • ID and class attributes must be used appropriately throughout the document.
-        • HTML elements must be used according to their semantics.
-        • HTML document must contain all of these element types:
+OK,DONE • HTML elements must be used according to their semantics.
+OK,DONE • HTML document must contain all of these element types:
 OK,DONE     * headings (different levels)
 OK,DONE     * lists (ordered and unordered)
 OK,DONE     * basic text formatting (paragraphs, line breaks, bold, italics)
