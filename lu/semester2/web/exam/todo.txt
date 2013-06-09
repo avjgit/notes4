@@ -9,7 +9,7 @@ later   • The document must validate using the W3C validator (http://validator
         • HTML elements must be used according to their semantics.
         • HTML document must contain all of these element types:
 OK,DONE     * headings (different levels)
-            * lists (ordered and unordered)
+OK,DONE     * lists (ordered and unordered)
             * basic text formatting (paragraphs, line breaks, bold, italics)
 OK,DONE     * images
             * data input form elements (later accessed from JavaScript code)
