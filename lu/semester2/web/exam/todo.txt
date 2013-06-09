@@ -18,7 +18,7 @@ OK,DONE     * images
         and must validate using the CSS validator (http://jigsaw.w3.org/
         css-validator). Stable CSS3 properties may be used as well, but vendor-
         specific markup should not be used.
-        • Style information must be stored in a .CSS file linked to the HTML
+OK,DONE • Style information must be stored in a .CSS file linked to the HTML
         document.
         • A print version has to be developed where some parts (for instance,
         navigation) of the document are hidden. “Print preview”function can be
