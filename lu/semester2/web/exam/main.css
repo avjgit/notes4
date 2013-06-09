@@ -1,0 +1,81 @@
+/*selector by tag*/
+body {
+    background-color: #CCCCFF;
+    font-family: Geneva, sans-serif;
+    font-size: 16px;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*id + tag*/
+#img_title > img {
+    height: 400px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+#img_title > h1 {
+    margin-left: 140px;
+    font-size: 60px;
+}
+
+#menu {
+    font-weight: bold;
+}
+/*class + tag*/
+.about > h2 {
+    font-weight: normal;
+    font-style: italic;
+}
+/*class*/
+.three_step_program {
+    color: green;
+}
+
+.client_quotes, .form_types {
+    font-style: italic;
+}
+
+#options > h3 {
+    text-decoration: underline;
+}
+
+#menu > li{
+    list-style-type: none;
+    float: left;
+    height: 30px;
+    margin-right: 10px;
+    font-size: 25px;
+    text-transform: uppercase;
+    background-color: grey;
+}
+a {
+    color: white;
+}
+a:visited{
+    color: white;
+}
+
+article {
+    margin-top: 100px;
+}
+
+#img_clients {
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+span {
+    color: red;
+}
+/*stays strong*/
+span#special {
+    color: blue;
+}
+/*overrites previous span*/
+span {
+    color: yellow;
+}
+input {
+    display: block;
+}
