@@ -79,3 +79,7 @@ span {
 input, select, textarea {
     display: block;
 }
+
+[type=checkbox], [type=radio]{
+    display: inline;
+}

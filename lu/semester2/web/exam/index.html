@@ -90,13 +90,16 @@
         <div class="form_basic">
             <form id="form1" action="http://naivist.net/form/" method="post">
 
-                <label for="countries">Your country:</label>
-                <input type="text" id="txt" name="txt" size="20">
+                <label for="name">Tell your name:</label>
+                <input type="text" id="name" name="name" size="20">
 
+                <label for="psw">Password:</label>
                 <input type="password" id="psw" name="psw" size="20">
-                <textarea id="txa" name="txa"></textarea>
 
-                <label for="countries">Your country:</label>
+                <label for="full_story">Tell more about youself:</label>
+                <textarea id="txa" name="full_story" rows="20" cols="100"></textarea>
+
+                <label for="countries">Where do you live?</label>
                 <select id="countries" name="countries">
                     <optgroup label="Americas">
                         <option value="North America">North America</option>
@@ -114,27 +117,24 @@
                     <option value="Arctics or Antarctics">Arctics or Antarctics</option>
                 </select>
 
-                <select name="languages" multiple="multiple">
+                <label for="languages">You speak any of?</label>
+                <select id="languages" name="languages" multiple="multiple">
                     <option value="en">English</option>
                     <option value="sp">Spanish</option>
-                    <option value="de">German</option>
                     <option value="cn">Chinese</option>
                     <option value="hn">Hindu</option>
                 </select>
 
-                <input type="select" id="sel" name="sel1">
+                <input name="text" id="disabled" name="disabled" disabled="disabled">
+                <input type="text" id="readonly" name="readonly" readonly="readonly" value="you may try to edit this field">
 
+                <input type="checkbox" id="ch1" checked="checked" name="meat" value="meat">Meat<br>
+                <input type="checkbox" id="ch2" name="potatoes" value="potatoes">Potatoes<br>
+                <input type="checkbox" id="ch3" name="tomato" value="tomato">Tomato<br>
 
-                <input name="text" id="tx2" name="tx2" disabled="disabled">
-                <input type="text" id="tx3" name="tx2" readonly="readonly" value="try to edit this field">
-
-                <input type="checkbox" id="ch1" checked="checked" value="meat">
-                <input type="checkbox" id="ch2" value="potatoes">
-                <input type="checkbox" id="ch3" value="tomato">
-
-                <input type="radio" name="gender" value="male">
-                <input type="radio" name="gender" value="female">
-                <input type="radio" name="gender" value="3rd_option">
+                <input type="radio" name="gender" value="male">Male<br>
+                <input type="radio" name="gender" value="female">Female<br>
+                <input type="radio" name="gender" value="3rd_option">3rd option
 
                 <input type="search">
                 <input type="date">
