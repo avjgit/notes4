@@ -76,6 +76,6 @@ span#special {
 span {
     color: yellow;
 }
-input {
+input, select, textarea {
     display: block;
 }

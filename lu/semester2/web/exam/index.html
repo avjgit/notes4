@@ -88,13 +88,67 @@
         </div>
         <h1>Just looks at this! Shiny new form to fill!</h1>
         <div class="form_basic">
-            <form id="form1" action="" method="">
-                <input type="text">
-                <input type="password">
-                <input name="asdf" disabled="disabled">
-                <input type="button" value="send">
-            </form>
-            <form id="form2">
+            <form id="form1" action="http://naivist.net/form/" method="post">
+
+                <label for="countries">Your country:</label>
+                <input type="text" id="txt" name="txt" size="20">
+
+                <input type="password" id="psw" name="psw" size="20">
+                <textarea id="txa" name="txa"></textarea>
+
+                <label for="countries">Your country:</label>
+                <select id="countries" name="countries">
+                    <optgroup label="Americas">
+                        <option value="North America">North America</option>
+                        <option value="South America">South America</option>
+                    </optgroup>
+
+                    <option value="Europe">Europe</option>
+                    <option value="Africa">Africa</option>
+                    <optgroup label="East">
+                        <option value="Near East">Near East</option>
+                        <option value="Middle East">Middle East</option>
+                        <option value="Far East">Far East</option>
+                    </optgroup>
+                    <option value="Australia">Australia</option>
+                    <option value="Arctics or Antarctics">Arctics or Antarctics</option>
+                </select>
+
+                <select name="languages" multiple="multiple">
+                    <option value="en">English</option>
+                    <option value="sp">Spanish</option>
+                    <option value="de">German</option>
+                    <option value="cn">Chinese</option>
+                    <option value="hn">Hindu</option>
+                </select>
+
+                <input type="select" id="sel" name="sel1">
+
+
+                <input name="text" id="tx2" name="tx2" disabled="disabled">
+                <input type="text" id="tx3" name="tx2" readonly="readonly" value="try to edit this field">
+
+                <input type="checkbox" id="ch1" checked="checked" value="meat">
+                <input type="checkbox" id="ch2" value="potatoes">
+                <input type="checkbox" id="ch3" value="tomato">
+
+                <input type="radio" name="gender" value="male">
+                <input type="radio" name="gender" value="female">
+                <input type="radio" name="gender" value="3rd_option">
+
+                <input type="search">
+                <input type="date">
+                <input type="number" />
+                <input type="range" />
+                <input type="file" multiple="multiple"/>
+
+
+                <input type="file">
+
+                <input type="reset" id="reset" name="reset" value="clear the form">
+                <input type="button" value="send" id="send" name="send">
+                <input type="submit" value="submit" id="submit" name="submit">
+
             </form>
         </div>
         Remember!
