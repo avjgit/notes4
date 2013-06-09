@@ -1,5 +1,5 @@
 – HTML code (15%)
-        • The page has to be developed according to HTML 5 or XHTML 1.0
+OK,DONE • The page has to be developed according to HTML 5 or XHTML 1.0
         Strict standard. DOCTYPE has to be declared and the document must
         conform to it.
         • The document must validate using the W3C validator (http://validator.
