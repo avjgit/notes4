@@ -96,6 +96,14 @@
                 <label for="psw">Password:</label>
                 <input type="password" id="psw" name="psw" size="20">
 
+                <label for="gender">You are...</label>
+                <input type="radio" name="gender" value="male">male<br>
+                <input type="radio" name="gender" value="female">female<br>
+                <input type="radio" name="gender" value="3rd_option">3rd option
+
+                <label for="birth">Born in </label>
+                <input type="date" name="birth" value="birth">
+
                 <label for="full_story">Tell more about youself:</label>
                 <textarea id="txa" name="full_story" rows="20" cols="100"></textarea>
 
@@ -128,27 +136,21 @@
                 <input name="text" id="disabled" name="disabled" disabled="disabled">
                 <input type="text" id="readonly" name="readonly" readonly="readonly" value="you may try to edit this field">
 
-                <input type="checkbox" id="ch1" checked="checked" name="meat" value="meat">Meat<br>
-                <input type="checkbox" id="ch2" name="potatoes" value="potatoes">Potatoes<br>
-                <input type="checkbox" id="ch3" name="tomato" value="tomato">Tomato<br>
+                <label for="languages">You would choose for lunch</label>
+                <input type="checkbox" id="ch1" checked="checked" name="food1" value="meat">Meat<br>
+                <input type="checkbox" id="ch2" name="food2" value="potatoes">Potatoes<br>
+                <input type="checkbox" id="ch3" name="food3" value="tomato">Tomato<br>
 
-                <input type="radio" name="gender" value="male">Male<br>
-                <input type="radio" name="gender" value="female">Female<br>
-                <input type="radio" name="gender" value="3rd_option">3rd option
+                <label for="rating_number">How would you rate our service? You may choose the range or set precise number</label>
+                <input type="number" name="rating_number" value="50" min="0" max="100"/>
+                <input type="range" name="rating_range" value="50"/>
 
-                <input type="search">
-                <input type="date">
-                <input type="number" />
-                <input type="range" />
+
                 <input type="file" multiple="multiple"/>
-
-
                 <input type="file">
 
                 <input type="reset" id="reset" name="reset" value="clear the form">
-                <input type="button" value="send" id="send" name="send">
                 <input type="submit" value="submit" id="submit" name="submit">
-
             </form>
         </div>
         Remember!
