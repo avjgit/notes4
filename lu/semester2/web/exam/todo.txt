@@ -21,6 +21,7 @@ OK,DONE • Data type validation (for instance, if the value entered in date fie
 OK,DONE • Data range validation (for instance, if the number entered in ”month” field is between 1 and 12; or if value in salary field is positive.)
 OK,DONE • In case of validation errors, a message explaining the problem has to be presented to the user. The form must not be submitted in this case. If the form is filled correctly, it should be submitted to http://naivist.net/form/.
 ========= Use of JavaScript for DOM manipulations (10%)
-        • Changing visibility of some part of the document as a response to user interaction with some part of the document (for instance, user clicks a button “more information” and an explanation block is shown). • Creation of new DOM elements from code.
-        • Some DOM manipulations have to be demonstrated without using any external libraries, only by using plain document object model.
-        • Some other manipulations have to be implemented using a helper library (such as jQuery, Prototype, MooTools, ExtJS)
+OK,DONE • Changing visibility of some part of the document as a response to user interaction with some part of the document (for instance, user clicks a button “more information” and an explanation block is shown).
+        • Creation of new DOM elements from code.
+OK,DONE • Some DOM manipulations have to be demonstrated without using any external libraries, only by using plain document object model.
+OK,DONE • Some other manipulations have to be implemented using a helper library (such as jQuery, Prototype, MooTools, ExtJS)
