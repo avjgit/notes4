@@ -17,7 +17,6 @@
         </div>
         <nav>
             <ul id="menu">
-                <!-- todo: link to inner sections -->
                 <li><a href="#form1">Fill the form!</a></li>
                 <li><a href="http://en.wikipedia.org/wiki/Special:Random">Read something</a></li>
                 <li><a href="http://www.flickr.com/explore/interesting/7days/">See some pics</a></li>
@@ -98,19 +97,16 @@
                 <label for="name">Tell your name:</label>
                 <input type="text" id="name" name="name" size="20" required>
 
-                <label for="psw">Password:</label>
+                <label for="password">Password:</label>
                 <input type="password" id="password" name="password" size="20" required ><br>
 
-                <label for="gender">You are...</label><br>
-                <input type="radio" name="gender" value="male">male<br>
-                <input type="radio" name="gender" value="female">female<br>
-                <input type="radio" name="gender" value="3rd_option">3rd option<br><br>
-
-                <label for="birth">Born in </label>
-                <input type="date" name="birth" value="birth"><br>
+                <label for="gender1">You are...</label><br>
+                <input type="radio" id="gender1" name="gender" value="male">male<br>
+                <input type="radio" id="gender2" name="gender" value="female">female<br>
+                <input type="radio" id="gender3" name="gender" value="3rd_option">3rd option<br><br>
 
                 <label for="full_story">Tell more about youself:</label>
-                <textarea id="txa" name="full_story" rows="20" cols="100"></textarea><br>
+                <textarea id="full_story" name="full_story" rows="20" cols="100"></textarea><br>
 
                 <label for="countries">Where do you live?</label>
                 <select id="countries" name="countries">
@@ -138,7 +134,7 @@
                     <option value="hn">Hindu</option>
                 </select><br>
 
-                <input name="text" id="disabled" name="disabled" disabled="disabled">
+                <input id="disabled" name="disabled" disabled="disabled">
                 <input type="text" id="readonly" name="readonly" readonly="readonly" value="you may try to edit this field"><br>
 
 
@@ -149,7 +145,7 @@
                 <input type="checkbox" id="ch3" name="food3" value="tomato">Tomato<br><br>
 
                 <label for="rating_number">How would you rate our service? You may choose the range or set precise number</label>
-                <input type="number" name="rating_number" value="50" min="0" max="100"/>
+                <input type="number" id="rating_number" name="rating_number" value="50" min="0" max="100"/>
                 <input type="range" name="rating_range" value="50"/>
 
                 <input type="file" multiple="multiple"/>
@@ -161,23 +157,23 @@
             <p id="dynamicfields"></p>
 
 
-                <input type="reset" id="reset" name="reset" value="clear the form" size="50">
+                <input type="reset" id="reset" name="reset" value="clear the form">
                 <input type="submit" value="submit" id="submit" name="submit">
             </form>
             <button id="default">Fill in some defaults</button>
             <button id="generate">Generate more fields to fill</button>
             <!-- <p id="dynamicfields"></p> -->
         </div>
-        <p>
+        <div>
         Remember!
         <ol class="three_step_program">
             <li>Recognize you have addiction</li>
             <li>Control it with our tool</li>
             <li>Help others by spreading the word</li>
         </ol>
-        </p>
+        </div>
         <button id="showbtn">Our licence agreement (in Latin)</button>
-        <p id="licence" display=>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+        <p id="licence" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
             et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
