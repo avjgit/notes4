@@ -8,7 +8,7 @@ OK,DONE     * headings (different levels)
 OK,DONE     * lists (ordered and unordered)
 OK,DONE     * basic text formatting (paragraphs, line breaks, bold, italics)
 OK,DONE     * images
-            * data input form elements (later accessed from JavaScript code)
+OK,DONE     * data input form elements (later accessed from JavaScript code)
 ========= CSS code (15%)
 later   • The CSS code must be developed according to CSS 2.1 specification and must validate using the CSS validator (http://jigsaw.w3.org/css-validator). Stable CSS3 properties may be used as well, but vendor- specific markup should not be used.
 OK,DONE • Style information must be stored in a .CSS file linked to the HTML document.
@@ -22,6 +22,6 @@ OK,DONE • Data range validation (for instance, if the number entered in ”mon
 OK,DONE • In case of validation errors, a message explaining the problem has to be presented to the user. The form must not be submitted in this case. If the form is filled correctly, it should be submitted to http://naivist.net/form/.
 ========= Use of JavaScript for DOM manipulations (10%)
 OK,DONE • Changing visibility of some part of the document as a response to user interaction with some part of the document (for instance, user clicks a button “more information” and an explanation block is shown).
-        • Creation of new DOM elements from code.
+OK,DONE • Creation of new DOM elements from code.
 OK,DONE • Some DOM manipulations have to be demonstrated without using any external libraries, only by using plain document object model.
 OK,DONE • Some other manipulations have to be implemented using a helper library (such as jQuery, Prototype, MooTools, ExtJS)
