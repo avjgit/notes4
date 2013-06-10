@@ -74,24 +74,8 @@ function changeBtnName(){
 }
 
 function mainFunction(){
-    // document.getElementById("submit").onclick = function(){
-        // checkMandatory() &&
-        // checkTypesRanges();
 
-        // var val = document.getElementById("name").value;
-        // alert(val);
-        // alert($("#name").value);
-
-    // };
-
-
-    // document.getElementById("form1").submit(function(){
-        // return  checkMandatory() &&
-        //         checkTypesRanges();
-    // };
     $('#form1').submit(function(){
-        // document.getElementById("form1").submit(function(){
-        // document.getElementById("form1").submit(function(){
             return submitCheck();
     });
 
