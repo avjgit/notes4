@@ -16,10 +16,10 @@ OK,DONE • A print version has to be developed where some parts (for instance, 
 OK,DONE • At least 10 selectors have to be used in CSS document
 OK,DONE • Some part of the document must demonstrate how two or more classes can be formatted using CSS
 ========= Data input form and data validation using JavaScript (10%)
-        • Validation of mandatory fields – a warning should be shown if some of the fields are not filled;
-        • Data type validation (for instance, if the value entered in date field is actually a date; or if a numeric field contains a number)
-        • Data range validation (for instance, if the number entered in ”month” field is between 1 and 12; or if value in salary field is positive.)
-        • In case of validation errors, a message explaining the problem has to be presented to the user. The form must not be submitted in this case. If the form is filled correctly, it should be submitted to http://naivist.net/form/.
+OK,DONE • Validation of mandatory fields – a warning should be shown if some of the fields are not filled;
+OK,DONE • Data type validation (for instance, if the value entered in date field is actually a date; or if a numeric field contains a number)
+OK,DONE • Data range validation (for instance, if the number entered in ”month” field is between 1 and 12; or if value in salary field is positive.)
+OK,DONE • In case of validation errors, a message explaining the problem has to be presented to the user. The form must not be submitted in this case. If the form is filled correctly, it should be submitted to http://naivist.net/form/.
 ========= Use of JavaScript for DOM manipulations (10%)
         • Changing visibility of some part of the document as a response to user interaction with some part of the document (for instance, user clicks a button “more information” and an explanation block is shown). • Creation of new DOM elements from code.
         • Some DOM manipulations have to be demonstrated without using any external libraries, only by using plain document object model.

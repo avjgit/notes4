@@ -83,3 +83,9 @@ input, select, textarea {
 [type=checkbox], [type=radio]{
     display: inline;
 }
+
+.error {
+    border-width: 3px;
+    border-color: red;
+    border-style: solid;
+}
