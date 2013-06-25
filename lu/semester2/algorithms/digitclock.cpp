@@ -2,60 +2,44 @@
 #include <stdlib.h>
 using namespace std;
 
-class Clock
-{
+class Clock{
     int size;
 public:
-    Clock(int size_)
-    {
+    Clock(int size_){
         size = max(1, size_);
     }
-    Clock()
-    {
+    Clock(){
         size = 1;
     }
-    void print0()
-    {
+    void print0(){
         //upper line
         cout << " ";
         for (int i = 0; i < size; i++) cout << "-";
-        cout << " ";
-        cout << endl;
-
+        cout << " " << endl;
         //first half
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++){
             cout << "|";
             for (int i = 0; i < size; i++) cout << " ";
-            cout << "|";
-            cout << endl;
+            cout << "|" << endl;
         }
-
         //middle line
         cout << "|";
         for (int i = 0; i < size; i++) cout << " ";
-        cout << "|";
-        cout << endl;
-
+        cout << "|" << endl;
         //second half
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++){
             cout << "|";
             for (int i = 0; i < size; i++) cout << " ";
-            cout << "|";
-            cout << endl;
+            cout << "|" << endl;
         }
-
         // bottom line
         cout << " ";
         for (int i = 0; i < size; i++) cout << "-";
-        cout << " ";
-        cout << endl;
+        cout << " " << endl;
     }
 };
 
-int main()
-{
+int main(){
     Clock clock;
     clock.print0();
     return 0;
