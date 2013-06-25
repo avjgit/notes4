@@ -3,20 +3,23 @@
 using namespace std;
 
 class Clock{
-    int size, hours, minutes, seconds;
+    int size, HH, MM, SS;
+    int digits[6];
 public:
-    Clock(int size_){
-        size = max(1, size_);
-    }
-    Clock(){
-        size = 1;
-    }
-    Clock(int hours_, int minutes_, int seconds_, int size_=1)
+    Clock(int HH_, int MM_, int SS_, int size_=1)
     {
-        hours = hours_;
-        minutes = minutes_;
-        seconds = seconds_;
+        digits[0]  = HH_ / 10;
+        digits[1]  = HH_ % 10;
+        digits[2]  = MM_ / 10;
+        digits[3]  = MM_ % 10;
+        digits[4]  = SS_ / 10;
+        digits[5]  = SS_ % 10;
         size = size_;
+        // print upper
+        // print first half
+        // print middle
+        // print second half
+        // print bottom
     }
     void line()
     {
@@ -142,7 +145,7 @@ public:
 };
 
 int main(){
-    Clock clock;
+    Clock clock = Clock(10, 23, 45);
     clock.print0();
     clock.print1();
     clock.print2();
