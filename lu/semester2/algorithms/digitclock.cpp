@@ -15,7 +15,7 @@ class Clock
 public:
     Clock()
     {
-        size = 1;
+        Clock(1);
         // left_border = 1;
         // right_border = 1;
         // up_border = 1;
@@ -24,7 +24,7 @@ public:
     }
     Clock(int size_)
     {
-        size = size_;
+        size = min(1, size_);
     }
 
     void print0()
