@@ -3,8 +3,8 @@
 using namespace std;
 
 class Clock{
-    int size, HH, MM, SS;
-    int digits[6];
+    static const int D = 6;
+    int size, HH, MM, SS, digits[D];
 public:
     Clock(int HH_, int MM_, int SS_, int size_=1)
     {
@@ -15,7 +15,21 @@ public:
         digits[4]  = SS_ / 10;
         digits[5]  = SS_ % 10;
         size = size_;
+
         // print upper
+        for(int i = 0; i < D; i++) {
+            switch(digits[i]){
+                case 0: print0_upper(); break;
+                case 2: print0_upper(); break;
+                case 3: print0_upper(); break;
+                case 4: print0_upper(); break;
+                case 5: print0_upper(); break;
+                case 6: print0_upper(); break;
+                case 7: print0_upper(); break;
+                case 8: print0_upper(); break;
+                case 9: print0_upper(); break;
+            }
+        }
         // print first half
         // print middle
         // print second half
@@ -45,6 +59,11 @@ public:
         for (int i = 0; i < size; i++) cout << " ";
         cout << " " << endl;
     }
+    void print0_upper()     {line();}
+    void print0_uphalf()    {double_line();}
+    void print0_middle()    {double_line();}
+    void print0_downhalf()  {double_line();}
+    void print0_bottom()    {line();}
 
     void print0(){
         //upper line
