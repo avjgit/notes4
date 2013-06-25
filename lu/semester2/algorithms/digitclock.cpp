@@ -2,23 +2,52 @@
 #include <stdlib.h>
 using namespace std;
 
-void print0(int size)
+class Clock
 {
-    cout << " ";
-    cout << "-";
-    cout << " ";
-    cout << endl;
-    cout << "|";
-    cout << " ";
-    cout << "|";
-    cout << endl;
-    cout << " ";
-    cout << "-";
-    cout << " ";
-    cout << endl;
-}
+    int left_border;
+    int right_border;
+    int up_border;
+    int down_border;
+    int middle_line;
+    int width;
+    int height;
+
+public:
+    Clock()
+    {
+        left_border = 1;
+        right_border = 1;
+        up_border = 1;
+        down_border = 1;
+        middle_line = 1;
+    }
+    Clock(int size)
+    {
+        *this = Clock();
+        width = left_border + size + right_border;
+        height = up_border + size + middle_line + size + down_border;
+    }
+
+    void print0(int size)
+    {
+        cout << " ";
+        cout << "-";
+        cout << " ";
+        cout << endl;
+        cout << "|";
+        cout << " ";
+        cout << "|";
+        cout << endl;
+        cout << " ";
+        cout << "-";
+        cout << " ";
+        cout << endl;
+    }
+};
+
 int main()
 {
-    print0(0);
+    Clock clock = Clock(1);
+    clock.print0(0);
     return 0;
 }
