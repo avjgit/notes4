@@ -113,11 +113,11 @@ public:
     void empty_middle(ostream& s) {for (int i = 0; i < size; i++) s << " ";}
     void full_line(ostream& s)    {for (int i = 0; i < size; i++) s << "-";}
 
-    void line(ostream& s=cout)         {cout << " "; full_line(cout);    cout << " ";}
-    void empty_line(ostream& s=cout)   {cout << " "; empty_middle(cout); cout << " ";}
-    void double_line(ostream& s=cout)  {cout << "|"; empty_middle(cout); cout << "|";}
-    void right_line(ostream& s=cout)   {cout << " "; empty_middle(cout); cout << "|";}
-    void left_line(ostream& s=cout)    {cout << "|"; empty_middle(cout); cout << " ";}
+    void line(ostream& s=cout)         {s << " "; full_line(s);    s << " ";}
+    void empty_line(ostream& s=cout)   {s << " "; empty_middle(s); s << " ";}
+    void double_line(ostream& s=cout)  {s << "|"; empty_middle(s); s << "|";}
+    void right_line(ostream& s=cout)   {s << " "; empty_middle(s); s << "|";}
+    void left_line(ostream& s=cout)    {s << "|"; empty_middle(s); s << " ";}
 
     void print0_upper()     {line();}
     void print0_uphalf()    {double_line();}
