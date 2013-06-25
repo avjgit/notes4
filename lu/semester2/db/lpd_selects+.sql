@@ -271,17 +271,18 @@ insert into ratings values('ok');
 insert into ratings values('good');
 insert into ratings values('perfect');
 -------------------------------------------PARTICIPANTS	
+delete from participants;
 insert into participants values(1, 1, null, 0);
+insert into participants values(1, null, 0);
+insert into participants values(3, 1, null, 0);
+insert into participants values(4, 1, null, 0);
+insert into participants values(5, 1, null, 0);
 insert into participants values(1, 2, null, 0);
-insert into participants values(1, 3, null, 0);
-insert into participants values(1, 4, null, 0);
-insert into participants values(1, 5, null, 0);
-insert into participants values(2, 1, null, 0);
 insert into participants values(2, 2, null, 0);
-insert into participants values(2, 3, null, 0);
-insert into participants values(2, 7, null, 0);
-insert into participants values(2, 8, null, 0);
-insert into participants values(3, 9, null, 0);
+insert into participants values(3, 2, null, 0);
+insert into participants values(7, 2, null, 0);
+insert into participants values(8, 2, null, 0);
+insert into participants values(9, 3, null, 0);
 
 -------------------------------------------LECTURERS	
 insert into lecturers values(1, 6, 1);
@@ -335,6 +336,86 @@ insert into cars values('AA1241', 'Opel', 'Astra', 2013, 0, 22);
 insert into cars values('AA1242', 'Hyundai', 'i30', 2013, 1, 24);
 insert into cars values('AA1243', 'KIA', 'Ceed', 2013, 1, 24);
 
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+------------------------------------------------- ZI?AS PAR REFERATIEM
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+--flagstart
+
+select * from persons order by id;
+
+select * from lectures;
+
+select * from referats;
+
+select *
+from persons
+where 1=1 
+and id in (select person_id from lecturers)
+and id not in (select person_id from participants)
+--and id in (select person_id from participants)
+;
+
+
+
+select * from lectures;
+
+-- cik refer?tiem nekas nav iesniegts
+select count(referats.id)
+from referats
+where referats.id not in (
+  select referat_id
+  from referat_parts_submitted
+);
+-- cik refer?tiem iensiegta t?ze
+select count(referats.id)
+from referats
+where referats.id in (
+  select referat_id
+  from referat_parts_submitted s
+  where s.referat_part = 'THESIS'
+);
+-- cik refer?tiem iensiegta TIKAI t?ze
+select count(referats.id)
+from referats
+where referats.id in (
+  select referat_id
+  from referat_parts_submitted s
+  where s.referat_part = 'THESIS'
+) and referats.id not in (
+  select referat_id
+  from referat_parts_submitted s
+  where s.referat_part <> 'THESIS'
+);
+-- cik refer?ti ir iesniegti piln?b?
+select count(referats.id)
+from referats
+where referats.id in (
+  select referat_id
+  from referat_parts_submitted 
+  group by referat_id
+  having count(referat_part) = 3
+);
+
+-- cik refer?tiem kuras sadalas ir iesniegtas
+select 
+  parts.part, 
+  count(referat_id)
+from 
+  referat_parts parts, 
+  referat_parts_submitted submitted
+where submitted.referat_part = parts.part
+group by parts.part
+;
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+------------------------------------------------- PAPILDUS
+----------------------------------------------------------------------
+----------------------------------------------------------------------
 
 -- zi?as par visiem lekciju klaus?t?jiiem
 select distinct persons.*
@@ -376,9 +457,6 @@ where referats.section_id = sections.id
 group by sections.title
 ;
 
-
-
-
 -- vai ir sekcijas, kur tika iensniegts tikai viens refer?ts?
 select sections.title, count(referats.id)
 from sections, referats
@@ -386,48 +464,70 @@ where referats.section_id = sections.id
 group by sections.title
 having count(referats.id) = 1
 ;
--- cik refer?tiem nekas nav iesniegts
-select count(referats.id)
-from referats
-where referats.id not in (
-  select referat_id
-  from referat_parts_submitted
-);
--- cik refer?tiem iensiegta tikai t?ze
-select count(referats.id)
-from referats
-where referats.id in (
-  select referat_id
-  from referat_parts_submitted s
-  where s.referat_part = 'THESIS'
-) and referats.id in (
-  select referat_id
-  from referat_parts_submitted s
-  where s.referat_part <> 'THESIS'
-);
--- cik refer?ti ir iesniegti piln?b?
-select count(referats.id)
-from referats
-where referats.id in (
-  select referat_id
-  from referat_parts_submitted 
-  group by referat_id
-  having count(referat_part) = 3
-);
-
--- cik refer?tiem kuras sadalas ir iesniegtas
-select parts.part, count(referat_id)
-from referat_parts parts, referat_parts_submitted submitted
-where submitted.referat_part = parts.part
-group by parts.part
-;
 
 -- cik dal?bnieku piere?istr?j?s, bet nepiedal?j?s?
+select count(*) from participants where checked_in is null or checked_in = 0;
+
+
 -- kura bija popul?r?k? p?c apm?kl?t?bas lekcija? refer?ts? sekcija? lektors?
--- kura bija lab?k? p?c nov?rt?juma lekcija? refer?ts? sekcija? lektors?
+select l.id
+from lectures l, participants p
+where p.lecture_id = l.id 
+GROUP BY l.ID
+having count(*) = (
+  select max(count(*))
+  from lectures l, participants p
+  where p.lecture_id = l.id 
+  GROUP BY l.ID
+)
+;
+
+-- kura bija lab?k? p?c nov?rt?juma (visvair?k "perfect" atz?mju) lekcija? refer?ts? sekcija? lektors?
+select l.id
+from lectures l, participants p
+where p.lecture_id = l.id 
+and p.rating = 'perfect'
+group by l.id
+having count(*) = (
+  select max(count(*))
+  from lectures l, participants p
+  where p.lecture_id = l.id 
+  and p.rating = 'perfect'
+  GROUP BY l.ID 
+)
+;
+
 -- kurš dal?bnieks apmekl?jis visvair?k lekciju?
+select p.person_ID
+from lectures l, participants p
+where p.lecture_id = l.id 
+GROUP BY p.person_ID
+having count(*) = (
+  select max(count(*))
+  from lectures l, participants p
+  where p.lecture_id = l.id 
+  GROUP BY p.person_ID
+)
+;
+
 -- kuras lekcijas tika las?tas, kaut referats nebija gatavs piln?b??
+-- kuras lekcijas ir noz?m?tas, kaut referats nebija gatavs piln?b??
+select * from lectures where referat_id in (
+  select referat_id
+  from referat_parts_submitted 
+  GROUP BY referat_id
+  having count(*) < 3
+)
+--and start_datetime < (sysdate+30)
+;
+
 -- kura lekcija nesa??ma nevienu "nepatika" nov?rt?jumu?
+select lecture_id 
+from participants 
+minus
+select lecture_id 
+from participants 
+where rating = 'not liked';
 -- vai bija lekcijas- praktisk?s nodarb?bas (workshop), kas notika nepiemerot?s telp?s (has_workstations =0)? 
 -- cik lekciju notika konferencz?l?s viesn?c?s?
 -- vai bija gad?jumi, kad cilv?ki nevar?ja ietilpt lekcijas auditorij??
@@ -438,6 +538,24 @@ group by parts.part
 -- atbrauks jauna deleg?cija; jums jasazinas ar viesn?c?m un j?atjauno pieejamo istabu skaits; atrodiet kontaktus (epastus un tel) viesn?c?m
 
 
---
--- kuriem dal?bniekiem ir epasts uz sava servera (pie??mums - m?jas lapa nosaukums satur uzvardu)
--- count records per table
+-- piem?ri SQL teikumiem, kas ..
+-- .. pievieno,
+insert into conferences values (
+  'LVFood2013', 
+  'Latvijas piena p?rstr?d?t?ju izst?de 2013',
+  to_date('01.07.2013', 'DD.MM.YYYY'),
+  to_date('10.07.2013', 'DD.MM.YYYY')
+);  
+-- .. maina,
+update conferences 
+set title = 'Latvijas p?rtikas r?pniec?bas izst?de 2013'
+where code = 'LVFood2013';  
+-- .. dz?š inform?ciju
+delete from conferences where code = 'LVFood2013';
+
+
+select distinct p.firstname
+from lecturers l
+inner join persons p
+  on l.person_id = p.id
+order by l.id;
