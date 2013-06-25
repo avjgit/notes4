@@ -15,7 +15,6 @@ public:
         mm = mm_ % MAX_MM;
         ss = ss_ % MAX_MM;
 
-
         digits[0]  = hh / 10;
         digits[1]  = hh % 10;
         digits[2]  = mm / 10;
@@ -111,14 +110,14 @@ public:
         cout << endl;
     }
 
-    void empty_middle() {for (int i = 0; i < size; i++) cout << " ";}
-    void full_line()    {for (int i = 0; i < size; i++) cout << "-";}
+    void empty_middle(ostream& s) {for (int i = 0; i < size; i++) s << " ";}
+    void full_line(ostream& s)    {for (int i = 0; i < size; i++) s << "-";}
 
-    void line()         {cout << " "; full_line();    cout << " ";}
-    void empty_line()  {cout << " "; empty_middle();  cout << " ";}
-    void double_line()  {cout << "|"; empty_middle(); cout << "|";}
-    void right_line()   {cout << " "; empty_middle(); cout << "|";}
-    void left_line()    {cout << "|"; empty_middle(); cout << " ";}
+    void line(ostream& s=cout)         {cout << " "; full_line(cout);    cout << " ";}
+    void empty_line(ostream& s=cout)   {cout << " "; empty_middle(cout); cout << " ";}
+    void double_line(ostream& s=cout)  {cout << "|"; empty_middle(cout); cout << "|";}
+    void right_line(ostream& s=cout)   {cout << " "; empty_middle(cout); cout << "|";}
+    void left_line(ostream& s=cout)    {cout << "|"; empty_middle(cout); cout << " ";}
 
     void print0_upper()     {line();}
     void print0_uphalf()    {double_line();}
