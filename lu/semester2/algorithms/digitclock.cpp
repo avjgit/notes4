@@ -15,6 +15,7 @@ public:
         mm = mm_ % MAX_MM;
         ss = ss_ % MAX_MM;
 
+
         digits[0]  = hh / 10;
         digits[1]  = hh % 10;
         digits[2]  = mm / 10;
