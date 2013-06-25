@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
 using namespace std;
 
@@ -7,10 +8,13 @@ class Clock{
     static const int MAX_HH = 24;
     static const int MAX_MM = 60;
     int hh, mm, ss, size, digits[D];
+    // ofstream& out;
+     std::ostream & output;
 public:
-    Clock() {}
-    Clock(int hh_, int mm_, int ss_, int size_=1)
+    Clock(std::ostream& s = std::cout) output(s) {}
+    Clock(ofstream& s=cout, int hh_, int mm_, int ss_, int size_=1)
     {
+        out(s);
         hh = hh_ % MAX_HH;
         mm = mm_ % MAX_MM;
         ss = ss_ % MAX_MM;
@@ -182,8 +186,10 @@ public:
 };
 
 int main(){
+    ofstream fout ("clock.txt");
+
     Clock clock;
-    clock = Clock(19, 23, 45, 2);
-    clock = Clock( 6,  7, 8, 2);
+    clock = Clock(fout, 19, 23, 45, 2);
+    clock = Clock(fout,  6,  7,  8, 2);
     return 0;
 }
