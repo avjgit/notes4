@@ -31,9 +31,10 @@ public:
                 case 9: print9_upper(); break;
             }
         }
+        cout << endl;
         // print first half
-        for(int i = 0; i < D; i++) {
-            for (int k = 0; k < size; k++){
+        for (int k = 0; k < size; k++){
+            for(int i = 0; i < D; i++) {
                 switch(digits[i]){
                     case 0: print0_uphalf(); break;
                     case 1: print1_uphalf(); break;
@@ -47,6 +48,7 @@ public:
                     case 9: print9_uphalf(); break;
                 }
             }
+            cout << endl;
         }
         // print middle
         for(int i = 0; i < D; i++) {
@@ -63,9 +65,11 @@ public:
                 case 9: print9_middle(); break;
             }
         }
+        cout << endl;
+
         // print second half
-        for(int i = 0; i < D; i++) {
-            for (int k = 0; k < size; k++){
+        for (int k = 0; k < size; k++){
+            for(int i = 0; i < D; i++) {
                 switch(digits[i]){
                     case 0: print0_downhalf(); break;
                     case 1: print1_downhalf(); break;
@@ -79,6 +83,7 @@ public:
                     case 9: print9_downhalf(); break;
                 }
             }
+            cout << endl;
         }
         // print bottom
         for(int i = 0; i < D; i++) {
@@ -95,30 +100,32 @@ public:
                 case 9: print9_bottom(); break;
             }
         }
+        cout << endl;
+
     }
     void line()
     {
         cout << " ";
         for (int i = 0; i < size; i++) cout << "-";
-        cout << " " << endl;
+        cout << " ";
     }
     void double_line()
     {
         cout << "|";
         for (int i = 0; i < size; i++) cout << " ";
-        cout << "|" << endl;
+        cout << "|";
     }
     void right_line()
     {
         cout << " ";
         for (int i = 0; i < size; i++) cout << " ";
-        cout << "|" << endl;
+        cout << "|";
     }
     void left_line()
     {
         cout << "|";
         for (int i = 0; i < size; i++) cout << " ";
-        cout << " " << endl;
+        cout << " ";
     }
     void print0_upper()     {line();}
     void print0_uphalf()    {double_line();}
@@ -288,12 +295,12 @@ public:
 };
 
 int main(){
-    Clock clock = Clock(10, 23, 45);
-    clock.print0();
-    clock.print1();
-    clock.print2();
-    clock.print3();
-    clock.print4();
-    clock.print5();
+    Clock clock = Clock(01, 23, 45);
+    clock.print0(); cout << "###########" << endl;
+    clock.print1(); cout << "###########" << endl;
+    clock.print2(); cout << "###########" << endl;
+    clock.print3(); cout << "###########" << endl;
+    clock.print4(); cout << "###########" << endl;
+    clock.print5(); cout << "###########" << endl;
     return 0;
 }
