@@ -3,13 +3,20 @@
 using namespace std;
 
 class Clock{
-    int size;
+    int size, hours, minutes, seconds;
 public:
     Clock(int size_){
         size = max(1, size_);
     }
     Clock(){
         size = 1;
+    }
+    Clock(int hours_, int minutes_, int seconds_, int size_=1)
+    {
+        hours = hours_;
+        minutes = minutes_;
+        seconds = seconds_;
+        size = size_;
     }
     void line()
     {
@@ -116,6 +123,22 @@ public:
         // bottom line
         right_line();
     }
+    void print5(){
+        //upper line
+        line();
+        //first half
+        for (int i = 0; i < size; i++){
+            left_line();
+        }
+        //middle line
+        line();
+        //second half
+        for (int i = 0; i < size; i++){
+            right_line();
+        }
+        // bottom line
+        line();
+    }
 };
 
 int main(){
@@ -125,5 +148,6 @@ int main(){
     clock.print2();
     clock.print3();
     clock.print4();
+    clock.print5();
     return 0;
 }
