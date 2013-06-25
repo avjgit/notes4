@@ -37,10 +37,37 @@ public:
         for (int i = 0; i < size; i++) cout << "-";
         cout << " " << endl;
     }
+    void print1(){
+        //upper line
+        cout << " ";
+        for (int i = 0; i < size; i++) cout << " ";
+        cout << "|" << endl;
+        //first half
+        for (int i = 0; i < size; i++){
+            cout << " ";
+            for (int i = 0; i < size; i++) cout << " ";
+            cout << "|" << endl;
+        }
+        //middle line
+        cout << " ";
+        for (int i = 0; i < size; i++) cout << " ";
+        cout << "|" << endl;
+        //second half
+        for (int i = 0; i < size; i++){
+            cout << " ";
+            for (int i = 0; i < size; i++) cout << " ";
+            cout << "|" << endl;
+        }
+        // bottom line
+        cout << " ";
+        for (int i = 0; i < size; i++) cout << " ";
+        cout << "|" << endl;
+    }
 };
 
 int main(){
     Clock clock;
     clock.print0();
+    clock.print1();
     return 0;
 }
