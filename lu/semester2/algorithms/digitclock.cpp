@@ -4,16 +4,16 @@ using namespace std;
 
 class Clock{
     static const int D = 6;
-    int size, HH, MM, SS, digits[D];
+    int size, digits[D];
 public:
-    Clock(int HH_, int MM_, int SS_, int size_=1)
+    Clock(int HH, int MM, int SS, int size_=1)
     {
-        digits[0]  = HH_ / 10;
-        digits[1]  = HH_ % 10;
-        digits[2]  = MM_ / 10;
-        digits[3]  = MM_ % 10;
-        digits[4]  = SS_ / 10;
-        digits[5]  = SS_ % 10;
+        digits[0]  = HH / 10;
+        digits[1]  = HH % 10;
+        digits[2]  = MM / 10;
+        digits[3]  = MM % 10;
+        digits[4]  = SS / 10;
+        digits[5]  = SS % 10;
         size = size_;
 
         // print upper
