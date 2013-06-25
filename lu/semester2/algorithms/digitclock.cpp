@@ -4,52 +4,59 @@ using namespace std;
 
 class Clock
 {
-    // int left_border;
-    // int right_border;
-    // int up_border;
-    // int down_border;
-    // int middle_line;
-    // int width;
-    // int height;
     int size;
 public:
-    Clock()
-    {
-        Clock(1);
-        // left_border = 1;
-        // right_border = 1;
-        // up_border = 1;
-        // down_border = 1;
-        // middle_line = 1;
-    }
     Clock(int size_)
     {
-        size = min(1, size_);
+        size = max(1, size_);
     }
-
+    Clock()
+    {
+        size = 1;
+    }
     void print0()
     {
+        //upper line
         cout << " ";
         for (int i = 0; i < size; i++) cout << "-";
         cout << " ";
         cout << endl;
 
+        //first half
+        for (int i = 0; i < size; i++)
+        {
+            cout << "|";
+            for (int i = 0; i < size; i++) cout << " ";
+            cout << "|";
+            cout << endl;
+        }
+
+        //middle line
         cout << "|";
         for (int i = 0; i < size; i++) cout << " ";
         cout << "|";
         cout << endl;
 
+        //second half
+        for (int i = 0; i < size; i++)
+        {
+            cout << "|";
+            for (int i = 0; i < size; i++) cout << " ";
+            cout << "|";
+            cout << endl;
+        }
+
+        // bottom line
         cout << " ";
         for (int i = 0; i < size; i++) cout << "-";
         cout << " ";
         cout << endl;
-
     }
 };
 
 int main()
 {
-    Clock clock = Clock(1);
+    Clock clock;
     clock.print0();
     return 0;
 }
