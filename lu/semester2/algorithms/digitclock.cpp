@@ -101,28 +101,30 @@ public:
             }
         }
         cout << endl;
+    }
 
+    void empty_line(){
+        for (int i = 0; i < size; i++) cout << " ";
     }
-    void line()
-    {
-        cout << " ";
+    void full_line(){
         for (int i = 0; i < size; i++) cout << "-";
+    }
+    void line(){
+        cout << " ";
+        full_line();
         cout << " ";
     }
-    void double_line()
-    {
+    void double_line(){
         cout << "|";
+        empty_line();
+        cout << "|";
+    }
+    void right_line(){
+        cout << " ";
         for (int i = 0; i < size; i++) cout << " ";
         cout << "|";
     }
-    void right_line()
-    {
-        cout << " ";
-        for (int i = 0; i < size; i++) cout << " ";
-        cout << "|";
-    }
-    void left_line()
-    {
+    void left_line(){
         cout << "|";
         for (int i = 0; i < size; i++) cout << " ";
         cout << " ";
@@ -132,67 +134,17 @@ public:
     void print0_middle()    {double_line();}
     void print0_downhalf()  {double_line();}
     void print0_bottom()    {line();}
-
-    void print0(){
-        //upper line
-        line();
-        //first half
-        for (int i = 0; i < size; i++){
-            double_line();
-        }
-        //middle line
-        double_line();
-        //second half
-        for (int i = 0; i < size; i++){
-            double_line();
-        }
-        // bottom line
-        line();
-    }
     void print1_upper()     {right_line();}
     void print1_uphalf()    {right_line();}
     void print1_middle()    {right_line();}
     void print1_downhalf()  {right_line();}
     void print1_bottom()    {right_line();}
 
-    void print1(){
-        //upper line
-        right_line();
-        //first half
-        for (int i = 0; i < size; i++){
-            right_line();
-        }
-        //middle line
-        right_line();
-        //second half
-        for (int i = 0; i < size; i++){
-            right_line();
-        }
-        // bottom line
-        right_line();
-    }
     void print2_upper()     {line();}
     void print2_uphalf()    {right_line();}
     void print2_middle()    {line();}
     void print2_downhalf()  {left_line();}
     void print2_bottom()    {line();}
-
-    void print2(){
-        // upper line
-        line();
-        //first half
-        for (int i = 0; i < size; i++){
-            right_line();
-        }
-        //middle line
-        line();
-        //second half
-        for (int i = 0; i < size; i++){
-            left_line();
-        }
-        // bottom line
-        line();
-    }
 
 
     void print3_upper()     {line();}
@@ -201,47 +153,12 @@ public:
     void print3_downhalf()  {right_line();}
     void print3_bottom()    {line();}
 
-    void print3(){
-        //upper line
-        line();
-        //first half
-        for (int i = 0; i < size; i++){
-            right_line();
-        }
-        //middle line
-        line();
-        //second half
-        for (int i = 0; i < size; i++){
-            right_line();
-        }
-        // bottom line
-        line();
-    }
-
 
     void print4_upper()     {double_line();}
     void print4_uphalf()    {double_line();}
     void print4_middle()    {line();}
     void print4_downhalf()  {right_line();}
     void print4_bottom()    {right_line();}
-
-    void print4(){
-        //upper line
-        double_line();
-        //first half
-        for (int i = 0; i < size; i++){
-            double_line();
-        }
-        //middle line
-        line();
-        //second half
-        for (int i = 0; i < size; i++){
-            right_line();
-        }
-        // bottom line
-        right_line();
-    }
-
     void print5_upper()     {line();}
     void print5_uphalf()    {left_line();}
     void print5_middle()    {line();}
@@ -276,31 +193,9 @@ public:
     void print9_downhalf()  {line();}
     void print9_bottom()    {line();}
 
-    void print5(){
-        //upper line
-        line();
-        //first half
-        for (int i = 0; i < size; i++){
-            left_line();
-        }
-        //middle line
-        line();
-        //second half
-        for (int i = 0; i < size; i++){
-            right_line();
-        }
-        // bottom line
-        line();
-    }
 };
 
 int main(){
     Clock clock = Clock(01, 23, 45);
-    clock.print0(); cout << "###########" << endl;
-    clock.print1(); cout << "###########" << endl;
-    clock.print2(); cout << "###########" << endl;
-    clock.print3(); cout << "###########" << endl;
-    clock.print4(); cout << "###########" << endl;
-    clock.print5(); cout << "###########" << endl;
     return 0;
 }
