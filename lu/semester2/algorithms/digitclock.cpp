@@ -4,22 +4,21 @@ using namespace std;
 
 void print0(int size)
 {
-    cout << "/";
+    cout << " ";
     cout << "-";
-    cout << "\\";
+    cout << " ";
+    cout << endl;
     cout << "|";
     cout << " ";
     cout << "|";
-    cout << "\\";
+    cout << endl;
+    cout << " ";
     cout << "-";
-    cout << "/";
+    cout << " ";
+    cout << endl;
 }
 int main()
 {
-    cout << "hi" << endl;
     print0(0);
-    cout << endl;
-    system("pause");
-    // getchar();
     return 0;
 }
