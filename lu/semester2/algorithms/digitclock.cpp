@@ -31,23 +31,26 @@ public:
     void print0(int size)
     {
         cout << " ";
-        cout << "-";
+        for (int i = 0; i < size; i++) cout << "-";
         cout << " ";
         cout << endl;
+
         cout << "|";
-        cout << " ";
+        for (int i = 0; i < size; i++) cout << " ";
         cout << "|";
         cout << endl;
+
         cout << " ";
-        cout << "-";
+        for (int i = 0; i < size; i++) cout << "-";
         cout << " ";
         cout << endl;
+
     }
 };
 
 int main()
 {
     Clock clock = Clock(1);
-    clock.print0(0);
+    clock.print0(1);
     return 0;
 }
