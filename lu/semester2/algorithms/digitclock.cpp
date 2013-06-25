@@ -110,24 +110,17 @@ public:
         for (int i = 0; i < size; i++) cout << "-";
     }
     void line(){
-        cout << " ";
-        full_line();
-        cout << " ";
+        // cout << " " << full_line() << " ";
+        cout << " "; full_line(); cout << " ";
     }
     void double_line(){
-        cout << "|";
-        empty_line();
-        cout << "|";
+        cout << "|"; empty_line(); cout << "|";
     }
     void right_line(){
-        cout << " ";
-        for (int i = 0; i < size; i++) cout << " ";
-        cout << "|";
+        cout << " "; empty_line(); cout << "|";
     }
     void left_line(){
-        cout << "|";
-        for (int i = 0; i < size; i++) cout << " ";
-        cout << " ";
+        cout << "|"; empty_line(); cout << " ";
     }
     void print0_upper()     {line();}
     void print0_uphalf()    {double_line();}
@@ -196,6 +189,6 @@ public:
 };
 
 int main(){
-    Clock clock = Clock(01, 23, 45);
+    Clock clock = Clock(01, 23, 45, 2);
     return 0;
 }
