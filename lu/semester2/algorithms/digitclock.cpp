@@ -4,16 +4,23 @@ using namespace std;
 
 class Clock{
     static const int D = 6;
-    int size, digits[D];
+    static const int MAX_HH = 24;
+    static const int MAX_MM = 60;
+    int hh, mm, ss, size, digits[D];
 public:
-    Clock(int HH, int MM, int SS, int size_=1)
+    Clock() {}
+    Clock(int hh_, int mm_, int ss_, int size_=1)
     {
-        digits[0]  = HH / 10;
-        digits[1]  = HH % 10;
-        digits[2]  = MM / 10;
-        digits[3]  = MM % 10;
-        digits[4]  = SS / 10;
-        digits[5]  = SS % 10;
+        hh = hh_ % MAX_HH;
+        mm = mm_ % MAX_MM;
+        ss = ss_ % MAX_MM;
+
+        digits[0]  = hh / 10;
+        digits[1]  = hh % 10;
+        digits[2]  = mm / 10;
+        digits[3]  = mm % 10;
+        digits[4]  = ss / 10;
+        digits[5]  = ss % 10;
         size = size_;
 
         // print upper
@@ -103,13 +110,14 @@ public:
         cout << endl;
     }
 
-    void empty_line()   {for (int i = 0; i < size; i++) cout << " ";}
+    void empty_middle() {for (int i = 0; i < size; i++) cout << " ";}
     void full_line()    {for (int i = 0; i < size; i++) cout << "-";}
 
-    void line()         {cout << " "; full_line();  cout << " ";}
-    void double_line()  {cout << "|"; empty_line(); cout << "|";}
-    void right_line()   {cout << " "; empty_line(); cout << "|";}
-    void left_line()    {cout << "|"; empty_line(); cout << " ";}
+    void line()         {cout << " "; full_line();    cout << " ";}
+    void empty_line()  {cout << " "; empty_middle();  cout << " ";}
+    void double_line()  {cout << "|"; empty_middle(); cout << "|";}
+    void right_line()   {cout << " "; empty_middle(); cout << "|";}
+    void left_line()    {cout << "|"; empty_middle(); cout << " ";}
 
     void print0_upper()     {line();}
     void print0_uphalf()    {double_line();}
@@ -117,7 +125,7 @@ public:
     void print0_downhalf()  {double_line();}
     void print0_bottom()    {line();}
 
-    void print1_upper()     {right_line();}
+    void print1_upper()     {empty_line();}
     void print1_uphalf()    {right_line();}
     void print1_middle()    {right_line();}
     void print1_downhalf()  {right_line();}
@@ -135,7 +143,7 @@ public:
     void print3_downhalf()  {right_line();}
     void print3_bottom()    {line();}
 
-    void print4_upper()     {double_line();}
+    void print4_upper()     {empty_line();}
     void print4_uphalf()    {double_line();}
     void print4_middle()    {line();}
     void print4_downhalf()  {right_line();}
@@ -148,32 +156,34 @@ public:
     void print5_bottom()    {line();}
 
     void print6_upper()     {line();}
-    void print6_uphalf()    {line();}
+    void print6_uphalf()    {left_line();}
     void print6_middle()    {line();}
-    void print6_downhalf()  {line();}
+    void print6_downhalf()  {double_line();}
     void print6_bottom()    {line();}
 
     void print7_upper()     {line();}
-    void print7_uphalf()    {line();}
-    void print7_middle()    {line();}
-    void print7_downhalf()  {line();}
-    void print7_bottom()    {line();}
+    void print7_uphalf()    {right_line();}
+    void print7_middle()    {right_line();}
+    void print7_downhalf()  {right_line();}
+    void print7_bottom()    {empty_line();}
 
     void print8_upper()     {line();}
-    void print8_uphalf()    {line();}
+    void print8_uphalf()    {double_line();}
     void print8_middle()    {line();}
-    void print8_downhalf()  {line();}
+    void print8_downhalf()  {double_line();}
     void print8_bottom()    {line();}
 
     void print9_upper()     {line();}
-    void print9_uphalf()    {line();}
+    void print9_uphalf()    {double_line();}
     void print9_middle()    {line();}
-    void print9_downhalf()  {line();}
+    void print9_downhalf()  {right_line();}
     void print9_bottom()    {line();}
 
 };
 
 int main(){
-    Clock clock = Clock(01, 23, 45, 2);
+    Clock clock;
+    clock = Clock(19, 23, 45, 2);
+    clock = Clock( 6,  7, 8, 2);
     return 0;
 }
