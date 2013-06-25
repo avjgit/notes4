@@ -20,6 +20,7 @@ public:
         for(int i = 0; i < D; i++) {
             switch(digits[i]){
                 case 0: print0_upper(); break;
+                case 1: print0_upper(); break;
                 case 2: print0_upper(); break;
                 case 3: print0_upper(); break;
                 case 4: print0_upper(); break;
@@ -31,9 +32,69 @@ public:
             }
         }
         // print first half
+        for(int i = 0; i < D; i++) {
+            for (int k = 0; k < size; k++){
+                switch(digits[i]){
+                    case 0: print0_uphalf(); break;
+                    case 1: print0_uphalf(); break;
+                    case 2: print0_uphalf(); break;
+                    case 3: print0_uphalf(); break;
+                    case 4: print0_uphalf(); break;
+                    case 5: print0_uphalf(); break;
+                    case 6: print0_uphalf(); break;
+                    case 7: print0_uphalf(); break;
+                    case 8: print0_uphalf(); break;
+                    case 9: print0_uphalf(); break;
+                }
+            }
+        }
         // print middle
+        for(int i = 0; i < D; i++) {
+            switch(digits[i]){
+                case 0: print0_middle(); break;
+                case 1: print0_middle(); break;
+                case 2: print0_middle(); break;
+                case 3: print0_middle(); break;
+                case 4: print0_middle(); break;
+                case 5: print0_middle(); break;
+                case 6: print0_middle(); break;
+                case 7: print0_middle(); break;
+                case 8: print0_middle(); break;
+                case 9: print0_middle(); break;
+            }
+        }
         // print second half
+        for(int i = 0; i < D; i++) {
+            for (int k = 0; k < size; k++){
+                switch(digits[i]){
+                    case 0: print0_downhalf(); break;
+                    case 1: print0_downhalf(); break;
+                    case 2: print0_downhalf(); break;
+                    case 3: print0_downhalf(); break;
+                    case 4: print0_downhalf(); break;
+                    case 5: print0_downhalf(); break;
+                    case 6: print0_downhalf(); break;
+                    case 7: print0_downhalf(); break;
+                    case 8: print0_downhalf(); break;
+                    case 9: print0_downhalf(); break;
+                }
+            }
+        }
         // print bottom
+        for(int i = 0; i < D; i++) {
+            switch(digits[i]){
+                case 0: print0_bottom(); break;
+                case 1: print0_bottom(); break;
+                case 2: print0_bottom(); break;
+                case 3: print0_bottom(); break;
+                case 4: print0_bottom(); break;
+                case 5: print0_bottom(); break;
+                case 6: print0_bottom(); break;
+                case 7: print0_bottom(); break;
+                case 8: print0_bottom(); break;
+                case 9: print0_bottom(); break;
+            }
+        }
     }
     void line()
     {
