@@ -1,3 +1,8 @@
+// course:  DatZ1029 Datu struktūras un pamatalgoritmi I
+// lab:     Digitalais pulkstenis
+// author:  Andrejs Jurcenoks aj05044
+// history: https://github.com/avjgit/notes4/commits/master/lu/semester2/algorithms/digitclock.cpp
+
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
@@ -81,7 +86,6 @@ public:
             print_empty_delimeter(i);
         }
         outstream << endl;
-
         // print second half
         for (int k = 0; k < size; k++){
             for(int i = 0; i < D; i++) {
@@ -120,11 +124,11 @@ public:
         outstream << endl;
     }
 
+    void print_empty_delimeter(int i)   {if ((i == 1) || (i == 3)) outstream << " ";}
+    void print_delimeter(int i)         {if ((i == 1) || (i == 3)) outstream << "*";}
+
     void empty_middle() {for (int i = 0; i < size; i++) outstream << " ";}
     void full_line()    {for (int i = 0; i < size; i++) outstream << "-";}
-
-    void print_empty_delimeter(int i)    {if ((i == 1) || (i == 3)) outstream << " ";}
-    void print_delimeter(int i)    {if ((i == 1) || (i == 3)) outstream << "*";}
 
     void line()         {outstream << " "; full_line();    outstream << " ";}
     void empty_line()   {outstream << " "; empty_middle(); outstream << " ";}
@@ -191,7 +195,6 @@ public:
     void print9_middle()    {line();}
     void print9_downhalf()  {right_line();}
     void print9_bottom()    {line();}
-
 };
 
 int main(){
