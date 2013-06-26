@@ -9,13 +9,8 @@ class Clock{
     static const int MAX_MM = 60;
     int hh, mm, ss, size, digits[D];
     ofstream outstream;
-     // std::ostream & output;
 public:
-    Clock()
-    : outstream("clock.txt", ios::app)
-    {
-
-    }
+    Clock() : outstream("clock.txt", ios::app) {}
     Clock(int hh_, int mm_, int ss_, int size_=1)
     : outstream("clock.txt", ios::app)
     {
@@ -47,7 +42,7 @@ public:
                 case 8: print8_upper(); break;
                 case 9: print9_upper(); break;
             }
-            if ((i == 1) || (i == 3)) outstream << " ";
+            print_empty_delimeter(i);
         }
         outstream << endl;
         // print first half
@@ -65,7 +60,7 @@ public:
                     case 8: print8_uphalf(); break;
                     case 9: print9_uphalf(); break;
                 }
-                if ((i == 1) || (i == 3)) outstream << "*";
+                print_delimeter(i);
             }
             outstream << endl;
         }
@@ -83,8 +78,7 @@ public:
                 case 8: print8_middle(); break;
                 case 9: print9_middle(); break;
             }
-            if ((i == 1) || (i == 3)) outstream << " ";
-
+            print_empty_delimeter(i);
         }
         outstream << endl;
 
@@ -103,7 +97,7 @@ public:
                     case 8: print8_downhalf(); break;
                     case 9: print9_downhalf(); break;
                 }
-                if ((i == 1) || (i == 3)) outstream << "*";
+                print_delimeter(i);
             }
             outstream << endl;
         }
@@ -121,13 +115,16 @@ public:
                 case 8: print8_bottom(); break;
                 case 9: print9_bottom(); break;
             }
-            if ((i == 1) || (i == 3)) outstream << " ";
+            print_empty_delimeter(i);
         }
         outstream << endl;
     }
 
     void empty_middle() {for (int i = 0; i < size; i++) outstream << " ";}
     void full_line()    {for (int i = 0; i < size; i++) outstream << "-";}
+
+    void print_empty_delimeter(int i)    {if ((i == 1) || (i == 3)) outstream << " ";}
+    void print_delimeter(int i)    {if ((i == 1) || (i == 3)) outstream << "*";}
 
     void line()         {outstream << " "; full_line();    outstream << " ";}
     void empty_line()   {outstream << " "; empty_middle(); outstream << " ";}
