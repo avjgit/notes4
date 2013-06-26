@@ -8,18 +8,17 @@ class Clock{
     static const int MAX_HH = 24;
     static const int MAX_MM = 60;
     int hh, mm, ss, size, digits[D];
-    ofstream outfile;
+    ofstream outstream;
      // std::ostream & output;
 public:
     Clock()
-    : outfile("clock.out")
+    : outstream("clock.txt")
     {
 
     }
     Clock(int hh_, int mm_, int ss_, int size_=1)
-    : outfile("clock.out")
+    : outstream("clock.txt")
     {
-        // out(s);
         hh = hh_ % MAX_HH;
         mm = mm_ % MAX_MM;
         ss = ss_ % MAX_MM;
@@ -47,7 +46,7 @@ public:
                 case 9: print9_upper(); break;
             }
         }
-        cout << endl;
+        outstream << endl;
         // print first half
         for (int k = 0; k < size; k++){
             for(int i = 0; i < D; i++) {
@@ -64,7 +63,7 @@ public:
                     case 9: print9_uphalf(); break;
                 }
             }
-            cout << endl;
+            outstream << endl;
         }
         // print middle
         for(int i = 0; i < D; i++) {
@@ -81,7 +80,7 @@ public:
                 case 9: print9_middle(); break;
             }
         }
-        cout << endl;
+        outstream << endl;
 
         // print second half
         for (int k = 0; k < size; k++){
@@ -99,7 +98,7 @@ public:
                     case 9: print9_downhalf(); break;
                 }
             }
-            cout << endl;
+            outstream << endl;
         }
         // print bottom
         for(int i = 0; i < D; i++) {
@@ -116,17 +115,17 @@ public:
                 case 9: print9_bottom(); break;
             }
         }
-        cout << endl;
+        outstream << endl;
     }
 
-    void empty_middle(ostream& s) {for (int i = 0; i < size; i++) s << " ";}
-    void full_line(ostream& s)    {for (int i = 0; i < size; i++) s << "-";}
+    void empty_middle() {for (int i = 0; i < size; i++) outstream << " ";}
+    void full_line()    {for (int i = 0; i < size; i++) outstream << "-";}
 
-    void line(ostream& s=cout)         {s << " "; full_line(s);    s << " ";}
-    void empty_line(ostream& s=cout)   {s << " "; empty_middle(s); s << " ";}
-    void double_line(ostream& s=cout)  {s << "|"; empty_middle(s); s << "|";}
-    void right_line(ostream& s=cout)   {s << " "; empty_middle(s); s << "|";}
-    void left_line(ostream& s=cout)    {s << "|"; empty_middle(s); s << " ";}
+    void line()         {outstream << " "; full_line();    outstream << " ";}
+    void empty_line()   {outstream << " "; empty_middle(); outstream << " ";}
+    void double_line()  {outstream << "|"; empty_middle(); outstream << "|";}
+    void right_line()   {outstream << " "; empty_middle(); outstream << "|";}
+    void left_line()    {outstream << "|"; empty_middle(); outstream << " ";}
 
     void print0_upper()     {line();}
     void print0_uphalf()    {double_line();}
@@ -191,12 +190,13 @@ public:
 };
 
 int main(){
-    // ofstream fout ("clock.txt");
-
     Clock *clock;
+
     clock = new Clock (19, 23, 45, 2);
     delete clock;
+
     clock = new Clock(6,  7,  8, 2);
     delete clock;
+
     return 0;
 }
