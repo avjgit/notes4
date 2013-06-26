@@ -8,13 +8,18 @@ class Clock{
     static const int MAX_HH = 24;
     static const int MAX_MM = 60;
     int hh, mm, ss, size, digits[D];
-    // ofstream& out;
-     std::ostream & output;
+    ofstream outfile;
+     // std::ostream & output;
 public:
-    Clock(std::ostream& s = std::cout) output(s) {}
-    Clock(ofstream& s=cout, int hh_, int mm_, int ss_, int size_=1)
+    Clock()
+    : outfile("clock.out")
     {
-        out(s);
+
+    }
+    Clock(int hh_, int mm_, int ss_, int size_=1)
+    : outfile("clock.out")
+    {
+        // out(s);
         hh = hh_ % MAX_HH;
         mm = mm_ % MAX_MM;
         ss = ss_ % MAX_MM;
@@ -186,10 +191,12 @@ public:
 };
 
 int main(){
-    ofstream fout ("clock.txt");
+    // ofstream fout ("clock.txt");
 
-    Clock clock;
-    clock = Clock(fout, 19, 23, 45, 2);
-    clock = Clock(fout,  6,  7,  8, 2);
+    Clock *clock;
+    clock = new Clock (19, 23, 45, 2);
+    delete clock;
+    clock = new Clock(6,  7,  8, 2);
+    delete clock;
     return 0;
 }
