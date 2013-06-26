@@ -12,12 +12,12 @@ class Clock{
      // std::ostream & output;
 public:
     Clock()
-    : outstream("clock.txt")
+    : outstream("clock.txt", ios::app)
     {
 
     }
     Clock(int hh_, int mm_, int ss_, int size_=1)
-    : outstream("clock.txt")
+    : outstream("clock.txt", ios::app)
     {
         hh = hh_ % MAX_HH;
         mm = mm_ % MAX_MM;
@@ -30,6 +30,8 @@ public:
         digits[4]  = ss / 10;
         digits[5]  = ss % 10;
         size = size_;
+
+        outstream << "clock " << hh << " : " << mm << " : " << ss << endl;
 
         // print upper
         for(int i = 0; i < D; i++) {
