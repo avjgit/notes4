@@ -47,6 +47,7 @@ public:
                 case 8: print8_upper(); break;
                 case 9: print9_upper(); break;
             }
+            if ((i == 1) || (i == 3)) outstream << " ";
         }
         outstream << endl;
         // print first half
@@ -64,6 +65,7 @@ public:
                     case 8: print8_uphalf(); break;
                     case 9: print9_uphalf(); break;
                 }
+                if ((i == 1) || (i == 3)) outstream << "*";
             }
             outstream << endl;
         }
@@ -81,6 +83,8 @@ public:
                 case 8: print8_middle(); break;
                 case 9: print9_middle(); break;
             }
+            if ((i == 1) || (i == 3)) outstream << " ";
+
         }
         outstream << endl;
 
@@ -99,6 +103,7 @@ public:
                     case 8: print8_downhalf(); break;
                     case 9: print9_downhalf(); break;
                 }
+                if ((i == 1) || (i == 3)) outstream << "*";
             }
             outstream << endl;
         }
@@ -116,6 +121,7 @@ public:
                 case 8: print8_bottom(); break;
                 case 9: print9_bottom(); break;
             }
+            if ((i == 1) || (i == 3)) outstream << " ";
         }
         outstream << endl;
     }
