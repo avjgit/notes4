@@ -200,11 +200,14 @@ public:
 int main(){
     Clock *clock;
 
-    clock = new Clock (19, 23, 45, 2);
-    delete clock;
-
-    clock = new Clock(6,  7,  8, 2);
-    delete clock;
+    clock = new Clock (19, 23, 45, 1); delete clock;
+    clock = new Clock ( 6,  7,  8, 1); delete clock;
+    clock = new Clock (19, 23, 45, 2); delete clock;
+    clock = new Clock ( 6,  7,  8, 2); delete clock;
+    clock = new Clock (19, 23, 45, 3); delete clock;
+    clock = new Clock ( 6,  7,  8, 3); delete clock;
+    clock = new Clock (19, 23, 45, 4); delete clock;
+    clock = new Clock ( 6,  7,  8, 4); delete clock;
 
     return 0;
 }
