@@ -22,6 +22,12 @@ if(isset($_GET['target'])) {
     echo "You asked to convert $amount $source into $target";
 }
 
+$XML=simplexml_load_file("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+        
+foreach($XML->Cube->Cube->Cube as $rate){
+    echo '1&euro;='.$rate["rate"].' '.$rate["currency"].'<br/>';
+}
+
 
 $result_status = ""; //valid values: empty string, "success", "error"
 $result_message = "";
