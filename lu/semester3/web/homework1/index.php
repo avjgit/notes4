@@ -39,14 +39,12 @@ if(
         $XML=simplexml_load_file("http://www.bank.lv/vk/xml.xml");
 
         if(isset($XML)){
-            // foreach(...){
-            //     if ($rate["currency"] == $source){
-            //         echo 'rate is ', $rate["rate"];
-            //         $result_status = "success";
-            //         $result_message = $amount * $rate["rate"]
-            //         echo 'hey, this would be ', $result_message, ' in lats!';
-            //     }
-            // }
+            foreach ($XML->xpath('//Currency') as $rate) {
+            	if ((string)$rate->ID == $source){
+                    $result_status = "success";
+                    $result_message = $amount * floatval($rate->Rate);
+            	}
+            }
             if($result_status == ""){
             	echo 'not converted';
                 $result_status = "error";
