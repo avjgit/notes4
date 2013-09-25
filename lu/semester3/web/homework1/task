@@ -1,6 +1,3 @@
-The variables that can be passed from index.php into view.php, are:
 - $target_currencies (list of popular currencies, you can implement dynamic filling of this array)
 
 Students who submit their work by the end of Thursday, September 26, get an extra point for that.
-
-- currency units?

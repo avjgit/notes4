@@ -2,7 +2,18 @@
 
 $result_status = ""; //valid values: empty string, "success", "error"
 $result_message = "";
+
 $target_currencies = array('LVL', 'GBP', 'RUB', 'CHF', 'SEK', 'NOK', 'JPY', 'LTL', 'BYR');
+
+$XML=simplexml_load_file("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+foreach($XML->Cube->Cube->Cube as $rate){
+	$target_currencies[] = $rate["currency"];
+}
+
+$XML=simplexml_load_file("http://www.bank.lv/vk/xml.xml");
+foreach ($XML->xpath('//Currency') as $rate) {
+	$target_currencies[] = (string)$rate->ID;
+}
 
 if(
     isset($_GET['amount']) and
