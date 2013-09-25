@@ -22,6 +22,29 @@ function get_currencies(){
 	return array_unique($target_currencies);
 }
 
+function to_eur($amount, $source){
+	global $result_status, $result_message, $eur_source, $lvl_source;
+
+    $XML=simplexml_load_file($eur_source);
+
+    if(isset($XML)){
+        foreach($XML->Cube->Cube->Cube as $rate){
+            if ($rate["currency"] == $source){
+                $result_status = "success";
+                $result_message = round( $amount / floatval($rate["rate"]), 2);
+            }
+        }
+        if($result_status == ""){
+            $result_status = "error";
+            $result_message = "Got currency data, but there is no rate for your currency.";
+        }
+    }
+    else {
+        $result_status = "error";
+        $result_message = "Could not get currency data.";
+    }
+}
+
 $result_status = ""; //valid values: empty string, "success", "error"
 $result_message = "";
 $target_currencies = get_currencies();
@@ -40,25 +63,7 @@ if(
         $result_message = $amount;
     }
     elseif ($target == 'EUR'){
-        $XML=simplexml_load_file($eur_source);
-
-        if(isset($XML)){
-            foreach($XML->Cube->Cube->Cube as $rate){
-                if ($rate["currency"] == $source){
-                    $result_status = "success";
-	                $result_message = round( $amount / floatval($rate["rate"]), 2);
-                }
-            }
-            if($result_status == ""){
-                $result_status = "error";
-                $result_message = "Got currency data, but there is no rate for your currency.";
-            }
-        }
-        else {
-            $result_status = "error";
-            $result_message = "Could not get currency data.";
-        }
-
+    	to_eur($amount, $source);
     }
     elseif ($target == 'LVL') {
         $XML=simplexml_load_file($lvl_source);
@@ -87,24 +92,7 @@ if(
     	// b) at 979 eur per ouce, for 1.42 you can get ... 0.0015 ounces
 
     	// Step 1 of 2: convert currency to EUR
-        $XML=simplexml_load_file($eur_source);
-
-        if(isset($XML)){
-            foreach($XML->Cube->Cube->Cube as $rate){
-                if ($rate["currency"] == $source){
-                    $result_status = "success";
-	                $result_message = round( $amount / floatval($rate["rate"]), 2);
-                }
-            }
-            if($result_status == ""){
-                $result_status = "error";
-                $result_message = "Got currency data, but there is no rate for your currency.";
-            }
-        }
-        else {
-            $result_status = "error";
-            $result_message = "Could not get currency data.";
-        }
+    	to_eur($amount, $source)
 
     	// Step 2 of 2: convert EUR to gold
     	$goldrates = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
