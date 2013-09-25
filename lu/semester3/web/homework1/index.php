@@ -21,7 +21,7 @@ if(
             foreach($XML->Cube->Cube->Cube as $rate){
                 if ($rate["currency"] == $source){
                     $result_status = "success";
-	                $result_message = $amount / floatval($rate["rate"]);
+	                $result_message = round( $amount / floatval($rate["rate"]), 2);
                 }
             }
             if($result_status == ""){
@@ -42,7 +42,7 @@ if(
             foreach ($XML->xpath('//Currency') as $rate) {
             	if ((string)$rate->ID == $source){
                     $result_status = "success";
-                    $result_message = $amount * floatval($rate->Rate);
+                    $result_message = round( $amount * floatval($rate->Rate), 2);
             	}
             }
             if($result_status == ""){

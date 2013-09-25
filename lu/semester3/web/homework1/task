@@ -1,5 +1,4 @@
 - analyze user input data, perform currency conversion only if all mandatory fields are filled and data corresponds to expected type (e.g. amount can be recognized as a decimal value)
-- parse the currency rate document in order to find the needed currency (//msdn.microsoft.com/en-us/library/ms256086.aspx)
 - do conversion and round the result to 2 decimals
 
 The variables that can be passed from index.php into view.php, are:
