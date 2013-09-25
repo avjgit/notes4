@@ -1,9 +1,6 @@
 - analyze user input data, perform currency conversion only if all mandatory fields are filled and data corresponds to expected type (e.g. amount can be recognized as a decimal value)
-- do conversion and round the result to 2 decimals
 
 The variables that can be passed from index.php into view.php, are:
-- $result_status (empty string, "success", "error): show on screen in if non-empty
-- $result_message (a string to be displayed to the user - either error message or success explanation)
 - $target_currencies (list of popular currencies, you can implement dynamic filling of this array)
 
 To get the maximum score, include an option to convert the amount into Troy ounces (of gold). Gold exchange rate can be downloaded from http://www.goldfixing.com/today'sprices.htm where the data is available at this URL: http://www.goldfixing.com/vars/goldfixing.vars
