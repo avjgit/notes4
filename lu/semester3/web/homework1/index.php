@@ -2,7 +2,7 @@
 
 $result_status = ""; //valid values: empty string, "success", "error"
 $result_message = "";
-$target_currencies = array('LVL', 'GBP', 'RUB', 'CHF', 'SEK', 'NOK', 'JPY', 'LTL');
+$target_currencies = array('LVL', 'GBP', 'RUB', 'CHF', 'SEK', 'NOK', 'JPY', 'LTL', 'BYR');
 
 if(
     isset($_GET['amount']) and
@@ -45,7 +45,7 @@ if(
             foreach ($XML->xpath('//Currency') as $rate) {
             	if ((string)$rate->ID == $source){
                     $result_status = "success";
-                    $result_message = round( $amount * floatval($rate->Rate), 2);
+                    $result_message = round( $amount * (floatval($rate->Rate) / floatval($rate->Units)), 2);
             	}
             }
             if($result_status == ""){
