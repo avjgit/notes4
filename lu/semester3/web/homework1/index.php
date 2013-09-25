@@ -56,8 +56,6 @@ if(
         }
     }
     elseif ($target == 'Gold') {
-        // $XML=simplexml_load_file("http://www.bank.lv/vk/xml.xml");
-    	echo 'inside gold!';
     	// plan: a) first, convert currency into eur, b) then into gold
     	// example: 1 lvl to gold:
     	// a) 1 lvl - rate .7026 => 1.42 eur
@@ -85,34 +83,32 @@ if(
 
     	// Step 2 of 2: convert EUR to gold
     	$homepage = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
-    	// remove trailing trash characters
     	$homepage = str_replace(" ", "", $homepage);
     	$homepage = str_replace("&", "", $homepage);
-
-		$pos = strpos($homepage, 'pmeuro=');
-		echo 'found at ', $pos;
-		$goldprice = substr($homepage, $pos);
+    	$price_flag = 'pmeuro=';
+		$pos = strpos($homepage, $price_flag);
+		$goldprice = substr($homepage, $pos + strlen($price_flag));
 		echo 'price is ', $goldprice ;
-		$result_message = $result_message/ floatval(goldprice);
+		$result_message = $result_message/ floatval($goldprice);
 		echo 'for your ', $amount, $source, ' you can buy ', $result_message;
 
-        if(isset($XML)){
-            // foreach ($XML->xpath('//Currency') as $rate) {
-            // 	if ((string)$rate->ID == $source){
-            //         $result_status = "success";
-            //         $result_message = round( $amount * floatval($rate->Rate), 2);
-            // 	}
-            // }
-            if($result_status == ""){
-            	echo 'not converted';
-                $result_status = "error";
-                $result_message = "Got currency data, but there is no rate for your currency.";
-            }
-        }
-        else {
-            $result_status = "error";
-            $result_message = "Could not get currency data.";
-        }
+        // if(isset($XML)){
+        //     // foreach ($XML->xpath('//Currency') as $rate) {
+        //     // 	if ((string)$rate->ID == $source){
+        //     //         $result_status = "success";
+        //     //         $result_message = round( $amount * floatval($rate->Rate), 2);
+        //     // 	}
+        //     // }
+        //     if($result_status == ""){
+        //     	echo 'not converted';
+        //         $result_status = "error";
+        //         $result_message = "Got currency data, but there is no rate for your currency.";
+        //     }
+        // }
+        // else {
+        //     $result_status = "error";
+        //     $result_message = "Could not get currency data.";
+        // }
     }
 }
 
