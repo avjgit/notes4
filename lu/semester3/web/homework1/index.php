@@ -25,7 +25,7 @@ if(
 		// foreach(...){
 		// 	if ($rate["currency"] == $target){
 		// 		echo 'rate is ', $rate["rate"];
-		// 		// echo 'hey, this would be ', ($amount * 100000) / ($rate["rate"] * 100000), ' in euro!';
+				// echo 'hey, this would be ', $amount * $rate["rate"], ' in lats!';		
 		// 	}
 		// }       	
     	 
