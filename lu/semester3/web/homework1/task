@@ -1,9 +1,6 @@
-- analyze user input data, perform currency conversion only if all mandatory fields are filled and data corresponds to expected type (e.g. amount can be recognized as a decimal value)
-
 The variables that can be passed from index.php into view.php, are:
 - $target_currencies (list of popular currencies, you can implement dynamic filling of this array)
 
 Students who submit their work by the end of Thursday, September 26, get an extra point for that.
 
-- what about lvl to lvl, eur to eur?
 - currency units?

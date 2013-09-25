@@ -13,7 +13,11 @@ if(
     $source = $_GET["source"];
     $target = $_GET["target"];
 
-    if ($target == 'EUR'){
+    if ($target == $source){
+        $result_status = "success";
+        $result_message = $amount;
+    }
+    elseif ($target == 'EUR'){
         $XML=simplexml_load_file("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
 
         if(isset($XML)){
