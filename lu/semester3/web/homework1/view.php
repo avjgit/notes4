@@ -86,7 +86,7 @@
 			Troy ounces
 		    </label>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="is_amount_filled()">Submit</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="is_input_valid()">Submit</button>
 
 
 	    </form>
@@ -97,9 +97,31 @@
 </html>
 
 <script type="text/javascript">
-	function is_currency_filled(){
+	function is_input_valid() {
+		// return is_amount_filled() && is_source_filled(); // doesn't work:(
+		is_amount_filled = is_amount_filled();
+		is_source_filled = is_source_filled();
+		is_target_filled = is_target_filled();
+		return
+			is_amount_filled &&
+			is_source_filled &&
+			is_target_filled;
+	}
+	function is_source_filled(){
 		if (document.getElementsByName("source")[0].value == '... this currency'){
-			alert('Please fill in currency field.');
+			alert('Please fill in source currency field.');
+		}
+	}
+	function is_target_filled(){
+		var radios = document.getElementsByName('target');
+		is_target_set = false;
+		for (var i = 0, length = radios.length; i < length; i++) {
+		    if (radios[i].checked) {
+		    	is_target_set = true;
+		    }
+		}
+		if(!is_target_set){
+			alert('Please fill in target currency field.');
 		}
 	}
 	function is_amount_filled(){
