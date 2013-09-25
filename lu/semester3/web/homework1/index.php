@@ -15,6 +15,9 @@ foreach ($XML->xpath('//Currency') as $rate) {
 	$target_currencies[] = (string)$rate->ID;
 }
 
+$target_currencies = array_unique($target_currencies);
+asort($target_currencies);
+
 if(
     isset($_GET['amount']) and
     isset($_GET['source']) and
