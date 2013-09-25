@@ -1,16 +1,19 @@
 <?php
 
+$eur_source = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
+$lvl_source = "http://www.bank.lv/vk/xml.xml";
+
 $result_status = ""; //valid values: empty string, "success", "error"
 $result_message = "";
 
 $target_currencies = array('LVL', 'GBP', 'RUB', 'CHF', 'SEK', 'NOK', 'JPY', 'LTL', 'BYR');
 
-$XML=simplexml_load_file("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+$XML=simplexml_load_file($eur_source);
 foreach($XML->Cube->Cube->Cube as $rate){
 	$target_currencies[] = $rate["currency"];
 }
 
-$XML=simplexml_load_file("http://www.bank.lv/vk/xml.xml");
+$XML=simplexml_load_file($lvl_source);
 foreach ($XML->xpath('//Currency') as $rate) {
 	$target_currencies[] = (string)$rate->ID;
 }
@@ -32,7 +35,7 @@ if(
         $result_message = $amount;
     }
     elseif ($target == 'EUR'){
-        $XML=simplexml_load_file("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+        $XML=simplexml_load_file($eur_source);
 
         if(isset($XML)){
             foreach($XML->Cube->Cube->Cube as $rate){
@@ -53,7 +56,7 @@ if(
 
     }
     elseif ($target == 'LVL') {
-        $XML=simplexml_load_file("http://www.bank.lv/vk/xml.xml");
+        $XML=simplexml_load_file($lvl_source);
 
         if(isset($XML)){
             foreach ($XML->xpath('//Currency') as $rate) {
@@ -79,7 +82,7 @@ if(
     	// b) at 979 eur per ouce, for 1.42 you can get ... 0.0015 ounces
 
     	// Step 1 of 2: convert currency to EUR
-        $XML=simplexml_load_file("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+        $XML=simplexml_load_file($eur_source);
 
         if(isset($XML)){
             foreach($XML->Cube->Cube->Cube as $rate){
