@@ -6,18 +6,14 @@ $lvl_source = "http://www.bank.lv/vk/xml.xml";
 function get_currencies(){
 	global $eur_source, $lvl_source;
 
-	$target_currencies = array('LVL', 'GBP', 'RUB', 'CHF', 'SEK', 'NOK', 'JPY', 'LTL', 'BYR');
-
 	$XML=simplexml_load_file($eur_source);
 	foreach($XML->Cube->Cube->Cube as $rate){
 		$target_currencies[] = $rate["currency"];
 	}
-
 	$XML=simplexml_load_file($lvl_source);
 	foreach ($XML->xpath('//Currency') as $rate) {
 		$target_currencies[] = (string)$rate->ID;
 	}
-
 	asort($target_currencies);
 	return array_unique($target_currencies);
 }
@@ -27,9 +23,11 @@ function error_data(){
     $GLOBALS['result_message'] = "Could not get currency data.";
 }
 
-function error_rate(){
-    $GLOBALS['result_status'] = "error";
-    $GLOBALS['result_message'] = "Got currency data, but there is no rate for your currency.";
+function check_error_rate(){
+    if($GLOBALS['result_status'] == ""){
+	    $GLOBALS['result_status'] = "error";
+    	$GLOBALS['result_message'] = "Got currency data, but there is no rate for your currency.";
+	}
 }
 
 function success($target_amount){
@@ -50,9 +48,7 @@ function to_eur($amount, $source){
                 success( $eur_amount . ' EUR.');
             }
         }
-        if($result_status == ""){
-			error_rate();
-        }
+		check_error_rate();
     }
     else {
 		error_data();
@@ -71,9 +67,7 @@ function to_lvl($amount, $source){
                 success( $lvl_amount . ' LVL.');
         	}
         }
-        if($result_status == ""){
-			error_rate();
-        }
+		check_error_rate();
     }
     else {
 		error_data();
@@ -130,7 +124,7 @@ if(
 				success($goldounces . ' Troy ounces or ' . $goldgrams . ' grams of gold.');
 
 			    if($result_status == ""){
-					error_rate();
+					check_error_rate();
 			    }
 			}
 			else {
