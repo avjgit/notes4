@@ -32,6 +32,12 @@ function error_rate(){
     $GLOBALS['result_message'] = "Got currency data, but there is no rate for your currency.";
 }
 
+function success($target_amount){
+	global $result_status, $result_message, $amount, $source;
+	$result_status = "success";
+	$result_message = 'For your ' . $amount . ' ' . $source . ' you can buy ' . $target_amount;
+}
+
 function to_eur($amount, $source){
 	global $result_status, $result_message, $eur_source;
 
@@ -40,8 +46,8 @@ function to_eur($amount, $source){
     if(isset($XML)){
         foreach($XML->Cube->Cube->Cube as $rate){
             if ($rate["currency"] == $source){
-                $result_status = "success";
-                $result_message = round( $amount / floatval($rate["rate"]), 2);
+            	$eur_amount = round( $amount / floatval($rate["rate"]), 2);
+                success( $eur_amount . ' EUR.');
             }
         }
         if($result_status == ""){
@@ -61,8 +67,8 @@ function to_lvl($amount, $source){
     if(isset($XML)){
         foreach ($XML->xpath('//Currency') as $rate) {
         	if ((string)$rate->ID == $source){
-                $result_status = "success";
-                $result_message = round( $amount * (floatval($rate->Rate) / floatval($rate->Units)), 2);
+                $lvl_amount = round( $amount * (floatval($rate->Rate) / floatval($rate->Units)), 2);
+                success( $lvl_amount . ' LVL.');
         	}
         }
         if($result_status == ""){
@@ -121,8 +127,8 @@ if(
 				$ounce_grams = 31.1034768;
 				$goldgrams = round($goldounces * $ounce_grams, 4);
 
-				$result_message = 'For your ' . $amount . ' ' . $source . ' you can buy ' .
-				$goldounces . ' Troy ounces or ' . $goldgrams . ' grams of gold.';
+				success($goldounces . ' Troy ounces or ' . $goldgrams . ' grams of gold.');
+
 			    if($result_status == ""){
 					error_rate();
 			    }
@@ -132,12 +138,6 @@ if(
 			}
 		}
     }
-}
-
-function success($target_amount){
-	global $result_status, $result_message, $amount, $source;
-	$result_status = "success";
-	$result_message = 'For your ' . $amount . ' ' . $source . ' you can buy ' . $target_amount;
 }
 
 require("view.php");
