@@ -63,7 +63,14 @@ if(
     	// ...
     	// b)
     	$homepage = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
-		echo $homepage;
+    	// remove trailing trash characters
+    	$homepage = str_replace(" ", "", $homepage);
+    	$homepage = str_replace("&", "", $homepage);
+
+		$pos = strpos($homepage, 'pmeuro=');
+		echo 'found at ', $pos;
+		$goldprice = substr($homepage, $pos);
+		echo 'price is ', $goldprice ;
 
         if(isset($XML)){
             // foreach ($XML->xpath('//Currency') as $rate) {
