@@ -3,23 +3,28 @@
 $eur_source = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
 $lvl_source = "http://www.bank.lv/vk/xml.xml";
 
+function get_currencies(){
+	global $eur_source, $lvl_source;
+
+	$target_currencies = array('LVL', 'GBP', 'RUB', 'CHF', 'SEK', 'NOK', 'JPY', 'LTL', 'BYR');
+
+	$XML=simplexml_load_file($eur_source);
+	foreach($XML->Cube->Cube->Cube as $rate){
+		$target_currencies[] = $rate["currency"];
+	}
+
+	$XML=simplexml_load_file($lvl_source);
+	foreach ($XML->xpath('//Currency') as $rate) {
+		$target_currencies[] = (string)$rate->ID;
+	}
+
+	asort($target_currencies);
+	return array_unique($target_currencies);
+}
+
 $result_status = ""; //valid values: empty string, "success", "error"
 $result_message = "";
-
-$target_currencies = array('LVL', 'GBP', 'RUB', 'CHF', 'SEK', 'NOK', 'JPY', 'LTL', 'BYR');
-
-$XML=simplexml_load_file($eur_source);
-foreach($XML->Cube->Cube->Cube as $rate){
-	$target_currencies[] = $rate["currency"];
-}
-
-$XML=simplexml_load_file($lvl_source);
-foreach ($XML->xpath('//Currency') as $rate) {
-	$target_currencies[] = (string)$rate->ID;
-}
-
-$target_currencies = array_unique($target_currencies);
-asort($target_currencies);
+$target_currencies = get_currencies();
 
 if(
     isset($_GET['amount']) and
