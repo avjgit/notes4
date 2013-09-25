@@ -86,7 +86,7 @@
 			Troy ounces
 		    </label>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="is_currency_valid()">Submit</button>
 
 
 	    </form>
@@ -95,3 +95,10 @@
 
     </body>
 </html>
+
+<script type="text/javascript">
+	function is_currency_valid(){
+		alert(document.getElementsByName("source")[0].value);
+
+	}
+</script>
