@@ -28,7 +28,7 @@
 
 	<div class="container">
 
-	    <form id="form1" class="form-signin" method="GET">
+	    <form id="form1" class="form-signin" method="GET" onsubmit="return is_input_valid();" >
 
 		<?php
 		if ($result_status == "success") { ?>
@@ -86,7 +86,7 @@
 			Troy ounces
 		    </label>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="is_input_valid()">Submit</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" >Submit</button>
 
 
 	    </form>
@@ -97,26 +97,18 @@
 </html>
 
 <script type="text/javascript">
-	function mainFunction(){
-	    $('#form1').submit(function(){
-	        return is_input_valid();
-	    });
-	}
 
 	function is_input_valid() {
-		// return is_amount_filled() && is_source_filled(); // doesn't work:(
-		is_amount_filled = is_amount_filled();
-		is_source_filled = is_source_filled();
-		is_target_filled = is_target_filled();
-		return
-			is_amount_filled &&
-			is_source_filled &&
-			is_target_filled;
+		return is_amount_filled() &&
+			is_source_filled() &&
+			is_target_filled();
 	}
 	function is_source_filled(){
 		if (document.getElementsByName("source")[0].value == '... this currency'){
 			alert('Please fill in source currency field.');
+			return false;
 		}
+		return true;
 	}
 	function is_target_filled(){
 		var radios = document.getElementsByName('target');
@@ -129,11 +121,14 @@
 		if(!is_target_set){
 			alert('Please fill in target currency field.');
 		}
+		return is_target_set;
 	}
 	function is_amount_filled(){
 		amount = document.getElementById("amount").value;
 		if (amount == "" || isNaN(amount)){
 			alert('Please fill in amount field.');
+			return false;
 		}
+		return true;
 	}
 </script>
