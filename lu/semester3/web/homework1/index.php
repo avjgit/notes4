@@ -59,9 +59,31 @@ if(
         // $XML=simplexml_load_file("http://www.bank.lv/vk/xml.xml");
     	echo 'inside gold!';
     	// plan: a) first, convert currency into eur, b) then into gold
-    	// a)
-    	// ...
-    	// b)
+    	// example: 1 lvl to gold:
+    	// a) 1 lvl - rate .7026 => 1.42 eur
+    	// b) at 979 eur per ouce, for 1.42 you can get ... 0.0015 ounces
+
+    	// Step 1 of 2: convert currency to EUR
+        $XML=simplexml_load_file("http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
+
+        if(isset($XML)){
+            foreach($XML->Cube->Cube->Cube as $rate){
+                if ($rate["currency"] == $source){
+                    $result_status = "success";
+	                $result_message = round( $amount / floatval($rate["rate"]), 2);
+                }
+            }
+            if($result_status == ""){
+                $result_status = "error";
+                $result_message = "Got currency data, but there is no rate for your currency.";
+            }
+        }
+        else {
+            $result_status = "error";
+            $result_message = "Could not get currency data.";
+        }
+
+    	// Step 2 of 2: convert EUR to gold
     	$homepage = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
     	// remove trailing trash characters
     	$homepage = str_replace(" ", "", $homepage);
@@ -71,6 +93,8 @@ if(
 		echo 'found at ', $pos;
 		$goldprice = substr($homepage, $pos);
 		echo 'price is ', $goldprice ;
+		$result_message = $result_message/ floatval(goldprice);
+		echo 'for your ', $amount, $source, ' you can buy ', $result_message;
 
         if(isset($XML)){
             // foreach ($XML->xpath('//Currency') as $rate) {
