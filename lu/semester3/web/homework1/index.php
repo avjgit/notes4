@@ -22,6 +22,16 @@ function get_currencies(){
 	return array_unique($target_currencies);
 }
 
+function error_data(){
+    $GLOBALS['result_status'] = "error";
+    $GLOBALS['result_message'] = "Could not get currency data.";
+}
+
+function error_rate(){
+    $GLOBALS['result_status'] = "error";
+    $GLOBALS['result_message'] = "Got currency data, but there is no rate for your currency.";
+}
+
 function to_eur($amount, $source){
 	global $result_status, $result_message, $eur_source, $lvl_source;
 
@@ -35,13 +45,11 @@ function to_eur($amount, $source){
             }
         }
         if($result_status == ""){
-            $result_status = "error";
-            $result_message = "Got currency data, but there is no rate for your currency.";
+			error_rate();
         }
     }
     else {
-        $result_status = "error";
-        $result_message = "Could not get currency data.";
+		error_data();
     }
 }
 
@@ -58,13 +66,11 @@ function to_lvl($amount, $source){
         	}
         }
         if($result_status == ""){
-            $result_status = "error";
-            $result_message = "Got currency data, but there is no rate for your currency.";
+			error_rate();
         }
     }
     else {
-        $result_status = "error";
-        $result_message = "Could not get currency data.";
+		error_data();
     }
 }
 
