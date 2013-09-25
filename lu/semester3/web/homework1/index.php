@@ -89,7 +89,16 @@ if(
 		$pos = strpos($homepage, $price_flag);
 		$goldprice = substr($homepage, $pos + strlen($price_flag));
 		echo 'price is ', $goldprice ;
-		$result_message = $result_message/ floatval($goldprice);
+
+		$goldounces = $result_message/ floatval($goldprice);
+		echo '. Ounces: ' . $goldounces;
+		$goldgrams = $goldounces * 31.1034768;
+		echo '. Grams: ' . $goldgrams;
+
+
+		$result_message = $result_message/ floatval($goldprice) . ' Troy ounces.'
+		 	. ' or ' . ($result_message * 31.1034768) . ' in grams';
+		// $result_message = $result_message . ' Troy ounces.';
 		echo 'for your ', $amount, $source, ' you can buy ', $result_message;
 
         // if(isset($XML)){
