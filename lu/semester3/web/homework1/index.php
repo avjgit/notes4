@@ -24,7 +24,7 @@ if(
 	                $result_message = $amount / floatval($rate["rate"]);
                 }
             }
-            if(!isset($result_status)){
+            if($result_status == ""){
                 $result_status = "error";
                 $result_message = "Got currency data, but there is no rate for your currency.";
             }
@@ -47,7 +47,8 @@ if(
             //         echo 'hey, this would be ', $result_message, ' in lats!';
             //     }
             // }
-            if(!isset($result_status)){
+            if($result_status == ""){
+            	echo 'not converted';
                 $result_status = "error";
                 $result_message = "Got currency data, but there is no rate for your currency.";
             }
