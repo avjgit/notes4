@@ -86,7 +86,7 @@
 			Troy ounces
 		    </label>
 		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="is_currency_valid()">Submit</button>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" onclick="is_amount_filled()">Submit</button>
 
 
 	    </form>
@@ -97,8 +97,15 @@
 </html>
 
 <script type="text/javascript">
-	function is_currency_valid(){
-		alert(document.getElementsByName("source")[0].value);
-
+	function is_currency_filled(){
+		if (document.getElementsByName("source")[0].value == '... this currency'){
+			alert('Please fill in currency field.');
+		}
+	}
+	function is_amount_filled(){
+		amount = document.getElementById("amount").value;
+		if (amount == "" || isNaN(amount)){
+			alert('Please fill in amount field.');
+		}
 	}
 </script>

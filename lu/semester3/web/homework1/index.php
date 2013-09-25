@@ -45,7 +45,6 @@ if(
             	}
             }
             if($result_status == ""){
-            	echo 'not converted';
                 $result_status = "error";
                 $result_message = "Got currency data, but there is no rate for your currency.";
             }
