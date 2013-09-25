@@ -12,7 +12,7 @@ The attached script is a mock-up of final code. It separates business logic from
 Main tasks that have to be accomplished
 
 - analyze user input data, perform currency conversion only if all mandatory fields are filled and data corresponds to expected type (e.g. amount can be recognized as a decimal value)
-- download the currency rate file from the remote server (don't forget that the service may be unavailable, prepare a specific message for this case!)
+
 - parse the currency rate document in order to find the needed currency
 - do conversion and round the result to 2 decimals
 
