@@ -28,7 +28,7 @@
 
 	<div class="container">
 
-	    <form class="form-signin" method="GET">
+	    <form id="form1" class="form-signin" method="GET">
 
 		<?php
 		if ($result_status == "success") { ?>
@@ -97,6 +97,12 @@
 </html>
 
 <script type="text/javascript">
+	function mainFunction(){
+	    $('#form1').submit(function(){
+	        return is_input_valid();
+	    });
+	}
+
 	function is_input_valid() {
 		// return is_amount_filled() && is_source_filled(); // doesn't work:(
 		is_amount_filled = is_amount_filled();
