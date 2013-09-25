@@ -3,8 +3,6 @@
 The variables that can be passed from index.php into view.php, are:
 - $target_currencies (list of popular currencies, you can implement dynamic filling of this array)
 
-To get the maximum score, include an option to convert the amount into Troy ounces (of gold). Gold exchange rate can be downloaded from http://www.goldfixing.com/today'sprices.htm where the data is available at this URL: http://www.goldfixing.com/vars/goldfixing.vars
-
 Students who submit their work by the end of Thursday, September 26, get an extra point for that.
 
 - what about lvl to lvl, eur to eur?
