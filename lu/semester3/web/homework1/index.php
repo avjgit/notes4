@@ -99,42 +99,18 @@ if(
         }
 
     	// Step 2 of 2: convert EUR to gold
-    	$homepage = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
-    	$homepage = str_replace(" ", "", $homepage);
-    	$homepage = str_replace("&", "", $homepage);
+    	$goldrates = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
+    	$goldrates = str_replace(" ", "", $goldrates);
+    	$goldrates = str_replace("&", "", $goldrates);
     	$price_flag = 'pmeuro=';
-		$pos = strpos($homepage, $price_flag);
-		$goldprice = substr($homepage, $pos + strlen($price_flag));
-		echo 'price is ', $goldprice ;
+		$price_flag_start = strpos($goldrates, $price_flag);
+		$goldprice = substr($goldrates, $price_flag_start + strlen($price_flag));
+		$goldounces = round($result_message/ floatval($goldprice), 4);
+		$ounce_grams = 31.1034768;
+		$goldgrams = round($goldounces * $ounce_grams, 4);
 
-		$goldounces = $result_message/ floatval($goldprice);
-		echo '. Ounces: ' . $goldounces;
-		$goldgrams = $goldounces * 31.1034768;
-		echo '. Grams: ' . $goldgrams;
-
-
-		$result_message = $result_message/ floatval($goldprice) . ' Troy ounces.'
-		 	. ' or ' . ($result_message * 31.1034768) . ' in grams';
-		// $result_message = $result_message . ' Troy ounces.';
-		echo 'for your ', $amount, $source, ' you can buy ', $result_message;
-
-        // if(isset($XML)){
-        //     // foreach ($XML->xpath('//Currency') as $rate) {
-        //     // 	if ((string)$rate->ID == $source){
-        //     //         $result_status = "success";
-        //     //         $result_message = round( $amount * floatval($rate->Rate), 2);
-        //     // 	}
-        //     // }
-        //     if($result_status == ""){
-        //     	echo 'not converted';
-        //         $result_status = "error";
-        //         $result_message = "Got currency data, but there is no rate for your currency.";
-        //     }
-        // }
-        // else {
-        //     $result_status = "error";
-        //     $result_message = "Could not get currency data.";
-        // }
+		$result_message = 'For your ' . $amount . ' ' . $source . ' you can buy ' .
+			$goldounces . ' Troy ounces or ' . $goldgrams . ' grams of gold.';
     }
 }
 
