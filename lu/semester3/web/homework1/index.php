@@ -45,6 +45,29 @@ function to_eur($amount, $source){
     }
 }
 
+function to_lvl($amount, $source){
+	global $result_status, $result_message, $eur_source, $lvl_source;
+
+    $XML=simplexml_load_file($lvl_source);
+
+    if(isset($XML)){
+        foreach ($XML->xpath('//Currency') as $rate) {
+        	if ((string)$rate->ID == $source){
+                $result_status = "success";
+                $result_message = round( $amount * (floatval($rate->Rate) / floatval($rate->Units)), 2);
+        	}
+        }
+        if($result_status == ""){
+            $result_status = "error";
+            $result_message = "Got currency data, but there is no rate for your currency.";
+        }
+    }
+    else {
+        $result_status = "error";
+        $result_message = "Could not get currency data.";
+    }
+}
+
 $result_status = ""; //valid values: empty string, "success", "error"
 $result_message = "";
 $target_currencies = get_currencies();
@@ -66,24 +89,7 @@ if(
     	to_eur($amount, $source);
     }
     elseif ($target == 'LVL') {
-        $XML=simplexml_load_file($lvl_source);
-
-        if(isset($XML)){
-            foreach ($XML->xpath('//Currency') as $rate) {
-            	if ((string)$rate->ID == $source){
-                    $result_status = "success";
-                    $result_message = round( $amount * (floatval($rate->Rate) / floatval($rate->Units)), 2);
-            	}
-            }
-            if($result_status == ""){
-                $result_status = "error";
-                $result_message = "Got currency data, but there is no rate for your currency.";
-            }
-        }
-        else {
-            $result_status = "error";
-            $result_message = "Could not get currency data.";
-        }
+    	to_lvl($amount, $source);
     }
     elseif ($target == 'Gold') {
     	// plan: a) first, convert currency into eur, b) then into gold
@@ -92,7 +98,7 @@ if(
     	// b) at 979 eur per ouce, for 1.42 you can get ... 0.0015 ounces
 
     	// Step 1 of 2: convert currency to EUR
-    	to_eur($amount, $source)
+    	to_eur($amount, $source);
 
     	// Step 2 of 2: convert EUR to gold
     	$goldrates = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
