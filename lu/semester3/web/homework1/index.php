@@ -33,7 +33,7 @@ function error_rate(){
 }
 
 function to_eur($amount, $source){
-	global $result_status, $result_message, $eur_source, $lvl_source;
+	global $result_status, $result_message, $eur_source;
 
     $XML=simplexml_load_file($eur_source);
 
@@ -54,7 +54,7 @@ function to_eur($amount, $source){
 }
 
 function to_lvl($amount, $source){
-	global $result_status, $result_message, $eur_source, $lvl_source;
+	global $result_status, $result_message, $lvl_source;
 
     $XML=simplexml_load_file($lvl_source);
 
@@ -106,20 +106,38 @@ if(
     	// Step 1 of 2: convert currency to EUR
     	to_eur($amount, $source);
 
-    	// Step 2 of 2: convert EUR to gold
-    	$goldrates = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
-    	$goldrates = str_replace(" ", "", $goldrates);
-    	$goldrates = str_replace("&", "", $goldrates);
-    	$price_flag = 'pmeuro=';
-		$price_flag_start = strpos($goldrates, $price_flag);
-		$goldprice = substr($goldrates, $price_flag_start + strlen($price_flag));
-		$goldounces = round($result_message/ floatval($goldprice), 4);
-		$ounce_grams = 31.1034768;
-		$goldgrams = round($goldounces * $ounce_grams, 4);
+    	if ($result_status == "success") {
 
-		$result_message = 'For your ' . $amount . ' ' . $source . ' you can buy ' .
-			$goldounces . ' Troy ounces or ' . $goldgrams . ' grams of gold.';
+	    	// Step 2 of 2: convert EUR to gold
+	    	$goldrates = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
+
+			if(isset($goldrates)){
+		    	$goldrates = str_replace(" ", "", $goldrates);
+		    	$goldrates = str_replace("&", "", $goldrates);
+		    	$price_flag = 'pmeuro=';
+				$price_flag_start = strpos($goldrates, $price_flag);
+				$goldprice = substr($goldrates, $price_flag_start + strlen($price_flag));
+				$goldounces = round($result_message/ floatval($goldprice), 4);
+				$ounce_grams = 31.1034768;
+				$goldgrams = round($goldounces * $ounce_grams, 4);
+
+				$result_message = 'For your ' . $amount . ' ' . $source . ' you can buy ' .
+				$goldounces . ' Troy ounces or ' . $goldgrams . ' grams of gold.';
+			    if($result_status == ""){
+					error_rate();
+			    }
+			}
+			else {
+				error_data();
+			}
+		}
     }
+}
+
+function success($target_amount){
+	global $result_status, $result_message, $amount, $source;
+	$result_status = "success";
+	$result_message = 'For your ' . $amount . ' ' . $source . ' you can buy ' . $target_amount;
 }
 
 require("view.php");
