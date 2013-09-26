@@ -1,3 +1,4 @@
+<!-- https://github.com/avjgit/notes4/commits/master/lu/semester3/web/homework1/index.php -->
 <?php
 
 $eur_source = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
