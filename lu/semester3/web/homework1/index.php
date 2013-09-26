@@ -40,39 +40,50 @@ function success($target_amount){
 function to_eur($amount, $source){
 	global $eur_source, $eur_amount;
 
-    $XML=simplexml_load_file($eur_source);
-
-    if(isset($XML)){
-        foreach($XML->Cube->Cube->Cube as $rate){
-            if ($rate["currency"] == $source){
-            	$eur_amount = round( $amount / floatval($rate["rate"]), 2);
-                success( $eur_amount . ' EUR.');
-            }
-        }
-		check_error_rate();
+    if ($source == 'EUR'){
+    	$eur_amount = $amount;
+    	success( $amount . ' ' . $source);
     }
     else {
-		error_data();
-    }
+	    $XML=simplexml_load_file($eur_source);
+
+	    if(isset($XML)){
+	        foreach($XML->Cube->Cube->Cube as $rate){
+	            if ($rate["currency"] == $source){
+	            	$eur_amount = round( $amount / floatval($rate["rate"]), 2);
+	                success( $eur_amount . ' EUR.');
+	            }
+	        }
+			check_error_rate();
+	    }
+	    else {
+			error_data();
+	    }
+	}
 }
 
 function to_lvl($amount, $source){
 	global $lvl_source;
 
-    $XML=simplexml_load_file($lvl_source);
-
-    if(isset($XML)){
-        foreach ($XML->xpath('//Currency') as $rate) {
-        	if ((string)$rate->ID == $source){
-                $lvl_amount = round( $amount * (floatval($rate->Rate) / floatval($rate->Units)), 2);
-                success( $lvl_amount . ' LVL.');
-        	}
-        }
-		check_error_rate();
+    if ($source == 'LVL'){
+    	success( $amount . ' ' . $source);
     }
     else {
-		error_data();
-    }
+	    $XML=simplexml_load_file($lvl_source);
+
+	    if(isset($XML)){
+	        foreach ($XML->xpath('//Currency') as $rate) {
+	        	if ((string)$rate->ID == $source){
+	                $lvl_amount = round( $amount * (floatval($rate->Rate) / floatval($rate->Units)), 2);
+	                success( $lvl_amount . ' LVL.');
+	        	}
+	        }
+			check_error_rate();
+	    }
+	    else {
+			error_data();
+	    }
+	}
 }
 
 $result_status = ""; //valid values: empty string, "success", "error"
@@ -88,35 +99,19 @@ if(
     $source = $_GET["source"];
     $target = $_GET["target"];
 
-    if ($target == $source){
-    	success( $amount . ' ' . $target);
-    }
-    elseif ($target == 'EUR'){
+	if ($target == 'EUR'){
     	to_eur($amount, $source);
     }
     elseif ($target == 'LVL') {
     	to_lvl($amount, $source);
     }
     elseif ($target == 'Gold') {
-    	// plan: a) first, convert currency into eur, b) then into gold
-    	// example: 1 lvl to gold:
-    	// a) 1 lvl - rate .7026 => 1.42 eur
-    	// b) at 979 eur per ouce, for 1.42 you can get ... 0.0015 ounces
-
     	// Step 1 of 2: convert currency to EUR
-    	if ($source == 'EUR') {
-    		$result_status = "success";
-    		$eur_amount = $amount;
-    	}
-    	else {
-    		to_eur($amount, $source);
-		}
+  		to_eur($amount, $source);
 
     	if ($result_status == "success") {
-
 	    	// Step 2 of 2: convert EUR to gold
 	    	$goldrates = file_get_contents('http://www.goldfixing.com/vars/goldfixing.vars');
-
 			if(isset($goldrates)){
 		    	$goldrates = str_replace(" ", "", $goldrates);
 		    	$goldrates = str_replace("&", "", $goldrates);
@@ -126,12 +121,8 @@ if(
 				$goldounces = round($eur_amount/ floatval($goldprice), 4);
 				$ounce_grams = 31.1034768;
 				$goldgrams = round($goldounces * $ounce_grams, 4);
-
 				success($goldounces . ' Troy ounces or ' . $goldgrams . ' grams of gold.');
-
-			    if($result_status == ""){
-					check_error_rate();
-			    }
+ 				check_error_rate();
 			}
 			else {
 				error_data();
