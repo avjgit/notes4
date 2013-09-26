@@ -2,6 +2,7 @@
 
 $eur_source = "http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
 $lvl_source = "http://www.bank.lv/vk/xml.xml";
+$eur_amount = 0;
 
 function get_currencies(){
 	global $eur_source, $lvl_source;
@@ -37,7 +38,7 @@ function success($target_amount){
 }
 
 function to_eur($amount, $source){
-	global $result_status, $result_message, $eur_source;
+	global $eur_source, $eur_amount;
 
     $XML=simplexml_load_file($eur_source);
 
@@ -56,7 +57,7 @@ function to_eur($amount, $source){
 }
 
 function to_lvl($amount, $source){
-	global $result_status, $result_message, $lvl_source;
+	global $lvl_source;
 
     $XML=simplexml_load_file($lvl_source);
 
@@ -88,8 +89,7 @@ if(
     $target = $_GET["target"];
 
     if ($target == $source){
-        $result_status = "success";
-        $result_message = $amount;
+    	success( $amount . ' ' . $target);
     }
     elseif ($target == 'EUR'){
     	to_eur($amount, $source);
@@ -104,7 +104,13 @@ if(
     	// b) at 979 eur per ouce, for 1.42 you can get ... 0.0015 ounces
 
     	// Step 1 of 2: convert currency to EUR
-    	to_eur($amount, $source);
+    	if ($source == 'EUR') {
+    		$result_status = "success";
+    		$eur_amount = $amount;
+    	}
+    	else {
+    		to_eur($amount, $source);
+		}
 
     	if ($result_status == "success") {
 
@@ -117,7 +123,7 @@ if(
 		    	$price_flag = 'pmeuro=';
 				$price_flag_start = strpos($goldrates, $price_flag);
 				$goldprice = substr($goldrates, $price_flag_start + strlen($price_flag));
-				$goldounces = round($result_message/ floatval($goldprice), 4);
+				$goldounces = round($eur_amount/ floatval($goldprice), 4);
 				$ounce_grams = 31.1034768;
 				$goldgrams = round($goldounces * $ounce_grams, 4);
 
