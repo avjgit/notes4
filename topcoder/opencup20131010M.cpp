@@ -26,7 +26,7 @@ int main()
     long N;
 
     infile >> N;
-    long product, max_product, max_number;
+    long product, max_product;
 
     max_product = 1;
     for (long i = 1; i <= N; i++)
@@ -34,10 +34,9 @@ int main()
         product = product_digits(i);
         if (product > max_product) {
             max_product = product;
-            max_number = i;
         }
     }
-    cout << "max is " << max_product << ", by " << max_number;
+    cout << max_product;
 
     // int length = floor(log10(N) + 1);
     // digits = new int[length-1];
