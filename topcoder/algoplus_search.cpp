@@ -61,29 +61,45 @@ int main()
         searchfile >> curc;
     }
 
-    current = first;
-    while (current != NULL){
-        cout << current->c;
-        current = current->next;
-    }
+    // current = first;
+    // while (current != NULL){
+    //     cout << current->c;
+    //     current = current->next;
+    // }
 
     ifstream infile ("text.in");
 
+    bool new_word = true;
+    int pos = 0;
+
+    infile >> noskipws >> curc;
+    pos++;
+    cout << "char: " << curc << ", pos: " << pos;
+
     while(infile.good())
     {
-        infile >> curc;
-
         current = first;
-        for(int i = 0; i < length; i++)
+        for(int i = 0; i < length && new_word; i++)
         {
+            // cout << endl << "i: " << i;
+            cout << endl << "evaluating " << curc << "...";
+
             if(curc == current->c){
+                cout << "ok, char " << curc << " found";
                 current = current->next;
                 if (i == length-1){
-                    infile >> curc;
+                    infile >> noskipws >> curc;
+                    pos++;
+                    cout << "char: " << curc << ", pos: " << pos;
+
+                    cout << "checking " << curc << endl;
+
                     if (is_end_of_word(curc)){
 
+                        cout << "found word! at " << pos-length << endl;
+
                         curr_found = new found;
-                        curr_found->position = i;
+                        curr_found->position = pos;
                         curr_found->next = NULL;
 
                         if (first_found == NULL) {
@@ -95,16 +111,30 @@ int main()
                         prev_found = curr_found;
                     }
                 }
+                infile >> curc;
+                pos++;
+                cout << "char: " << curc << ", pos: " << pos;
             }
             else{
-                while(!is_end_of_word(curc))
-                    infile >> curc;
-                break;
+                while(!is_end_of_word(curc)){
+                    infile >> noskipws >> curc;
+                    pos++;
+                    cout << "char: " << curc << ", pos: " << pos;
+                    cout << endl << "skipping, took " << curc;
+                }
+                new_word = false;
             }
-        }
-    }
 
-    // char cfound = first_found->position;
+        }
+
+        infile >> curc;
+        pos++;
+        cout << "char: " << curc << ", pos: " << pos;
+        new_word = true;
+    }
+    cout << "out of loop" << endl;
+
+    // int cfound = first_found->position;
     // cout << cfound;
 
     // curr_found = first_found;
