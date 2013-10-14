@@ -40,6 +40,9 @@ int main()
     searchchar* first = NULL;
     int length = 0;
 
+    //
+    // read target word
+    //
     char curc;
     searchfile >> curc;
     while(!searchfile.eof())
@@ -61,29 +64,37 @@ int main()
         searchfile >> curc;
     }
 
+    //
+    // test output target word
+    //
     // current = first;
     // while (current != NULL){
     //     cout << current->c;
     //     current = current->next;
     // }
 
+    //
+    // looking through file
+    //
     ifstream infile ("text.in");
 
     bool new_word = true;
     int pos = 0;
 
-    infile >> noskipws >> curc;
+    infile >> noskipws >> curc; // noskipws - important! "no skip whitespace"
     pos++;
     cout << "char: " << curc << ", pos: " << pos;
 
     while(infile.good())
     {
         current = first;
+
         for(int i = 0; i < length && new_word; i++)
         {
-            // cout << endl << "i: " << i;
             cout << endl << "evaluating " << curc << "...";
-
+            //
+            // checking all workd length
+            //
             if(curc == current->c){
                 cout << "ok, char " << curc << " found";
                 current = current->next;
@@ -92,7 +103,7 @@ int main()
                     pos++;
                     cout << "char: " << curc << ", pos: " << pos;
 
-                    cout << "checking " << curc << endl;
+                    cout << endl << "checking " << curc << endl;
 
                     if (is_end_of_word(curc)){
 
@@ -115,6 +126,9 @@ int main()
                 pos++;
                 cout << "char: " << curc << ", pos: " << pos;
             }
+            //
+            // if some character is wrong, then skip all word till the end
+            //
             else{
                 while(!is_end_of_word(curc)){
                     infile >> noskipws >> curc;
@@ -134,17 +148,14 @@ int main()
     }
     cout << "out of loop" << endl;
 
-    // int cfound = first_found->position;
-    // cout << cfound;
-
-    // curr_found = first_found;
-    // while(curr_found->next != NULL)
-    // {
-    //     // cout << "found " << curr_found->position;
-    //     // outfile << curr_found->position;
-    //     // outfile << " ";
-    //     curr_found = curr_found->next;
-    // }
+    curr_found = first_found;
+    while(curr_found != NULL)
+    {
+        // cout << "found " << curr_found->position;
+        outfile << curr_found->position;
+        outfile << " ";
+        curr_found = curr_found->next;
+    }
 
     infile.close();
     return 0;
