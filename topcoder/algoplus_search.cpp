@@ -93,7 +93,7 @@ int main()
         {
             cout << endl << "evaluating " << curc << "...";
             //
-            // checking all workd length
+            // checking all word length
             //
             if(curc == current->c){
                 cout << "ok, char " << curc << " found";
