@@ -11,7 +11,7 @@ class OracleOfBacon
   class InvalidKeyError < RuntimeError ; end
 
   attr_accessor :from, :to
-  attr_reader :api_key, :response, :uri
+  attr_reader :api_key, :response, :uri, :errors
   
   include ActiveModel::Validations
   validates_presence_of :from
@@ -21,10 +21,15 @@ class OracleOfBacon
 
   def from_does_not_equal_to
     # YOUR CODE HERE
+	#if @from == @to do
+	#	throw exception
+	#end
   end
 
+
   def initialize(api_key='')
-    # your code here
+    @from = 'Kevin Bacon'
+    @to = 'Kevin Bacon'
   end
 
   def find_connections
