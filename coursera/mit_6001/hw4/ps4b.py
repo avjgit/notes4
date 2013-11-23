@@ -129,7 +129,7 @@ def compPlayHand(hand, wordList, n):
 # Problem #8: Playing a game
 #
 #
-def playHandLoop(hand, wordList, HAND_SIZE)
+def playHandLoop(hand, wordList, HAND_SIZE):
     while(True):
         user_input = raw_input('Enter u to have yourself play, c to have the computer play: ')
         if user_input == 'u':
