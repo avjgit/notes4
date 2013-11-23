@@ -32,6 +32,21 @@ element* exists(element *root, int target){
     return NULL;
 }
 
+element* reference(element *last, int target)
+{
+    element *next_node = last;
+    element *next_leaf = NULL;
+    while(next_node != NULL){
+        next_leaf = next_node->last_leaf;
+        while(next_leaf != NULL){
+            if(next_leaf->value == target) return next_leaf;
+            next_leaf = next_leaf->siebling;
+        }
+        next_node = next_node->siebling;
+    }
+    return NULL;
+}
+
 void print(ofstream& file, element *root){
     if (root == NULL) return;
     // if (root->last_leaf == NULL) return;
@@ -51,7 +66,7 @@ void print(ofstream& file, element *root){
 
 int main(){
     ifstream in("spogulis.in");
-    // ifstream in("spogulis.i1.txt");
+    // ifstream in("spogulis.i8.txt");
     ofstream out("spogulis.out");
     string line;
     int node_value, leaf_value;
@@ -104,12 +119,11 @@ int main(){
         // out << "\n";
     }
 
-    //2 reorder
     element *node_to_check = node;
     element *referenced = NULL;
     while(node_to_check != NULL){
         //TODO
-        referenced = reference(previous_node, node_to_check);
+        referenced = reference(previous_node, node_to_check->value);
         if (referenced == NULL){
             root = node_to_check;
         }
@@ -118,7 +132,6 @@ int main(){
         }
         node_to_check = node_to_check->siebling;
     }
-    //3 find root
 
     print(out, root);
     out << FLAG_STOP;
