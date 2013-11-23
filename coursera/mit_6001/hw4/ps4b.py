@@ -129,6 +129,18 @@ def compPlayHand(hand, wordList, n):
 # Problem #8: Playing a game
 #
 #
+def playHandLoop(hand, wordList, HAND_SIZE)
+    while(True):
+        user_input = raw_input('Enter u to have yourself play, c to have the computer play: ')
+        if user_input == 'u':
+            playHand(hand, wordList, HAND_SIZE)
+            break
+        elif user_input == 'c':
+            compPlayHand(hand, wordList, HAND_SIZE)
+            break
+        else:
+            print('Invalid command.')
+
 def playGame(wordList):
     """
     Allow the user to play an arbitrary number of hands.
@@ -161,31 +173,34 @@ def playGame(wordList):
             break
         elif user_input == 'n':
             hand = dealHand(HAND_SIZE)
-            while(True):
-                user_input = raw_input('Enter u to have yourself play, c to have the computer play: ')
-                if user_input == 'u':
-                    playHand(hand, wordList, HAND_SIZE)
-                    break
-                elif user_input == 'c':
-                    compPlayHand(hand, wordList, HAND_SIZE)
-                    break
-                else:
-                    print('Invalid command.')
+            playHandLoop(hand, wordList, HAND_SIZE)
+            # while(True):
+            #     user_input = raw_input('Enter u to have yourself play, c to have the computer play: ')
+            #     if user_input == 'u':
+            #         playHand(hand, wordList, HAND_SIZE)
+            #         break
+            #     elif user_input == 'c':
+            #         compPlayHand(hand, wordList, HAND_SIZE)
+            #         break
+            #     else:
+            #         print('Invalid command.')
 
         elif user_input == 'r':
             if(hand == ''):
                 print('You have not played a hand yet. Please play a new hand first!')
             else:
-                while(True):
-                    user_input = raw_input('Enter u to have yourself play, c to have the computer play: ')
-                    if user_input == 'u':
-                        playHand(hand, wordList, HAND_SIZE)
-                        break
-                    elif user_input == 'c':
-                        compPlayHand(hand, wordList, HAND_SIZE)
-                        break
-                    else:
-                        print('Invalid command.')
+                playHandLoop(hand, wordList, HAND_SIZE)
+
+                # while(True):
+                #     user_input = raw_input('Enter u to have yourself play, c to have the computer play: ')
+                #     if user_input == 'u':
+                #         playHand(hand, wordList, HAND_SIZE)
+                #         break
+                #     elif user_input == 'c':
+                #         compPlayHand(hand, wordList, HAND_SIZE)
+                #         break
+                #     else:
+                #         print('Invalid command.')
         else:
             print('Invalid command.')
 
