@@ -1,9 +1,9 @@
 #include "stdio.h"
-#include "stdlib.h"
+// #include "stdlib.h"
 //todo: remove
-#include <iostream>
+// #include <iostream>
 #include <fstream>
-#include <string>
+// #include <string>
 #include <sstream>
 using namespace std;
 //todo: end of remove
@@ -29,33 +29,25 @@ int main()
         // fprintf(out, "%i\n", node);
         // fscanf(in, "%i", &node);
     // };
-
+    // fclose(in);
+    // fclose(out);
     ////////////////////////////////////////////////////////// implementation 2
-    std::ifstream in("spogulis.in");
-    std::ofstream out("spogulis.out");
-
-    std::string line;
-    int i;
-    int n, sum;
-    int node;
-    while (std::getline(in, line))
+    ifstream in("spogulis.in");
+    ofstream out("spogulis.out");
+    string line;
+    int leaf, node;
+    while (getline(in, line))
     {
-        std::string s = line;
-        std::istringstream  is( s );
-        // sum = 0;
-        is >> node;
+        istringstream linestream(line);
+        linestream >> node;
         out << node << " has: ";
-        while( is >> n ) {
-            // sum += n;
-            out << n << " ";
+        while( linestream >> leaf ) {
+            out << leaf << " ";
         }
-        // out << "sum is " << sum << "; ";
-
-        // out << line << "\n";
         out << "\n";
     }
 
-    // fclose(in);
-    // fclose(out);
+    fprintf(stdout, "Sis kods veiksmigi kompilejas. Pedejais mezgls bija %i\n", node);
+
     return 0;
 }
