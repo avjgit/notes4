@@ -1,15 +1,16 @@
 #include "stdio.h"
 #include "stdlib.h"
 //todo: remove
-//#include <iostream>
-//#include <fstream>
+#include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 using namespace std;
 //todo: end of remove
 
 int main()
 {
+    ////////////////////////////////////////////////////////// implementation 1
     // FILE* in;
     // FILE* out;
     // todo: tests to pass 1 by 1: 2 3 4 5 6 7 8
@@ -29,14 +30,26 @@ int main()
         // fscanf(in, "%i", &node);
     // };
 
-    std::ifstream in("spogulis.i7.txt");
+    ////////////////////////////////////////////////////////// implementation 2
+    std::ifstream in("spogulis.in");
     std::ofstream out("spogulis.out");
+
     std::string str;
     int i;
     while (std::getline(in, str))
     {
         out << str << "\n";
     }
+
+    std::string s = "100 123 42";
+    std::istringstream  is( s );
+
+    int n, sum;
+    sum = 0;
+    while( is >> n ) {
+        sum += n;
+    }
+    out << "sum is " << sum;
 
     // fclose(in);
     // fclose(out);
