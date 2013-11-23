@@ -34,22 +34,26 @@ int main()
     std::ifstream in("spogulis.in");
     std::ofstream out("spogulis.out");
 
-    std::string str;
+    std::string line;
     int i;
-    while (std::getline(in, str))
-    {
-        out << str << "\n";
-    }
-
-    std::string s = "100 123 42";
-    std::istringstream  is( s );
-
     int n, sum;
-    sum = 0;
-    while( is >> n ) {
-        sum += n;
+    int node;
+    while (std::getline(in, line))
+    {
+        std::string s = line;
+        std::istringstream  is( s );
+        // sum = 0;
+        is >> node;
+        out << node << " has: ";
+        while( is >> n ) {
+            // sum += n;
+            out << n << " ";
+        }
+        // out << "sum is " << sum << "; ";
+
+        // out << line << "\n";
+        out << "\n";
     }
-    out << "sum is " << sum;
 
     // fclose(in);
     // fclose(out);
