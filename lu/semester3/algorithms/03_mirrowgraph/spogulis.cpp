@@ -3,27 +3,25 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
 using namespace std;
+
 struct element{ int value; element *last_leaf, *siebling;};
-element* exists(element *root, int element_value){
+
+element* exists(element *root, int target){
     if(root == NULL) {cout << "root is empty"; return root;};
     cout << "checking root " << root->value << "\n";
     // getch();
 
-    if(root->value == element_value) return root;
-    cout << "nope, not equal\n";
+    if(root->value == target) return root;
+    cout << "root is not target\n";
     if(root->last_leaf == NULL) return NULL;
     element* next = root->last_leaf;
-    cout << "will check leaf " << next->value << "\n";
-
     element* in_subtree;
     while(next != NULL){
-
         cout << "checking leaf " << next->value << "\n";
-        if(next->value == element_value) return next;
-        in_subtree = exists(next, element_value);
-        if((in_subtree != NULL) && (in_subtree->value == element_value)) return in_subtree;
+        if(next->value == target) return next;
+        in_subtree = exists(next, target);
+        if((in_subtree != NULL) && (in_subtree->value == target)) return in_subtree;
         next = next->siebling;
     }
     return NULL;
