@@ -175,8 +175,37 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    if (word not in wordList):
+        return False
 
+    hand_copy = hand.copy()
+    for i in word:
+        amount_available = hand_copy.get(i, 0)
+        if (amount_available <= 0):
+            return False
+        else:
+            hand_copy[i] -= 1
+    return True
+
+def isValidWordFromList(word, hand):
+    """
+    Returns True if word is in the wordList and is entirely
+    composed of letters in the hand. Otherwise, returns False.
+
+    Does not mutate hand or wordList.
+
+    word: string
+    hand: dictionary (string -> int)
+    wordList: list of lowercase strings
+    """
+    hand_copy = hand.copy()
+    for i in word:
+        amount_available = hand_copy.get(i, 0)
+        if (amount_available <= 0):
+            return False
+        else:
+            hand_copy[i] -= 1
+    return True
 
 #
 # Problem #4: Playing a hand
@@ -189,7 +218,10 @@ def calculateHandlen(hand):
     hand: dictionary (string-> int)
     returns: integer
     """
-    # TO DO... <-- Remove this comment when you code this function
+    length = 0
+    for i in hand:
+        length += hand[i]
+    return length
 
 
 
@@ -215,34 +247,47 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
 
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
+    totalScore = 0
 
     # As long as there are still letters left in the hand:
+    while(calculateHandlen(hand) > 0):
 
         # Display the hand
+        displayHand(hand)
 
         # Ask user for input
+        user_input = raw_input("Enter word, or a ""."" to indicate that you are finished: ")
 
         # If the input is a single period:
+        if(user_input == '.'):
 
             # End the game (break out of the loop)
+            break
 
 
         # Otherwise (the input is not a single period):
+        else:
 
             # If the word is not valid:
+            if(not isValidWord(user_input, hand, wordList)):
 
                 # Reject invalid word (print a message followed by a blank line)
+                print("Invalid word, please try again.\n")
 
             # Otherwise (the word is valid):
+            else:
 
                 # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
+                wordScore = getWordScore(user_input, n)
+                totalScore += wordScore
+                print(user_input + " earned " + str(wordScore) + " points. Total: " + str(totalScore) + " points.\n")
 
                 # Update the hand
-
+                hand = updateHand(hand, user_input)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
+    print("Goodbye! Total score: " + str(totalScore) +" points.")
 
 
 #
@@ -261,15 +306,26 @@ def playGame(wordList):
 
     2) When done playing the hand, repeat from step 1
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this line when you code the function
-
-
-
+    user_input = ''
+    hand = ''
+    while(True):
+        user_input = raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
+        if user_input == 'e':
+            break
+        elif user_input == 'n':
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+        elif user_input == 'r':
+            if(hand == ''):
+                print('You have not played a hand yet. Please play a new hand first!')
+            else:
+                playHand(hand, wordList, HAND_SIZE)
+        else:
+            print('Invalid command.')
 
 #
 # Build data structures used for entire session and play game
 #
-# if __name__ == '__main__':
-    # wordList = loadWords()
-    # playGame(wordList)
+if __name__ == '__main__':
+    wordList = loadWords()
+    playGame(wordList)
