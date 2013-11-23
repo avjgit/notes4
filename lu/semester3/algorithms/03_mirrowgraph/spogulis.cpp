@@ -1,3 +1,9 @@
+// Andrejs Jurcenoks
+// aj05044
+// Datu strukturas un pamatalgoritmi II
+// PD3 Spogulis
+// https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/03_mirrowgraph/spogulis.cpp
+
 #include "stdio.h"
 #include <fstream>
 #include <sstream>
@@ -54,31 +60,28 @@ int main(){
     element *node = NULL;
     element *current_leaf = NULL;
     element *previous_leaf = NULL;
-
+    element *first = NULL;
+    element *previous_node = NULL;
 
     while (getline(in, line)){
         istringstream linestream(line);
         linestream >> node_value;
         // cout << "------------ took " << node_value << "\n";
         if (node_value == FLAG_STOP) break;
-        if (root == NULL) {
-            root = new element;
-            root->value = node_value;
-            root->last_leaf = NULL;
-            root->siebling = NULL;
-        }
-        else{
-            node = exists(root, node_value);
-            if (node == NULL) {
-                node = new element;
-                node->value = node_value;
-                node->last_leaf = NULL;
-                node->siebling = NULL;
-            }
-            else{
-                // cout << "ok, found " << node->value << "\n";
-            }
-        }
+        // if (first == NULL) {
+        //     first = new element;
+        //     first->value = node_value;
+        //     first->last_leaf = NULL;
+        //     first->siebling = NULL;
+        //     previous_node = first;
+        // }
+        // else{
+            node = new element;
+            node->value = node_value;
+            node->last_leaf = NULL;
+            node->siebling = previous_node;
+            previous_node = node;
+        // }
         // out << node_value_value << " ";
         while( linestream >> leaf_value ) {
             // out << leaf_value << " ";
@@ -89,17 +92,33 @@ int main(){
             previous_leaf = current_leaf;
         }
 
-        if (node == NULL) {
-            root->last_leaf = previous_leaf;
-        }
-        else{
+        // if (node == NULL) {
+            // first->last_leaf = previous_leaf;
+        // }
+        // else{
             node->last_leaf = previous_leaf;
-        }
+        // }
 
         previous_leaf = NULL;
 
         // out << "\n";
     }
+
+    //2 reorder
+    element *node_to_check = node;
+    element *referenced = NULL;
+    while(node_to_check != NULL){
+        //TODO
+        referenced = reference(previous_node, node_to_check);
+        if (referenced == NULL){
+            root = node_to_check;
+        }
+        else{
+            referenced->last_leaf = node_to_check->last_leaf;
+        }
+        node_to_check = node_to_check->siebling;
+    }
+    //3 find root
 
     print(out, root);
     out << FLAG_STOP;
