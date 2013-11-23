@@ -28,7 +28,20 @@ element* exists(element *root, int target){
 }
 
 void print(ofstream& file, element *root){
-    file << "put " << root->value;
+    if (root == NULL) return;
+    if (root->last_leaf == NULL) return;
+    file << root->value << " ";
+    element *next = root->last_leaf;
+    while(next != NULL){
+        file << next->value << " ";
+        next = next->siebling;
+    }
+    file << "\n";
+    next = root->last_leaf;
+    while(next != NULL){
+        print(file, next);
+        next = next->siebling;
+    }
 }
 
 int main(){
