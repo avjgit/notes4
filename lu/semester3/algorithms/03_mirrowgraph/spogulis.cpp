@@ -1,18 +1,29 @@
 #include "stdio.h"
+#include <conio.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+
 using namespace std;
 struct element{ int value; element *last_leaf, *siebling;};
 element* exists(element *root, int element_value){
+    if(root == NULL) {cout << "root is empty"; return root;};
+    cout << "checking root " << root->value << "\n";
+    // getch();
 
     if(root->value == element_value) return root;
+    cout << "nope, not equal\n";
+    if(root->last_leaf == NULL) return NULL;
     element* next = root->last_leaf;
+    cout << "will check leaf " << next->value << "\n";
+
     element* in_subtree;
     while(next != NULL){
+
+        cout << "checking leaf " << next->value << "\n";
         if(next->value == element_value) return next;
-        // in_subtree = exists(next, element_value);
-        // if(in_subtree->value == element_value) return in_subtree;
+        in_subtree = exists(next, element_value);
+        if((in_subtree != NULL) && (in_subtree->value == element_value)) return in_subtree;
         next = next->siebling;
     }
     return NULL;
@@ -31,15 +42,21 @@ int main(){
     while (getline(in, line)){
         istringstream linestream(line);
         linestream >> node_value;
+        cout << "------------ took " << node_value << "\n";
+        if (node_value == 0) break;
         if (root == NULL) {
             root = new element;
             root->value = node_value;
+            root->last_leaf = NULL;
+            root->siebling = NULL;
         }
         else{
             node = exists(root, node_value);
             if (node == NULL) {
                 node = new element;
                 node->value = node_value;
+                node->last_leaf = NULL;
+                node->siebling = NULL;
             }
             else{
                 cout << "ok, found " << node->value << "\n";
@@ -51,6 +68,7 @@ int main(){
             current_leaf = new element;
             current_leaf->value = leaf_value;
             current_leaf->siebling = previous_leaf;
+            current_leaf->last_leaf = NULL;
             previous_leaf = current_leaf;
         }
 
