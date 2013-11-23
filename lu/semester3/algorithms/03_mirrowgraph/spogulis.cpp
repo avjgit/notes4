@@ -8,17 +8,17 @@ using namespace std;
 struct element{ int value; element *last_leaf, *siebling;};
 
 element* exists(element *root, int target){
-    if(root == NULL) {cout << "root is empty"; return root;};
-    cout << "checking root " << root->value << "\n";
+    if(root == NULL) {/*cout << "root is empty";*/ return root;};
+    // cout << "checking root " << root->value << "\n";
     // getch();
 
     if(root->value == target) return root;
-    cout << "root is not target\n";
+    // cout << "root is not target\n";
     if(root->last_leaf == NULL) return NULL;
     element* next = root->last_leaf;
     element* in_subtree;
     while(next != NULL){
-        cout << "checking leaf " << next->value << "\n";
+        // cout << "checking leaf " << next->value << "\n";
         if(next->value == target) return next;
         in_subtree = exists(next, target);
         if((in_subtree != NULL) && (in_subtree->value == target)) return in_subtree;
@@ -26,6 +26,11 @@ element* exists(element *root, int target){
     }
     return NULL;
 }
+
+void print(ofstream& file, element *root){
+    file << "put " << root->value;
+}
+
 int main(){
     ifstream in("spogulis.in");
     ofstream out("spogulis.out");
@@ -40,7 +45,7 @@ int main(){
     while (getline(in, line)){
         istringstream linestream(line);
         linestream >> node_value;
-        cout << "------------ took " << node_value << "\n";
+        // cout << "------------ took " << node_value << "\n";
         if (node_value == 0) break;
         if (root == NULL) {
             root = new element;
@@ -57,7 +62,7 @@ int main(){
                 node->siebling = NULL;
             }
             else{
-                cout << "ok, found " << node->value << "\n";
+                // cout << "ok, found " << node->value << "\n";
             }
         }
         // out << node_value_value << " ";
@@ -81,5 +86,8 @@ int main(){
 
         // out << "\n";
     }
+
+    print(out, root);
+
     return 0;
 }
