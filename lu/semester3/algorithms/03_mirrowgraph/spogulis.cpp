@@ -53,43 +53,41 @@ int main(){
     int FLAG_STOP = 0;
     element *root = NULL;
     element *node = NULL;
-    element *current_leaf = NULL;
-    element *previous_leaf = NULL;
-    element *previous_node = NULL;
+    element *leaf = NULL;
+    element *last_leaf = NULL;
+    element *last_node = NULL;
 
     while (getline(in, line)){
         istringstream linestream(line);
         linestream >> node_value;
-        // cout << "------------ took " << node_value << "\n";
         if (node_value == FLAG_STOP) break;
 
         node = new element;
         node->value = node_value;
-        node->last_leaf = NULL;
-        node->siebling = previous_node;
-        previous_node = node;
+        node->siebling = last_node;
+        last_node = node;
 
         while( linestream >> leaf_value ) {
-            current_leaf = new element;
-            current_leaf->value = leaf_value;
-            current_leaf->siebling = previous_leaf;
-            current_leaf->last_leaf = NULL;
-            previous_leaf = current_leaf;
+            leaf = new element;
+            leaf->last_leaf = NULL; //important!
+            leaf->value = leaf_value;
+            leaf->siebling = last_leaf;
+            last_leaf = leaf;
         }
 
-        node->last_leaf = previous_leaf;
-        previous_leaf = NULL;
+        node->last_leaf = last_leaf;
+        last_leaf = NULL;
     }
 
-    element *node_to_check = node;
-    element *referenced = NULL;
+    element *node_to_check = last_node;
+    element *reference_as_leaf = NULL;
     while(node_to_check != NULL){
-        referenced = referenced_as_leaf(previous_node, node_to_check->value);
-        if (referenced == NULL){
+        reference_as_leaf = referenced_as_leaf(last_node, node_to_check->value);
+        if (reference_as_leaf == NULL){
             root = node_to_check;
         }
         else{
-            referenced->last_leaf = node_to_check->last_leaf;
+            reference_as_leaf->last_leaf = node_to_check->last_leaf;
         }
         node_to_check = node_to_check->siebling;
     }
