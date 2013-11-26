@@ -1,18 +1,40 @@
-Praktiskais darbs PD4
-“Lidostas”
+============================== Praktiskais darbs PD4 “Lidostas”
+============================== Uzdevuma formulējums
+Lai piesaistītu saviem lidojumiem pasažierus nacionālā aviokompānija rīkoja izlozi saviem pasažieriem.
+Uzvarētājs balvā saņēma iespēju lidot no jebkuras lidostas uz jebkuru lidostu ar pārsēšanos, ja to vēlas pasažieris.
+Papildus uzvarētājs saņēma 1000Ls. Lai ierobežotu uzvarētāja ceļošanu pa pasauli, tika noteikts, ka
 
+	* 	katru reisu drīkst izmantot tikai 1 reizi un
+	*	par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls.
+	*	Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam.
 
-Uzdevuma formulējums
+- Ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā.
+//Citā laikā lidojums pa šo pašu maršrutu jau skaitās cits reiss.
 
-Lai piesaistītu saviem lidojumiem pasažierus nacionālā aviokompānija rīkoja izlozi saviem pasažieriem. Uzvarētājs balvā saņēma iespēju lidot no jebkuras lidostas uz jebkuru lidostu ar pārsēšanos, ja to vēlas pasažieris. Papildus uzvarētājs saņēma 1000Ls. Lai ierobežotu uzvarētāja ceļošanu pa pasauli, tika noteikts, ka katru reisu drīkst izmantot tikai 1 reizi un par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls. Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam.
-Ar reisu tiek saprast lidojums no vienas lidostas uz otru konkrētā laikā. Citā laikā lidojums pa šo pašu maršrutu jau skaitās cits reiss.
-Lai pārsēstos no viena reisa uz otru, ir nepieciešama 1 minūte, t.i. ja pasažieris ielido 12:34, tad jau 12:35 viņš drīkst lidot ar citu lidmašīnu. Visur pulksteņa laiks tiek pierakstīts formā „HH:MM”, kur HH ir stundas 00..23 ar priekšējām nullēm un MM ir minūtes 00..59 ar priekšējām nullēm.
-No katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss, t.i. vienā un tajā pašā laikā nevar izlidot vairāk kā 1 lidmašīna.
-Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min. Tātad, ja reisā ielidošanas laiks ir mazāks par izlidošanas laiku, tad ielidošana jau ir nākošajā dienā. Visi laiki ir doti pēc Griničas laika (http://lv.wikipedia.org/wiki/Grini%C4%8Das_laiks).
-Izlozē uzvarēja meitene Laimīte. Viņa vēlējās nokļūt galapunktā, saglabājot pēc iespējas vairāk iedotās naudas (un savas arī). Viņa neprata atrast optimālāko ceļojuma maršrutu. Laimīte nolēma, ka rīkosies pēc sekojošas stratēģijas: ierodoties kādā lidostā, viņa uzreiz ar pirmo reisu, kas viņai ir pieejams, dosies tālāk. Tādējādi viņa cerēja samazināt lidostai maksājamās naudas apjomu.
-Noskaidrot, vai Laimīte, šādi ceļojot, var nokļūt vēlamajā galapunktā. Ja tas izdosies, tad jāuzrāda viņas ceļojuma maršruts.
+- Lai pārsēstos no viena reisa uz otru, ir nepieciešama 1 minūte,
+// t.i. ja pasažieris ielido 12:34, tad jau 12:35 viņš drīkst lidot ar citu lidmašīnu.
+
+- Visur pulksteņa laiks tiek pierakstīts formā „HH:MM”,
+kur HH ir stundas 00..23 ar priekšējām nullēm un MM ir minūtes 00..59 ar priekšējām nullēm.
+
+No katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss,
+t.i. vienā un tajā pašā laikā nevar izlidot vairāk kā 1 lidmašīna.
+
+Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min. Tātad
+, ja reisā ielidošanas laiks ir mazāks par izlidošanas laiku, tad ielidošana jau ir nākošajā dienā.
+
+Visi laiki ir doti pēc Griničas laika (http://lv.wikipedia.org/wiki/Grini%C4%8Das_laiks).
+
+Izlozē uzvarēja meitene Laimīte. Viņa vēlējās nokļūt galapunktā, saglabājot pēc iespējas vairāk iedotās naudas (un savas arī).
+Viņa neprata atrast optimālāko ceļojuma maršrutu.
+Laimīte nolēma, ka rīkosies pēc sekojošas stratēģijas:
+ierodoties kādā lidostā, viņa uzreiz ar pirmo reisu, kas viņai ir pieejams, dosies tālāk.
+Tādējādi viņa cerēja samazināt lidostai maksājamās naudas apjomu.
+Noskaidrot, vai Laimīte, šādi ceļojot, var nokļūt vēlamajā galapunktā.
+Ja tas izdosies, tad jāuzrāda viņas ceļojuma maršruts.
 No ceļojuma sākuma lidostas ir vismaz 1 reiss un Laimīte noteikti aizlido no sākuma lidostas.
-Ir zināms, ka visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n. Kopējais reisu skaits nav lielāks par 20’000.
+Ir zināms, ka visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n.
+Kopējais reisu skaits nav lielāks par 20’000.
 
 Failu vārdi
 
