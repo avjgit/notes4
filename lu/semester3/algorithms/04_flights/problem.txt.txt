@@ -1,0 +1,240 @@
+Praktiskais darbs PD4
+“Lidostas”
+
+
+Uzdevuma formulējums
+
+Lai piesaistītu saviem lidojumiem pasažierus nacionālā aviokompānija rīkoja izlozi saviem pasažieriem. Uzvarētājs balvā saņēma iespēju lidot no jebkuras lidostas uz jebkuru lidostu ar pārsēšanos, ja to vēlas pasažieris. Papildus uzvarētājs saņēma 1000Ls. Lai ierobežotu uzvarētāja ceļošanu pa pasauli, tika noteikts, ka katru reisu drīkst izmantot tikai 1 reizi un par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls. Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam.
+Ar reisu tiek saprast lidojums no vienas lidostas uz otru konkrētā laikā. Citā laikā lidojums pa šo pašu maršrutu jau skaitās cits reiss.
+Lai pārsēstos no viena reisa uz otru, ir nepieciešama 1 minūte, t.i. ja pasažieris ielido 12:34, tad jau 12:35 viņš drīkst lidot ar citu lidmašīnu. Visur pulksteņa laiks tiek pierakstīts formā „HH:MM”, kur HH ir stundas 00..23 ar priekšējām nullēm un MM ir minūtes 00..59 ar priekšējām nullēm.
+No katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss, t.i. vienā un tajā pašā laikā nevar izlidot vairāk kā 1 lidmašīna.
+Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min. Tātad, ja reisā ielidošanas laiks ir mazāks par izlidošanas laiku, tad ielidošana jau ir nākošajā dienā. Visi laiki ir doti pēc Griničas laika (http://lv.wikipedia.org/wiki/Grini%C4%8Das_laiks).
+Izlozē uzvarēja meitene Laimīte. Viņa vēlējās nokļūt galapunktā, saglabājot pēc iespējas vairāk iedotās naudas (un savas arī). Viņa neprata atrast optimālāko ceļojuma maršrutu. Laimīte nolēma, ka rīkosies pēc sekojošas stratēģijas: ierodoties kādā lidostā, viņa uzreiz ar pirmo reisu, kas viņai ir pieejams, dosies tālāk. Tādējādi viņa cerēja samazināt lidostai maksājamās naudas apjomu.
+Noskaidrot, vai Laimīte, šādi ceļojot, var nokļūt vēlamajā galapunktā. Ja tas izdosies, tad jāuzrāda viņas ceļojuma maršruts.
+No ceļojuma sākuma lidostas ir vismaz 1 reiss un Laimīte noteikti aizlido no sākuma lidostas.
+Ir zināms, ka visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n. Kopējais reisu skaits nav lielāks par 20’000.
+
+Failu vārdi
+
+•	lidostas.c vai lidostas.cpp, vai lidostas.pas - programmas tekstam
+•	lidostas.in - ieejas dati
+•	lidostas.out - izpildes rezultāts
+
+Ieeja:
+Ieejas failā pirmajā rindā ir lidostu skaits
+     <Count>
+
+Ieejas failā otrajā rindā ir ceļojuma sākuma un beigu lidostas
+     <Start> <End>
+
+Ieejas failā trešajā rindā ir ierašanās laiks ceļojuma sākuma lidostā (var lidot ar lidmašīnu, sākot ar šo laiku plus 1 minūte)
+     <Time> formātā „HH:MM”
+
+Seko rindas, kas apraksta lidmašīnu reisus
+     <From> <To> <n> <Flight1> ... <Flightn>
+, kur <From> ir reisa izlidošanas lidosta un <To> ir reisa ielidošanas lidosta; seko reisu skaits <n> un visu n reisu izlidošanas un ielidošanas laiki <Flighti> formātā „HH:MM-HH:MM”.
+
+Ieejas failu vienmēr noslēdz rindiņa, kurā ir tikai skaitlis 0.
+
+Ieejas dati ir korekti atbilstoši formātam un uzdevuma nosacījumiem.
+
+Izeja:
+Ja ir iespējams realizēt vēlamo ceļojumu, tad izejas failā jāieraksta ceļojuma sākuma lidosta un ierašanās laiks tajā.
+<Start> <Time>
+
+Seko katra izvēlētā ceļojuma apraksts ar izvēlētajiem reisiem formā
+<From>-><To> <Flight>
+Rindiņu secība patvaļīga. Reisus starp konkrētām 2 lidostām var pierakstīt arī vairākās rindiņās. Reisi netiek dublēti.
+
+Ja nav iespējams realizēt vēlamo ceļojumu, tad izejas failā jāieraksta „Impossible”.
+
+
+Praktiskais darbs PD4
+“Lidostas”
+
+Publiskie testi
+
+Nav alternatīvu ceļojuma variantu
+
+Ieeja
+5
+1 5
+00:00
+1 2 1 01:00-02:00
+2 3 1 03:00-04:00
+3 4 1 05:00-06:00
+4 5 1 07:00-08:00
+0
+Izeja
+
+1 00:00
+1->2 01:00-02:00
+2->3 03:00-04:00
+3->4 05:00-06:00
+4->5 07:00-08:00
+
+Lai nomainītu lidmašīnas, nepieciešama vismaz 1 minūte
+
+Ieeja
+3
+1 3
+00:00
+1 2 1 01:00-02:00
+2 3 2 02:00-04:00 02:01-04:01
+0
+Izeja
+
+1 00:00
+1->2 01:00-02:00
+2->3 02:01-04:01
+
+Izlidošanas un ielidošanas laiki var būt ļoti dažādi
+
+Ieeja
+4
+1 4
+00:00
+1 2 3 01:00-02:00 15:56-18:24 21:45-23:50
+2 1 3 02:01-04:32 17:14-19:07 20:45-22:18
+2 3 1 12:13-14:15
+3 2 1 16:17-18:19
+1 3 1 20:21-22:23
+3 4 1 18:00-02:00
+0
+Izeja
+
+1 00:00
+1->2 01:00-02:00
+2->1 02:01-04:32
+1->2 15:56-18:24
+2->1 20:45-22:18
+1->3 20:21-22:23
+3->2 16:17-18:19
+2->3 12:13-14:15
+3->4 18:00-02:00
+
+Pamatā 3.testpiemērs, kuram mainīts ceļojuma sākuma laiks
+
+Ieeja
+4
+1 4
+18:00
+1 2 3 01:00-02:00 15:56-18:24 21:45-23:50
+2 1 3 02:01-04:32 17:14-19:07 20:45-22:18
+2 3 1 12:13-14:15
+3 2 1 16:17-18:19
+1 3 1 20:21-22:23
+3 4 1 18:00-02:00
+0
+Izeja
+
+1 18:00
+1->3 20:21-22:23
+3->2 16:17-18:19
+2->1 20:45-22:18
+1->2 01:00-02:00
+2->1 02:01-04:32
+1->2 15:56-18:24
+2->3 12:13-14:15
+3->4 18:00-02:00
+
+Reisi var nebūt hronoloģiskā secībā
+
+Ieeja
+4
+1 4
+20:30
+1 2 3 01:00-02:00 15:56-18:24 21:45-23:50
+2 1 4 02:01-04:32 17:14-19:07 08:09-10:11 20:45-22:18
+2 3 1 12:13-14:15
+3 2 1 16:17-18:19
+1 3 2 20:21-22:23 09:15-11:57
+3 4 1 18:00-02:00
+0
+Izeja
+
+1 20:30
+1->2 21:45-23:50
+2->1 02:01-04:32
+1->3 09:15-11:57
+3->2 16:17-18:19
+2->1 20:45-22:18
+1->2 01:00-02:00
+2->1 08:09-10:11
+1->2 15:56-18:24
+2->3 12:13-14:15
+3->4 18:00-02:00
+
+Nevar sasniegt vēlamo galapunktu
+
+Ieeja
+4
+1 4
+00:30
+1 2 3 01:00-02:00 15:56-18:24 21:45-23:50
+2 1 4 02:01-04:32 17:14-19:07 08:09-10:11 20:45-22:18
+2 3 1 12:13-14:15
+3 2 2 16:17-18:19 12:00-13:59
+1 3 1 09:15-11:57
+3 4 1 18:00-02:00
+0
+Izeja
+
+Impossible
+
+Kopš ierašanās sākuma lidostā nepieciešama vismaz 1 minūte, lai aizlidotu
+
+Ieeja
+3
+2 3
+02:00
+1 2 1 01:00-02:00
+2 3 2 02:00-04:00 02:01-04:01
+0
+Izeja
+
+2 02:00
+2->3 02:01-04:01
+
+Uzdevuma formulējuma piemērs 1
+
+Ieeja
+5
+1 5
+00:00
+1 2 1 01:00-03:00
+1 2 2 12:00-14:05 15:00-17:00
+1 3 2 06:30-08:00 17:20-18:55
+2 3 2 13:00-16:00 21:00-00:00
+2 4 3 04:00-08:00 05:00-09:00 18:00-22:00
+3 1 2 02:45-04:15 23:50-01:20
+3 2 1 23:52-02:52
+3 5 1 23:51-04:00
+4 2 1 18:00-22:00
+4 3 1 12:00-13:00
+0
+Izeja
+
+1 00:00
+1->2 01:00-03:00
+2->4 04:00-08:00
+4->3 12:00-13:00
+3->1 23:50-01:20
+1->3 06:30-08:00
+3->5 23:51-04:00
+
+
+Uzdevuma formulējuma piemērs 2
+
+Ieeja
+3
+1 3
+00:00
+1 2 1 01:00-02:00
+2 1 1 03:00-04:00
+2 3 1 12:00-13:00
+3 2 1 18:00-19:00
+0
+Izeja
+
+Impossible
