@@ -4,9 +4,9 @@ Lai piesaistītu saviem lidojumiem pasažierus nacionālā aviokompānija rīkoj
 Uzvarētājs balvā saņēma iespēju lidot no jebkuras lidostas uz jebkuru lidostu ar pārsēšanos, ja to vēlas pasažieris.
 Papildus uzvarētājs saņēma 1000Ls. Lai ierobežotu uzvarētāja ceļošanu pa pasauli, tika noteikts, ka
 
-	* 	katru reisu drīkst izmantot tikai 1 reizi un
-	*	par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls.
-	*	Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam.
+    *   katru reisu drīkst izmantot tikai 1 reizi un
+    *   par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls.
+    *   Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam.
 
 - Ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā.
 //Citā laikā lidojums pa šo pašu maršrutu jau skaitās cits reiss.
@@ -36,47 +36,33 @@ No ceļojuma sākuma lidostas ir vismaz 1 reiss un Laimīte noteikti aizlido no 
 Ir zināms, ka visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n.
 Kopējais reisu skaits nav lielāks par 20’000.
 
-Failu vārdi
+==================  Ieeja
+5                   lidostu skaits        <Count>
+1 5                 ceļojuma sākuma un beigu lidostas     <Start> <End>
+00:00               ierašanās laiks ceļojuma sākuma lidostā <Time> formātā „HH:MM”; NB: var lidot ar lidmašīnu, sākot ar šo laiku + 1 minūte
+1 2 1 01:00-02:00   <From> <To> <n> <Flight1> ... <Flightn>
+2 3 1 03:00-04:00       <From> ir reisa izlidošanas lidosta <To> ir reisa ielidošanas lidosta; seko reisu skaits <n>
+3 4 1 05:00-06:00       un visu n reisu izlidošanas un ielidošanas laiki <Flighti> formātā „HH:MM-HH:MM”.
+4 5 1 07:00-08:00
+0                   Ieejas failu vienmēr noslēdz rindiņa, kurā ir tikai skaitlis 0.
 
-•	lidostas.c vai lidostas.cpp, vai lidostas.pas - programmas tekstam
-•	lidostas.in - ieejas dati
-•	lidostas.out - izpildes rezultāts
+==================  Izeja
+* Ja nav iespējams realizēt vēlamo ceļojumu, tad izejas failā jāieraksta „Impossible”.
 
-Ieeja:
-Ieejas failā pirmajā rindā ir lidostu skaits
-     <Count>
+1 00:00             Ja ir iespējams realizēt vēlamo ceļojumu, tad jāieraksta sākuma lidosta un ierašanās laiks tajā: <Start> <Time>
+1->2 01:00-02:00    Seko katra izvēlētā ceļojuma apraksts ar izvēlētajiem reisiem formā <From>-><To> <Flight>
+2->3 03:00-04:00
+3->4 05:00-06:00
+4->5 07:00-08:00
 
-Ieejas failā otrajā rindā ir ceļojuma sākuma un beigu lidostas
-     <Start> <End>
+Rindiņu secība patvaļīga.
+Reisus starp konkrētām 2 lidostām var pierakstīt arī vairākās rindiņās.
+Reisi netiek dublēti.
 
-Ieejas failā trešajā rindā ir ierašanās laiks ceļojuma sākuma lidostā (var lidot ar lidmašīnu, sākot ar šo laiku plus 1 minūte)
-     <Time> formātā „HH:MM”
-
-Seko rindas, kas apraksta lidmašīnu reisus
-     <From> <To> <n> <Flight1> ... <Flightn>
-, kur <From> ir reisa izlidošanas lidosta un <To> ir reisa ielidošanas lidosta; seko reisu skaits <n> un visu n reisu izlidošanas un ielidošanas laiki <Flighti> formātā „HH:MM-HH:MM”.
-
-Ieejas failu vienmēr noslēdz rindiņa, kurā ir tikai skaitlis 0.
-
-Ieejas dati ir korekti atbilstoši formātam un uzdevuma nosacījumiem.
-
-Izeja:
-Ja ir iespējams realizēt vēlamo ceļojumu, tad izejas failā jāieraksta ceļojuma sākuma lidosta un ierašanās laiks tajā.
-<Start> <Time>
-
-Seko katra izvēlētā ceļojuma apraksts ar izvēlētajiem reisiem formā
-<From>-><To> <Flight>
-Rindiņu secība patvaļīga. Reisus starp konkrētām 2 lidostām var pierakstīt arī vairākās rindiņās. Reisi netiek dublēti.
-
-Ja nav iespējams realizēt vēlamo ceļojumu, tad izejas failā jāieraksta „Impossible”.
-
-
-Praktiskais darbs PD4
-“Lidostas”
-
-Publiskie testi
-
-Nav alternatīvu ceļojuma variantu
+==============================
+============================== Publiskie testi
+==============================
+============================== Nav alternatīvu ceļojuma variantu
 
 Ieeja
 5
@@ -95,7 +81,7 @@ Izeja
 3->4 05:00-06:00
 4->5 07:00-08:00
 
-Lai nomainītu lidmašīnas, nepieciešama vismaz 1 minūte
+============================== Lai nomainītu lidmašīnas, nepieciešama vismaz 1 minūte
 
 Ieeja
 3
@@ -110,7 +96,7 @@ Izeja
 1->2 01:00-02:00
 2->3 02:01-04:01
 
-Izlidošanas un ielidošanas laiki var būt ļoti dažādi
+============================== Izlidošanas un ielidošanas laiki var būt ļoti dažādi
 
 Ieeja
 4
@@ -135,7 +121,7 @@ Izeja
 2->3 12:13-14:15
 3->4 18:00-02:00
 
-Pamatā 3.testpiemērs, kuram mainīts ceļojuma sākuma laiks
+============================== Pamatā 3.testpiemērs, kuram mainīts ceļojuma sākuma laiks
 
 Ieeja
 4
@@ -160,7 +146,7 @@ Izeja
 2->3 12:13-14:15
 3->4 18:00-02:00
 
-Reisi var nebūt hronoloģiskā secībā
+============================== Reisi var nebūt hronoloģiskā secībā
 
 Ieeja
 4
@@ -187,7 +173,7 @@ Izeja
 2->3 12:13-14:15
 3->4 18:00-02:00
 
-Nevar sasniegt vēlamo galapunktu
+============================== Nevar sasniegt vēlamo galapunktu
 
 Ieeja
 4
@@ -204,7 +190,7 @@ Izeja
 
 Impossible
 
-Kopš ierašanās sākuma lidostā nepieciešama vismaz 1 minūte, lai aizlidotu
+============================== Kopš ierašanās sākuma lidostā nepieciešama vismaz 1 minūte, lai aizlidotu
 
 Ieeja
 3
@@ -218,7 +204,7 @@ Izeja
 2 02:00
 2->3 02:01-04:01
 
-Uzdevuma formulējuma piemērs 1
+============================== Uzdevuma formulējuma piemērs 1
 
 Ieeja
 5
@@ -246,7 +232,7 @@ Izeja
 3->5 23:51-04:00
 
 
-Uzdevuma formulējuma piemērs 2
+============================== Uzdevuma formulējuma piemērs 2
 
 Ieeja
 3
