@@ -1,34 +1,21 @@
 ============================== Praktiskais darbs PD4 “Lidostas”
-Uzvarētājs saņēma 1000Ls.
-    *   katru reisu drīkst izmantot tikai 1 reizi
-    *   par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls
-    *   Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam
-
-- Ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā.
-//Citā laikā lidojums pa šo pašu maršrutu jau skaitās cits reiss.
-
+- katru reisu drīkst izmantot tikai 1 reizi
+- ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā.
 - Lai pārsēstos no viena reisa uz otru, ir nepieciešama 1 minūte,
-// t.i. ja pasažieris ielido 12:34, tad jau 12:35 viņš drīkst lidot ar citu lidmašīnu.
-
 - Visur pulksteņa laiks tiek pierakstīts formā „HH:MM”,
-kur HH ir stundas 00..23 ar priekšējām nullēm un MM ir minūtes 00..59 ar priekšējām nullēm.
+- No katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss
+- Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min.
+- ja ielidošanas laiks < izlidošanas laiku, tad ielidošana jau ir nākošajā dienā.
 
-No katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss,
-t.i. vienā un tajā pašā laikā nevar izlidot vairāk kā 1 lidmašīna.
-
-Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min.
-=> ja reisā ielidošanas laiks < izlidošanas laiku, tad ielidošana jau ir nākošajā dienā.
-
-Izlozē uzvarēja meitene Laimīte. Viņa vēlējās nokļūt galapunktā, saglabājot pēc iespējas vairāk iedotās naudas (un savas arī).
-Viņa neprata atrast optimālāko ceļojuma maršrutu.
+Izlozē uzvarēja meitene Laimīte. Viņa vēlējās nokļūt galapunktā, pie tam minimizējot gaidīšanas laiku.
 Laimīte nolēma, ka rīkosies pēc sekojošas stratēģijas:
 ierodoties kādā lidostā, viņa uzreiz ar pirmo reisu, kas viņai ir pieejams, dosies tālāk.
 Tādējādi viņa cerēja samazināt lidostai maksājamās naudas apjomu.
 Noskaidrot, vai Laimīte, šādi ceļojot, var nokļūt vēlamajā galapunktā.
 Ja tas izdosies, tad jāuzrāda viņas ceļojuma maršruts.
-No ceļojuma sākuma lidostas ir vismaz 1 reiss un Laimīte noteikti aizlido no sākuma lidostas.
-Ir zināms, ka visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n.
-Kopējais reisu skaits nav lielāks par 20’000.
+
+- visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n
+- Kopējais reisu skaits nav lielāks par 20’000
 
 ==================  Ieeja
 5                   lidostu skaits        <Count>
