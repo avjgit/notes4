@@ -1,12 +1,8 @@
 ============================== Praktiskais darbs PD4 “Lidostas”
-============================== Uzdevuma formulējums
-Lai piesaistītu saviem lidojumiem pasažierus nacionālā aviokompānija rīkoja izlozi saviem pasažieriem.
-Uzvarētājs balvā saņēma iespēju lidot no jebkuras lidostas uz jebkuru lidostu ar pārsēšanos, ja to vēlas pasažieris.
-Papildus uzvarētājs saņēma 1000Ls. Lai ierobežotu uzvarētāja ceļošanu pa pasauli, tika noteikts, ka
-
-    *   katru reisu drīkst izmantot tikai 1 reizi un
-    *   par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls.
-    *   Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam.
+Uzvarētājs saņēma 1000Ls.
+    *   katru reisu drīkst izmantot tikai 1 reizi
+    *   par katru pavadīto minūti pārsēšanās lidostā tiek iekasēts 1Ls
+    *   Ja iedotā nauda izbeidzas, tad par uzturēšanos lidostās uzvarētājam jāsāk maksāt pašam
 
 - Ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā.
 //Citā laikā lidojums pa šo pašu maršrutu jau skaitās cits reiss.
@@ -20,10 +16,8 @@ kur HH ir stundas 00..23 ar priekšējām nullēm un MM ir minūtes 00..59 ar pr
 No katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss,
 t.i. vienā un tajā pašā laikā nevar izlidot vairāk kā 1 lidmašīna.
 
-Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min. Tātad
-, ja reisā ielidošanas laiks ir mazāks par izlidošanas laiku, tad ielidošana jau ir nākošajā dienā.
-
-Visi laiki ir doti pēc Griničas laika (http://lv.wikipedia.org/wiki/Grini%C4%8Das_laiks).
+Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min.
+=> ja reisā ielidošanas laiks < izlidošanas laiku, tad ielidošana jau ir nākošajā dienā.
 
 Izlozē uzvarēja meitene Laimīte. Viņa vēlējās nokļūt galapunktā, saglabājot pēc iespējas vairāk iedotās naudas (un savas arī).
 Viņa neprata atrast optimālāko ceļojuma maršrutu.
