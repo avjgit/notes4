@@ -1,17 +1,12 @@
 ============================== Praktiskais darbs PD4 “Lidostas”
 - visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n
 - kopējais reisu skaits nav lielāks par 20’000
-- ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā
-- ja ielidošanas laiks < izlidošanas laiku, tad ielidošana jau ir nākošajā dienā.
 - visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min.
-- no katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss
-
 - lai pārsēstos no viena reisa uz otru, ir nepieciešama 1 minūte
 - katru reisu drīkst izmantot tikai 1 reizi
 - ierodoties lidostā, uzreiz ar pirmo pieejamo reisu dodas tālāk
 - MĒRĶIS: nokļūt galapunktā, minimizējot gaidīšanas laiku.
-
-==================  Ieeja
+============================== Ieeja
 5                   lidostu skaits        <Count>
 1 5                 ceļojuma sākuma un beigu lidostas     <Start> <End>
 00:00               ierašanās laiks ceļojuma sākuma lidostā <Time> formātā „HH:MM”; NB: var lidot ar lidmašīnu, sākot ar šo laiku + 1 minūte
@@ -20,10 +15,7 @@
 3 4 1 05:00-06:00       un visu n reisu izlidošanas un ielidošanas laiki <Flighti> formātā „HH:MM-HH:MM”.
 4 5 1 07:00-08:00
 0                   Ieejas failu vienmēr noslēdz rindiņa, kurā ir tikai skaitlis 0.
-
-==================  Izeja
-* Ja nav iespējams realizēt vēlamo ceļojumu, tad izejas failā jāieraksta „Impossible”.
-
+============================== Izeja
 1 00:00             Ja ir iespējams realizēt vēlamo ceļojumu, tad jāieraksta sākuma lidosta un ierašanās laiks tajā: <Start> <Time>
 1->2 01:00-02:00    Seko katra izvēlētā ceļojuma apraksts ar izvēlētajiem reisiem formā <From>-><To> <Flight>
 2->3 03:00-04:00
@@ -33,12 +25,9 @@
 Rindiņu secība patvaļīga.
 Reisus starp konkrētām 2 lidostām var pierakstīt arī vairākās rindiņās.
 Reisi netiek dublēti.
-
-==============================
+* Ja nav iespējams realizēt vēlamo ceļojumu, tad izejas failā jāieraksta „Impossible”.
 ============================== Publiskie testi
-==============================
 ============================== Nav alternatīvu ceļojuma variantu
-
 Ieeja
 5
 1 5
