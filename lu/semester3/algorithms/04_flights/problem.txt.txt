@@ -1,21 +1,15 @@
 ============================== Praktiskais darbs PD4 “Lidostas”
 - katru reisu drīkst izmantot tikai 1 reizi
-- ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā.
-- Lai pārsēstos no viena reisa uz otru, ir nepieciešama 1 minūte,
-- Visur pulksteņa laiks tiek pierakstīts formā „HH:MM”,
+- ar reisu tiek saprasts lidojums no vienas lidostas uz otru konkrētā laikā
+- lai pārsēstos no viena reisa uz otru, ir nepieciešama 1 minūte
+- visur pulksteņa laiks tiek pierakstīts formā „HH:MM”
 - No katras lidostas vienā laika brīdī ir ne vairāk kā viens reiss
 - Visi reisu ilgumi ir robežās no 30 min līdz 23 stundas un 59 min.
 - ja ielidošanas laiks < izlidošanas laiku, tad ielidošana jau ir nākošajā dienā.
-
-Izlozē uzvarēja meitene Laimīte. Viņa vēlējās nokļūt galapunktā, pie tam minimizējot gaidīšanas laiku.
-Laimīte nolēma, ka rīkosies pēc sekojošas stratēģijas:
-ierodoties kādā lidostā, viņa uzreiz ar pirmo reisu, kas viņai ir pieejams, dosies tālāk.
-Tādējādi viņa cerēja samazināt lidostai maksājamās naudas apjomu.
-Noskaidrot, vai Laimīte, šādi ceļojot, var nokļūt vēlamajā galapunktā.
-Ja tas izdosies, tad jāuzrāda viņas ceļojuma maršruts.
-
+- ierodoties lidostā, uzreiz ar pirmo pieejamo reisu dodas tālāk
 - visas n lidostas tiek apzīmētas ar unikālu skaitli no 1 līdz n
-- Kopējais reisu skaits nav lielāks par 20’000
+- kopējais reisu skaits nav lielāks par 20’000
+- MĒRĶIS: nokļūt galapunktā, minimizējot gaidīšanas laiku.
 
 ==================  Ieeja
 5                   lidostu skaits        <Count>
