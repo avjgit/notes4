@@ -29,39 +29,54 @@ int main(){
 
 
 
-    ifstream in("lidostas.in");
-    ofstream out("lidostas.out");
+    // ifstream in("lidostas.in");
+    // ofstream out("lidostas.out");
 
-    in >> airports;
-    in >> start_airport;
-    in >> target_airport;
+    // in >> airports;
+    // in >> start_airport;
+    // in >> target_airport;
 
-    out << "ok, there are " << airports << " airports.";
-    out << "we need to get from " << start_airport << " to " << target_airport << "\n";
+    // out << "ok, there are " << airports << " airports.";
+    // out << "we need to get from " << start_airport << " to " << target_airport << "\n";
 
 
-    // FILE* in = fopen("lidostas.in", "r");
-    // FILE* out = fopen("lidostas.out", "w+");
-    // fscanf  (in, "%i", &airports);
-    // fprintf (out, "%i", airports);
+    FILE* in = fopen("lidostas.in", "r");
+    FILE* out = fopen("lidostas.out", "w+");
+    fscanf  (in, "%i", &airports);
+    fprintf (out, "%i", airports);
 
-    // fscanf  (in, "%i", &start_airport);
-    // fscanf  (in, "%i", &target_airport);
+    fscanf  (in, "%i", &start_airport);
+    fscanf  (in, "%i", &target_airport);
 
-    // fprintf (out, "%i", airports);
+    fprintf (out, "%i", start_airport);
+    fprintf (out, "%i", target_airport);
 
-    in >> start_HH;
-    in >> start_MM;
-    out << "we arriving at ";
-    out << std::setw(2) << std::setfill('-') << start_HH;
-    out << ":";
-    out << std::setw(2) << std::setfill('9') << start_MM;
 
+    fscanf  (in, "%i:%i", &start_HH, &start_MM);
+    // fscanf  (in, "%i", &start_MM);
+
+    fprintf (out, "%i", start_HH);
+    fprintf (out, "%i", start_MM);
+
+
+    fscanf  (in, "%i", &departure_airport);
+    fscanf  (in, "%i", &arrival_airport);
+
+    fprintf (out, " from %i", departure_airport);
+    fprintf (out, " to %i", arrival_airport);
+// int x;
+
+//     in >> departure_airport;
+//     in >> x;
+//     out << "we arriving at ";
+//     out << std::setw(2) << std::setfill('0') << departure_airport;
+//     out << ":";
+//     out << std::setw(2) << std::setfill('0') << x;
     // while(true){
-        in >> departure_airport;
+        // in >> start_MM;
         // if (departure_airport == END_OF_INPUT)
             // break;
-        // in >> arrival_airport;
+        // in >> start_HH;
         // in >> flights;
         // in >> departure_HH;
         // in >> departure_MM;
@@ -69,23 +84,14 @@ int main(){
         // in >> arrival_MM;
     // }
     // out << "ok";
-        out << "\n" << departure_airport ;
-        // out << arrival_airport << "\n";
+        // out << "\n" << start_MM ;
+        // out << start_HH << "\n";
         // out << flights << "\n";
         // out << departure_HH << ":";
         // out << departure_MM << "-";
         // out << arrival_HH << ":";
         // out << arrival_MM;
-        int test;
-        in >> test;
-        out << test << "\n";
-        int a;
-        in >> a;
-        out << a << "\n";
-        // in >> departure_airport;
-        // out << departure_airport << "\n";
-        // in >> start_airport;
-        // out << start_airport << "\n";
+
 
 
 
