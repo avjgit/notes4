@@ -26,18 +26,13 @@ int main(){
     fscanf  (in, "%i", &target_airport);
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
 
-    fprintf (out, "%i\n", airports);
-    fprintf (out, "%i\n", start_airport);
-    fprintf (out, "%i\n", target_airport);
-    fprintf (out, "%02i:%02i", start_HH, start_MM);
+    // 1d array of pointers to airports first flights
+    // each flight then has flag, if USED, and pointer to next flight
+    // bet - "Reisi var nebūt doti hronoloģiskā secībā"!
+    // tad ... tomēr lietot 2d ar laikiem kolonnā?
 
     // flights data
     fscanf  (in, "%i %i %i", &departure_airport, &arrival_airport, &flights);
-
-    fprintf (out, " from %i", departure_airport);
-    fprintf (out, " to %i", arrival_airport);
-    fprintf (out, " there will be %i flights", flights);
-
 
     return 0;
 }
