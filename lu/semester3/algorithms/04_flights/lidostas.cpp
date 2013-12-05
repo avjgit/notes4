@@ -5,6 +5,7 @@
 // https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/04_flights/lidostas.cpp
 #include <fstream>
 #include <sstream>
+#include <iomanip>
 using namespace std;
 
 struct flight{int airport, time;};
@@ -17,6 +18,7 @@ int main(){
     // cout << DAY_MINUTES;
     int airports, arrival_airport, target_airport;
     int flights, arrival_time, departur_time;
+    int arrival_HH, arrival_MM;
     string flight_line;
 
     ifstream in("lidostas.in");
@@ -28,6 +30,15 @@ int main(){
 
     out << "ok, there are " << airports << " airports.";
     out << "we need to get from " << arrival_airport << " to " << target_airport;
+
+    in >> arrival_HH;
+    in >> arrival_MM;
+    out << "we arriving at ";
+    out << std::setw(2) << std::setfill('0') << arrival_HH;
+    out << ":";
+    out << std::setw(2) << std::setfill('0') << arrival_MM;
+
+
 
     // while (getline(in, line)){
         // istringstream linestream(flight_line);
