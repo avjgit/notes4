@@ -1,14 +1,15 @@
-// Andrejs Jurcenoks
-// aj05044
-// Datu strukturas un pamatalgoritmi II
-// PD3 Lidostas
-// https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/04_flights/lidostas.cpp
+// Andrejs Jurcenoks// aj05044// Datu strukturas un pamatalgoritmi II// PD3 Lidostas// https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/04_flights/lidostas.cpp
 #include <fstream>
 #include <sstream>
 #include <iomanip>
 using namespace std;
-
-struct flight{int airport, time;};
+struct flight{
+    int departure_time;
+    int arrival_airport;
+    itn arrival_time;
+    flight* next_flight;
+    bool used;
+};
 
 int main(){
     // for 2d flights array, for columns (as departure times)
