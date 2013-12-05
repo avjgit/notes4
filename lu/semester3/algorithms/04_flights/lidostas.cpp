@@ -8,7 +8,7 @@ struct flight{
     int arrival_airport;
     int arrival_time;
     bool used;
-    flight* next_flight;
+    flight* other_flight;
 };
 int main(){
     int airports, start_airport, arrival_airport, departure_airport, target_airport;
@@ -30,6 +30,10 @@ int main(){
     // each flight then has flag, if USED, and pointer to next flight
     // bet - "Reisi var nebūt doti hronoloģiskā secībā"!
     // tad ... tomēr lietot 2d ar laikiem kolonnā?
+    // ne; var lietot sarakstu, bet nakamsi bus nevis "next", but vnk "other"
+    // un bus jaizvelas tuvakais - jasalidzina ielidosanas laiks ar izlidosanas,
+    // pie tam no pieejamiem
+    // un jaizvelas mazakais
 
     // flights data
     fscanf  (in, "%i %i %i", &departure_airport, &arrival_airport, &flights);
