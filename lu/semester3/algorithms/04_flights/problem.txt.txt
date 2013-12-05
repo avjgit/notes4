@@ -9,7 +9,8 @@
 ============================== Ieeja
 5                   lidostu skaits        <Count>
 1 5                 ceļojuma sākuma un beigu lidostas     <Start> <End>
-00:00               ierašanās laiks ceļojuma sākuma lidostā <Time> formātā „HH:MM”; NB: var lidot ar lidmašīnu, sākot ar šo laiku + 1 minūte
+00:00               ierašanās laiks ceļojuma sākuma lidostā <Time> formātā „HH:MM”;
+                    NB: var lidot ar lidmašīnu, sākot ar šo laiku + 1 minūte
 1 2 1 01:00-02:00   <From> <To> <n> <Flight1> ... <Flightn>
 2 3 1 03:00-04:00       <From> ir reisa izlidošanas lidosta <To> ir reisa ielidošanas lidosta; seko reisu skaits <n>
 3 4 1 05:00-06:00       un visu n reisu izlidošanas un ielidošanas laiki <Flighti> formātā „HH:MM-HH:MM”.
