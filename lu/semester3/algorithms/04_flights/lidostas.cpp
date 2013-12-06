@@ -34,9 +34,34 @@ int main(){
     // un bus jaizvelas tuvakais - jasalidzina ielidosanas laiks ar izlidosanas,
     // pie tam no pieejamiem
     // un jaizvelas mazakais
-
-    // flights data
-    fscanf  (in, "%i %i %i", &departure_airport, &arrival_airport, &flights);
+    for(int i = 0; i < 20; i++){
+    // while(true){
+        fscanf(in, "%i", &departure_airport);
+        if (departure_airport == 0)
+            break;
+        fscanf(
+            in,
+            "%i %i %i:%i-%i:%i",
+            &arrival_airport,
+            &flights,
+            &departure_HH,
+            &departure_MM,
+            &arrival_HH,
+            &arrival_MM
+        );
+        fprintf(
+            out,
+            "flight %i: %i %i %i %i:%i-%i:%i\n",
+            i,
+            departure_airport,
+            arrival_airport,
+            flights,
+            departure_HH,
+            departure_MM,
+            arrival_HH,
+            arrival_MM
+        );
+    }
 
     return 0;
 }
