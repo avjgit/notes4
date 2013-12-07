@@ -76,21 +76,43 @@ int main(){
     }
 
     ///////////////////////////////// searching for nearest non-used flight
-    f = airports[start_airport];
+    f = airports[start_airport]; //flight to start to loop through
     arrival_time = arrival_HH*100 + arrival_MM;
     flight* nearest = NULL;
     int current_departure_time;
-    int nearest_departure_time = 2359;
+    int nearest_departure_time = 2400;
 
-    // let's try with pseudocode
-    until goal_found or no_more_flights:
-        select nearest non-used flight from departure_airport
-        if all are used
-            no_more_flights, exit
-        if nearest->departure_airport = target_airport
-            goal_found, exit
-        else
-            departure_airport = nearest->arrival_airport
+    // until goal_found or no_more_flights:
+    bool found = false;
+    bool stuck = false;
+    while(!found && !stuck){
+    //     select nearest non-used flight from departure_airport
+        while(f != NULL){
+            if(!f->used){
+                if(f->departure_time < nearest_departure_time){
+                    nearest_departure_time = f->departure_time;
+                    nearest = f;
+                }
+            }
+
+
+            f = f->other_flight;
+        }
+
+    //     if all are used - no "nearest non-used" found
+        if(nearest == NULL)
+    //         no_more_flights, exit
+            stuck = true;
+
+        if (nearest->arrival_airport == target_airport){
+            goal_found = true;
+        }
+        else{
+            nearest->used = true;
+            f = airports[nearest->arrival_airport];
+            arrival_time = nearest->arrival_HH * 100 + nearest->arrival_MM;
+        }
+    }
 
     // searching for nearest available flight
     while(true){
