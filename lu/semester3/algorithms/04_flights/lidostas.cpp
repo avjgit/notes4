@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <string>
 using namespace std;
 struct flight{
     int departure_time;
@@ -34,8 +35,12 @@ int main(){
     // un bus jaizvelas tuvakais - jasalidzina ielidosanas laiks ar izlidosanas,
     // pie tam no pieejamiem
     // un jaizvelas mazakais
-    for(int i = 0; i < 9; i++){
-    // while(true){
+
+    string s = "asdf";
+    // for(int i = 0; i < 9; i++){
+    int i = 0;
+    while(true){
+        i++;
         fscanf(in, "%d", &departure_airport);
         if (departure_airport == 0)
             break;
@@ -51,7 +56,7 @@ int main(){
         );
         fprintf(
             out,
-            "flight %i: %i %i %i %i:%i-%i:%i\n",
+            "flight %d: %d %d %d %02d:%02d-%02d:%02d\n",
             i,
             departure_airport,
             arrival_airport,
@@ -62,6 +67,17 @@ int main(){
             arrival_MM
         );
     }
+    fprintf(out, "%s\n", s.c_str());
+
+    fclose(out);
+    out = fopen("lidostas.out", "w");
+    fprintf(out, "%s\n", s.c_str());
+
+
+
+
+    fclose(in);
+    fclose(out);
 
     return 0;
 }
