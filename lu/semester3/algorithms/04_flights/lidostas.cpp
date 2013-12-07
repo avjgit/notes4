@@ -39,7 +39,7 @@ int main(){
         airports[i] = NULL;
 
     ///////////////////////////////// reading flights data
-    flight *f, *last_flight;
+    flight *f;
     while(true){
         fscanf(in, "%d", &departure_airport);
         if (departure_airport == 0) {break;}
@@ -101,13 +101,13 @@ int main(){
             // printf("%s %d\n", "checking flight to ", f->arrival_airport);
             if(f->used == false){
                 if(f->departure_time > arrival_time){
-                    departure_time = f->departure_time;
+                    time_till_departure = f->departure_time - arrival_time;
                 }
                 else{
-                    departure_time = 2400 - arrival_time + f->departure_time;
+                    time_till_departure = 2400 - arrival_time + f->departure_time;
                 }
 
-                if(departure_time < nearest_departure_time){
+                if(time_till_departure < nearest_departure_time){
                     nearest_departure_time = f->departure_time;
                     nearest = f;
                 }
