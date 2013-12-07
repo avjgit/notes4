@@ -6,8 +6,12 @@
 using namespace std;
 struct flight{
     int arrival_airport;
-    int departure_time;
+    int departure_time;     // _time - for easier comparison
+    int departure_HH;       // _H - for easier output
+    int departure_MM;
     int arrival_time;
+    int arrival_HH;
+    int arrival_MM;
     bool used;
     flight* other_flight;
 };
@@ -56,6 +60,10 @@ int main(){
             // todo: fix correct time; this is just to quick check of idea
             f->departure_time = departure_HH * 100 + departure_MM;
             f->arrival_time = arrival_HH * 100 + arrival_MM;
+            f->departure_HH = departure_HH;
+            f->departure_MM = departure_MM;
+            f->arrival_HH = arrival_HH;
+            f->arrival_MM = arrival_MM;
             f->used = false;
             f->other_flight = NULL;
 
@@ -66,7 +74,6 @@ int main(){
             if (i == 1){
                 airports[departure_airport] = f;
                 last_flight = f;
-                fprintf(out, "%s\n", "ok, first time");
             }
             else{
                 last_flight->other_flight = f;
@@ -76,24 +83,21 @@ int main(){
     }
 
     ///////////////////////////////// searching for nearest non-used flight
+    fprintf(out, "%d %02d:%02d\n", start_airport, start_HH, start_MM);
+    arrival_time = start_HH*100 + start_MM;
+    departure_airport = start_airport;
     f = airports[start_airport]; //flight to start to loop through
-    arrival_time = arrival_HH*100 + arrival_MM;
     flight* nearest = 0;
-    flight* nullptr = NULL;
 
     int current_departure_time;
     int nearest_departure_time = 2400;
 
     // until goal_found or no_more_flights:
-    bool found = false;
-    bool stuck = false;
-    // while(!found && !stuck){
-    for(int i = 0; i < 10; i++){
-    //     select nearest non-used flight from departure_airport
+    while(true){
+        // select nearest non-used flight from departure_airport
         while(f != NULL){
             printf("%s %d\n", "checking flight to ", f->arrival_airport);
             if(f->used == false){
-                // printf("%s %d\n", "checking flight to ", f->arrival_airport);
                 if(f->departure_time < nearest_departure_time){
                     nearest_departure_time = f->departure_time;
                     nearest = f;
@@ -102,17 +106,29 @@ int main(){
             f = f->other_flight;
         }
 
-    //     if all are used - no "nearest non-used" found
         if(nearest == NULL)
             break; // no more flights
+
+        fprintf(
+            out,
+            "%d->%d %02d:%02d-%02d:%02d\n",
+            departure_airport,
+            nearest->arrival_airport,
+            nearest->departure_HH,
+            nearest->departure_MM,
+            nearest->arrival_HH,
+            nearest->arrival_MM
+        );
 
         if (nearest->arrival_airport == target_airport)
             break; //found
 
-        f = airports[nearest->arrival_airport];
         arrival_time = nearest->arrival_time;
+        departure_airport = nearest->arrival_airport;
+        f = airports[departure_airport];
         nearest->used = true;
         nearest = NULL;
+        nearest_departure_time = 2400;
     }
 
     // searching for nearest available flight
