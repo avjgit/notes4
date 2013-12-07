@@ -29,22 +29,12 @@ int main(){
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
     // "+1" - just for easier reference in later ([n], not [n-1])
     //initializes array elements to null
-    flight* airports = new flight [airports_count + 1]();
-    for (int i = 0; i <= airports_count; i++) {
-        printf("%s\n", "printing...");
-        printf("%s\n", airports[i]);
-        airports[i] = NULL;
-
-        // if(airports[i] == NULL){
-            // printf("%s\n", "empty");
-        // }
-        // else{
-        //     printf("%s\n", "full");
-        // }
-    }
+    flight** airports = new flight* [airports_count + 1];
 
     //////////////////////////////////////////////////// reading flights data
     flight *f, *last_flight;
+    bool first_found = false;
+
     while(true){
         fscanf(in, "%d", &departure_airport);
         // stop if 0
@@ -87,15 +77,16 @@ int main(){
 
             // todo: hey, what about flights to other airports?
 
-            // if (airports[departure_airport] == 0){
-                // airports[departure_airport] = f;
-            //     last_flight = f;
-            //     fprintf(out, "%s\n", "ok, first time");
-            // }
-            // else{
-            //     // last_flight->other_flight = f;
-                // last_flight = f;
-            // }
+            if (!first_found){
+                first_found = true;
+                airports[departure_airport] = f;
+                last_flight = f;
+                fprintf(out, "%s\n", "ok, first time");
+            }
+            else{
+                last_flight->other_flight = f;
+                last_flight = f;
+            }
         }
     }
     //     f = airports[start_airport];
