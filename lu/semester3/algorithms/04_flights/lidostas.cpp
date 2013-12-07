@@ -82,6 +82,16 @@ int main(){
     int current_departure_time;
     int nearest_departure_time = 2359;
 
+    // let's try with pseudocode
+    until goal_found or no_more_flights:
+        select nearest non-used flight from departure_airport
+        if all are used
+            no_more_flights, exit
+        if nearest->departure_airport = target_airport
+            goal_found, exit
+        else
+            departure_airport = nearest->arrival_airport
+
     // searching for nearest available flight
     while(true){
         if (!f->used){
