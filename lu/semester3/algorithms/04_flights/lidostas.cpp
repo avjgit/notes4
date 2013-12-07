@@ -78,17 +78,22 @@ int main(){
     ///////////////////////////////// searching for nearest non-used flight
     f = airports[start_airport]; //flight to start to loop through
     arrival_time = arrival_HH*100 + arrival_MM;
-    flight* nearest = NULL;
+    flight* nearest = 0;
+    flight* nullptr = NULL;
+
     int current_departure_time;
     int nearest_departure_time = 2400;
 
     // until goal_found or no_more_flights:
     bool found = false;
     bool stuck = false;
-    while(!found && !stuck){
+    // while(!found && !stuck){
+    for(int i = 0; i < 10; i++){
     //     select nearest non-used flight from departure_airport
         while(f != NULL){
-            if(!f->used){
+            printf("%s %d\n", "checking flight to ", f->arrival_airport);
+            if(f->used == false){
+                // printf("%s %d\n", "checking flight to ", f->arrival_airport);
                 if(f->departure_time < nearest_departure_time){
                     nearest_departure_time = f->departure_time;
                     nearest = f;
@@ -99,56 +104,54 @@ int main(){
 
     //     if all are used - no "nearest non-used" found
         if(nearest == NULL)
-    //         no_more_flights, exit
-            stuck = true;
+            break; // no more flights
 
-        if (nearest->arrival_airport == target_airport){
-            goal_found = true;
-        }
-        else{
-            nearest->used = true;
-            f = airports[nearest->arrival_airport];
-            arrival_time = nearest->arrival_HH * 100 + nearest->arrival_MM;
-        }
+        if (nearest->arrival_airport == target_airport)
+            break; //found
+
+        f = airports[nearest->arrival_airport];
+        arrival_time = nearest->arrival_time;
+        nearest->used = true;
+        nearest = NULL;
     }
 
     // searching for nearest available flight
-    while(true){
-        if (!f->used){
-            // unifing departure time, to correctly compare with next day's departures
-            if(f->departure_time > arrival_time){
-                departure_time = f->departure_time;
-            }
-            else{
-                departure_time = f->departure_time + (2400 - arrival_time);
-            }
+    // while(true){
+    //     if (!f->used){
+    //         // unifing departure time, to correctly compare with next day's departures
+    //         if(f->departure_time > arrival_time){
+    //             departure_time = f->departure_time;
+    //         }
+    //         else{
+    //             departure_time = f->departure_time + (2400 - arrival_time);
+    //         }
 
-            if (departure_time < nearest_departure_time){
-                nearest_departure_time = departure_time;
-                nearest = f;
-            }
-        }
+    //         if (departure_time < nearest_departure_time){
+    //             nearest_departure_time = departure_time;
+    //             nearest = f;
+    //         }
+    //     }
 
-        if(f->other_flight == NULL){
-            if (nearest == NULL)
-                // todo: no flight avaiable; output Impossible
-                break;
-        }
+    //     if(f->other_flight == NULL){
+    //         if (nearest == NULL)
+    //             // todo: no flight avaiable; output Impossible
+    //             break;
+    //     }
 
-        f = f->other_flight;
+    //     f = f->other_flight;
 
-        nearest->used = true;
+    //     nearest->used = true;
 
-        if(nearest->arrival_airport = target_airport){
-            // todo: print to file
-            printf("%s\n", "found!");
-            break;
-        }
+    //     if(nearest->arrival_airport = target_airport){
+    //         // todo: print to file
+    //         printf("%s\n", "found!");
+    //         break;
+    //     // }
 
-    f = airports[nearest->arrival_airport];
+    // f = airports[nearest->arrival_airport];
 
 
-    }
+    // }
 
     return 0;
 }
