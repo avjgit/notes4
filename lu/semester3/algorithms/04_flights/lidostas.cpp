@@ -34,14 +34,14 @@ int main(){
     // un bus jaizvelas tuvakais - jasalidzina ielidosanas laiks ar izlidosanas,
     // pie tam no pieejamiem
     // un jaizvelas mazakais
-    for(int i = 0; i < 20; i++){
+    for(int i = 0; i < 9; i++){
     // while(true){
-        fscanf(in, "%i", &departure_airport);
+        fscanf(in, "%d", &departure_airport);
         if (departure_airport == 0)
             break;
         fscanf(
             in,
-            "%i %i %i:%i-%i:%i",
+            "%d %d %d:%d-%d:%d\n",
             &arrival_airport,
             &flights,
             &departure_HH,
