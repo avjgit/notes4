@@ -33,7 +33,14 @@ int main(){
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
     // "+1" - just for easier reference in later ([n], not [n-1])
     //initializes array elements to null
-    flight** airports = new flight* [airports_count + 1];
+    flight** airports = new flight* [airports_count + 1]();
+
+    if (airports[0] == NULL)
+        printf("%s\n", "empty");
+    else
+        printf("%s\n", "not empty");
+
+    return 0;
 
     ///////////////////////////////// reading flights data
     flight *f, *last_flight;
@@ -89,7 +96,7 @@ int main(){
     f = airports[start_airport]; //flight to start to loop through
     flight* nearest = 0;
 
-    int current_departure_time;
+    int time_till_departure;
     int nearest_departure_time = 2400;
 
     // until goal_found or no_more_flights:
@@ -98,7 +105,14 @@ int main(){
         while(f != NULL){
             printf("%s %d\n", "checking flight to ", f->arrival_airport);
             if(f->used == false){
-                if(f->departure_time < nearest_departure_time){
+                if(f->departure_time > arrival_time){
+                    departure_time = f->departure_time;
+                }
+                else{
+                    departure_time = 2400 - arrival_time + f->departure_time;
+                }
+
+                if(departure_time < nearest_departure_time){
                     nearest_departure_time = f->departure_time;
                     nearest = f;
                 }
