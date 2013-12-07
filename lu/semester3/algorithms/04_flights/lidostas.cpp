@@ -94,8 +94,6 @@ int main(){
                     nearest = f;
                 }
             }
-
-
             f = f->other_flight;
         }
 
