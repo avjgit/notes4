@@ -28,7 +28,7 @@ int main(){
     fscanf  (in, "%i", &target_airport);
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
     // "+1" - just for easier reference in later ([n], not [n-1])
-    flight* airports[airports_count + 1];
+    flight* airports = new flight [airports_count + 1];
 
     //////////////////////////////////////////////////// reading flights data
     flight *f, *last_flight;
@@ -59,77 +59,89 @@ int main(){
             f->departure_time = departure_HH * 100 + departure_MM;
             f->arrival_time = arrival_HH * 100 + arrival_MM;
             f->used = false;
+            f->other_flight = NULL;
 
+            fprintf(
+                out,
+                "have read: %d %d %02d:%02d-%02d:%02d\n",
+                departure_airport,
+                arrival_airport,
+                departure_HH,
+                departure_MM,
+                arrival_HH,
+                arrival_MM
+            );
 
             // todo: hey, what about flights to other airports?
 
-            if (airports[departure_airport] == NULL){
-                airports[departure_airport] = f;
-                last_flight = f;
-            }
-            else{
-                last_flight->other_flight = f;
-                last_flight = f;
-            }
+            // if (airports[departure_airport] == NULL){
+            //     airports[departure_airport] = f;
+            //     last_flight = f;
+            //     fprintf(out, "%s\n", "ok, first time");
+            // }
+            // else{
+            //     // last_flight->other_flight = f;
+            //     last_flight = f;
+            // }
         }
-
-        f = airports[start_airport];
-        arrival_time = arrival_HH*100 + arrival_MM;
-        flight* nearest = NULL;
-        int departure_time, nearest_time;
-
-        // searching for nearest available flight
-        while(true){
-            if (!f->used){
-                if(f->departure_time > arrival_time){
-                    departure_time = f->departure_time;
-                }
-                else{
-                    departure_time = f->departure_time + (2400 - arrival_time);
-                }
-
-                if (nearest == NULL){
-                    nearest = f;
-                    nearest_time = f->departure_time;
-                }
-
-                if (departure_time < nearest_time){
-                    nearest_time = departure_time;
-                    nearest = f;
-                }
-            }
-            else{
-                if(f->other_flight == NULL){
-                    // todo: no flight avaiable; output Impossible
-                    break;
-                }
-                else{
-                    f = f->other_flight;
-                }
-            }
-        }
-        nearest->used = true;
-
-        if(nearest->arrival_airport = target_airport){
-            // todo: print to file
-            break;
-        }
-
-        f = airports[nearest->arrival_airport];
-
-        // fprintf(
-        //     out,
-        //     "flight %d: %d %d %d %02d:%02d-%02d:%02d\n",
-        //     i,
-        //     departure_airport,
-        //     arrival_airport,
-        //     flights,
-        //     departure_HH,
-        //     departure_MM,
-        //     arrival_HH,
-        //     arrival_MM
-        // );
     }
+    //     f = airports[start_airport];
+    //     arrival_time = arrival_HH*100 + arrival_MM;
+    //     flight* nearest = NULL;
+    //     int departure_time, nearest_time;
+
+    //     // searching for nearest available flight
+    //     while(true){
+    //         if (!f->used){
+    //             if(f->departure_time > arrival_time){
+    //                 departure_time = f->departure_time;
+    //             }
+    //             else{
+    //                 departure_time = f->departure_time + (2400 - arrival_time);
+    //             }
+
+    //             if (nearest == NULL){
+    //                 nearest = f;
+    //                 nearest_time = f->departure_time;
+    //             }
+
+    //             if (departure_time < nearest_time){
+    //                 nearest_time = departure_time;
+    //                 nearest = f;
+    //             }
+    //         }
+    //         else{
+    //             if(f->other_flight == NULL){
+    //                 // todo: no flight avaiable; output Impossible
+    //                 break;
+    //             }
+    //             else{
+    //                 f = f->other_flight;
+    //             }
+    //         }
+    //     }
+    //     nearest->used = true;
+
+    //     if(nearest->arrival_airport = target_airport){
+    //         // todo: print to file
+    //         break;
+    //     }
+
+    //     f = airports[nearest->arrival_airport];
+
+    //     // fprintf(
+    //     //     out,
+    //     //     "flight %d: %d %d %d %02d:%02d-%02d:%02d\n",
+    //     //     i,
+    //     //     departure_airport,
+    //     //     arrival_airport,
+    //     //     flights,
+    //     //     departure_HH,
+    //     //     departure_MM,
+    //     //     arrival_HH,
+    //     //     arrival_MM
+    //     // );
+    // }
 
     // fclose(out);
     // out = fopen("lidostas.out", "w");
