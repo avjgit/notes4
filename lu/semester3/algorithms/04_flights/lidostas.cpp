@@ -60,13 +60,6 @@ int main(){
                 &arrival_MM
             );
 
-        // struct flight{
-        // int departure_time;
-        // int arrival_airport;
-        // int arrival_time;
-        // bool used;
-        // flight* other_flight;
-
             f = new flight;
             f->arrival_airport = arrival_airport;
             // todo: fix correct time; this is just to quick check of idea
@@ -82,6 +75,46 @@ int main(){
             }
             last_flight = f;
         }
+
+        arrival_airport = start_airport;
+        arrival_time = arrival_HH*100 + arrival_MM;
+        f = airports[arrival_airport];
+        flight* nearest = NULL;
+        int departure_time, nearest_time;
+
+        // searching for nearest available flight
+        while(true){
+            if (!f->used){
+                if(f->departure_time > arrival_time){
+                    departure_time = f->departure_time;
+                }
+                else{
+                    departure_time = f->departure_time + (2400 - arrival_time)
+                }
+
+                if (nearest == NULL){
+                    nearest = f;
+                    nearest_time = f->departure_time;
+                }
+
+                if (departure_time < nearest_time){
+                    nearest_time = departure_time;
+                    nearest = f;
+                }
+            }
+            else{
+                f = f->other_flight;
+            }
+        }
+        nearest->used = true;
+
+        if(nearest->arrival_airport = target_airport){
+            // todo: print to file
+            break;
+        }
+
+        f = airports[nearest->arrival_airport];
+
 
         // fprintf(
         //     out,
