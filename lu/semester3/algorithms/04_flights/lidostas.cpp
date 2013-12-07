@@ -22,24 +22,15 @@ int main(){
     FILE* in = fopen("lidostas.in", "r");
     FILE* out = fopen("lidostas.out", "w+");
 
-    // reading main data
+    //////////////////////////////////////////////////// reading main data
     fscanf  (in, "%i", &airports_count);
     fscanf  (in, "%i", &start_airport);
     fscanf  (in, "%i", &target_airport);
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
+    // "+1" - just for easier reference in later ([n], not [n-1])
+    flight* airports[airports_count + 1];
 
-    flight* airports[airports_count + 1]; // "+1" - just for easier reference in later ([n], not [n-1])
-
-    // 1d array of pointers to airports first flights
-    // each flight then has flag, if USED, and pointer to next flight
-    // bet - "Reisi var nebūt doti hronoloģiskā secībā"!
-    // tad ... tomēr lietot 2d ar laikiem kolonnā?
-    // ne; var lietot sarakstu, bet nakamsi bus nevis "next", but vnk "other"
-    // un bus jaizvelas tuvakais - jasalidzina ielidosanas laiks ar izlidosanas,
-    // pie tam no pieejamiem
-    // un jaizvelas mazakais
-
-    // reading flights data
+    //////////////////////////////////////////////////// reading flights data
     flight *f, *last_flight;
     while(true){
         fscanf(in, "%d", &departure_airport);
@@ -51,6 +42,7 @@ int main(){
 
         for (int i = 1; i <= flights; i++){
 
+            // read flight timings, like "12:20-13:47"
             fscanf(
                 in,
                 "%d:%d-%d:%d",
@@ -60,6 +52,7 @@ int main(){
                 &arrival_MM
             );
 
+            // store them in structure
             f = new flight;
             f->arrival_airport = arrival_airport;
             // todo: fix correct time; this is just to quick check of idea
@@ -67,18 +60,21 @@ int main(){
             f->arrival_time = arrival_HH * 100 + arrival_MM;
             f->used = false;
 
+
+            // todo: hey, what about flights to other airports?
+
             if (airports[departure_airport] == NULL){
                 airports[departure_airport] = f;
+                last_flight = f;
             }
             else{
                 last_flight->other_flight = f;
+                last_flight = f;
             }
-            last_flight = f;
         }
 
-        arrival_airport = start_airport;
+        f = airports[start_airport];
         arrival_time = arrival_HH*100 + arrival_MM;
-        f = airports[arrival_airport];
         flight* nearest = NULL;
         int departure_time, nearest_time;
 
@@ -89,7 +85,7 @@ int main(){
                     departure_time = f->departure_time;
                 }
                 else{
-                    departure_time = f->departure_time + (2400 - arrival_time)
+                    departure_time = f->departure_time + (2400 - arrival_time);
                 }
 
                 if (nearest == NULL){
@@ -103,7 +99,13 @@ int main(){
                 }
             }
             else{
-                f = f->other_flight;
+                if(f->other_flight == NULL){
+                    // todo: no flight avaiable; output Impossible
+                    break;
+                }
+                else{
+                    f = f->other_flight;
+                }
             }
         }
         nearest->used = true;
@@ -114,7 +116,6 @@ int main(){
         }
 
         f = airports[nearest->arrival_airport];
-
 
         // fprintf(
         //     out,
