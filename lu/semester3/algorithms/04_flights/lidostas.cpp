@@ -95,15 +95,16 @@ int main(){
     int time_till_departure;
     int nearest_departure_time = 2400;
 
+    bool impossible = false;
     // until goal_found or no_more_flights:
     while(true){
-        printf("%s %d\n", "checking flight from ", departure_airport);
+        // printf("%s %d\n", "checking flight from ", departure_airport);
 
         // select nearest non-used flight from departure_airport
         while(f != NULL){
-            printf("%s %d\n", "checking flight to ", f->arrival_airport);
+            // printf("%s %d\n", "checking flight to ", f->arrival_airport);
             if(f->used == false){
-                printf("%s %d\n", "checking flight at ", f->departure_time);
+                // printf("%s %d\n", "checking flight at ", f->departure_time);
 
                 if(f->departure_time > arrival_time){
                     time_till_departure = f->departure_time - arrival_time;
@@ -111,10 +112,10 @@ int main(){
                 else{
                     time_till_departure = 2400 - arrival_time + f->departure_time;
                 }
-                printf("%s %d\n", "time till: ", time_till_departure);
+                // printf("%s %d\n", "time till: ", time_till_departure);
 
                 if(time_till_departure < nearest_departure_time){
-                    printf("%s %d\n", "ok, nearest in: ", nearest_departure_time);
+                    // printf("%s %d\n", "ok, nearest in: ", nearest_departure_time);
 
                     nearest_departure_time = time_till_departure;
                     nearest = f;
@@ -123,8 +124,10 @@ int main(){
             f = f->other_flight;
         }
 
-        if(nearest == NULL)
+        if(nearest == NULL){
+            impossible = true;
             break; // no more flights
+        }
 
         fprintf(
             out,
@@ -148,43 +151,14 @@ int main(){
         nearest_departure_time = 2400;
     }
 
-    // searching for nearest available flight
-    // while(true){
-    //     if (!f->used){
-    //         // unifing departure time, to correctly compare with next day's departures
-    //         if(f->departure_time > arrival_time){
-    //             departure_time = f->departure_time;
-    //         }
-    //         else{
-    //             departure_time = f->departure_time + (2400 - arrival_time);
-    //         }
+    if(impossible){
+        fclose(out);
+        out = fopen("lidostas.out", "w");
+        fprintf(out, "%s\n", "Impossible");
+    }
 
-    //         if (departure_time < nearest_departure_time){
-    //             nearest_departure_time = departure_time;
-    //             nearest = f;
-    //         }
-    //     }
-
-    //     if(f->other_flight == NULL){
-    //         if (nearest == NULL)
-    //             // todo: no flight avaiable; output Impossible
-    //             break;
-    //     }
-
-    //     f = f->other_flight;
-
-    //     nearest->used = true;
-
-    //     if(nearest->arrival_airport = target_airport){
-    //         // todo: print to file
-    //         printf("%s\n", "found!");
-    //         break;
-    //     // }
-
-    // f = airports[nearest->arrival_airport];
-
-
-    // }
+    fclose(in);
+    fclose(out);
 
     return 0;
 }
