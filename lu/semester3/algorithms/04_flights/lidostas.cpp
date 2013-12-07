@@ -35,13 +35,6 @@ int main(){
     //initializes array elements to null
     flight** airports = new flight* [airports_count + 1]();
 
-    if (airports[0] == NULL)
-        printf("%s\n", "empty");
-    else
-        printf("%s\n", "not empty");
-
-    return 0;
-
     ///////////////////////////////// reading flights data
     flight *f, *last_flight;
     while(true){
@@ -74,17 +67,16 @@ int main(){
             f->used = false;
             f->other_flight = NULL;
 
-
-            // todo: hey, what about flights to other airports?
-
             // if this is first flight we read in
-            if (i == 1){
+            if (airports[departure_airport] == NULL){
                 airports[departure_airport] = f;
-                last_flight = f;
+                // last_flight = f;
             }
             else{
-                last_flight->other_flight = f;
-                last_flight = f;
+                f->other_flight = airports[departure_airport];
+                airports[departure_airport] = f;
+                // last_flight->other_flight = f;
+                // last_flight = f;
             }
         }
     }
