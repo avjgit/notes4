@@ -211,3 +211,38 @@ Ieeja
 Izeja
 
 Impossible
+
+
+// output
+
+//     // fprintf(
+//     //     out,
+//     //     "flight %d: %d %d %d %02d:%02d-%02d:%02d\n",
+//     //     i,
+//     //     departure_airport,
+//     //     arrival_airport,
+//     //     flights,
+//     //     departure_HH,
+//     //     departure_MM,
+//     //     arrival_HH,
+//     //     arrival_MM
+//     // );
+
+            fprintf(
+                out,
+                "have read: %d %d %02d:%02d-%02d:%02d\n",
+                departure_airport,
+                arrival_airport,
+                departure_HH,
+                departure_MM,
+                arrival_HH,
+                arrival_MM
+            );
+
+
+    // fclose(out);
+    // out = fopen("lidostas.out", "w");
+    // fprintf(out, "%s\n", "Impossible");
+
+    // fclose(in);
+    // fclose(out);
