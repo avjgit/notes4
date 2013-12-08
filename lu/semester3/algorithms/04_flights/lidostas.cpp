@@ -3,6 +3,7 @@
 #include <fstream>
 using namespace std;
 struct flight{
+    int departure_airport;
     int arrival_airport;
     int departure_time;     // _time - for easier comparison
     int departure_HH;       // _H - for easier output
@@ -26,7 +27,8 @@ int main(){
     fscanf  (in, "%i", &start_airport);
     fscanf  (in, "%i", &target_airport);
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
-    // "+1" - just for easier reference in later ([n], not [n-1])
+
+    // [n+1] - just for easier reference in later ([n], not [n-1])
     // array of pointers to list of flights_count for each airport
     flight** airports = new flight* [airports_count + 1];
     for(int i = 0; i < (airports_count+1); i++) airports[i] = NULL;
@@ -34,8 +36,10 @@ int main(){
     ///////////////////////////////// reading flights_count data
     flight *f;
     while(true){
+
         fscanf(in, "%d", &departure_airport);
         if (departure_airport == 0) {break;} // end of data marked with 0
+
         fscanf(in, "%d %d", &arrival_airport, &flights_count);
 
         // read flight timings, like "12:20-13:47"
@@ -43,6 +47,7 @@ int main(){
 
             // first, creating structure to store flights_count
             f = new flight;
+            f->departure_airport = departure_airport;
             f->arrival_airport = arrival_airport;
             f->used = false;
             f->other_flight = NULL;
@@ -80,10 +85,9 @@ int main(){
 
     flight* nearest = NULL;
     int time_till_departure;
-    int nearest_departure_time = 2400;
-
+    int min_time_till_departure = 2400;
     bool impossible = false;
-    // until goal_found or no_more_flights_count:
+    // until goal reached or there are no more flights:
     while(true){
         // loop through all airport's flights_count (until next flight == NULL)
         while(f != NULL){
@@ -95,11 +99,13 @@ int main(){
                 else{
                     time_till_departure = 2400 - arrival_time + f->departure_time;
                 }
+
                 // finding flight with minimal time to wait
-                if(time_till_departure < nearest_departure_time){
-                    nearest_departure_time = time_till_departure;
+                if(time_till_departure < min_time_till_departure){
+                    min_time_till_departure = time_till_departure;
                     nearest = f;
                 }
+
             }
             f = f->other_flight;
         }
@@ -109,11 +115,13 @@ int main(){
             impossible = true;
             break;
         }
+
         // printing flight data
         fprintf(
             out,
             "%d->%d %02d:%02d-%02d:%02d\n",
-            departure_airport,
+            // departure_airport,
+            nearest->departure_airport,
             nearest->arrival_airport,
             nearest->departure_HH,
             nearest->departure_MM,
@@ -130,7 +138,7 @@ int main(){
         f = airports[departure_airport];
         nearest->used = true;
         nearest = NULL;
-        nearest_departure_time = 2400;
+        min_time_till_departure = 2400;
     }
 
     if(impossible){
