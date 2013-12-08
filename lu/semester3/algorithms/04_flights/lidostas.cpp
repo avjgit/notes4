@@ -42,27 +42,25 @@ int main(){
 
         // read flight timings, like "12:20-13:47"
         for (int i = 1; i <= flights; i++){
+
+            // first, creating structure to store flights
+            f = new flight;
+            f->arrival_airport = arrival_airport;
+            f->used = false;
+            f->other_flight = NULL;
+
             fscanf(
                 in,
                 "%d:%d-%d:%d",
-                &departure_HH,
-                &departure_MM,
-                &arrival_HH,
-                &arrival_MM
+                &f->departure_HH,
+                &f->departure_MM,
+                &f->arrival_HH,
+                &f->arrival_MM
             );
 
-            // store them in structure
-            f = new flight;
-            f->arrival_airport = arrival_airport;
             // this format is easier for human reading - 18:20 is 1820, not 1100
-            f->departure_time = departure_HH * 100 + departure_MM;
-            f->arrival_time = arrival_HH * 100 + arrival_MM;
-            f->departure_HH = departure_HH;
-            f->departure_MM = departure_MM;
-            f->arrival_HH = arrival_HH;
-            f->arrival_MM = arrival_MM;
-            f->used = false;
-            f->other_flight = NULL;
+            f->departure_time = f->departure_HH * 100 + f->departure_MM;
+            f->arrival_time = f->arrival_HH * 100 + f->arrival_MM;
 
             // if this is first flight we read in
             if (airports[departure_airport] == NULL){
