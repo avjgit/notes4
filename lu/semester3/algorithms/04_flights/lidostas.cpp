@@ -15,6 +15,10 @@ struct flight{
     flight* other_flight;
 };
 
+int time_formatted(int HH, int MM){
+    return HH * 100 + MM;
+}
+
 void print_flight(FILE* out, flight* f){
     fprintf(
         out,
@@ -28,14 +32,11 @@ void print_flight(FILE* out, flight* f){
     );
 }
 int main(){
-    int airports_count, start_airport, target_airport, departure_airport, arrival_airport;
-    int flights_count, arrival_time;
-    int start_HH, start_MM;
-
     FILE* in = fopen("lidostas.in", "r");
     FILE* out = fopen("lidostas.out", "w+");
 
     ///////////////////////////////// reading main data
+    int airports_count, start_airport, target_airport, start_HH, start_MM;
     fscanf  (in, "%i", &airports_count);
     fscanf  (in, "%i", &start_airport);
     fscanf  (in, "%i", &target_airport);
@@ -48,10 +49,11 @@ int main(){
 
     ///////////////////////////////// reading flights_count data
     flight *f;
+    int departure_airport, arrival_airport, flights_count;
     while(true){
 
         fscanf(in, "%d", &departure_airport);
-        if (departure_airport == 0) {break;} // end of data marked with 0
+        if (departure_airport == 0) break; // end of data marked with 0
 
         fscanf(in, "%d %d", &arrival_airport, &flights_count);
 
@@ -75,8 +77,8 @@ int main(){
             );
 
             // this format is easier for human reading - 18:20 is 1820, not 1100
-            f->departure_time = f->departure_HH * 100 + f->departure_MM;
-            f->arrival_time = f->arrival_HH * 100 + f->arrival_MM;
+            f->departure_time   = time_formatted(f->departure_HH, f->departure_MM);
+            f->arrival_time     = time_formatted(f->arrival_HH, f->arrival_MM);
 
             // if this is first flight we read in
             if (airports[departure_airport] == NULL){
@@ -93,17 +95,12 @@ int main(){
     fprintf(out, "%d %02d:%02d\n", start_airport, start_HH, start_MM);
 
     flight* arrival = new flight;
-    arrival->arrival_time = start_HH*100 + start_MM;
+    arrival->arrival_time = time_formatted(start_HH, start_MM);
     arrival->arrival_airport = start_airport;
 
-    // arrival_time = start_HH*100 + start_MM;
-    // departure_airport = start_airport;
-    // f = airports[start_airport]; //flight to start to loop through
-
     flight* nearest;
-    int time_till_departure;
     const int WHOLE_DAY = 2400;
-    int min_time_till_departure;
+    int time_till_departure, min_time_till_departure;
     bool impossible = false;
     // until goal reached or there are no more flights:
     while(true){
@@ -144,10 +141,8 @@ int main(){
         if (nearest->arrival_airport == target_airport)
             break; //if target airport reached
 
-        // setting for next flight
+        // flying out with nearest flight
         arrival = nearest;
-        // arrival_time = nearest->arrival_time;
-        // departure_airport = nearest->arrival_airport;
         nearest->used = true;
     }
 
