@@ -92,26 +92,35 @@ int main(){
     ///////////////////////////////// searching for nearest non-used flight
     fprintf(out, "%d %02d:%02d\n", start_airport, start_HH, start_MM);
 
-    arrival_time = start_HH*100 + start_MM;
-    departure_airport = start_airport;
-    f = airports[start_airport]; //flight to start to loop through
+    flight* arrival = new flight;
+    arrival->arrival_time = start_HH*100 + start_MM;
+    arrival->arrival_airport = start_airport;
 
-    flight* nearest = NULL;
+    // arrival_time = start_HH*100 + start_MM;
+    // departure_airport = start_airport;
+    // f = airports[start_airport]; //flight to start to loop through
+
+    flight* nearest;
     int time_till_departure;
     const int WHOLE_DAY = 2400;
-    int min_time_till_departure = WHOLE_DAY;
+    int min_time_till_departure;
     bool impossible = false;
     // until goal reached or there are no more flights:
     while(true){
+        // setup
+        nearest = NULL;
+        min_time_till_departure = WHOLE_DAY;
+        f = airports[arrival->arrival_airport];
+
         // loop through all airport's flights_count (until next flight == NULL)
         while(f != NULL){
             if(f->used == false){
                 // unifying departure time (to correctly compare next day's time)
-                if(f->departure_time > arrival_time){
-                    time_till_departure = f->departure_time - arrival_time;
+                if(f->departure_time > arrival->arrival_time){
+                    time_till_departure = f->departure_time - arrival->arrival_time;
                 }
                 else{
-                    time_till_departure = WHOLE_DAY - arrival_time + f->departure_time;
+                    time_till_departure = WHOLE_DAY - arrival->arrival_time + f->departure_time;
                 }
 
                 // finding flight with minimal time to wait
@@ -136,12 +145,10 @@ int main(){
             break; //if target airport reached
 
         // setting for next flight
-        arrival_time = nearest->arrival_time;
-        departure_airport = nearest->arrival_airport;
-        f = airports[departure_airport];
+        arrival = nearest;
+        // arrival_time = nearest->arrival_time;
+        // departure_airport = nearest->arrival_airport;
         nearest->used = true;
-        nearest = NULL;
-        min_time_till_departure = WHOLE_DAY;
     }
 
     if(impossible){
