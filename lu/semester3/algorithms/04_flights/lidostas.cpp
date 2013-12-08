@@ -111,35 +111,26 @@ int main(){
     arrival->arrival_time = time_formatted(start_HH, start_MM);
     arrival->arrival_airport = start_airport;
 
-    flight* nearest;
+    flight *nearest;
     const int WHOLE_DAY = 2400;
-    int time_till_departure, min_time_till_departure;
+    int waiting_time, min_waiting_time;
     bool impossible = false;
     // until goal reached or there are no more flights:
     while(true){
         // setup
         nearest = NULL;
-        min_time_till_departure = WHOLE_DAY;
-        f = airports[arrival->arrival_airport];
+        min_waiting_time = WHOLE_DAY;
+        f = airports[arrival->arrival_airport]; //f = flight begin evaluated (checked) now
 
         // loop through all airport's flights_count (until next flight == NULL)
         while(f != NULL){
             if(!f->used){
-                // unifying departure time (to correctly compare next day's time)
-                // if(f->departure_time > arrival->arrival_time){
-                //     time_till_departure = f->departure_time - arrival->arrival_time;
-                // }
-                // else{
-                //     time_till_departure = WHOLE_DAY - arrival->arrival_time + f->departure_time;
-                // }
-                time_till_departure = time_between(arrival, f);
-
+                waiting_time = time_between(arrival, f);
                 // finding flight with minimal time to wait
-                if(time_till_departure < min_time_till_departure){
-                    min_time_till_departure = time_till_departure;
+                if(waiting_time < min_waiting_time){
+                    min_waiting_time = waiting_time;
                     nearest = f;
                 }
-
             }
             f = f->other_flight;
         }
