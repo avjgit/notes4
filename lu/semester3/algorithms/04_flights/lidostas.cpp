@@ -14,6 +14,19 @@ struct flight{
     bool used;
     flight* other_flight;
 };
+
+void print_flight(FILE* out, flight* f){
+    fprintf(
+        out,
+        "%d->%d %02d:%02d-%02d:%02d\n",
+        f->departure_airport,
+        f->arrival_airport,
+        f->departure_HH,
+        f->departure_MM,
+        f->arrival_HH,
+        f->arrival_MM
+    );
+}
 int main(){
     int airports_count, start_airport, target_airport, departure_airport, arrival_airport;
     int flights_count, arrival_time;
@@ -85,7 +98,8 @@ int main(){
 
     flight* nearest = NULL;
     int time_till_departure;
-    int min_time_till_departure = 2400;
+    const int WHOLE_DAY = 2400;
+    int min_time_till_departure = WHOLE_DAY;
     bool impossible = false;
     // until goal reached or there are no more flights:
     while(true){
@@ -97,7 +111,7 @@ int main(){
                     time_till_departure = f->departure_time - arrival_time;
                 }
                 else{
-                    time_till_departure = 2400 - arrival_time + f->departure_time;
+                    time_till_departure = WHOLE_DAY - arrival_time + f->departure_time;
                 }
 
                 // finding flight with minimal time to wait
@@ -116,18 +130,7 @@ int main(){
             break;
         }
 
-        // printing flight data
-        fprintf(
-            out,
-            "%d->%d %02d:%02d-%02d:%02d\n",
-            // departure_airport,
-            nearest->departure_airport,
-            nearest->arrival_airport,
-            nearest->departure_HH,
-            nearest->departure_MM,
-            nearest->arrival_HH,
-            nearest->arrival_MM
-        );
+        print_flight(out, nearest);
 
         if (nearest->arrival_airport == target_airport)
             break; //if target airport reached
@@ -138,7 +141,7 @@ int main(){
         f = airports[departure_airport];
         nearest->used = true;
         nearest = NULL;
-        min_time_till_departure = 2400;
+        min_time_till_departure = WHOLE_DAY;
     }
 
     if(impossible){
