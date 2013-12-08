@@ -13,18 +13,29 @@ struct flight{
     int arrival_MM;
     bool used;
     flight* other_flight;
+
+    flight(){
+        used = false;
+        other_flight = NULL;
+    }
+
+    flight(int departure_airport_, int arrival_airport_){
+        used = false;
+        other_flight = NULL;
+        departure_airport = departure_airport_;
+        arrival_airport = arrival_airport_;
+    }
 };
 
-int time_formatted(int HH, int MM){
-    return HH * 100 + MM;
-}
-
-int time_between(flight* arrival, flight* departure){
-    const int WHOLE_DAY = 2400;
-    if(departure->departure_time > arrival->arrival_time)
-        return departure->departure_time - arrival->arrival_time;
-    else
-        return WHOLE_DAY - arrival->arrival_time + departure->departure_time;
+void read_flight_timings(FILE* in, flight* f){
+    fscanf(
+        in,
+        "%d:%d-%d:%d",
+        &f->departure_HH,
+        &f->departure_MM,
+        &f->arrival_HH,
+        &f->arrival_MM
+    );
 }
 
 void print_flight(FILE* out, flight* f){
@@ -40,15 +51,16 @@ void print_flight(FILE* out, flight* f){
     );
 }
 
-void read_flight(FILE* in, flight* f){
-    fscanf(
-        in,
-        "%d:%d-%d:%d",
-        &f->departure_HH,
-        &f->departure_MM,
-        &f->arrival_HH,
-        &f->arrival_MM
-    );
+int time_formatted(int HH, int MM){
+    return HH * 100 + MM;
+}
+
+int time_between(flight* arrival, flight* departure){
+    const int WHOLE_DAY = 2400;
+    if(departure->departure_time > arrival->arrival_time)
+        return departure->departure_time - arrival->arrival_time;
+    else
+        return WHOLE_DAY - arrival->arrival_time + departure->departure_time;
 }
 
 int main(){
@@ -80,14 +92,9 @@ int main(){
         // read flight timings, like "12:20-13:47"
         for (int i = 1; i <= flights_count; i++){
 
-            // first, creating structure to store flights_count
-            f = new flight;
-            f->departure_airport = departure_airport;
-            f->arrival_airport = arrival_airport;
-            f->used = false;
-            f->other_flight = NULL;
+            f = new flight(departure_airport, arrival_airport);
 
-            read_flight(in, f);
+            read_flight_timings(in, f);
 
             // this format is easier for human reading - 18:20 is 1820, not 1100
             f->departure_time   = time_formatted(f->departure_HH, f->departure_MM);
@@ -107,7 +114,7 @@ int main(){
     ///////////////////////////////// searching for nearest non-used flight
     fprintf(out, "%d %02d:%02d\n", start_airport, start_HH, start_MM);
 
-    flight* arrival = new flight;
+    flight* arrival = new flight();
     arrival->arrival_time = time_formatted(start_HH, start_MM);
     arrival->arrival_airport = start_airport;
 
