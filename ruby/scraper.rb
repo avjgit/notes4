@@ -25,7 +25,8 @@ ratings = []
 ratings << Rating.new('Gads', 'Skola', 'Vietas', 'Punkti')
 
 # 1982..2011
-for year in 2010..2011
+for year in 1982..2011
+
     page  = Nokogiri::HTML(open(source(source_template, year)).read)
     # p 'checking year ' + year.to_s
     
@@ -38,7 +39,7 @@ for year in 2010..2011
         # year_ratings[school] += 1
         # ratings_all[school] += 1
 
-        points =  row.xpath('td')[2].text rescue points = 0
+        points =  row.xpath('td')[2].text.to_i rescue points = 0
         # # p 'points for ' + school + ' found: ' + points.to_s
         # year_points[school] += points.to_i
         # points_all[school] += points.to_i
@@ -108,4 +109,4 @@ end
 # p ratings_per_year['total']
 p ratings
 # CSV.open("ratings.csv", "wb") {|csv| ratings_per_year.to_a.each {|elem| csv << elem} }
-# CSV.open("ratings.csv", "wb") {|csv| ratings.to_a.each {|elem| csv << elem} }
+CSV.open("ratings.csv", "wb") {|csv| ratings.to_a.each {|elem| csv << elem} }
