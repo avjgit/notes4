@@ -31,6 +31,18 @@ void print_flight(FILE* out, flight* f){
         f->arrival_MM
     );
 }
+
+void read_flight(FILE* in, flight* f){
+    fscanf(
+        in,
+        "%d:%d-%d:%d",
+        &f->departure_HH,
+        &f->departure_MM,
+        &f->arrival_HH,
+        &f->arrival_MM
+    );
+}
+
 int main(){
     FILE* in = fopen("lidostas.in", "r");
     FILE* out = fopen("lidostas.out", "w+");
@@ -67,14 +79,7 @@ int main(){
             f->used = false;
             f->other_flight = NULL;
 
-            fscanf(
-                in,
-                "%d:%d-%d:%d",
-                &f->departure_HH,
-                &f->departure_MM,
-                &f->arrival_HH,
-                &f->arrival_MM
-            );
+            read_flight(in, f);
 
             // this format is easier for human reading - 18:20 is 1820, not 1100
             f->departure_time   = time_formatted(f->departure_HH, f->departure_MM);
