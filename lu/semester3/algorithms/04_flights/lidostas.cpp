@@ -1,5 +1,5 @@
 // Andrejs Jurcenoks aj05044 DSuPII PD3
-// https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/04_flights/lidostas.cpp
+// https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/04_flights_count/lidostas.cpp
 #include <fstream>
 using namespace std;
 struct flight{
@@ -14,12 +14,9 @@ struct flight{
     flight* other_flight;
 };
 int main(){
-    int airports_count, start_airport, arrival_airport, departure_airport, target_airport;
-    int flights, arrival_time, departure_time;
+    int airports_count, start_airport, target_airport, departure_airport, arrival_airport;
+    int flights_count, arrival_time;
     int start_HH, start_MM;
-    int arrival_HH, arrival_MM;
-    int departure_HH, departure_MM;
-    string flight_line;
 
     FILE* in = fopen("lidostas.in", "r");
     FILE* out = fopen("lidostas.out", "w+");
@@ -30,20 +27,21 @@ int main(){
     fscanf  (in, "%i", &target_airport);
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
     // "+1" - just for easier reference in later ([n], not [n-1])
+    // array of pointers to list of flights_count for each airport
     flight** airports = new flight* [airports_count + 1];
     for(int i = 0; i < (airports_count+1); i++) airports[i] = NULL;
 
-    ///////////////////////////////// reading flights data
+    ///////////////////////////////// reading flights_count data
     flight *f;
     while(true){
         fscanf(in, "%d", &departure_airport);
         if (departure_airport == 0) {break;} // end of data marked with 0
-        fscanf(in, "%d %d", &arrival_airport, &flights);
+        fscanf(in, "%d %d", &arrival_airport, &flights_count);
 
         // read flight timings, like "12:20-13:47"
-        for (int i = 1; i <= flights; i++){
+        for (int i = 1; i <= flights_count; i++){
 
-            // first, creating structure to store flights
+            // first, creating structure to store flights_count
             f = new flight;
             f->arrival_airport = arrival_airport;
             f->used = false;
@@ -85,9 +83,9 @@ int main(){
     int nearest_departure_time = 2400;
 
     bool impossible = false;
-    // until goal_found or no_more_flights:
+    // until goal_found or no_more_flights_count:
     while(true){
-        // loop through all airport's flights (until next flight == NULL)
+        // loop through all airport's flights_count (until next flight == NULL)
         while(f != NULL){
             if(f->used == false){
                 // unifying departure time (to correctly compare next day's time)
@@ -106,7 +104,7 @@ int main(){
             f = f->other_flight;
         }
 
-        // if all are used - exit, no more flights
+        // if all are used - exit, no more flights_count
         if(nearest == NULL){
             impossible = true;
             break;
@@ -143,6 +141,5 @@ int main(){
 
     fclose(in);
     fclose(out);
-
     return 0;
 }
