@@ -1,8 +1,6 @@
-// Andrejs Jurcenoks// aj05044// Datu strukturas un pamatalgoritmi II// PD3 Lidostas// https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/04_flights/lidostas.cpp
+// Andrejs Jurcenoks aj05044 DSuPII PD3
+// https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/04_flights/lidostas.cpp
 #include <fstream>
-#include <sstream>
-#include <iomanip>
-#include <string>
 using namespace std;
 struct flight{
     int arrival_airport;
@@ -32,22 +30,18 @@ int main(){
     fscanf  (in, "%i", &target_airport);
     fscanf  (in, "%i:%i", &start_HH, &start_MM);
     // "+1" - just for easier reference in later ([n], not [n-1])
-    //initializes array elements to null
-    flight** airports;
-    airports = new flight* [airports_count + 1];
-    for(int i = 0; i < (airports_count+1); i++)
-        airports[i] = NULL;
+    flight** airports = new flight* [airports_count + 1];
+    for(int i = 0; i < (airports_count+1); i++) airports[i] = NULL;
 
     ///////////////////////////////// reading flights data
     flight *f;
     while(true){
         fscanf(in, "%d", &departure_airport);
-        if (departure_airport == 0) {break;}
+        if (departure_airport == 0) {break;} // end of data marked with 0
         fscanf(in, "%d %d", &arrival_airport, &flights);
 
+        // read flight timings, like "12:20-13:47"
         for (int i = 1; i <= flights; i++){
-
-            // read flight timings, like "12:20-13:47"
             fscanf(
                 in,
                 "%d:%d-%d:%d",
@@ -60,7 +54,7 @@ int main(){
             // store them in structure
             f = new flight;
             f->arrival_airport = arrival_airport;
-            // todo: fix correct time; this is just to quick check of idea
+            // this format is easier for human reading - 18:20 is 1820, not 1100
             f->departure_time = departure_HH * 100 + departure_MM;
             f->arrival_time = arrival_HH * 100 + arrival_MM;
             f->departure_HH = departure_HH;
@@ -73,13 +67,10 @@ int main(){
             // if this is first flight we read in
             if (airports[departure_airport] == NULL){
                 airports[departure_airport] = f;
-                // last_flight = f;
             }
             else{
                 f->other_flight = airports[departure_airport];
                 airports[departure_airport] = f;
-                // last_flight->other_flight = f;
-                // last_flight = f;
             }
         }
     }
@@ -98,25 +89,18 @@ int main(){
     bool impossible = false;
     // until goal_found or no_more_flights:
     while(true){
-        // printf("%s %d\n", "checking flight from ", departure_airport);
-
-        // select nearest non-used flight from departure_airport
+        // loop through all airport's flights (until next flight == NULL)
         while(f != NULL){
-            // printf("%s %d\n", "checking flight to ", f->arrival_airport);
             if(f->used == false){
-                // printf("%s %d\n", "checking flight at ", f->departure_time);
-
+                // unifying departure time (to correctly compare next day's time)
                 if(f->departure_time > arrival_time){
                     time_till_departure = f->departure_time - arrival_time;
                 }
                 else{
                     time_till_departure = 2400 - arrival_time + f->departure_time;
                 }
-                // printf("%s %d\n", "time till: ", time_till_departure);
-
+                // finding flight with minimal time to wait
                 if(time_till_departure < nearest_departure_time){
-                    // printf("%s %d\n", "ok, nearest in: ", nearest_departure_time);
-
                     nearest_departure_time = time_till_departure;
                     nearest = f;
                 }
@@ -124,11 +108,12 @@ int main(){
             f = f->other_flight;
         }
 
+        // if all are used - exit, no more flights
         if(nearest == NULL){
             impossible = true;
-            break; // no more flights
+            break;
         }
-
+        // printing flight data
         fprintf(
             out,
             "%d->%d %02d:%02d-%02d:%02d\n",
@@ -141,8 +126,9 @@ int main(){
         );
 
         if (nearest->arrival_airport == target_airport)
-            break; //found
+            break; //if target airport reached
 
+        // setting for next flight
         arrival_time = nearest->arrival_time;
         departure_airport = nearest->arrival_airport;
         f = airports[departure_airport];
