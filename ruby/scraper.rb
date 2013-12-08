@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
+require 'csv'
 
 source_template = 'http://nms.lu.lv/skolenu-ranga-tabula-STARTYEAR-ENDYEAR-m-g/'
 
@@ -28,6 +29,16 @@ for year in 1982..2011
 	ratings_per_year[year] = year_ratings
 
 end
-
-# p ratings_per_year
-p ratings_all
+ratings_per_year['total'] = ratings_all
+Rating = Struct.new(:year, :school, :count)
+ratings = []
+for year in ratings_per_year.keys
+	for school in ratings_per_year[year]
+		r = Rating.new(year, school[0], school[1])
+		ratings << r
+	end
+end
+# p ratings_per_year['total']
+# p ratings
+# CSV.open("ratings.csv", "wb") {|csv| ratings_per_year.to_a.each {|elem| csv << elem} }
+CSV.open("ratings.csv", "wb") {|csv| ratings.to_a.each {|elem| csv << elem} }
