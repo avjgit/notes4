@@ -19,6 +19,14 @@ int time_formatted(int HH, int MM){
     return HH * 100 + MM;
 }
 
+int time_between(flight* arrival, flight* departure){
+    const int WHOLE_DAY = 2400;
+    if(departure->departure_time > arrival->arrival_time)
+        return departure->departure_time - arrival->arrival_time;
+    else
+        return WHOLE_DAY - arrival->arrival_time + departure->departure_time;
+}
+
 void print_flight(FILE* out, flight* f){
     fprintf(
         out,
@@ -116,14 +124,15 @@ int main(){
 
         // loop through all airport's flights_count (until next flight == NULL)
         while(f != NULL){
-            if(f->used == false){
+            if(!f->used){
                 // unifying departure time (to correctly compare next day's time)
-                if(f->departure_time > arrival->arrival_time){
-                    time_till_departure = f->departure_time - arrival->arrival_time;
-                }
-                else{
-                    time_till_departure = WHOLE_DAY - arrival->arrival_time + f->departure_time;
-                }
+                // if(f->departure_time > arrival->arrival_time){
+                //     time_till_departure = f->departure_time - arrival->arrival_time;
+                // }
+                // else{
+                //     time_till_departure = WHOLE_DAY - arrival->arrival_time + f->departure_time;
+                // }
+                time_till_departure = time_between(arrival, f);
 
                 // finding flight with minimal time to wait
                 if(time_till_departure < min_time_till_departure){
