@@ -14,41 +14,42 @@ def source(source, year)
     end
 end
 
-ratings_per_year = Hash.new
-ratings_all = Hash.new 0
-Rating = Struct.new(:year, :school, :count, :points)
-ratings = []
-ratings << Rating.new('Gads', 'Skola', 'Vietas', 'Punkti')
+all_years_ratings = Hash.new
+total_ratings = Hash.new 0
 
 # 1982..2011
 for year in 1982..2011
 
     page  = Nokogiri::HTML(open(source(source_template, year)).read)
-    year_ratings = Hash.new 0
+    one_year_ratings = Hash.new 0
 
     schools = page.xpath('//table/tbody/tr[position() > 1]')
     for row in schools
         school =  row.xpath('td')[1].text
         points =  row.xpath('td')[2].text.to_i rescue points = 0
 
-        if !year_ratings.has_key?(school)
+        if !one_year_ratings.has_key?(school)
             rating_points = [1, points]
-            year_ratings[school] = rating_points
-            ratings_all[school] = rating_points
+            one_year_ratings[school] = rating_points
+            total_ratings[school] = rating_points
         else
-            year_ratings[school][0] += 1
-            year_ratings[school][1] += points
-            ratings_all[school][0] += 1
-            ratings_all[school][1] += points
+            one_year_ratings[school][0] += 1
+            one_year_ratings[school][1] += points
+            total_ratings[school][0] += 1
+            total_ratings[school][1] += points
         end
     end
-    ratings_per_year[year] = year_ratings
+    all_years_ratings[year] = one_year_ratings
 end
 
-ratings_per_year['total'] = ratings_all
+all_years_ratings['total'] = total_ratings
 
-for year in ratings_per_year.keys
-    for school in ratings_per_year[year]
+Rating = Struct.new(:year, :school, :count, :points)
+ratings = []
+ratings << Rating.new('Gads', 'Skola', 'Skoleenu skaits', 'Punkti')
+
+for year in all_years_ratings.keys
+    for school in all_years_ratings[year]
         ratings << Rating.new(year, school[0], school[1][0], school[1][1])
     end
 end
