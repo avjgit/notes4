@@ -3,10 +3,22 @@
 
 #include <fstream>
 // * Aizliegts izmantot jau gatavas datu struktūras (piemēram, String) un algoritmus (piemēram, qsort() un strcmp()).
+struct letter{
+    char full_word[20] = {};
+    char translation[20] = {};
+    letter* next_letters[256]; // ASCII size array
+};
+
 int main() {
 
     FILE* in = fopen("tulks.in", "r");
     FILE* out = fopen("tulks.out", "w+");
+
+    char word[20] = {};
+    for(int i = 0; word[i] != '\0'; i++)
+        fprintf(stdout, "%c", word[i], " ");
+    return 0;
+
 
     //todo
     // rootA, rootB, rootStart default = rootA
@@ -20,9 +32,6 @@ int main() {
     for(;;){
 
     fscanf(in, "%s", word_a);
-
-    // for(int i = 0; word_a[i] != '\0'; i++)
-        // fprintf(stdout, "%c", word_a[i], " ");
 
     if (word_a[0] == '-'){ // word is '-->', so end of dictionary
         // todo
