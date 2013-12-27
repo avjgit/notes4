@@ -20,32 +20,20 @@ int main() {
     fscanf(in, "%s", word_b);
     fprintf(out, "%s%s", word_b, " ");
 
-    fscanf(in, "%s", word_a);
-    fprintf(out, "%s%s", word_a, " ");
+    // fscanf(in, "%s", word_a);
+    // fprintf(out, "%s%s", word_a, " ");
 
-    fscanf(in, "%s", word_b);
-    fprintf(out, "%s%s", word_b, " ");
+    // fscanf(in, "%s", word_b);
+    // fprintf(out, "%s%s", word_b, " ");
 
+    for(int i = 0; word_a[i] != '\0'; i++)
+        fprintf(stdout, "%c", word_a[i], " ");
 
 
 // Vārdnīcā ir vismaz viens vārdu pāris, bet ne vairāk kā 50’000 vārdu pāru.
 // Ir zināms, ka vārdnīcā visi vārdi valodā A ir unikāli, t.i. tie nesatur dublikātus. Arī vārdnīcas B vārdi ir unikāli.
 // Tas nozīmē, ka vārda tulkojums no valodas A uz valodu B ir viennozīmīgs, un arī vārda tulkojums no valodas B uz valodu A ir viennozīmīgs.
 // Vārdnīcā ir iekļauti tikai tādi vārdi, kas sastāv no latīņu alfabēta mazajiem un lielajiem burtiem, kā arī cipariem ({a..z,A..Z,0..9}).
-
-    char a = 'a';
-    int ai = a;
-    char z = 'z';
-    int zi = z;
-    char aup = 'A';
-    int aupi = aup;
-    char c1 = '1';
-    int c1i = c1;
-
-    fprintf(stdout, "print test %i, %i, %i, %i", ai, zi, aupi, c1i);
-
-
-
 // ============ Pēc vārdnīcas seko tulkošanas virziens, kas jaunā rindā tiek kodēts ar 3 simbolu palīdzību.
 // Simbolu virkne ‘-->’ nozīmē, ka jātulko no valodas A uz valodu B.
 // Simbolu virkne ‘<--’ nozīmē, ka jātulko no valodas B uz valodu A.
