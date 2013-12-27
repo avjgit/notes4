@@ -25,11 +25,15 @@ int main() {
     letter* language_B = new letter;
     letter* language_From = language_A;
     letter* current = language_From;
+    letter* new_letter;
 
+    // todo: this is testline; remove
     current->next_letters[97] = language_B;
 
     char word_a[20];
     char word_b[20];
+    int char2int;
+
     ///////////////////// read in dictionary
     for(;;){
         fscanf(in, "%s", word_a);
@@ -39,21 +43,28 @@ int main() {
             break;
         }
         // pseudocode: transform wordA chars to letters structure
-        int char2int;
-
+        current = language_From; // set cursor to beginning of tree of characters
         for(int i = 0; word_a[i] != '\0'; i++){
+
             char2int = word_a[i]; // transferring character to integer (eg., A is 65)
-            if (current->next_letters[char2int] != NULL){
-                fprintf(stdout, "letter is known!");
-            }
-            else{
+
+            if (current->next_letters[char2int] == NULL){
+                new_letter = new letter;
+                new_letter->self = word_a[i];
+                new_letter->previous_letter = current;
+                current->next_letters[char2int] = new_letter;
                 fprintf(stdout, "%i", word_a[i], " ");
             }
+            else{
+                fprintf(stdout, "%i letter is known!", word_a[i]);
+            }
+            current = current->next_letters[char2int];
             fprintf(stdout, "-");
         }
         fprintf(stdout, "------");
 
         fscanf(in, "%s", word_b);
+
         // pseudocode: transform wordB chars to letters structure
         // pseudocode: point from wordB last char to wordA last char
         // pseudocode: point from wordA last char to wordB last char
