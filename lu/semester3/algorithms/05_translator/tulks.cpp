@@ -39,7 +39,7 @@ int main() {
     ///////////////////// read in dictionary
     for(;;){
         fscanf(in, "%s", word_a);
-        fprintf(stdout, "\nword A: %s: ", word_a);
+        // fprintf(stdout, "\nword A: %s: ", word_a);
 
         ///////////////////// check if end of dictionary; define translation direction
         if (word_a[0] == '-'){
@@ -59,13 +59,13 @@ int main() {
                 new_letter->self = word_a[i];
                 new_letter->previous_letter = current;
                 current->next_letters[char2int] = new_letter;
-                fprintf(stdout, "%i", word_a[i], " ");
+                // fprintf(stdout, "%i", word_a[i], " ");
             }
             else{
-                fprintf(stdout, "%i letter is known!", word_a[i]);
+                // fprintf(stdout, "%i letter is known!", word_a[i]);
             }
             current = current->next_letters[char2int];
-            fprintf(stdout, "-");
+            // fprintf(stdout, "-");
         }
         last_A = current;
 
@@ -73,7 +73,7 @@ int main() {
         // pseudocode: transform wordB chars to letters structure
 
         fscanf(in, "%s", word_b);
-        fprintf(stdout, "\nword B: %s: ", word_b);
+        // fprintf(stdout, "\nword B: %s: ", word_b);
 
         current = language_B; // set cursor to beginning of tree of characters
 
@@ -86,17 +86,17 @@ int main() {
                 new_letter->self = word_b[i];
                 new_letter->previous_letter = current;
                 current->next_letters[char2int] = new_letter;
-                fprintf(stdout, "%i", word_b[i], " ");
+                // fprintf(stdout, "%i", word_b[i], " ");
             }
             else{
-                fprintf(stdout, "%i letter is known!", word_b[i]);
+                // fprintf(stdout, "%i letter is known!", word_b[i]);
             }
             current = current->next_letters[char2int];
-            fprintf(stdout, "-");
+            // fprintf(stdout, "-");
         }
         last_B = current;
 
-        fprintf(stdout, "\n----------");
+        // fprintf(stdout, "\n----------");
 
         // pseudocode: point from wordB last char to wordA last char
         last_A->translation = last_B;
@@ -132,13 +132,20 @@ int main() {
         // pseudocode: output stack
             word_length = -1;
             current = current->translation;
-            fprintf(out, "translatable! ");
+            // fprintf(out, "translatable! ");
 
             do{
                 word_length++;
                 word_translation_stack[word_length] = current->self;
                 current = current->previous_letter;
             }while(current->previous_letter != NULL);
+
+            while(word_length >= 0){
+                fprintf(out, "%c", word_translation_stack[word_length]);
+                word_length--;
+            }
+            fprintf(out, " ");
+
 
         }
         else{
