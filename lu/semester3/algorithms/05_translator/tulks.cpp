@@ -33,18 +33,17 @@ int main() {
 
     for(;;){
 
-    fscanf(in, "%s", word_a);
+        fscanf(in, "%s", word_a);
+        ///////////////////// check if end of dictionary; define translation direction
+        if (word_a[0] == '-'){
+            if (word_a[2] == '<') language_From = language_B;
+            break;
+        }
 
-    if (word_a[0] == '-'){ // word is '-->', so end of dictionary
-        if (word[2] == '<')
-            language_From = language_B;
-        break;
-    }
+        fprintf(out, "%s%s", word_a, " ");
 
-    fprintf(out, "%s%s", word_a, " ");
-
-    fscanf(in, "%s", word_b);
-    fprintf(out, "%s%s", word_b, " ");
+        fscanf(in, "%s", word_b);
+        fprintf(out, "%s%s", word_b, " ");
 
     }
 
@@ -60,9 +59,6 @@ int main() {
 // Ir zināms, ka vārdnīcā visi vārdi valodā A ir unikāli, t.i. tie nesatur dublikātus. Arī vārdnīcas B vārdi ir unikāli.
 // Tas nozīmē, ka vārda tulkojums no valodas A uz valodu B ir viennozīmīgs, un arī vārda tulkojums no valodas B uz valodu A ir viennozīmīgs.
 // Vārdnīcā ir iekļauti tikai tādi vārdi, kas sastāv no latīņu alfabēta mazajiem un lielajiem burtiem, kā arī cipariem ({a..z,A..Z,0..9}).
-// ============ Pēc vārdnīcas seko tulkošanas virziens, kas jaunā rindā tiek kodēts ar 3 simbolu palīdzību.
-// Simbolu virkne ‘-->’ nozīmē, ka jātulko no valodas A uz valodu B.
-// Simbolu virkne ‘<--’ nozīmē, ka jātulko no valodas B uz valodu A.
 // ============ Pēc tulkošanas virziena seko tulkojamais teksts.
 // Tulkojamais teksts var aizņemt daudzas rindas.
 // Vārdi ir atdalīti ar vienu vai vairāk tukšumiem.
