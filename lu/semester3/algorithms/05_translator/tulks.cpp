@@ -13,8 +13,19 @@ int main() {
 // ============ Vārdnīca sastāv no vārdu pārīšiem formā <Word_A> <Word_B>
     char word_a[20];
     char word_b[20];
+
     fscanf(in, "%s", word_a);
     fprintf(out, "%s%s", word_a, " ");
+
+    fscanf(in, "%s", word_b);
+    fprintf(out, "%s%s", word_b, " ");
+
+    fscanf(in, "%s", word_a);
+    fprintf(out, "%s%s", word_a, " ");
+
+    fscanf(in, "%s", word_b);
+    fprintf(out, "%s%s", word_b, " ");
+
 
 
 // Vārdnīcā ir vismaz viens vārdu pāris, bet ne vairāk kā 50’000 vārdu pāru.
