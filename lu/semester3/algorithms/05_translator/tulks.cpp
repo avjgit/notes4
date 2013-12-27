@@ -116,26 +116,27 @@ int main() {
     fscanf(in, "%s", word);
     int k = 0;
     while (!feof(in)){
-        fprintf(stdout, "\nchecking %s: ", word);
+        // fprintf(stdout, "\nchecking %s: ", word);
         current = language_From;
         // pseudocode: per word characters, get from start till last char
         is_translation_found = true;
         for(int i = 0; word[i] != '\0'; i++){
-            fprintf(stdout, " %c: ", word[i]);
+            // fprintf(stdout, " %c: ", word[i]);
 
             char2int = word[i]; // transferring character to integer (eg., A is 65)
             if (current->next_letters[char2int] != NULL){
-                fprintf(stdout, "ok");
+                // fprintf(stdout, "ok");
                 current = current->next_letters[char2int];
             }
             else{
-                fprintf(stdout, "unknown!");
+                // fprintf(stdout, "unknown!");
                 is_translation_found = false;
                 break;
             }
         }
 
-        is_translation_found = (current->translation != NULL);
+        if(is_translation_found)
+            is_translation_found = (current->translation != NULL);
 
         if (is_translation_found){
         // pseudocode: else, set pointer to translation
@@ -148,7 +149,7 @@ int main() {
             do{
                 word_length++;
                 word_translation_stack[word_length] = current->self;
-                fprintf(stdout, "saved %c; ", current->self);
+                // fprintf(stdout, "saved %c; ", current->self);
                 current = current->previous_letter;
             }while(current->previous_letter != NULL);
 
