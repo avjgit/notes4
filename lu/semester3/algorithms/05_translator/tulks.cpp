@@ -32,27 +32,28 @@ int main() {
     char word_b[20];
 
     for(;;){
-
         fscanf(in, "%s", word_a);
         ///////////////////// check if end of dictionary; define translation direction
         if (word_a[0] == '-'){
             if (word_a[2] == '<') language_From = language_B;
             break;
         }
-
-        fprintf(out, "%s%s", word_a, " ");
-
+        // pseudocode: transform wordA chars to letters structure
         fscanf(in, "%s", word_b);
-        fprintf(out, "%s%s", word_b, " ");
-
+        // pseudocode: transform wordB chars to letters structure
+        // pseudocode: point from wordB last char to wordA last char
+        // pseudocode: point from wordA last char to wordB last char
     }
 
-    char txtword[20];
-
-    fscanf(in, "%s", txtword);
+    char word[20];
+    fscanf(in, "%s", word);
     while (!feof(in)){
-        fprintf(out, "%s%s", txtword, " ");
-        fscanf(in, "%s", txtword);
+        // pseudocode: per word characters, get from start till last char
+        // pseudocode: set start pointer to = has translation? translation; else - self, with prefix "?"
+        // pseudocode: go up from current letter till language root, filling stack
+        // pseudocode: output stack
+        fprintf(out, "%s%s", word, " ");
+        fscanf(in, "%s", word);
     }
 
 // Vārdnīcā ir vismaz viens vārdu pāris, bet ne vairāk kā 50’000 vārdu pāru.
