@@ -11,8 +11,12 @@ int main() {
 // ################################# Ieeja:
 // Ieejas fails satur 3 datu blokus: vārdnīcu, tulkošanas virzienu un tulkojamo tekstu.
 // ============ Vārdnīca sastāv no vārdu pārīšiem formā <Word_A> <Word_B>
-// <Word_A> ir vārds valodā A, bet <Word_B> ir pirmajam vārdam atbilstošais vārds valodā B. Katrs vārdu pāris ir savā rindā.
-// Vārdnīcā neviens vārds nav garāks par 20 simboliem.
+    char word_a[20];
+    char word_b[20];
+    fscanf(in, "%s", word_a);
+    fprintf(out, "%s%s", word_a, " ");
+
+
 // Vārdnīcā ir vismaz viens vārdu pāris, bet ne vairāk kā 50’000 vārdu pāru.
 // Ir zināms, ka vārdnīcā visi vārdi valodā A ir unikāli, t.i. tie nesatur dublikātus. Arī vārdnīcas B vārdi ir unikāli.
 // Tas nozīmē, ka vārda tulkojums no valodas A uz valodu B ir viennozīmīgs, un arī vārda tulkojums no valodas B uz valodu A ir viennozīmīgs.
