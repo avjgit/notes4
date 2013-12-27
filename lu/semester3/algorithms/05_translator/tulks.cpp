@@ -105,6 +105,8 @@ int main() {
     }
     ///////////////////// translation and output
     char word[20];
+    char word_translation_stack[20];
+    int word_length;
     bool is_translation_found;
 
 
@@ -128,8 +130,16 @@ int main() {
         // pseudocode: else, set pointer to translation
         // pseudocode: go up from current letter till language root, filling stack
         // pseudocode: output stack
+            word_length = -1;
             current = current->translation;
             fprintf(out, "translatable! ");
+
+            do{
+                word_length++;
+                word_translation_stack[word_length] = current->self;
+                current = current->previous_letter;
+            }while(current->previous_letter != NULL);
+
         }
         else{
         // pseudocode: if this word is not known (no pointer to last chare) - print out word with prefix "?"
