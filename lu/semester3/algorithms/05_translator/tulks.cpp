@@ -36,11 +36,9 @@ int main() {
         fscanf(in, "%s", word_a);
         // fprintf(stdout, "\nword A: %s: ", word_a);
 
-        ///////////////////// check if end of dictionary; define translation direction
-        if (word_a[1] == '-'){ // <-- or --> - both have common "-" in middle!
-            if (word_a[0] == '<') language_From = language_B;
-            break;
-        }
+        //check if end of dictionary; define translation direction
+        if (word_a[0] == '<'){ language_From = language_B; break; }
+        if (word_a[2] == '>'){ language_From = language_A; break; }
 
         ////////////////////////////// READ WORD A
         // pseudocode: transform wordA chars to letters structure
@@ -51,10 +49,9 @@ int main() {
             char2int = word_a[i]; // transferring character to integer (eg., A is 65)
 
             if (curr_A->next[char2int] == NULL){
-                new_letter = new letter;
-                new_letter->self = word_a[i];
-                new_letter->prev = curr_A;
-                curr_A->next[char2int] = new_letter;
+                curr_A->next[char2int]       = new letter;
+                curr_A->next[char2int]->self = word_a[i];
+                curr_A->next[char2int]->prev = curr_A;
                 // fprintf(stdout, "%i", word_a[i], " ");
             }
             else{
