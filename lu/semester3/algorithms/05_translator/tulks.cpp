@@ -7,7 +7,13 @@ struct letter{
     char self;
     letter* previous_letter;
     letter* translation;
-    letter* next_letters[256]; // ASCII size array
+    letter* next_letters[128]; // ASCII size array
+    letter(){
+        self = '.';
+        previous_letter = NULL;
+        translation = NULL;
+        for(int i = 0; i < 128; i++) next_letters[i] = NULL;
+    }
 };
 
 int main() {
@@ -15,12 +21,9 @@ int main() {
     FILE* in = fopen("tulks.in", "r");
     FILE* out = fopen("tulks.out", "w+");
 
-    char word[20] = {};
-    for(int i = 0; word[i] != '\0'; i++)
-        fprintf(stdout, "%c", word[i], " ");
-
-    //todo
-    // rootA, rootB, rootStart default = rootA
+    letter* language_A = new letter;
+    letter* language_B = new letter;
+    letter* language_From = language_A;
 
 // ################################# Ieeja:
 // Ieejas fails satur 3 datu blokus: vārdnīcu, tulkošanas virzienu un tulkojamo tekstu.
@@ -33,9 +36,8 @@ int main() {
     fscanf(in, "%s", word_a);
 
     if (word_a[0] == '-'){ // word is '-->', so end of dictionary
-        // todo
-        // if (word[2] == '<')
-            // rootStart = rootB;
+        if (word[2] == '<')
+            language_From = language_B;
         break;
     }
 
