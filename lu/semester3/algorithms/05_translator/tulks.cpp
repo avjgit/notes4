@@ -35,8 +35,7 @@ int main() {
         if (word_a[0] == '<'){ lang_From = lang_B; break; }
         if (word_a[2] == '>'){ lang_From = lang_A; break; }
 
-        ////////////////////////////// READ WORD A
-        // pseudocode: transform wordA chars to letters structure
+        // transform wordA chars to letters structure
         curr_A = lang_A; // set cursor to beginning of tree of characters
 
         for(int i = 0; word_a[i] != '\0'; i++){
@@ -51,9 +50,7 @@ int main() {
             curr_A = curr_A->next[c];
         }
 
-        ////////////////////////////// READ WORD B
-        // pseudocode: transform wordB chars to letters structure
-
+        // transform wordB chars to letters structure
         fscanf(in, "%s", word_b);
 
         // fix - if translation is known already - do not fill B translation
@@ -74,48 +71,43 @@ int main() {
         }
         curr_B = curr_B;
 
-        // pseudocode: point translation to each other
+        // point translation to each other
         curr_A->translation = curr_B;
         curr_B->translation = curr_A;
     }
     ///////////////////// translation and output
     char word[20];
-    char word_translation_stack[20];
-    int char_count;
-    bool is_translated;
+    char translation[20]; //word translation stack
+    int chars;
+    bool is_known;
     letter* curr = lang_From;
 
     fscanf(in, "%s", word);
     while (!feof(in)){
         curr = lang_From;
-        // pseudocode: per word characters, get from start till last char
-        is_translated = true;
+        // per word characters, get from start till last char
+        is_known = true;
         for(int i = 0; word[i] != '\0'; i++){
 
             c = word[i]; // transferring character to integer (eg., A is 65)
-            if (curr->next[c] != NULL){
-                curr = curr->next[c];
-            }
-            else{
-                is_translated = false;
+            if (curr->next[c] == NULL){
+                is_known = false;
                 break;
             }
+            curr = curr->next[c];
         }
 
-        if(is_translated)
-            is_translated = (curr->translation != NULL);
-
-        if (is_translated){
-            char_count = -1;
+        if (is_known && curr->translation != NULL){
+            chars = -1;
             curr = curr->translation; //set pointer to translation
             do{
-                char_count++; // fill translation stack
-                word_translation_stack[char_count] = curr->self;
+                chars++; // fill translation stack
+                translation[chars] = curr->self;
                 curr = curr->prev; //go up from curr letter till language root
             }while(curr->prev != NULL);
 
-            while(char_count >= 0) // output translation stack
-                fprintf(out, "%c", word_translation_stack[char_count--]);
+            while(chars >= 0) // output translation stack
+                fprintf(out, "%c", translation[chars--]);
         }
         else
             fprintf(out, "?%s", word);
