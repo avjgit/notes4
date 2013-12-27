@@ -15,6 +15,24 @@ struct letter{
     }
 };
 
+letter* save(letter* dictionary_root, char* word){
+    int c;
+    // transform word characters to dictionary structure
+    letter* cursor = dictionary_root;
+    for(int i = 0; word[i] != '\0'; i++){
+
+        c = word[i]; // transferring character to integer (eg., A is 65)
+
+        if (cursor->next[c] == NULL){
+            cursor->next[c]       = new letter;
+            cursor->next[c]->self = word[i];
+            cursor->next[c]->prev = cursor;
+        }
+        cursor = cursor->next[c];
+    }
+    return cursor;
+}
+
 int main() {
     FILE* in    = fopen("tulks.in", "r");
     FILE* out   = fopen("tulks.out", "w+");
@@ -35,41 +53,14 @@ int main() {
         if (word_a[0] == '<'){ lang_From = lang_B; break; }
         if (word_a[2] == '>'){ lang_From = lang_A; break; }
 
-        // transform wordA chars to letters structure
-        curr_A = lang_A; // set cursor to beginning of tree of characters
+        curr_A = save(lang_A, word_a);
 
-        for(int i = 0; word_a[i] != '\0'; i++){
-
-            c = word_a[i]; // transferring character to integer (eg., A is 65)
-
-            if (curr_A->next[c] == NULL){
-                curr_A->next[c]       = new letter;
-                curr_A->next[c]->self = word_a[i];
-                curr_A->next[c]->prev = curr_A;
-            }
-            curr_A = curr_A->next[c];
-        }
-
-        // transform wordB chars to letters structure
         fscanf(in, "%s", word_b);
 
         // fix - if translation is known already - do not fill B translation
         if (curr_A->translation != NULL) continue;
 
-        curr_B = lang_B; // set cursor to beginning of tree of characters
-
-        for(int i = 0; word_b[i] != '\0'; i++){
-
-            c = word_b[i]; // transferring character to integer (eg., A is 65)
-
-            if (curr_B->next[c] == NULL){
-                curr_B->next[c]       = new letter;
-                curr_B->next[c]->self = word_b[i];
-                curr_B->next[c]->prev = curr_B;
-            }
-            curr_B = curr_B->next[c];
-        }
-        curr_B = curr_B;
+        curr_B = save(lang_B, word_b);
 
         // point translation to each other
         curr_A->translation = curr_B;
@@ -100,9 +91,9 @@ int main() {
         if (is_known && curr->translation != NULL){
             chars = -1;
             curr = curr->translation; //set pointer to translation
+
             do{
-                chars++; // fill translation stack
-                translation[chars] = curr->self;
+                translation[++chars] = curr->self; // fill translation stack
                 curr = curr->prev; //go up from curr letter till language root
             }while(curr->prev != NULL);
 
