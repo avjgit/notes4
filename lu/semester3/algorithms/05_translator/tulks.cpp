@@ -107,10 +107,10 @@ int main() {
     char word[20];
     bool is_translation_found;
 
-    current = language_From;
 
     fscanf(in, "%s", word);
     while (!feof(in)){
+        current = language_From;
         // pseudocode: per word characters, get from start till last char
         is_translation_found = true;
         for(int i = 0; word[i] != '\0'; i++){
