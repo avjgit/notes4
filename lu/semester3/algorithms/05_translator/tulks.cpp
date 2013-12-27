@@ -20,10 +20,9 @@ int main() {
     for(;;){
 
     fscanf(in, "%s", word_a);
-    fprintf(out, "%s%s", word_a, " ");
 
-    for(int i = 0; word_a[i] != '\0'; i++)
-        fprintf(stdout, "%c", word_a[i], " ");
+    // for(int i = 0; word_a[i] != '\0'; i++)
+        // fprintf(stdout, "%c", word_a[i], " ");
 
     if (word_a[0] == '-'){ // word is '-->', so end of dictionary
         // todo
@@ -32,9 +31,19 @@ int main() {
         break;
     }
 
+    fprintf(out, "%s%s", word_a, " ");
+
     fscanf(in, "%s", word_b);
     fprintf(out, "%s%s", word_b, " ");
 
+    }
+
+    char txtword[20];
+
+    fscanf(in, "%s", txtword);
+    while (!feof(in)){
+        fprintf(out, "%s%s", txtword, " ");
+        fscanf(in, "%s", txtword);
     }
 
 // Vārdnīcā ir vismaz viens vārdu pāris, bet ne vairāk kā 50’000 vārdu pāru.
