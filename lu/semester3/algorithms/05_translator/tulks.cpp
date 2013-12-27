@@ -75,6 +75,9 @@ int main() {
         fscanf(in, "%s", word_b);
         // fprintf(stdout, "\nword B: %s: ", word_b);
 
+        // fix - if translation is known already - do not fill B translation
+        if (last_A->translation != NULL) continue;
+
         current = language_B; // set cursor to beginning of tree of characters
 
         for(int i = 0; word_b[i] != '\0'; i++){
