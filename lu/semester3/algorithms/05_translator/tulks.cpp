@@ -42,7 +42,7 @@ int main() {
         // fprintf(stdout, "\nword A: %s: ", word_a);
 
         ///////////////////// check if end of dictionary; define translation direction
-        if (word_a[0] == '-'){
+        if (word_a[1] == '-'){ // <-- or --> - both have common "-" in middle!
             if (word_a[2] == '<') language_From = language_B;
             break;
         }
