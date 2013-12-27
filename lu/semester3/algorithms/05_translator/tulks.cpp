@@ -70,6 +70,8 @@ int main() {
         last_A = current;
 
         ////////////////////////////// READ WORD B
+        // pseudocode: transform wordB chars to letters structure
+
         fscanf(in, "%s", word_b);
         fprintf(stdout, "\nword B: %s: ", word_b);
 
@@ -92,22 +94,44 @@ int main() {
             current = current->next_letters[char2int];
             fprintf(stdout, "-");
         }
+        last_B = current;
+
         fprintf(stdout, "\n----------");
 
-        // pseudocode: transform wordB chars to letters structure
         // pseudocode: point from wordB last char to wordA last char
+        last_A->translation = last_B;
         // pseudocode: point from wordA last char to wordB last char
+        last_B->translation = last_A;
     }
     ///////////////////// translation and output
     char word[20];
+    bool is_translation_found = true;
+    current = language_From;
+
     fscanf(in, "%s", word);
     while (!feof(in)){
         // pseudocode: per word characters, get from start till last char
-        // pseudocode: if this word is not known (no pointer to last chare) - print out word with prefix "?"
+        for(int i = 0; word[i] != '\0'; i++){
+            char2int = word[i]; // transferring character to integer (eg., A is 65)
+            if (current->next_letters[char2int] != NULL){
+                current = current->next_letters[char2int];
+            }
+            else{
+                is_translation_found = false;
+                break;
+            }
+        }
+
+        if (is_translation_found){
         // pseudocode: else, set pointer to translation
         // pseudocode: go up from current letter till language root, filling stack
         // pseudocode: output stack
+            current = current->translation;
+        }
+        else{
+        // pseudocode: if this word is not known (no pointer to last chare) - print out word with prefix "?"
         fprintf(out, "%s%s", word, " ");
+        }
         fscanf(in, "%s", word);
     }
     fclose(in);
