@@ -25,6 +25,8 @@ int main() {
     letter* language_B = new letter;
     letter* language_From = language_A;
     letter* current = language_From;
+    letter* last_A = NULL;
+    letter* last_B = NULL;
     letter* new_letter;
 
     // todo: this is testline; remove
@@ -42,8 +44,10 @@ int main() {
             if (word_a[2] == '<') language_From = language_B;
             break;
         }
+        ////////////////////////////// READ WORD A
         // pseudocode: transform wordA chars to letters structure
-        current = language_From; // set cursor to beginning of tree of characters
+        current = language_A; // set cursor to beginning of tree of characters
+
         for(int i = 0; word_a[i] != '\0'; i++){
 
             char2int = word_a[i]; // transferring character to integer (eg., A is 65)
@@ -61,9 +65,31 @@ int main() {
             current = current->next_letters[char2int];
             fprintf(stdout, "-");
         }
+        last_A = current;
         fprintf(stdout, "------");
 
+        ////////////////////////////// READ WORD B
         fscanf(in, "%s", word_b);
+        current = language_B; // set cursor to beginning of tree of characters
+
+        for(int i = 0; word_b[i] != '\0'; i++){
+
+            char2int = word_b[i]; // transferring character to integer (eg., A is 65)
+
+            if (current->next_letters[char2int] == NULL){
+                new_letter = new letter;
+                new_letter->self = word_b[i];
+                new_letter->previous_letter = current;
+                current->next_letters[char2int] = new_letter;
+                fprintf(stdout, "%i", word_b[i], " ");
+            }
+            else{
+                fprintf(stdout, "%i letter is known!", word_b[i]);
+            }
+            current = current->next_letters[char2int];
+            fprintf(stdout, "-");
+        }
+        fprintf(stdout, "------");
 
         // pseudocode: transform wordB chars to letters structure
         // pseudocode: point from wordB last char to wordA last char
