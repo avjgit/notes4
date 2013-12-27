@@ -4,8 +4,9 @@
 #include <fstream>
 // * Aizliegts izmantot jau gatavas datu struktūras (piemēram, String) un algoritmus (piemēram, qsort() un strcmp()).
 struct letter{
-    char full_word[20] = {};
-    char translation[20] = {};
+    char self;
+    letter* previous_letter;
+    letter* translation;
     letter* next_letters[256]; // ASCII size array
 };
 
@@ -17,8 +18,6 @@ int main() {
     char word[20] = {};
     for(int i = 0; word[i] != '\0'; i++)
         fprintf(stdout, "%c", word[i], " ");
-    return 0;
-
 
     //todo
     // rootA, rootB, rootStart default = rootA
