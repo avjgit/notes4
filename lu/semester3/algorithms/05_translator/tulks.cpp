@@ -25,12 +25,9 @@ int main() {
     letter* language_B = new letter;
     letter* language_From = language_A;
 
-// ################################# Ieeja:
-// Ieejas fails satur 3 datu blokus: vārdnīcu, tulkošanas virzienu un tulkojamo tekstu.
-// ============ Vārdnīca sastāv no vārdu pārīšiem formā <Word_A> <Word_B>
     char word_a[20];
     char word_b[20];
-
+    ///////////////////// read in dictionary
     for(;;){
         fscanf(in, "%s", word_a);
         ///////////////////// check if end of dictionary; define translation direction
@@ -44,33 +41,18 @@ int main() {
         // pseudocode: point from wordB last char to wordA last char
         // pseudocode: point from wordA last char to wordB last char
     }
-
+    ///////////////////// translation and output
     char word[20];
     fscanf(in, "%s", word);
     while (!feof(in)){
         // pseudocode: per word characters, get from start till last char
-        // pseudocode: set start pointer to = has translation? translation; else - self, with prefix "?"
+        // pseudocode: if this word is not known (no pointer to last chare) - print out word with prefix "?"
+        // pseudocode: else, set pointer to translation
         // pseudocode: go up from current letter till language root, filling stack
         // pseudocode: output stack
         fprintf(out, "%s%s", word, " ");
         fscanf(in, "%s", word);
     }
-
-// Vārdnīcā ir vismaz viens vārdu pāris, bet ne vairāk kā 50’000 vārdu pāru.
-// Ir zināms, ka vārdnīcā visi vārdi valodā A ir unikāli, t.i. tie nesatur dublikātus. Arī vārdnīcas B vārdi ir unikāli.
-// Tas nozīmē, ka vārda tulkojums no valodas A uz valodu B ir viennozīmīgs, un arī vārda tulkojums no valodas B uz valodu A ir viennozīmīgs.
-// Vārdnīcā ir iekļauti tikai tādi vārdi, kas sastāv no latīņu alfabēta mazajiem un lielajiem burtiem, kā arī cipariem ({a..z,A..Z,0..9}).
-// ============ Pēc tulkošanas virziena seko tulkojamais teksts.
-// Tulkojamais teksts var aizņemt daudzas rindas.
-// Vārdi ir atdalīti ar vienu vai vairāk tukšumiem.
-// Vārdus veido simboli no kopas {a..z,A..Z,0..9}.
-// Tulkojamais teksts satur vismaz vienu vārdu.
-// Tulkojamais teksts var būt neierobežoti liels.
-// ################################# Izeja:
-// Rezultātu failam jāsatur tulkojamā teksta tulkojums, ja to tulko vārdu pa vārdam atbilstoši dotajai vārdnīcai un tulkošanas virzienam.
-// Viss tulkojums tiek drukāts vienā rindā neatkarīgi no rindu daudzuma tulkojamajā tekstā.
-// Vārdi tiek atdalīti ar tukšumu.
-// Ja kādam tulkojamajam vārdam vārdnīcā nav dots tulkojums, tad jādrukā tulkojamais vārds, tam priekšā pieliekot jautājuma zīmi ‘?’.
     fclose(in);
     fclose(out);
     return 0;
