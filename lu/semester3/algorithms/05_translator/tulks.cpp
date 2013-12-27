@@ -39,6 +39,8 @@ int main() {
     ///////////////////// read in dictionary
     for(;;){
         fscanf(in, "%s", word_a);
+        fprintf(stdout, "\nword A: %s: ", word_a);
+
         ///////////////////// check if end of dictionary; define translation direction
         if (word_a[0] == '-'){
             if (word_a[2] == '<') language_From = language_B;
@@ -66,10 +68,11 @@ int main() {
             fprintf(stdout, "-");
         }
         last_A = current;
-        fprintf(stdout, "------");
 
         ////////////////////////////// READ WORD B
         fscanf(in, "%s", word_b);
+        fprintf(stdout, "\nword B: %s: ", word_b);
+
         current = language_B; // set cursor to beginning of tree of characters
 
         for(int i = 0; word_b[i] != '\0'; i++){
@@ -89,7 +92,7 @@ int main() {
             current = current->next_letters[char2int];
             fprintf(stdout, "-");
         }
-        fprintf(stdout, "------");
+        fprintf(stdout, "\n----------");
 
         // pseudocode: transform wordB chars to letters structure
         // pseudocode: point from wordB last char to wordA last char
