@@ -105,12 +105,14 @@ int main() {
     }
     ///////////////////// translation and output
     char word[20];
-    bool is_translation_found = true;
+    bool is_translation_found;
+
     current = language_From;
 
     fscanf(in, "%s", word);
     while (!feof(in)){
         // pseudocode: per word characters, get from start till last char
+        is_translation_found = true;
         for(int i = 0; word[i] != '\0'; i++){
             char2int = word[i]; // transferring character to integer (eg., A is 65)
             if (current->next_letters[char2int] != NULL){
@@ -127,10 +129,11 @@ int main() {
         // pseudocode: go up from current letter till language root, filling stack
         // pseudocode: output stack
             current = current->translation;
+            fprintf(out, "translatable! ");
         }
         else{
         // pseudocode: if this word is not known (no pointer to last chare) - print out word with prefix "?"
-        fprintf(out, "%s%s", word, " ");
+        fprintf(out, "?%s%s", word, " ");
         }
         fscanf(in, "%s", word);
     }
