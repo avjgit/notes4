@@ -2,16 +2,16 @@
 // https://github.com/avjgit/notes4/blob/master/lu/semester3/algorithms/05_translator/tulks.cpp
 
 #include <fstream>
+
 struct letter{
     char self;
-    letter* prev; //previous_letter
+    letter* prev;       //previous_letter
+    letter* next[128];  // ASCII size array of all possible next letters
     letter* translation;
-    letter* next[128]; // ASCII size array of all possible next letters
     letter(){
-        self = '.';
         prev = NULL;
-        translation = NULL;
         for(int i = 0; i < 128; i++) next[i] = NULL;
+        translation = NULL;
     }
 };
 
@@ -23,7 +23,7 @@ letter* save(letter* dictionary_root, char* word){
 
         c = word[i]; // transferring character to integer (eg., A is 65)
 
-        if (cursor->next[c] == NULL){
+        if (cursor->next[c] == NULL){ // if this char is unknown yet
             cursor->next[c]       = new letter;
             cursor->next[c]->self = word[i];
             cursor->next[c]->prev = cursor;
@@ -34,44 +34,42 @@ letter* save(letter* dictionary_root, char* word){
 }
 
 int main() {
-    FILE* in    = fopen("tulks.in", "r");
-    FILE* out   = fopen("tulks.out", "w+");
+    FILE *in    = fopen("tulks.in", "r");
+    FILE *out   = fopen("tulks.out", "w+");
 
-    letter* lang_A = new letter;
-    letter* lang_B = new letter;
-    letter *lang_From, *curr_A, *curr_B;
+    letter *lang_A = new letter;
+    letter *lang_B = new letter;
+    letter *lang_From, *word_a, *word_b;
 
-    char word_a[20];
-    char word_b[20];
-    int c;
+    char word[20];
 
     ///////////////////// read in dictionary
     for(;;){
-        fscanf(in, "%s", word_a);
+        fscanf(in, "%s", word);
 
         //check if end of dictionary; define translation direction
-        if (word_a[0] == '<'){ lang_From = lang_B; break; }
-        if (word_a[2] == '>'){ lang_From = lang_A; break; }
+        if (word[0] == '<'){ lang_From = lang_B; break; }
+        if (word[2] == '>'){ lang_From = lang_A; break; }
 
-        curr_A = save(lang_A, word_a);
+        word_a = save(lang_A, word);
 
-        fscanf(in, "%s", word_b);
+        fscanf(in, "%s", word);
 
         // fix - if translation is known already - do not fill B translation
-        if (curr_A->translation != NULL) continue;
+        if (word_a->translation != NULL) continue;
 
-        curr_B = save(lang_B, word_b);
+        word_b = save(lang_B, word);
 
         // point translation to each other
-        curr_A->translation = curr_B;
-        curr_B->translation = curr_A;
+        word_a->translation = word_b;
+        word_b->translation = word_a;
     }
     ///////////////////// translation and output
-    char word[20];
-    char translation[20]; //word translation stack
-    int chars;
-    bool is_known;
-    letter* curr = lang_From;
+    char   translation[20]; // word translation, saved as stack
+    int    c;               // char's ASCII index
+    int    chars;           // counting chars in word
+    bool   is_known;        // does word exist in dictionary
+    letter *curr;           // cursor to go through dictionary
 
     fscanf(in, "%s", word);
     while (!feof(in)){
@@ -91,14 +89,12 @@ int main() {
         if (is_known && curr->translation != NULL){
             chars = -1;
             curr = curr->translation; //set pointer to translation
-
-            do{
+            do {
                 translation[++chars] = curr->self; // fill translation stack
                 curr = curr->prev; //go up from curr letter till language root
-            }while(curr->prev != NULL);
-
-            while(chars >= 0) // output translation stack
-                fprintf(out, "%c", translation[chars--]);
+            } while(curr->prev != NULL);
+            // output translation stack
+            while(chars >= 0) fprintf(out, "%c", translation[chars--]);
         }
         else
             fprintf(out, "?%s", word);
