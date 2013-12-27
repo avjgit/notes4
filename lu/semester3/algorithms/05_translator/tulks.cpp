@@ -135,6 +135,8 @@ int main() {
             }
         }
 
+        is_translation_found = (current->translation != NULL);
+
         if (is_translation_found){
         // pseudocode: else, set pointer to translation
         // pseudocode: go up from current letter till language root, filling stack
@@ -161,7 +163,7 @@ int main() {
         }
         fprintf(out, " ");
         k++;
-        if (k == 6) return 0;
+        // if (k == 7) return 0;
         fscanf(in, "%s", word);
     }
     fclose(in);
