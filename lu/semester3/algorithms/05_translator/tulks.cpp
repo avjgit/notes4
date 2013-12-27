@@ -24,6 +24,9 @@ int main() {
     letter* language_A = new letter;
     letter* language_B = new letter;
     letter* language_From = language_A;
+    letter* current = language_From;
+
+    current->next_letters[97] = language_B;
 
     char word_a[20];
     char word_b[20];
@@ -36,6 +39,20 @@ int main() {
             break;
         }
         // pseudocode: transform wordA chars to letters structure
+        int char2int;
+
+        for(int i = 0; word_a[i] != '\0'; i++){
+            char2int = word_a[i]; // transferring character to integer (eg., A is 65)
+            if (current->next_letters[char2int] != NULL){
+                fprintf(stdout, "letter is known!");
+            }
+            else{
+                fprintf(stdout, "%i", word_a[i], " ");
+            }
+            fprintf(stdout, "-");
+        }
+        fprintf(stdout, "------");
+
         fscanf(in, "%s", word_b);
         // pseudocode: transform wordB chars to letters structure
         // pseudocode: point from wordB last char to wordA last char
